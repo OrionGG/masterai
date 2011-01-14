@@ -7,7 +7,7 @@
 <projectproperty id="jadeproject" module="Ingenias Agent Framework generator"  name="JADE main project folder" value="AISubject"  tooltip="The folder that will contain the project for this development" />
 <projectproperty id="jadeperm" module="Ingenias Agent Framework generator"  name="JADE generate only once folder" value="permsrc"  tooltip="The folder that will hold generated elements that should not be regenerated" />
 <projectproperty id="htmldoc" module="HTML Document generator"  name="HTML document folder" value="html"  tooltip="The document folder that will contain HTML version of this specification" />
- <openeddiagram>Orders to Pilot</openeddiagram> <openeddiagram>Leg Completed</openeddiagram> <openeddiagram>Fligth Plan</openeddiagram> <openeddiagram>Decision to Plane</openeddiagram> <openeddiagram>App Decl Change Plane Head</openeddiagram> <openeddiagram>Change Plane Head Components</openeddiagram> <openeddiagram>Change Head</openeddiagram> <openeddiagram>Check Proximity</openeddiagram> <openeddiagram>Create Conflict FF</openeddiagram> <openeddiagram>Radar Application</openeddiagram> <openeddiagram>Update Position</openeddiagram> <openeddiagram>Fligth Plans Tasks</openeddiagram> <openeddiagram>Plan Creation Modification</openeddiagram> <openeddiagram>Components</openeddiagram> <openeddiagram>Pilot Plane Interation Model</openeddiagram> <openeddiagram>Pilot Plane Interaction Task</openeddiagram></projectproperties>
+ <openeddiagram>Orders to Pilot</openeddiagram> <openeddiagram>Fligth Plan</openeddiagram> <openeddiagram>Plan Creation Modification</openeddiagram> <openeddiagram>Fligth Plans Tasks</openeddiagram> <openeddiagram>Create New Leg</openeddiagram> <openeddiagram>Leg Completed</openeddiagram> <openeddiagram>App Decl Change Plane Head</openeddiagram></projectproperties>
 <leafpackages>
    <path>
     <package id="Project"/>
@@ -63,6 +63,11 @@
     <package id="Project"/>
     <package id="Plan Creation And Modification"/>
     <package id="Leg Completed"/>
+   </path>
+   <path>
+    <package id="Project"/>
+    <package id="Plan Creation And Modification"/>
+    <package id="Create New Leg"/>
    </path>
    <path>
     <package id="Project"/>
@@ -379,6 +384,12 @@
 <key id="_view_type">UML</key>
 </mapproperties>
 </object>
+<object id="Create Decisions" type="ingenias.editor.entities.Task">
+<mapproperties>
+<key id="Description"></key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
 <object id="Plane" type="ingenias.editor.entities.Agent">
 <mapproperties>
 <key id="Code"></key>
@@ -600,6 +611,12 @@ try {
 <mapproperties>
 <key id="Description"></key>
 <key id="_view_type">UML</key>
+</mapproperties>
+</object>
+<object id="Decisions Created" type="ingenias.editor.entities.Goal">
+<mapproperties>
+<key id="Description"></key>
+<key id="_view_type">INGENIAS</key>
 </mapproperties>
 </object>
 <object id="Conversation0" type="ingenias.editor.entities.Conversation">
@@ -1107,6 +1124,14 @@ try {
 <key id="_view_type">UML</key>
 </mapproperties>
 </object>
+<object id="Leg Made" type="ingenias.editor.entities.FrameFact">
+<objectproperty id="Slots" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="Description"></key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
 <object id="Plane Too Close" type="ingenias.editor.entities.ApplicationEventSlots">
 <objectproperty id="Slots" collection="true">
 </objectproperty>
@@ -1591,6 +1616,17 @@ try {
 <mapproperties>
 <key id="Code"></key>
 <key id="Description"></key>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+<object id="WorkflowBox0" type="ingenias.editor.entities.WorkflowBox">
+<objectproperty id="Workflow">
+</objectproperty>
+<objectproperty id="Role">
+</objectproperty>
+<objectproperty id="Tasks" collection="true">
+</objectproperty>
+<mapproperties>
 <key id="_view_type">UML</key>
 </mapproperties>
 </object>
@@ -2783,101 +2819,6 @@ try {
 <key id="_view_type">INGENIAS</key>
 </mapproperties>
 </role></relationship>
-<relationship id="21" type="ingenias.editor.entities.WFConsumes">
-<object id="21" type="ingenias.editor.entities.WFConsumes">
-<objectproperty id="Condition">
-</objectproperty>
-<mapproperties>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</object>
-<role idEntity="Fligth Leg Completed" class="ingenias.editor.entities.Goal" roleName="WFConsumestarget" type="ingenias.editor.entities.WFConsumestargetRole" dgcid="1795412648">
-<mapproperties>
-<key id="attributeToShow">0</key>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</role><role idEntity="Make Leg" class="ingenias.editor.entities.Task" roleName="WFConsumessource" type="ingenias.editor.entities.WFConsumessourceRole" dgcid="790080223">
-<mapproperties>
-<key id="attributeToShow">0</key>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</role></relationship>
-<relationship id="83" type="ingenias.editor.entities.WFResponsable">
-<object id="83" type="ingenias.editor.entities.WFResponsable">
-<mapproperties>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</object>
-<role idEntity="Make Leg" class="ingenias.editor.entities.Task" roleName="WFResponsabletarget" type="ingenias.editor.entities.WFResponsabletargetRole" dgcid="790080223">
-<mapproperties>
-<key id="attributeToShow">0</key>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</role><role idEntity="Pilot" class="ingenias.editor.entities.Agent" roleName="WFResponsablesource" type="ingenias.editor.entities.WFResponsablesourceRole" dgcid="1942438914">
-<mapproperties>
-<key id="attributeToShow">0</key>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</role></relationship>
-<relationship id="28" type="ingenias.editor.entities.GTSatisfies">
-<object id="28" type="ingenias.editor.entities.GTSatisfies">
-<objectproperty id="SatisfactionCondition">
-</objectproperty>
-<mapproperties>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</object>
-<role idEntity="Fligth Leg Completed" class="ingenias.editor.entities.Goal" roleName="GTSatisfiestarget" type="ingenias.editor.entities.GTSatisfiestargetRole" dgcid="1795412648">
-<mapproperties>
-<key id="attributeToShow">0</key>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</role><role idEntity="Make Leg" class="ingenias.editor.entities.Task" roleName="GTSatisfiessource" type="ingenias.editor.entities.GTSatisfiessourceRole" dgcid="790080223">
-<mapproperties>
-<key id="attributeToShow">0</key>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</role></relationship>
-<relationship id="82" type="ingenias.editor.entities.WFProduces">
-<object id="82" type="ingenias.editor.entities.WFProduces">
-<objectproperty id="Condition">
-</objectproperty>
-<mapproperties>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</object>
-<role idEntity="Make Leg" class="ingenias.editor.entities.Task" roleName="WFProducessource" type="ingenias.editor.entities.WFProducessourceRole" dgcid="790080223">
-<mapproperties>
-<key id="attributeToShow">0</key>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</role><role idEntity="DecisionFF" class="ingenias.editor.entities.FrameFact" roleName="WFProducestarget" type="ingenias.editor.entities.WFProducestargetRole" dgcid="1967409534">
-<mapproperties>
-<key id="Cardinality">1..*</key>
-<key id="attributeToShow">0</key>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</role></relationship>
-<relationship id="149" type="ingenias.editor.entities.Consumes">
-<object id="149" type="ingenias.editor.entities.Consumes">
-<objectproperty id="Condition">
-</objectproperty>
-<mapproperties>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</object>
-<role idEntity="Make Leg" class="ingenias.editor.entities.Task" roleName="WFConsumessource" type="ingenias.editor.entities.WFConsumessourceRole" dgcid="1180281478">
-<mapproperties>
-<key id="attributeToShow">0</key>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</role><role idEntity="Flight Leg" class="ingenias.editor.entities.FrameFact" roleName="WFConsumestarget" type="ingenias.editor.entities.WFConsumestargetRole" dgcid="815886734">
-<mapproperties>
-<key id="Cardinality"></key>
-<key id="attributeToShow">0</key>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</role></relationship>
 <relationship id="78" type="ingenias.editor.entities.WFResponsable">
 <object id="78" type="ingenias.editor.entities.WFResponsable">
 <mapproperties>
@@ -2909,6 +2850,138 @@ try {
 <key id="_view_type">INGENIAS</key>
 </mapproperties>
 </role><role idEntity="Make Leg" class="ingenias.editor.entities.Task" roleName="GTSatisfiessource" type="ingenias.editor.entities.GTSatisfiessourceRole" dgcid="1180281478">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="21" type="ingenias.editor.entities.GTModifies">
+<object id="21" type="ingenias.editor.entities.GTModifies">
+<objectproperty id="Condition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Make Leg" class="ingenias.editor.entities.Task" roleName="WFConsumessource" type="ingenias.editor.entities.WFConsumessourceRole" dgcid="1180281478">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="Flight Leg" class="ingenias.editor.entities.FrameFact" roleName="WFConsumestarget" type="ingenias.editor.entities.WFConsumestargetRole" dgcid="815886734">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="50" type="ingenias.editor.entities.WFProduces">
+<object id="50" type="ingenias.editor.entities.WFProduces">
+<objectproperty id="Condition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Leg Made" class="ingenias.editor.entities.FrameFact" roleName="WFProducestarget" type="ingenias.editor.entities.WFProducestargetRole" dgcid="1313829633">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="Make Leg" class="ingenias.editor.entities.Task" roleName="WFProducessource" type="ingenias.editor.entities.WFProducessourceRole" dgcid="1180281478">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="28" type="ingenias.editor.entities.WFConsumes">
+<object id="28" type="ingenias.editor.entities.WFConsumes">
+<objectproperty id="Condition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Leg Made" class="ingenias.editor.entities.FrameFact" roleName="WFConsumestarget" type="ingenias.editor.entities.WFConsumestargetRole" dgcid="475300497">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="Create Decisions" class="ingenias.editor.entities.Task" roleName="WFConsumessource" type="ingenias.editor.entities.WFConsumessourceRole" dgcid="2025773242">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="82" type="ingenias.editor.entities.WFProduces">
+<object id="82" type="ingenias.editor.entities.WFProduces">
+<objectproperty id="Condition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="DecisionFF" class="ingenias.editor.entities.FrameFact" roleName="WFProducestarget" type="ingenias.editor.entities.WFProducestargetRole" dgcid="1967409534">
+<mapproperties>
+<key id="Cardinality">1..*</key>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="Create Decisions" class="ingenias.editor.entities.Task" roleName="WFProducessource" type="ingenias.editor.entities.WFProducessourceRole" dgcid="2025773242">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="83" type="ingenias.editor.entities.WFConsumes">
+<object id="83" type="ingenias.editor.entities.WFConsumes">
+<objectproperty id="Condition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Flight Leg" class="ingenias.editor.entities.FrameFact" roleName="WFConsumestarget" type="ingenias.editor.entities.WFConsumestargetRole" dgcid="2068012054">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="Create Decisions" class="ingenias.editor.entities.Task" roleName="WFConsumessource" type="ingenias.editor.entities.WFConsumessourceRole" dgcid="2025773242">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="102" type="ingenias.editor.entities.WFResponsable">
+<object id="102" type="ingenias.editor.entities.WFResponsable">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Create Decisions" class="ingenias.editor.entities.Task" roleName="WFResponsabletarget" type="ingenias.editor.entities.WFResponsabletargetRole" dgcid="2025773242">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="Pilot" class="ingenias.editor.entities.Agent" roleName="WFResponsablesource" type="ingenias.editor.entities.WFResponsablesourceRole" dgcid="1942438914">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="111" type="ingenias.editor.entities.GTSatisfies">
+<object id="111" type="ingenias.editor.entities.GTSatisfies">
+<objectproperty id="SatisfactionCondition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Create Decisions" class="ingenias.editor.entities.Task" roleName="GTSatisfiessource" type="ingenias.editor.entities.GTSatisfiessourceRole" dgcid="2025773242">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="Decisions Created" class="ingenias.editor.entities.Goal" roleName="GTSatisfiestarget" type="ingenias.editor.entities.GTSatisfiestargetRole" dgcid="1347709154">
 <mapproperties>
 <key id="attributeToShow">0</key>
 <key id="_view_type">INGENIAS</key>
@@ -2951,26 +3024,6 @@ try {
 <key id="_view_type">INGENIAS</key>
 </mapproperties>
 </role></relationship>
-<relationship id="50" type="ingenias.editor.entities.WFProduces">
-<object id="50" type="ingenias.editor.entities.WFProduces">
-<objectproperty id="Condition">
-</objectproperty>
-<mapproperties>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</object>
-<role idEntity="DecisionFF" class="ingenias.editor.entities.FrameFact" roleName="WFProducestarget" type="ingenias.editor.entities.WFProducestargetRole" dgcid="1076870489">
-<mapproperties>
-<key id="Cardinality">1..*</key>
-<key id="attributeToShow">0</key>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</role><role idEntity="Make Leg" class="ingenias.editor.entities.Task" roleName="WFProducessource" type="ingenias.editor.entities.WFProducessourceRole" dgcid="1180281478">
-<mapproperties>
-<key id="attributeToShow">0</key>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</role></relationship>
 <relationship id="187" type="ingenias.editor.entities.GTSatisfies">
 <object id="187" type="ingenias.editor.entities.GTSatisfies">
 <objectproperty id="SatisfactionCondition">
@@ -3006,7 +3059,7 @@ try {
 </mapproperties>
 </role><role idEntity="Flight Leg" class="ingenias.editor.entities.FrameFact" roleName="WFProducestarget" type="ingenias.editor.entities.WFProducestargetRole" dgcid="815886734">
 <mapproperties>
-<key id="Cardinality">1..*</key>
+<key id="Cardinality">1</key>
 <key id="attributeToShow">0</key>
 <key id="_view_type">INGENIAS</key>
 </mapproperties>
@@ -6264,71 +6317,173 @@ try {
 
 	<graph>
 			
-	<node id="83" nid="1985313813" type="WFResponsable">
+	<node id="50" nid="913714674" type="WFProduces">
 
-	<connected id="1942438914">
+	<connected id="710675128"><attr name="extraLabels">
+			<array>
+
+</array>
+</attr>
 
 
-	</connected>
-	<connected id="790080223">
+		<attr name="points">
+			<list>
+		<attr name="points0">
+			<point x="327.0" y="166.5"></point>
+		</attr>
+		<attr name="points1">
+			<point x="462.0" y="224.0"></point>
+		</attr>
 
-
-
-	</connected>
-	</node>
-			
-	<node id="Make Leg" nid="790080223" type="Task">
-
-	</node>
-			
-	<node id="Pilot" nid="1942438914" type="Agent">
-
-	</node>
-			
-	<node id="28" nid="215604177" type="GTSatisfies">
-
-	<connected id="790080223">
+</list>
+		</attr>
 
 
 	</connected>
-	<connected id="1795412648">
+	<connected id="583267046">
+		<attr name="points">
+			<list>
+		<attr name="points0">
+			<point x="327.0" y="166.5"></point>
+		</attr>
+		<attr name="points1">
+			<point x="220.0" y="120.5"></point>
+		</attr>
 
-
-
-	</connected>
-	</node>
-			
-	<node id="21" nid="2065299321" type="WFConsumes">
-
-	<connected id="790080223">
-
-
-	</connected>
-	<connected id="1795412648">
-
+</list>
+		</attr>
 
 
 	</connected>
 	</node>
 			
-	<node id="Fligth Leg Completed" nid="1795412648" type="Goal">
+	<node id="Make Leg" nid="583267046" type="Task">
 
 	</node>
 			
-	<node id="82" nid="1634675583" type="WFProduces">
+	<node id="Flight Leg" nid="1610165134" type="FrameFact">
 
-	<connected id="1967409534">
+	</node>
+			
+	<node id="Leg Made" nid="710675128" type="FrameFact">
 
+	</node>
+			
+	<node id="184" nid="2127593529" type="GTSatisfies">
+
+	<connected id="583267046">
+		<attr name="points">
+			<list>
+		<attr name="points0">
+			<point x="218.5" y="169.5"></point>
+		</attr>
+		<attr name="points1">
+			<point x="220.0" y="120.5"></point>
+		</attr>
+
+</list>
+		</attr>
 
 
 	</connected>
-	<connected id="790080223">
+	<connected id="1276680239">
+
+		<attr name="points">
+			<list>
+		<attr name="points0">
+			<point x="218.5" y="169.5"></point>
+		</attr>
+		<attr name="points1">
+			<point x="218.0" y="220.5"></point>
+		</attr>
+
+</list>
+		</attr>
 
 
 	</connected>
 	</node>
 			
-	<node id="DecisionFF" nid="1967409534" type="FrameFact">
+	<node id="Fligth Leg Completed" nid="1276680239" type="Goal">
+
+	</node>
+			
+	<node id="21" nid="2033130779" type="GTModifies">
+
+	<connected id="583267046"><attr name="extraLabels">
+			<array>
+
+</array>
+</attr>
+
+		<attr name="points">
+			<list>
+		<attr name="points0">
+			<point x="344.0" y="118.5"></point>
+		</attr>
+		<attr name="points1">
+			<point x="220.0" y="120.5"></point>
+		</attr>
+
+</list>
+		</attr>
+
+
+	</connected>
+	<connected id="1610165134">
+
+		<attr name="points">
+			<list>
+		<attr name="points0">
+			<point x="344.0" y="118.5"></point>
+		</attr>
+		<attr name="points1">
+			<point x="518.5" y="117.5"></point>
+		</attr>
+
+</list>
+		</attr>
+
+
+	</connected>
+	</node>
+			
+	<node id="78" nid="1726896493" type="WFResponsable">
+
+	<connected id="274101375">
+		<attr name="points">
+			<list>
+		<attr name="points0">
+			<point x="123.5" y="120.5"></point>
+		</attr>
+		<attr name="points1">
+			<point x="35.5" y="120.5"></point>
+		</attr>
+
+</list>
+		</attr>
+
+
+	</connected>
+	<connected id="583267046">
+
+		<attr name="points">
+			<list>
+		<attr name="points0">
+			<point x="123.5" y="120.5"></point>
+		</attr>
+		<attr name="points1">
+			<point x="220.0" y="120.5"></point>
+		</attr>
+
+</list>
+		</attr>
+
+
+	</connected>
+	</node>
+			
+	<node id="Pilot" nid="274101375" type="Agent">
 
 	</node>
 	</graph>
@@ -6336,51 +6491,261 @@ try {
 
 	<layout>
 			
-	<node id="node5">
+	<node id="node8">
 		<attr name="bounds">
-			<rectangle x="97" y="82" width="91" height="15"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node3">
-		<attr name="bounds">
-			<rectangle x="196" y="69" width="54" height="43"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node0">
-		<attr name="bounds">
-			<rectangle x="47" y="61" width="42" height="57"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node6">
-		<attr name="bounds">
-			<rectangle x="287" y="67" width="69" height="15"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node4">
-		<attr name="bounds">
-			<rectangle x="249" y="35" width="79" height="15"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node2">
-		<attr name="bounds">
-			<rectangle x="345" y="0" width="116" height="51"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node7">
-		<attr name="bounds">
-			<rectangle x="277" y="105" width="74" height="15"></rectangle>		</attr>
+			<rectangle x="290" y="159" width="74" height="15"></rectangle>		</attr>
 
 	</node>
 			
 	<node id="node1">
 		<attr name="bounds">
-			<rectangle x="378" y="112" width="53" height="46"></rectangle>		</attr>
+			<rectangle x="193" y="99" width="54" height="43"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node0">
+		<attr name="bounds">
+			<rectangle x="382" y="8" width="155" height="119"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node7">
+		<attr name="bounds">
+			<rectangle x="398" y="201" width="128" height="46"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node5">
+		<attr name="bounds">
+			<rectangle x="184" y="162" width="69" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node3">
+		<attr name="bounds">
+			<rectangle x="162" y="197" width="112" height="47"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node6">
+		<attr name="bounds">
+			<rectangle x="281" y="91" width="66" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node4">
+		<attr name="bounds">
+			<rectangle x="78" y="113" width="91" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node2">
+		<attr name="bounds">
+			<rectangle x="18" y="92" width="35" height="57"></rectangle>		</attr>
+
+	</node>
+	</layout>
+</gxl> </model>
+ <model id="Create New Leg" type="ingenias.editor.models.TasksAndGoalsModelModelJGraph">
+<object id="Create New Leg" type="ingenias.editor.entities.TasksAndGoalsModelDataEntity">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+  <path>
+    <package id="Project"/>
+    <package id="Plan Creation And Modification"/>
+   </path>
+<gxl>
+
+	<graph>
+			
+	<node id="DecisionFF" nid="1967409534" type="FrameFact">
+
+	</node>
+			
+	<node id="111" nid="234541049" type="GTSatisfies">
+
+	<connected id="2025773242"><attr name="extraLabels">
+			<array>
+
+</array>
+</attr>
+
+
+
+	</connected>
+	<connected id="1347709154">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="83" nid="1475286766" type="WFConsumes">
+
+	<connected id="2025773242"><attr name="extraLabels">
+			<array>
+
+</array>
+</attr>
+
+
+
+	</connected>
+	<connected id="2068012054">
+
+
+
+	</connected>
+	<connected id="2068012054">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="Pilot" nid="1942438914" type="Agent">
+
+	</node>
+			
+	<node id="102" nid="580343744" type="WFResponsable">
+
+	<connected id="1942438914"><attr name="extraLabels">
+			<array>
+
+</array>
+</attr>
+
+
+
+	</connected>
+	<connected id="2025773242">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="82" nid="1205017258" type="WFProduces">
+
+	<connected id="1967409534"><attr name="extraLabels">
+			<array>
+
+</array>
+</attr>
+
+
+
+
+	</connected>
+	<connected id="2025773242">
+
+
+	</connected>
+	</node>
+			
+	<node id="Flight Leg" nid="2068012054" type="FrameFact">
+
+	</node>
+			
+	<node id="Create Decisions" nid="2025773242" type="Task">
+
+	</node>
+			
+	<node id="28" nid="61213427" type="WFConsumes">
+
+	<connected id="2025773242"><attr name="extraLabels">
+			<array>
+
+</array>
+</attr>
+
+
+
+	</connected>
+	<connected id="475300497">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="Decisions Created" nid="1347709154" type="Goal">
+
+	</node>
+			
+	<node id="Leg Made" nid="475300497" type="FrameFact">
+
+	</node>
+	</graph>
+
+
+	<layout>
+			
+	<node id="node1">
+		<attr name="bounds">
+			<rectangle x="410" y="220" width="53" height="46"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node10">
+		<attr name="bounds">
+			<rectangle x="166" y="91" width="69" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node7">
+		<attr name="bounds">
+			<rectangle x="307" y="131" width="79" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node0">
+		<attr name="bounds">
+			<rectangle x="43" y="134" width="42" height="57"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node8">
+		<attr name="bounds">
+			<rectangle x="76" y="153" width="91" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node5">
+		<attr name="bounds">
+			<rectangle x="293" y="196" width="74" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node6">
+		<attr name="bounds">
+			<rectangle x="394" y="63" width="155" height="119"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node3">
+		<attr name="bounds">
+			<rectangle x="158" y="129" width="93" height="58"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node4">
+		<attr name="bounds">
+			<rectangle x="277" y="80" width="79" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node9">
+		<attr name="bounds">
+			<rectangle x="180" y="18" width="34" height="50"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node2">
+		<attr name="bounds">
+			<rectangle x="383" y="0" width="71" height="46"></rectangle>		</attr>
 
 	</node>
 	</layout>
@@ -6443,19 +6808,6 @@ try {
 	</connected>
 	</node>
 			
-	<node id="184" nid="688811102" type="GTSatisfies">
-
-	<connected id="1180281478">
-
-
-	</connected>
-	<connected id="185781865">
-
-
-
-	</connected>
-	</node>
-			
 	<node id="Flight Plan" nid="1565977303" type="FrameFact">
 
 	</node>
@@ -6481,62 +6833,7 @@ try {
 
 	</node>
 			
-	<node id="149" nid="546743936" type="Consumes">
-
-	<connected id="1180281478">
-
-
-	</connected>
-	<connected id="815886734">
-
-
-
-	</connected>
-	</node>
-			
-	<node id="50" nid="1102259485" type="WFProduces">
-
-	<connected id="1076870489">
-
-
-
-	</connected>
-	<connected id="1180281478">
-
-
-	</connected>
-	</node>
-			
-	<node id="Fligth Leg Completed" nid="185781865" type="Goal">
-
-	</node>
-			
 	<node id="Flight Leg" nid="815886734" type="FrameFact">
-
-	</node>
-			
-	<node id="Pilot" nid="1497097238" type="Agent">
-
-	</node>
-			
-	<node id="78" nid="492025204" type="WFResponsable">
-
-	<connected id="1497097238">
-
-
-	</connected>
-	<connected id="1180281478">
-
-
-
-	</connected>
-	</node>
-			
-	<node id="DecisionFF" nid="1076870489" type="FrameFact">
-
-	</node>
-			
-	<node id="Make Leg" nid="1180281478" type="Task">
 
 	</node>
 	</graph>
@@ -6546,49 +6843,43 @@ try {
 			
 	<node id="node1">
 		<attr name="bounds">
-			<rectangle x="152" y="39" width="35" height="57"></rectangle>		</attr>
+			<rectangle x="53" y="90" width="96" height="57"></rectangle>		</attr>
 
 	</node>
 			
-	<node id="node13">
+	<node id="node6">
 		<attr name="bounds">
-			<rectangle x="477" y="66" width="79" height="15"></rectangle>		</attr>
+			<rectangle x="428" y="77" width="79" height="15"></rectangle>		</attr>
 
 	</node>
 			
-	<node id="node15">
+	<node id="node7">
 		<attr name="bounds">
-			<rectangle x="310" y="57" width="69" height="15"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node12">
-		<attr name="bounds">
-			<rectangle x="192" y="72" width="91" height="15"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node11">
-		<attr name="bounds">
-			<rectangle x="362" y="211" width="69" height="15"></rectangle>		</attr>
+			<rectangle x="287" y="68" width="69" height="15"></rectangle>		</attr>
 
 	</node>
 			
 	<node id="node5">
 		<attr name="bounds">
-			<rectangle x="626" y="30" width="48" height="46"></rectangle>		</attr>
+			<rectangle x="151" y="112" width="91" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node4">
+		<attr name="bounds">
+			<rectangle x="571" y="10" width="139" height="73"></rectangle>		</attr>
 
 	</node>
 			
 	<node id="node2">
 		<attr name="bounds">
-			<rectangle x="287" y="78" width="120" height="43"></rectangle>		</attr>
+			<rectangle x="243" y="100" width="120" height="43"></rectangle>		</attr>
 
 	</node>
 			
-	<node id="node16">
+	<node id="node8">
 		<attr name="bounds">
-			<rectangle x="454" y="105" width="74" height="15"></rectangle>		</attr>
+			<rectangle x="434" y="141" width="74" height="15"></rectangle>		</attr>
 
 	</node>
 			
@@ -6598,51 +6889,9 @@ try {
 
 	</node>
 			
-	<node id="node9">
-		<attr name="bounds">
-			<rectangle x="449" y="152" width="63" height="15"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node14">
-		<attr name="bounds">
-			<rectangle x="468" y="186" width="74" height="15"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node8">
-		<attr name="bounds">
-			<rectangle x="400" y="233" width="75" height="47"></rectangle>		</attr>
-
-	</node>
-			
 	<node id="node3">
 		<attr name="bounds">
-			<rectangle x="576" y="93" width="155" height="69"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node7">
-		<attr name="bounds">
-			<rectangle x="156" y="154" width="35" height="57"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node10">
-		<attr name="bounds">
-			<rectangle x="216" y="175" width="91" height="15"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node4">
-		<attr name="bounds">
-			<rectangle x="625" y="181" width="53" height="46"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node6">
-		<attr name="bounds">
-			<rectangle x="331" y="161" width="54" height="43"></rectangle>		</attr>
+			<rectangle x="579" y="120" width="155" height="119"></rectangle>		</attr>
 
 	</node>
 	</layout>
@@ -8507,19 +8756,19 @@ try {
 			
 	<node id="node4">
 		<attr name="bounds">
-			<rectangle x="175" y="120" width="134" height="16"></rectangle>		</attr>
+			<rectangle x="178" y="125" width="134" height="16"></rectangle>		</attr>
 
 	</node>
 			
 	<node id="node0">
 		<attr name="bounds">
-			<rectangle x="26" y="59" width="35" height="57"></rectangle>		</attr>
+			<rectangle x="32" y="69" width="35" height="57"></rectangle>		</attr>
 
 	</node>
 			
 	<node id="node3">
 		<attr name="bounds">
-			<rectangle x="138" y="51" width="179" height="47"></rectangle>		</attr>
+			<rectangle x="141" y="57" width="179" height="47"></rectangle>		</attr>
 
 	</node>
 			
