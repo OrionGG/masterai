@@ -103,6 +103,118 @@ public class MainProdStandAlone {
         final jade.wrapper.AgentContainer ac = rt.createAgentContainer(p);
 
 {
+        // Create a new agent
+        final jade.wrapper.AgentController agcCorage_Pilot = ac.createNewAgent("Corage_Pilot",
+            "ingenias.jade.agents.Corage_PilotJADEAgent", new Object[0]);	
+	
+	
+        new Thread(){
+          public void run(){
+            try {
+               System.out.println("Starting up Corage_Pilot...");
+              agcCorage_Pilot.start();
+            } catch (Exception e){
+              e.printStackTrace();
+            }
+          }
+        }.start();
+
+        // Create a new agent
+        final jade.wrapper.AgentController agcPilot = ac.createNewAgent("Pilot",
+            "ingenias.jade.agents.PilotJADEAgent", new Object[0]);	
+	
+	
+        new Thread(){
+          public void run(){
+            try {
+               System.out.println("Starting up Pilot...");
+              agcPilot.start();
+            } catch (Exception e){
+              e.printStackTrace();
+            }
+          }
+        }.start();
+
+        // Create a new agent
+        final jade.wrapper.AgentController agcHuman_Pilot = ac.createNewAgent("Human_Pilot",
+            "ingenias.jade.agents.Human_PilotJADEAgent", new Object[0]);	
+	
+	
+        new Thread(){
+          public void run(){
+            try {
+               System.out.println("Starting up Human_Pilot...");
+              agcHuman_Pilot.start();
+            } catch (Exception e){
+              e.printStackTrace();
+            }
+          }
+        }.start();
+
+        // Create a new agent
+        final jade.wrapper.AgentController agcSecure_Pilot = ac.createNewAgent("Secure_Pilot",
+            "ingenias.jade.agents.Secure_PilotJADEAgent", new Object[0]);	
+	
+	
+        new Thread(){
+          public void run(){
+            try {
+               System.out.println("Starting up Secure_Pilot...");
+              agcSecure_Pilot.start();
+            } catch (Exception e){
+              e.printStackTrace();
+            }
+          }
+        }.start();
+
+        // Create a new agent
+        final jade.wrapper.AgentController agcPlane = ac.createNewAgent("Plane",
+            "ingenias.jade.agents.PlaneJADEAgent", new Object[0]);	
+	
+	
+        new Thread(){
+          public void run(){
+            try {
+               System.out.println("Starting up Plane...");
+              agcPlane.start();
+            } catch (Exception e){
+              e.printStackTrace();
+            }
+          }
+        }.start();
+
+        // Create a new agent
+        final jade.wrapper.AgentController agcUnmanned_Autonomous_Pilot = ac.createNewAgent("Unmanned_Autonomous_Pilot",
+            "ingenias.jade.agents.Unmanned_Autonomous_PilotJADEAgent", new Object[0]);	
+	
+	
+        new Thread(){
+          public void run(){
+            try {
+               System.out.println("Starting up Unmanned_Autonomous_Pilot...");
+              agcUnmanned_Autonomous_Pilot.start();
+            } catch (Exception e){
+              e.printStackTrace();
+            }
+          }
+        }.start();
+
+        // Create a new agent
+        final jade.wrapper.AgentController agcFlight_Planner = ac.createNewAgent("Flight_Planner",
+            "ingenias.jade.agents.Flight_PlannerJADEAgent", new Object[0]);	
+	
+	
+        new Thread(){
+          public void run(){
+            try {
+               System.out.println("Starting up Flight_Planner...");
+              agcFlight_Planner.start();
+            } catch (Exception e){
+              e.printStackTrace();
+            }
+          }
+        }.start();
+
 }
 	      MainInteractionManager.getInstance().setTitle("node ");
      }
