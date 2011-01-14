@@ -7,7 +7,7 @@
 <projectproperty id="jadeproject" module="Ingenias Agent Framework generator"  name="JADE main project folder" value="AISubject"  tooltip="The folder that will contain the project for this development" />
 <projectproperty id="jadeperm" module="Ingenias Agent Framework generator"  name="JADE generate only once folder" value="permsrc"  tooltip="The folder that will hold generated elements that should not be regenerated" />
 <projectproperty id="htmldoc" module="HTML Document generator"  name="HTML document folder" value="html"  tooltip="The document folder that will contain HTML version of this specification" />
- <openeddiagram>Orders to Pilot</openeddiagram> <openeddiagram>Fligth Plan</openeddiagram> <openeddiagram>Plan Creation Modification</openeddiagram> <openeddiagram>Fligth Plans Tasks</openeddiagram> <openeddiagram>Create New Leg</openeddiagram> <openeddiagram>Leg Completed</openeddiagram> <openeddiagram>App Decl Change Plane Head</openeddiagram></projectproperties>
+ <openeddiagram>Orders to Pilot</openeddiagram> <openeddiagram>Fligth Plan</openeddiagram> <openeddiagram>Plan Creation Modification</openeddiagram> <openeddiagram>Fligth Plans Tasks</openeddiagram> <openeddiagram>Create New Leg</openeddiagram> <openeddiagram>Leg Completed</openeddiagram> <openeddiagram>App Decl Change Plane Head</openeddiagram> <openeddiagram>Check Proximity</openeddiagram> <openeddiagram>Create Conflict FF</openeddiagram></projectproperties>
 <leafpackages>
    <path>
     <package id="Project"/>
@@ -42,6 +42,7 @@
    <path>
     <package id="Project"/>
     <package id="Check Proximity"/>
+    <package id="System init"/>
     <package id="Check Proximity"/>
    </path>
    <path>
@@ -442,13 +443,14 @@
 <object id="INGENIASCodeComponent0" type="ingenias.editor.entities.INGENIASCodeComponent">
 <mapproperties>
 <key id="Language">Java</key>
-<key id="Code">ingenias.jade.mental.Plane_Too_Close event=new ingenias.jade.mental.Plane_Too_Close();
-try {
-	application.getOwner().getMSM().addMentalEntity(event);
-} catch (ingenias.exception.InvalidEntity e1) {
-	// TODO Auto-generated catch block
-	e1.printStackTrace();
-}</key>
+<key id="Code">		final RadarAppImp application=app;
+		ingenias.jade.mental.Plane_Too_Close event=new ingenias.jade.mental.Plane_Too_Close();
+		try {
+			application.getOwner().getMSM().addMentalEntity(event);
+		} catch (ingenias.exception.InvalidEntity e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}</key>
 <key id="_view_type">UML</key>
 </mapproperties>
 </object>
@@ -2398,25 +2400,6 @@ try {
 <key id="_view_type">INGENIAS</key>
 </mapproperties>
 </role></relationship>
-<relationship id="107" type="ingenias.editor.entities.WFProduces">
-<object id="107" type="ingenias.editor.entities.WFProduces">
-<objectproperty id="Condition">
-</objectproperty>
-<mapproperties>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</object>
-<role idEntity="Conflict" class="ingenias.editor.entities.FrameFact" roleName="WFProducestarget" type="ingenias.editor.entities.WFProducestargetRole" dgcid="1659687646">
-<mapproperties>
-<key id="attributeToShow">0</key>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</role><role idEntity="Generate Conflict Flag" class="ingenias.editor.entities.Task" roleName="WFProducessource" type="ingenias.editor.entities.WFProducessourceRole" dgcid="138832944">
-<mapproperties>
-<key id="attributeToShow">0</key>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</role></relationship>
 <relationship id="110" type="ingenias.editor.entities.GTSatisfies">
 <object id="110" type="ingenias.editor.entities.GTSatisfies">
 <objectproperty id="SatisfactionCondition">
@@ -2465,6 +2448,25 @@ try {
 <key id="_view_type">INGENIAS</key>
 </mapproperties>
 </role><role idEntity="Generate Conflict Flag" class="ingenias.editor.entities.Task" roleName="WFUsessource" type="ingenias.editor.entities.WFUsessourceRole" dgcid="138832944">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="107" type="ingenias.editor.entities.GTCreates">
+<object id="107" type="ingenias.editor.entities.GTCreates">
+<objectproperty id="Condition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Conflict" class="ingenias.editor.entities.FrameFact" roleName="GTCreatestarget" type="ingenias.editor.entities.GTCreatestargetRole" dgcid="1659687646">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="Generate Conflict Flag" class="ingenias.editor.entities.Task" roleName="GTCreatessource" type="ingenias.editor.entities.GTCreatessourceRole" dgcid="138832944">
 <mapproperties>
 <key id="attributeToShow">0</key>
 <key id="_view_type">INGENIAS</key>
@@ -5445,9 +5447,13 @@ try {
 
 	</node>
 			
-	<node id="107" nid="1478682892" type="WFProduces">
+	<node id="Radar" nid="1335187317" type="EnvironmentApplication">
 
-	<connected id="1659687646"><attr name="extraLabels">
+	</node>
+			
+	<node id="107" nid="161922977" type="GTCreates">
+
+	<connected id="138832944"><attr name="extraLabels">
 			<array>
 
 </array>
@@ -5455,16 +5461,12 @@ try {
 
 
 
+	</connected>
+	<connected id="1659687646">
+
+
 
 	</connected>
-	<connected id="138832944">
-
-
-	</connected>
-	</node>
-			
-	<node id="Radar" nid="1335187317" type="EnvironmentApplication">
-
 	</node>
 			
 	<node id="Conflict" nid="1659687646" type="FrameFact">
@@ -5511,6 +5513,10 @@ try {
 	</connected>
 	</node>
 			
+	<node id="Plane" nid="1803364571" type="Agent">
+
+	</node>
+			
 	<node id="109" nid="366397964" type="WFResponsable">
 
 	<connected id="1803364571"><attr name="extraLabels">
@@ -5528,10 +5534,6 @@ try {
 
 	</connected>
 	</node>
-			
-	<node id="Plane" nid="1803364571" type="Agent">
-
-	</node>
 	</graph>
 
 
@@ -5543,7 +5545,7 @@ try {
 
 	</node>
 			
-	<node id="node10">
+	<node id="node9">
 		<attr name="bounds">
 			<rectangle x="399" y="66" width="53" height="15"></rectangle>		</attr>
 
@@ -5555,15 +5557,15 @@ try {
 
 	</node>
 			
-	<node id="node4">
+	<node id="node8">
 		<attr name="bounds">
-			<rectangle x="394" y="167" width="74" height="15"></rectangle>		</attr>
+			<rectangle x="500" y="11" width="132" height="65"></rectangle>		</attr>
 
 	</node>
 			
-	<node id="node9">
+	<node id="node10">
 		<attr name="bounds">
-			<rectangle x="500" y="11" width="132" height="65"></rectangle>		</attr>
+			<rectangle x="399" y="167" width="64" height="15"></rectangle>		</attr>
 
 	</node>
 			
@@ -5579,27 +5581,27 @@ try {
 
 	</node>
 			
-	<node id="node5">
+	<node id="node4">
 		<attr name="bounds">
 			<rectangle x="215" y="1" width="142" height="50"></rectangle>		</attr>
 
 	</node>
 			
-	<node id="node6">
+	<node id="node5">
 		<attr name="bounds">
 			<rectangle x="249" y="60" width="69" height="15"></rectangle>		</attr>
 
 	</node>
 			
-	<node id="node8">
+	<node id="node6">
 		<attr name="bounds">
-			<rectangle x="122" y="101" width="91" height="15"></rectangle>		</attr>
+			<rectangle x="84" y="83" width="35" height="57"></rectangle>		</attr>
 
 	</node>
 			
 	<node id="node7">
 		<attr name="bounds">
-			<rectangle x="84" y="83" width="35" height="57"></rectangle>		</attr>
+			<rectangle x="122" y="101" width="91" height="15"></rectangle>		</attr>
 
 	</node>
 	</layout>
@@ -5613,6 +5615,7 @@ try {
   <path>
     <package id="Project"/>
     <package id="Check Proximity"/>
+    <package id="System init"/>
    </path>
 <gxl>
 
