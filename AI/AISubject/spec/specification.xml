@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project cid="150" version="1.2">
+<project cid="84" version="1.2">
 <projectproperties>
 <projectproperty id="extfolder" module="IDK"  name="Extension Module Folder" value="ext"  tooltip="Folder where the IDE will find its new modules" />
 <projectproperty id="jadeout" module="Ingenias Agent Framework generator"  name="JADE generated output folder" value="gensrc"  tooltip="The folder that will hold generated JADE agents" />
@@ -7,7 +7,7 @@
 <projectproperty id="jadeproject" module="Ingenias Agent Framework generator"  name="JADE main project folder" value="AISubject"  tooltip="The folder that will contain the project for this development" />
 <projectproperty id="jadeperm" module="Ingenias Agent Framework generator"  name="JADE generate only once folder" value="permsrc"  tooltip="The folder that will hold generated elements that should not be regenerated" />
 <projectproperty id="htmldoc" module="HTML Document generator"  name="HTML document folder" value="html"  tooltip="The document folder that will contain HTML version of this specification" />
- <openeddiagram>Orders to Pilot</openeddiagram> <openeddiagram>Leg Completed</openeddiagram> <openeddiagram>Fligth Plan</openeddiagram> <openeddiagram>Make A Decision</openeddiagram> <openeddiagram>Arrived On Time Goal</openeddiagram> <openeddiagram>Fligth Plans Tasks</openeddiagram> <openeddiagram>Pilot Plane Interaction Task</openeddiagram> <openeddiagram>Pilot Plane Interaction</openeddiagram> <openeddiagram>Pilot Plane Interation Model</openeddiagram> <openeddiagram>Plane Model</openeddiagram> <openeddiagram>Pilot Goal</openeddiagram> <openeddiagram>Pilot Model</openeddiagram> <openeddiagram>Check Proximity task</openeddiagram> <openeddiagram>Position Sensors</openeddiagram> <openeddiagram>Radar Application</openeddiagram> <openeddiagram>Create Conflict FF</openeddiagram> <openeddiagram>Plan Position</openeddiagram> <openeddiagram>Update Position</openeddiagram> <openeddiagram>Plan Creation Modification</openeddiagram> <openeddiagram>Decision to Plane</openeddiagram> <openeddiagram>Components</openeddiagram></projectproperties>
+ <openeddiagram>Orders to Pilot</openeddiagram> <openeddiagram>Leg Completed</openeddiagram> <openeddiagram>Fligth Plan</openeddiagram> <openeddiagram>Decision to Plane</openeddiagram> <openeddiagram>App Decl Change Plane Head</openeddiagram> <openeddiagram>Change Plane Head Components</openeddiagram> <openeddiagram>Change Head</openeddiagram> <openeddiagram>Check Proximity</openeddiagram> <openeddiagram>Create Conflict FF</openeddiagram> <openeddiagram>Radar Application</openeddiagram> <openeddiagram>Update Position</openeddiagram> <openeddiagram>Fligth Plans Tasks</openeddiagram> <openeddiagram>Plan Creation Modification</openeddiagram> <openeddiagram>Components</openeddiagram> <openeddiagram>Pilot Plane Interation Model</openeddiagram> <openeddiagram>Pilot Plane Interaction Task</openeddiagram></projectproperties>
 <leafpackages>
    <path>
     <package id="Project"/>
@@ -32,17 +32,17 @@
    <path>
     <package id="Project"/>
     <package id="Check Proximity"/>
-    <package id="Check Proximity task"/>
-   </path>
-   <path>
-    <package id="Project"/>
-    <package id="Check Proximity"/>
     <package id="Radar Application"/>
    </path>
    <path>
     <package id="Project"/>
     <package id="Check Proximity"/>
     <package id="Create Conflict FF"/>
+   </path>
+   <path>
+    <package id="Project"/>
+    <package id="Check Proximity"/>
+    <package id="Check Proximity"/>
    </path>
    <path>
     <package id="Project"/>
@@ -172,7 +172,7 @@
 <key id="_view_type">UML</key>
 </mapproperties>
 </object>
-<object id="Plan Selector" type="ingenias.editor.entities.EnvironmentApplication">
+<object id="Plan Creator" type="ingenias.editor.entities.EnvironmentApplication">
 <objectproperty id="Methods" collection="true">
 </objectproperty>
 <mapproperties>
@@ -183,6 +183,16 @@
 </object>
 <object id="Radar" type="ingenias.editor.entities.EnvironmentApplication">
 <objectproperty id="Methods" collection="true">
+<object id="8" type="ingenias.editor.entities.Method">
+<objectproperty id="Parameter" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="Name">isOtherPlaneTooClose</key>
+<key id="Description"></key>
+<key id="_view_type">INGENIAS</key>
+<key id="Result">Boolean</key>
+</mapproperties>
+</object>
 </objectproperty>
 <mapproperties>
 <key id="Description"></key>
@@ -240,13 +250,6 @@
 </mapproperties>
 </object>
 </objectproperty>
-<mapproperties>
-<key id="Code"></key>
-<key id="Description"></key>
-<key id="_view_type">UML</key>
-</mapproperties>
-</object>
-<object id="ExecutePlan" type="ingenias.editor.entities.Task">
 <mapproperties>
 <key id="Code"></key>
 <key id="Description"></key>
@@ -425,6 +428,19 @@
 <key id="_view_type">UML</key>
 </mapproperties>
 </object>
+<object id="INGENIASCodeComponent0" type="ingenias.editor.entities.INGENIASCodeComponent">
+<mapproperties>
+<key id="Language">Java</key>
+<key id="Code">ingenias.jade.mental.Plane_Too_Close event=new ingenias.jade.mental.Plane_Too_Close();
+try {
+	application.getOwner().getMSM().addMentalEntity(event);
+} catch (ingenias.exception.InvalidEntity e1) {
+	// TODO Auto-generated catch block
+	e1.printStackTrace();
+}</key>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
 <object id="PilotPlaneInteraction" type="ingenias.editor.entities.Interaction">
 <objectproperty id="TransferredInfo" collection="true">
 </objectproperty>
@@ -575,6 +591,12 @@
 </mapproperties>
 </object>
 <object id="Proximity Checked" type="ingenias.editor.entities.Goal">
+<mapproperties>
+<key id="Description"></key>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+<object id="Plane Position Updated" type="ingenias.editor.entities.Goal">
 <mapproperties>
 <key id="Description"></key>
 <key id="_view_type">UML</key>
@@ -1167,6 +1189,16 @@
 <key id="Result">Position</key>
 </mapproperties>
 </object>
+<object id="8" type="ingenias.editor.entities.Method">
+<objectproperty id="Parameter" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="Name">isOtherPlaneTooClose</key>
+<key id="Description"></key>
+<key id="_view_type">INGENIAS</key>
+<key id="Result">Boolean</key>
+</mapproperties>
+</object>
 <object id="196" type="ingenias.editor.entities.MethodParameter">
 <mapproperties>
 <key id="Name">degrees</key>
@@ -1728,48 +1760,28 @@
 <key id="_view_type">UML</key>
 </mapproperties>
 </object>
-<object id="186" type="ingenias.editor.entities.FileSpecMapping">
+<object id="168" type="ingenias.editor.entities.FileSpecPatternMapping">
 <objectproperty id="Entity">
-<object id="AircraftData" type="ingenias.editor.entities.FrameFact">
-<objectproperty id="Slots" collection="true">
-<object id="148" type="ingenias.editor.entities.ObjectSlot">
+<object id="Add Degrees To Head" type="ingenias.editor.entities.InternalApplication">
+<objectproperty id="Methods" collection="true">
+<object id="195" type="ingenias.editor.entities.Method">
+<objectproperty id="Parameter" collection="true">
+<object id="196" type="ingenias.editor.entities.MethodParameter">
 <mapproperties>
-<key id="Name">Speed</key>
-<key id="Value"></key>
-<key id="Type">float</key>
+<key id="Name">degrees</key>
+<key id="Type">double</key>
 <key id="Code"></key>
-<key id="Description"></key>
+<key id="Description">Possitive or negative degrees a plane must change its head</key>
 <key id="_view_type">UML</key>
 </mapproperties>
 </object>
-<object id="133" type="ingenias.editor.entities.ObjectSlot">
+</objectproperty>
 <mapproperties>
-<key id="Name">Altitude</key>
-<key id="Value"></key>
-<key id="Type">int</key>
+<key id="Name">addDegreesToHead</key>
 <key id="Code"></key>
 <key id="Description"></key>
 <key id="_view_type">UML</key>
-</mapproperties>
-</object>
-<object id="55" type="ingenias.editor.entities.ObjectSlot">
-<mapproperties>
-<key id="Name">Latitude</key>
-<key id="Value"></key>
-<key id="Type">float</key>
-<key id="Code"></key>
-<key id="Description"></key>
-<key id="_view_type">UML</key>
-</mapproperties>
-</object>
-<object id="56" type="ingenias.editor.entities.ObjectSlot">
-<mapproperties>
-<key id="Name">Longitude</key>
-<key id="Value"></key>
-<key id="Type">float</key>
-<key id="Code"></key>
-<key id="Description"></key>
-<key id="_view_type">UML</key>
+<key id="Result">void</key>
 </mapproperties>
 </object>
 </objectproperty>
@@ -1781,13 +1793,74 @@
 </object>
 </objectproperty>
 <mapproperties>
-<key id="File">Data</key>
+<key id="File"></key>
+<key id="Pattern">MultipleInstances</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="170" type="ingenias.editor.entities.FileSpecPatternMapping">
+<objectproperty id="Entity">
+<object id="Plane Position Service" type="ingenias.editor.entities.EnvironmentApplication">
+<objectproperty id="Methods" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="Description"></key>
 <key id="_view_type">UML</key>
 </mapproperties>
 </object>
-<object id="INGENIASComponent0" type="ingenias.editor.entities.INGENIASComponent">
-<objectproperty id="Files" collection="true">
-<object id="189" type="ingenias.editor.entities.FileSpecPatternMapping">
+</objectproperty>
+<mapproperties>
+<key id="File"></key>
+<key id="Pattern">MultipleInstances</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="172" type="ingenias.editor.entities.FileSpecPatternMapping">
+<objectproperty id="Entity">
+<object id="Radar" type="ingenias.editor.entities.EnvironmentApplication">
+<objectproperty id="Methods" collection="true">
+<object id="8" type="ingenias.editor.entities.Method">
+<objectproperty id="Parameter" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="Name">isOtherPlaneTooClose</key>
+<key id="Description"></key>
+<key id="_view_type">INGENIAS</key>
+<key id="Result">Boolean</key>
+</mapproperties>
+</object>
+</objectproperty>
+<mapproperties>
+<key id="Description"></key>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+</objectproperty>
+<mapproperties>
+<key id="File"></key>
+<key id="Pattern">MultipleInstances</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="84" type="ingenias.editor.entities.FileSpecPatternMapping">
+<objectproperty id="Entity">
+<object id="Plan Creator" type="ingenias.editor.entities.EnvironmentApplication">
+<objectproperty id="Methods" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="Code"></key>
+<key id="Description"></key>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+</objectproperty>
+<mapproperties>
+<key id="File"></key>
+<key id="Pattern">Singleton</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="186" type="ingenias.editor.entities.FileSpecMapping">
 <objectproperty id="Entity">
 <object id="AircraftData" type="ingenias.editor.entities.FrameFact">
 <objectproperty id="Slots" collection="true">
@@ -1841,8 +1914,33 @@
 </objectproperty>
 <mapproperties>
 <key id="File"></key>
-<key id="Pattern">Singleton</key>
 <key id="_view_type">UML</key>
+</mapproperties>
+</object>
+<object id="169" type="ingenias.editor.entities.FileSpecMapping">
+<objectproperty id="Entity">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="INGENIASComponent0" type="ingenias.editor.entities.INGENIASComponent">
+<objectproperty id="Files" collection="true">
+<object id="170" type="ingenias.editor.entities.FileSpecPatternMapping">
+<objectproperty id="Entity">
+<object id="Plane Position Service" type="ingenias.editor.entities.EnvironmentApplication">
+<objectproperty id="Methods" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="Description"></key>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+</objectproperty>
+<mapproperties>
+<key id="File"></key>
+<key id="Pattern">MultipleInstances</key>
+<key id="_view_type">INGENIAS</key>
 </mapproperties>
 </object>
 </objectproperty>
@@ -1853,100 +1951,10 @@
 </object>
 <object id="INGENIASComponent1" type="ingenias.editor.entities.INGENIASComponent">
 <objectproperty id="Files" collection="true">
-<object id="103" type="ingenias.editor.entities.FileSpecPatternMapping">
+<object id="84" type="ingenias.editor.entities.FileSpecPatternMapping">
 <objectproperty id="Entity">
-<object id="Flight Plan" type="ingenias.editor.entities.FrameFact">
-<objectproperty id="Slots" collection="true">
-<object id="68" type="ingenias.editor.entities.ObjectSlot">
-<mapproperties>
-<key id="Name">FuelCalculation</key>
-<key id="Value"></key>
-<key id="Type">float</key>
-<key id="Code"></key>
-<key id="Description"></key>
-<key id="_view_type">UML</key>
-</mapproperties>
-</object>
-<object id="69" type="ingenias.editor.entities.ObjectSlot">
-<mapproperties>
-<key id="Name">CruisingSpeed</key>
-<key id="Value"></key>
-<key id="Type">float</key>
-<key id="Code"></key>
-<key id="Description"></key>
-<key id="_view_type">UML</key>
-</mapproperties>
-</object>
-<object id="71" type="ingenias.editor.entities.ObjectSlot">
-<mapproperties>
-<key id="Name">DeparturePoint</key>
-<key id="Value"></key>
-<key id="Type">Position</key>
-<key id="Code"></key>
-<key id="Description"></key>
-<key id="_view_type">UML</key>
-</mapproperties>
-</object>
-<object id="72" type="ingenias.editor.entities.ObjectSlot">
-<mapproperties>
-<key id="Name">DepartureTime</key>
-<key id="Value"></key>
-<key id="Type">Date</key>
-<key id="Code"></key>
-<key id="Description"></key>
-<key id="_view_type">UML</key>
-</mapproperties>
-</object>
-<object id="73" type="ingenias.editor.entities.ObjectSlot">
-<mapproperties>
-<key id="Name">CruisingAltitude</key>
-<key id="Value"></key>
-<key id="Type">float</key>
-<key id="Code"></key>
-<key id="Description"></key>
-<key id="_view_type">UML</key>
-</mapproperties>
-</object>
-<object id="74" type="ingenias.editor.entities.ObjectSlot">
-<mapproperties>
-<key id="Name">DestinationPoint</key>
-<key id="Value"></key>
-<key id="Type">Position</key>
-<key id="Code"></key>
-<key id="Description"></key>
-<key id="_view_type">UML</key>
-</mapproperties>
-</object>
-<object id="75" type="ingenias.editor.entities.ObjectSlot">
-<mapproperties>
-<key id="Name">EstimatedTimeEnrout</key>
-<key id="Value"></key>
-<key id="Type">Date</key>
-<key id="Code"></key>
-<key id="Description"></key>
-<key id="_view_type">UML</key>
-</mapproperties>
-</object>
-<object id="76" type="ingenias.editor.entities.ObjectSlot">
-<mapproperties>
-<key id="Name">AlternateAirports</key>
-<key id="Value"></key>
-<key id="Type">ArrayList&lt;Position&gt;</key>
-<key id="Code"></key>
-<key id="Description"></key>
-<key id="_view_type">UML</key>
-</mapproperties>
-</object>
-<object id="77" type="ingenias.editor.entities.ObjectSlot">
-<mapproperties>
-<key id="Name">Waypoints</key>
-<key id="Value"></key>
-<key id="Type">ArrayList&lt;Position&gt;</key>
-<key id="Code"></key>
-<key id="Description"></key>
-<key id="_view_type">UML</key>
-</mapproperties>
-</object>
+<object id="Plan Creator" type="ingenias.editor.entities.EnvironmentApplication">
+<objectproperty id="Methods" collection="true">
 </objectproperty>
 <mapproperties>
 <key id="Code"></key>
@@ -1956,9 +1964,9 @@
 </object>
 </objectproperty>
 <mapproperties>
-<key id="File">F</key>
-<key id="Pattern"></key>
-<key id="_view_type">UML</key>
+<key id="File"></key>
+<key id="Pattern">Singleton</key>
+<key id="_view_type">INGENIAS</key>
 </mapproperties>
 </object>
 </objectproperty>
@@ -1969,48 +1977,28 @@
 </object>
 <object id="INGENIASComponent2" type="ingenias.editor.entities.INGENIASComponent">
 <objectproperty id="Files" collection="true">
-<object id="186" type="ingenias.editor.entities.FileSpecMapping">
+<object id="168" type="ingenias.editor.entities.FileSpecPatternMapping">
 <objectproperty id="Entity">
-<object id="AircraftData" type="ingenias.editor.entities.FrameFact">
-<objectproperty id="Slots" collection="true">
-<object id="148" type="ingenias.editor.entities.ObjectSlot">
+<object id="Add Degrees To Head" type="ingenias.editor.entities.InternalApplication">
+<objectproperty id="Methods" collection="true">
+<object id="195" type="ingenias.editor.entities.Method">
+<objectproperty id="Parameter" collection="true">
+<object id="196" type="ingenias.editor.entities.MethodParameter">
 <mapproperties>
-<key id="Name">Speed</key>
-<key id="Value"></key>
-<key id="Type">float</key>
+<key id="Name">degrees</key>
+<key id="Type">double</key>
 <key id="Code"></key>
-<key id="Description"></key>
+<key id="Description">Possitive or negative degrees a plane must change its head</key>
 <key id="_view_type">UML</key>
 </mapproperties>
 </object>
-<object id="133" type="ingenias.editor.entities.ObjectSlot">
+</objectproperty>
 <mapproperties>
-<key id="Name">Altitude</key>
-<key id="Value"></key>
-<key id="Type">int</key>
+<key id="Name">addDegreesToHead</key>
 <key id="Code"></key>
 <key id="Description"></key>
 <key id="_view_type">UML</key>
-</mapproperties>
-</object>
-<object id="55" type="ingenias.editor.entities.ObjectSlot">
-<mapproperties>
-<key id="Name">Latitude</key>
-<key id="Value"></key>
-<key id="Type">float</key>
-<key id="Code"></key>
-<key id="Description"></key>
-<key id="_view_type">UML</key>
-</mapproperties>
-</object>
-<object id="56" type="ingenias.editor.entities.ObjectSlot">
-<mapproperties>
-<key id="Name">Longitude</key>
-<key id="Value"></key>
-<key id="Type">float</key>
-<key id="Code"></key>
-<key id="Description"></key>
-<key id="_view_type">UML</key>
+<key id="Result">void</key>
 </mapproperties>
 </object>
 </objectproperty>
@@ -2022,8 +2010,44 @@
 </object>
 </objectproperty>
 <mapproperties>
-<key id="File">Data</key>
+<key id="File"></key>
+<key id="Pattern">MultipleInstances</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+</objectproperty>
+<mapproperties>
+<key id="Language">Java</key>
 <key id="_view_type">UML</key>
+</mapproperties>
+</object>
+<object id="INGENIASComponent3" type="ingenias.editor.entities.INGENIASComponent">
+<objectproperty id="Files" collection="true">
+<object id="172" type="ingenias.editor.entities.FileSpecPatternMapping">
+<objectproperty id="Entity">
+<object id="Radar" type="ingenias.editor.entities.EnvironmentApplication">
+<objectproperty id="Methods" collection="true">
+<object id="8" type="ingenias.editor.entities.Method">
+<objectproperty id="Parameter" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="Name">isOtherPlaneTooClose</key>
+<key id="Description"></key>
+<key id="_view_type">INGENIAS</key>
+<key id="Result">Boolean</key>
+</mapproperties>
+</object>
+</objectproperty>
+<mapproperties>
+<key id="Description"></key>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+</objectproperty>
+<mapproperties>
+<key id="File"></key>
+<key id="Pattern">MultipleInstances</key>
+<key id="_view_type">INGENIAS</key>
 </mapproperties>
 </object>
 </objectproperty>
@@ -2241,73 +2265,20 @@
 <key id="_view_type">INGENIAS</key>
 </mapproperties>
 </role></relationship>
-<relationship id="84" type="ingenias.editor.entities.WFResponsable">
-<object id="84" type="ingenias.editor.entities.WFResponsable">
-<mapproperties>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</object>
-<role idEntity="Plane" class="ingenias.editor.entities.Agent" roleName="WFResponsablesource" type="ingenias.editor.entities.WFResponsablesourceRole" dgcid="1194246042">
-<mapproperties>
-<key id="attributeToShow">0</key>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</role><role idEntity="Check Proximity" class="ingenias.editor.entities.Task" roleName="WFResponsabletarget" type="ingenias.editor.entities.WFResponsabletargetRole" dgcid="2093326742">
-<mapproperties>
-<key id="attributeToShow">0</key>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</role></relationship>
-<relationship id="91" type="ingenias.editor.entities.WFUses">
-<object id="91" type="ingenias.editor.entities.WFUses">
-<mapproperties>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</object>
-<role idEntity="Check Proximity" class="ingenias.editor.entities.Task" roleName="WFUsessource" type="ingenias.editor.entities.WFUsessourceRole" dgcid="2093326742">
-<mapproperties>
-<key id="attributeToShow">0</key>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</role><role idEntity="Radar" class="ingenias.editor.entities.EnvironmentApplication" roleName="WFUsestarget" type="ingenias.editor.entities.WFUsestargetRole" dgcid="1572999188">
-<mapproperties>
-<key id="attributeToShow">0</key>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</role></relationship>
-<relationship id="102" type="ingenias.editor.entities.GTCreates">
-<object id="102" type="ingenias.editor.entities.GTCreates">
-<objectproperty id="Condition">
-</objectproperty>
-<mapproperties>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</object>
-<role idEntity="Plane Too Close" class="ingenias.editor.entities.ApplicationEventSlots" roleName="GTCreatestarget" type="ingenias.editor.entities.GTCreatestargetRole" dgcid="13978943">
-<mapproperties>
-<key id="attributeToShow">0</key>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</role><role idEntity="Check Proximity" class="ingenias.editor.entities.Task" roleName="GTCreatessource" type="ingenias.editor.entities.GTCreatessourceRole" dgcid="2093326742">
-<mapproperties>
-<key id="attributeToShow">0</key>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</role></relationship>
-<relationship id="111" type="ingenias.editor.entities.GTSatisfies">
-<object id="111" type="ingenias.editor.entities.GTSatisfies">
+<relationship id="180" type="ingenias.editor.entities.GTSatisfies">
+<object id="180" type="ingenias.editor.entities.GTSatisfies">
 <objectproperty id="SatisfactionCondition">
 </objectproperty>
 <mapproperties>
 <key id="_view_type">INGENIAS</key>
 </mapproperties>
 </object>
-<role idEntity="Proximity Checked" class="ingenias.editor.entities.Goal" roleName="GTSatisfiestarget" type="ingenias.editor.entities.GTSatisfiestargetRole" dgcid="1963506579">
+<role idEntity="Plane Position Updated" class="ingenias.editor.entities.Goal" roleName="GTSatisfiestarget" type="ingenias.editor.entities.GTSatisfiestargetRole" dgcid="1960474134">
 <mapproperties>
 <key id="attributeToShow">0</key>
 <key id="_view_type">INGENIAS</key>
 </mapproperties>
-</role><role idEntity="Check Proximity" class="ingenias.editor.entities.Task" roleName="GTSatisfiessource" type="ingenias.editor.entities.GTSatisfiessourceRole" dgcid="2093326742">
+</role><role idEntity="Update Plane Position" class="ingenias.editor.entities.Task" roleName="GTSatisfiessource" type="ingenias.editor.entities.GTSatisfiessourceRole" dgcid="180288758">
 <mapproperties>
 <key id="attributeToShow">0</key>
 <key id="_view_type">INGENIAS</key>
@@ -2345,6 +2316,16 @@
 </object>
 </objectproperty>
 <objectproperty id="ApplicationMethod">
+<object id="8" type="ingenias.editor.entities.Method">
+<objectproperty id="Parameter" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="Name">isOtherPlaneTooClose</key>
+<key id="Description"></key>
+<key id="_view_type">INGENIAS</key>
+<key id="Result">Boolean</key>
+</mapproperties>
+</object>
 </objectproperty>
 <mapproperties>
 <key id="_view_type">INGENIAS</key>
@@ -2431,6 +2412,57 @@
 <key id="_view_type">INGENIAS</key>
 </mapproperties>
 </role><role idEntity="Generate Conflict Flag" class="ingenias.editor.entities.Task" roleName="WFResponsabletarget" type="ingenias.editor.entities.WFResponsabletargetRole" dgcid="138832944">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="194" type="ingenias.editor.entities.WFUses">
+<object id="194" type="ingenias.editor.entities.WFUses">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Radar" class="ingenias.editor.entities.EnvironmentApplication" roleName="WFUsestarget" type="ingenias.editor.entities.WFUsestargetRole" dgcid="1335187317">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="Generate Conflict Flag" class="ingenias.editor.entities.Task" roleName="WFUsessource" type="ingenias.editor.entities.WFUsessourceRole" dgcid="138832944">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="171" type="ingenias.editor.entities.UMLRealizes">
+<object id="171" type="ingenias.editor.entities.UMLRealizes">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="INGENIASComponent3" class="ingenias.editor.entities.INGENIASComponent" roleName="UMLRealizestarget" type="ingenias.editor.entities.UMLRealizestargetRole" dgcid="1512154008">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="Radar" class="ingenias.editor.entities.EnvironmentApplication" roleName="UMLRealizessource" type="ingenias.editor.entities.UMLRealizessourceRole" dgcid="884238022">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="185" type="ingenias.editor.entities.CDUsesCode">
+<object id="185" type="ingenias.editor.entities.CDUsesCode">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Radar" class="ingenias.editor.entities.EnvironmentApplication" roleName="CDUsesCodesource" type="ingenias.editor.entities.CDUsesCodesourceRole" dgcid="1092389379">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="INGENIASCodeComponent0" class="ingenias.editor.entities.INGENIASCodeComponent" roleName="CDUsesCodetarget" type="ingenias.editor.entities.CDUsesCodetargetRole" dgcid="2079065198">
 <mapproperties>
 <key id="attributeToShow">0</key>
 <key id="_view_type">INGENIAS</key>
@@ -2979,25 +3011,6 @@
 <key id="_view_type">INGENIAS</key>
 </mapproperties>
 </role></relationship>
-<relationship id="140" type="ingenias.editor.entities.GTSatisfies">
-<object id="140" type="ingenias.editor.entities.GTSatisfies">
-<objectproperty id="SatisfactionCondition">
-</objectproperty>
-<mapproperties>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</object>
-<role idEntity="ExecutePlan" class="ingenias.editor.entities.Task" roleName="GTSatisfiessource" type="ingenias.editor.entities.GTSatisfiessourceRole" dgcid="510133541">
-<mapproperties>
-<key id="attributeToShow">0</key>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</role><role idEntity="ArrivedOnTime" class="ingenias.editor.entities.Goal" roleName="GTSatisfiestarget" type="ingenias.editor.entities.GTSatisfiestargetRole" dgcid="1005015017">
-<mapproperties>
-<key id="attributeToShow">0</key>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</role></relationship>
 <relationship id="138" type="ingenias.editor.entities.GTSatisfies">
 <object id="138" type="ingenias.editor.entities.GTSatisfies">
 <objectproperty id="SatisfactionCondition">
@@ -3064,7 +3077,7 @@
 <key id="attributeToShow">0</key>
 <key id="_view_type">INGENIAS</key>
 </mapproperties>
-</role><role idEntity="Plan Selector" class="ingenias.editor.entities.EnvironmentApplication" roleName="WFUsestarget" type="ingenias.editor.entities.WFUsestargetRole" dgcid="751614647">
+</role><role idEntity="Plan Creator" class="ingenias.editor.entities.EnvironmentApplication" roleName="WFUsestarget" type="ingenias.editor.entities.WFUsestargetRole" dgcid="751614647">
 <mapproperties>
 <key id="attributeToShow">0</key>
 <key id="_view_type">INGENIAS</key>
@@ -3097,7 +3110,7 @@
 <key id="_view_type">INGENIAS</key>
 </mapproperties>
 </object>
-<role idEntity="Plan Selector" class="ingenias.editor.entities.EnvironmentApplication" roleName="UMLRealizessource" type="ingenias.editor.entities.UMLRealizessourceRole" dgcid="205215111">
+<role idEntity="Plan Creator" class="ingenias.editor.entities.EnvironmentApplication" roleName="UMLRealizessource" type="ingenias.editor.entities.UMLRealizessourceRole" dgcid="205215111">
 <mapproperties>
 <key id="attributeToShow">0</key>
 <key id="_view_type">INGENIAS</key>
@@ -3119,7 +3132,7 @@
 <key id="attributeToShow">0</key>
 <key id="_view_type">INGENIAS</key>
 </mapproperties>
-</role><role idEntity="Plan Selector" class="ingenias.editor.entities.EnvironmentApplication" roleName="ApplicationBelongsTotarget" type="ingenias.editor.entities.ApplicationBelongsTotargetRole" dgcid="998859817">
+</role><role idEntity="Plan Creator" class="ingenias.editor.entities.EnvironmentApplication" roleName="ApplicationBelongsTotarget" type="ingenias.editor.entities.ApplicationBelongsTotargetRole" dgcid="998859817">
 <mapproperties>
 <key id="attributeToShow">0</key>
 <key id="_view_type">INGENIAS</key>
@@ -4408,6 +4421,25 @@
 <key id="_view_type">INGENIAS</key>
 </mapproperties>
 </role></relationship>
+<relationship id="91" type="ingenias.editor.entities.UIColaborates">
+<object id="91" type="ingenias.editor.entities.UIColaborates">
+<objectproperty id="Condition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Initiator" class="ingenias.editor.entities.Role" roleName="UIColaboratestarget" type="ingenias.editor.entities.UIColaboratestargetRole" dgcid="1958647231">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="InteractionUnit3" class="ingenias.editor.entities.InteractionUnit" roleName="UIColaboratessource" type="ingenias.editor.entities.UIColaboratessourceRole" dgcid="902667878">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
 <relationship id="190" type="ingenias.editor.entities.GTInherits">
 <object id="190" type="ingenias.editor.entities.GTInherits">
 <mapproperties>
@@ -4808,13 +4840,13 @@
 			
 	<node id="node2">
 		<attr name="bounds">
-			<rectangle x="273" y="104" width="53" height="15"></rectangle>		</attr>
+			<rectangle x="272" y="98" width="53" height="15"></rectangle>		</attr>
 
 	</node>
 			
 	<node id="node1">
 		<attr name="bounds">
-			<rectangle x="91" y="90" width="118" height="46"></rectangle>		</attr>
+			<rectangle x="89" y="80" width="118" height="46"></rectangle>		</attr>
 
 	</node>
 	</layout>
@@ -5037,6 +5069,10 @@
 
 	<graph>
 			
+	<node id="Plane Position Updated" nid="1960474134" type="Goal">
+
+	</node>
+			
 	<node id="Update Plane Position" nid="180288758" type="Task">
 
 	</node>
@@ -5128,10 +5164,34 @@
 
 	</connected>
 	</node>
+			
+	<node id="180" nid="1087771407" type="GTSatisfies">
+
+	<connected id="180288758"><attr name="extraLabels">
+			<array>
+
+</array>
+</attr>
+
+
+
+	</connected>
+	<connected id="1960474134">
+
+
+
+	</connected>
+	</node>
 	</graph>
 
 
 	<layout>
+			
+	<node id="node9">
+		<attr name="bounds">
+			<rectangle x="184" y="11" width="135" height="50"></rectangle>		</attr>
+
+	</node>
 			
 	<node id="node0">
 		<attr name="bounds">
@@ -5147,7 +5207,7 @@
 			
 	<node id="node3">
 		<attr name="bounds">
-			<rectangle x="291" y="5" width="162" height="53"></rectangle>		</attr>
+			<rectangle x="393" y="2" width="162" height="53"></rectangle>		</attr>
 
 	</node>
 			
@@ -5171,7 +5231,7 @@
 			
 	<node id="node4">
 		<attr name="bounds">
-			<rectangle x="282" y="67" width="53" height="15"></rectangle>		</attr>
+			<rectangle x="330" y="66" width="53" height="15"></rectangle>		</attr>
 
 	</node>
 			
@@ -5186,169 +5246,10 @@
 			<rectangle x="341" y="155" width="66" height="15"></rectangle>		</attr>
 
 	</node>
-	</layout>
-</gxl> </model>
- <model id="Check Proximity task" type="ingenias.editor.models.TasksAndGoalsModelModelJGraph">
-<object id="Check Proximity task" type="ingenias.editor.entities.TasksAndGoalsModelDataEntity">
-<mapproperties>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</object>
-  <path>
-    <package id="Project"/>
-    <package id="Check Proximity"/>
-   </path>
-<gxl>
-
-	<graph>
 			
-	<node id="Plane" nid="1194246042" type="Agent">
-
-	</node>
-			
-	<node id="102" nid="1052435945" type="GTCreates">
-
-	<connected id="2093326742"><attr name="extraLabels">
-			<array>
-
-</array>
-</attr>
-
-
-
-	</connected>
-	<connected id="13978943">
-
-
-
-	</connected>
-	</node>
-			
-	<node id="84" nid="1064725232" type="WFResponsable">
-
-	<connected id="1194246042"><attr name="extraLabels">
-			<array>
-
-</array>
-</attr>
-
-
-
-	</connected>
-	<connected id="2093326742">
-
-
-
-	</connected>
-	</node>
-			
-	<node id="91" nid="347778728" type="WFUses">
-
-	<connected id="2093326742"><attr name="extraLabels">
-			<array>
-
-</array>
-</attr>
-
-
-
-	</connected>
-	<connected id="1572999188">
-
-
-
-	</connected>
-	</node>
-			
-	<node id="Proximity Checked" nid="1963506579" type="Goal">
-
-	</node>
-			
-	<node id="111" nid="1562139511" type="GTSatisfies">
-
-	<connected id="2093326742"><attr name="extraLabels">
-			<array>
-
-</array>
-</attr>
-
-
-
-	</connected>
-	<connected id="1963506579">
-
-
-
-	</connected>
-	</node>
-			
-	<node id="Check Proximity" nid="2093326742" type="Task">
-
-	</node>
-			
-	<node id="Plane Too Close" nid="13978943" type="ApplicationEventSlots">
-
-	</node>
-			
-	<node id="Radar" nid="1572999188" type="EnvironmentApplication">
-
-	</node>
-	</graph>
-
-
-	<layout>
-			
-	<node id="node0">
+	<node id="node10">
 		<attr name="bounds">
-			<rectangle x="63" y="92" width="35" height="42"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node6">
-		<attr name="bounds">
-			<rectangle x="340" y="135" width="64" height="15"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node2">
-		<attr name="bounds">
-			<rectangle x="105" y="103" width="91" height="15"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node4">
-		<attr name="bounds">
-			<rectangle x="340" y="70" width="53" height="15"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node7">
-		<attr name="bounds">
-			<rectangle x="221" y="5" width="109" height="50"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node8">
-		<attr name="bounds">
-			<rectangle x="226" y="60" width="69" height="15"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node1">
-		<attr name="bounds">
-			<rectangle x="203" y="80" width="87" height="57"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node5">
-		<attr name="bounds">
-			<rectangle x="454" y="138" width="110" height="83"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node3">
-		<attr name="bounds">
-			<rectangle x="443" y="21" width="118" height="46"></rectangle>		</attr>
+			<rectangle x="217" y="69" width="69" height="15"></rectangle>		</attr>
 
 	</node>
 	</layout>
@@ -5440,7 +5341,7 @@
 			
 	<node id="node3">
 		<attr name="bounds">
-			<rectangle x="201" y="123" width="163" height="45"></rectangle>		</attr>
+			<rectangle x="201" y="123" width="170" height="46"></rectangle>		</attr>
 
 	</node>
 			
@@ -5469,6 +5370,24 @@
 
 	</node>
 			
+	<node id="194" nid="1454520366" type="WFUses">
+
+	<connected id="138832944"><attr name="extraLabels">
+			<array>
+
+</array>
+</attr>
+
+
+
+	</connected>
+	<connected id="1335187317">
+
+
+
+	</connected>
+	</node>
+			
 	<node id="Plane Too Close" nid="1364868524" type="ApplicationEventSlots">
 
 	</node>
@@ -5489,6 +5408,10 @@
 
 
 	</connected>
+	</node>
+			
+	<node id="Radar" nid="1335187317" type="EnvironmentApplication">
+
 	</node>
 			
 	<node id="Conflict" nid="1659687646" type="FrameFact">
@@ -5563,31 +5486,43 @@
 			
 	<node id="node0">
 		<attr name="bounds">
-			<rectangle x="215" y="85" width="135" height="43"></rectangle>		</attr>
+			<rectangle x="216" y="84" width="135" height="43"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node10">
+		<attr name="bounds">
+			<rectangle x="399" y="66" width="53" height="15"></rectangle>		</attr>
 
 	</node>
 			
 	<node id="node1">
 		<attr name="bounds">
-			<rectangle x="505" y="3" width="110" height="83"></rectangle>		</attr>
+			<rectangle x="513" y="95" width="110" height="83"></rectangle>		</attr>
 
 	</node>
 			
 	<node id="node4">
 		<attr name="bounds">
-			<rectangle x="399" y="136" width="74" height="15"></rectangle>		</attr>
+			<rectangle x="394" y="167" width="74" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node9">
+		<attr name="bounds">
+			<rectangle x="500" y="11" width="132" height="65"></rectangle>		</attr>
 
 	</node>
 			
 	<node id="node3">
 		<attr name="bounds">
-			<rectangle x="523" y="161" width="94" height="31"></rectangle>		</attr>
+			<rectangle x="520" y="221" width="94" height="31"></rectangle>		</attr>
 
 	</node>
 			
 	<node id="node2">
 		<attr name="bounds">
-			<rectangle x="388" y="66" width="79" height="15"></rectangle>		</attr>
+			<rectangle x="393" y="114" width="79" height="15"></rectangle>		</attr>
 
 	</node>
 			
@@ -5599,7 +5534,7 @@
 			
 	<node id="node6">
 		<attr name="bounds">
-			<rectangle x="249" y="61" width="69" height="15"></rectangle>		</attr>
+			<rectangle x="249" y="60" width="69" height="15"></rectangle>		</attr>
 
 	</node>
 			
@@ -5612,6 +5547,113 @@
 	<node id="node7">
 		<attr name="bounds">
 			<rectangle x="84" y="83" width="35" height="57"></rectangle>		</attr>
+
+	</node>
+	</layout>
+</gxl> </model>
+ <model id="Check Proximity" type="ingenias.editor.models.ComponentDiagramModelJGraph">
+<object id="Check Proximity" type="ingenias.editor.entities.ComponentDiagramDataEntity">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+  <path>
+    <package id="Project"/>
+    <package id="Check Proximity"/>
+   </path>
+<gxl>
+
+	<graph>
+			
+	<node id="Radar" nid="884238022" type="EnvironmentApplication">
+
+	</node>
+			
+	<node id="185" nid="1677808433" type="CDUsesCode">
+
+	<connected id="1092389379"><attr name="extraLabels">
+			<array>
+
+</array>
+</attr>
+
+
+
+	</connected>
+	<connected id="2079065198">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="Radar" nid="1092389379" type="EnvironmentApplication">
+
+	</node>
+			
+	<node id="171" nid="1691430710" type="UMLRealizes">
+
+	<connected id="884238022"><attr name="extraLabels">
+			<array>
+
+</array>
+</attr>
+
+
+
+	</connected>
+	<connected id="1512154008">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="INGENIASComponent3" nid="1512154008" type="INGENIASComponent">
+
+	</node>
+			
+	<node id="INGENIASCodeComponent0" nid="2079065198" type="INGENIASCodeComponent">
+
+	</node>
+	</graph>
+
+
+	<layout>
+			
+	<node id="node0">
+		<attr name="bounds">
+			<rectangle x="53" y="30" width="137" height="68"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node5">
+		<attr name="bounds">
+			<rectangle x="255" y="147" width="76" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node3">
+		<attr name="bounds">
+			<rectangle x="56" y="119" width="137" height="68"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node2">
+		<attr name="bounds">
+			<rectangle x="265" y="57" width="53" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node1">
+		<attr name="bounds">
+			<rectangle x="393" y="30" width="142" height="69"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node4">
+		<attr name="bounds">
+			<rectangle x="393" y="130" width="167" height="57"></rectangle>		</attr>
 
 	</node>
 	</layout>
@@ -6633,24 +6675,7 @@
 	</connected>
 	</node>
 			
-	<node id="140" nid="1539690720" type="GTSatisfies">
-
-	<connected id="510133541">
-
-
-	</connected>
-	<connected id="1005015017">
-
-
-
-	</connected>
-	</node>
-			
 	<node id="ArrivedOnTime" nid="1005015017" type="Goal">
-
-	</node>
-			
-	<node id="ExecutePlan" nid="510133541" type="Task">
 
 	</node>
 			
@@ -6662,31 +6687,19 @@
 
 	<layout>
 			
-	<node id="node4">
-		<attr name="bounds">
-			<rectangle x="199" y="108" width="69" height="15"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node3">
-		<attr name="bounds">
-			<rectangle x="339" y="109" width="69" height="15"></rectangle>		</attr>
-
-	</node>
-			
 	<node id="node2">
 		<attr name="bounds">
-			<rectangle x="265" y="33" width="72" height="50"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node0">
-		<attr name="bounds">
-			<rectangle x="412" y="149" width="59" height="43"></rectangle>		</attr>
+			<rectangle x="134" y="108" width="69" height="15"></rectangle>		</attr>
 
 	</node>
 			
 	<node id="node1">
+		<attr name="bounds">
+			<rectangle x="132" y="33" width="72" height="50"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node0">
 		<attr name="bounds">
 			<rectangle x="133" y="148" width="75" height="43"></rectangle>		</attr>
 
@@ -6708,7 +6721,7 @@
 
 	<graph>
 			
-	<node id="Plan Selector" nid="751614647" type="EnvironmentApplication">
+	<node id="Plan Creator" nid="751614647" type="EnvironmentApplication">
 
 	</node>
 			
@@ -6857,11 +6870,33 @@
 	<node id="3" nid="1560766941" type="UMLRealizes">
 
 	<connected id="205215111">
+		<attr name="points">
+			<list>
+		<attr name="points0">
+			<point x="343.5" y="80.5"></point>
+		</attr>
+		<attr name="points1">
+			<point x="222.0" y="76.0"></point>
+		</attr>
+
+</list>
+		</attr>
 
 
 	</connected>
 	<connected id="1793137287">
 
+		<attr name="points">
+			<list>
+		<attr name="points0">
+			<point x="343.5" y="80.5"></point>
+		</attr>
+		<attr name="points1">
+			<point x="498.5" y="88.0"></point>
+		</attr>
+
+</list>
+		</attr>
 
 
 	</connected>
@@ -6871,7 +6906,7 @@
 
 	</node>
 			
-	<node id="Plan Selector" nid="205215111" type="EnvironmentApplication">
+	<node id="Plan Creator" nid="205215111" type="EnvironmentApplication">
 
 	</node>
 	</graph>
@@ -6881,19 +6916,19 @@
 			
 	<node id="node2">
 		<attr name="bounds">
-			<rectangle x="314" y="92" width="53" height="15"></rectangle>		</attr>
+			<rectangle x="317" y="73" width="53" height="15"></rectangle>		</attr>
 
 	</node>
 			
 	<node id="node0">
 		<attr name="bounds">
-			<rectangle x="402" y="58" width="187" height="98"></rectangle>		</attr>
+			<rectangle x="405" y="39" width="187" height="98"></rectangle>		</attr>
 
 	</node>
 			
 	<node id="node1">
 		<attr name="bounds">
-			<rectangle x="160" y="72" width="118" height="46"></rectangle>		</attr>
+			<rectangle x="163" y="53" width="118" height="46"></rectangle>		</attr>
 
 	</node>
 	</layout>
@@ -6913,7 +6948,7 @@
 
 	<graph>
 			
-	<node id="Plan Selector" nid="998859817" type="EnvironmentApplication">
+	<node id="Plan Creator" nid="998859817" type="EnvironmentApplication">
 
 	</node>
 			
@@ -8544,19 +8579,19 @@
 			
 	<node id="node1">
 		<attr name="bounds">
-			<rectangle x="66" y="74" width="107" height="46"></rectangle>		</attr>
+			<rectangle x="41" y="74" width="132" height="60"></rectangle>		</attr>
 
 	</node>
 			
 	<node id="node0">
 		<attr name="bounds">
-			<rectangle x="293" y="72" width="142" height="57"></rectangle>		</attr>
+			<rectangle x="293" y="72" width="197" height="70"></rectangle>		</attr>
 
 	</node>
 			
 	<node id="node2">
 		<attr name="bounds">
-			<rectangle x="207" y="91" width="53" height="15"></rectangle>		</attr>
+			<rectangle x="207" y="97" width="53" height="15"></rectangle>		</attr>
 
 	</node>
 	</layout>
@@ -9025,6 +9060,24 @@
 
 	</node>
 			
+	<node id="91" nid="1107154559" type="UIColaborates">
+
+	<connected id="902667878"><attr name="extraLabels">
+			<array>
+
+</array>
+</attr>
+
+
+
+	</connected>
+	<connected id="1958647231">
+
+
+
+	</connected>
+	</node>
+			
 	<node id="InteractionUnit2" nid="1695165360" type="InteractionUnit">
 
 	</node>
@@ -9153,6 +9206,12 @@
 	<node id="node4">
 		<attr name="bounds">
 			<rectangle x="329" y="135" width="56" height="43"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node15">
+		<attr name="bounds">
+			<rectangle x="548" y="155" width="79" height="15"></rectangle>		</attr>
 
 	</node>
 			
