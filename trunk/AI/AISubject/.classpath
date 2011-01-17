@@ -25,5 +25,9 @@
 	<classpathentry kind="lib" path="lib/xstream-1.2.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="lib/worldwind.jar"/>
+	<classpathentry kind="lib" path="lib/gdal.jar"/>
+	<classpathentry kind="lib" path="lib/gluegen-rt.jar"/>
+	<classpathentry kind="lib" path="lib/jogl.jar"/>
+	<classpathentry kind="lib" path="lib/plugin.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
