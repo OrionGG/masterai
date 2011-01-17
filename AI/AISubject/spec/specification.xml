@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project cid="207" version="1.2">
+<project cid="220" version="1.2">
 <projectproperties>
 <projectproperty id="extfolder" module="IDK"  name="Extension Module Folder" value="ext"  tooltip="Folder where the IDE will find its new modules" />
 <projectproperty id="jadeout" module="Ingenias Agent Framework generator"  name="JADE generated output folder" value="gensrc"  tooltip="The folder that will hold generated JADE agents" />
@@ -7,7 +7,7 @@
 <projectproperty id="jadeproject" module="Ingenias Agent Framework generator"  name="JADE main project folder" value="AISubject"  tooltip="The folder that will contain the project for this development" />
 <projectproperty id="jadeperm" module="Ingenias Agent Framework generator"  name="JADE generate only once folder" value="permsrc"  tooltip="The folder that will hold generated elements that should not be regenerated" />
 <projectproperty id="htmldoc" module="HTML Document generator"  name="HTML document folder" value="html"  tooltip="The document folder that will contain HTML version of this specification" />
- <openeddiagram>Pilot Model</openeddiagram> <openeddiagram>No action</openeddiagram> <openeddiagram>Radar Application</openeddiagram> <openeddiagram>Use Cases</openeddiagram> <openeddiagram>Arrived Safe And Sound</openeddiagram> <openeddiagram>Goals Priority</openeddiagram> <openeddiagram>Check Destination</openeddiagram> <openeddiagram>Update Position</openeddiagram> <openeddiagram>AvoidCollision</openeddiagram> <openeddiagram>Pilot Goal</openeddiagram> <openeddiagram>Create Initial Plan</openeddiagram> <openeddiagram>Plan Creator Application</openeddiagram> <openeddiagram>Flight Planner</openeddiagram> <openeddiagram>Flight Plan Monitorization</openeddiagram> <openeddiagram>Plane Position</openeddiagram> <openeddiagram>Main Program Activity</openeddiagram></projectproperties>
+ <openeddiagram>Pilot Model</openeddiagram> <openeddiagram>No action</openeddiagram> <openeddiagram>Radar Application</openeddiagram> <openeddiagram>Pilot Use Cases</openeddiagram> <openeddiagram>Arrived Safe And Sound</openeddiagram> <openeddiagram>Goals Priority</openeddiagram> <openeddiagram>Check Destination</openeddiagram> <openeddiagram>Update Position</openeddiagram> <openeddiagram>AvoidCollision</openeddiagram> <openeddiagram>Plane Model</openeddiagram> <openeddiagram>Environment To Plane</openeddiagram> <openeddiagram>Plane Position</openeddiagram> <openeddiagram>Position Sensors</openeddiagram> <openeddiagram>Environment Component</openeddiagram></projectproperties>
 <leafpackages>
    <path>
     <package id="Project"/>
@@ -44,6 +44,16 @@
     <package id="Project"/>
     <package id="Check Proximity"/>
     <package id="Create Conflict FF"/>
+   </path>
+   <path>
+    <package id="Project"/>
+    <package id="Pilot"/>
+    <package id="Pilot Making A Decision"/>
+   </path>
+   <path>
+    <package id="Project"/>
+    <package id="Pilot"/>
+    <package id="Pilot Use Cases"/>
    </path>
    <path>
     <package id="Project"/>
@@ -167,15 +177,7 @@
    </path>
    <path>
     <package id="Project"/>
-    <package id="Make A Decision"/>
-   </path>
-   <path>
-    <package id="Project"/>
     <package id="Arrived Safe And Sound"/>
-   </path>
-   <path>
-    <package id="Project"/>
-    <package id="Use Cases"/>
    </path>
    <path>
     <package id="Project"/>
@@ -185,17 +187,23 @@
     <package id="Project"/>
     <package id="Goals Priority"/>
    </path>
+   <path>
+    <package id="Project"/>
+    <package id="Only One Plane Deployment"/>
+   </path>
+   <path>
+    <package id="Project"/>
+    <package id="Simulation Environment"/>
+    <package id="Environment To Plane"/>
+   </path>
+   <path>
+    <package id="Project"/>
+    <package id="Simulation Environment"/>
+    <package id="System init"/>
+    <package id="Environment Component"/>
+   </path>
 </leafpackages>
 <objects>
-<object id="SimulationEnvironment" type="ingenias.editor.entities.EnvironmentApplication">
-<objectproperty id="Methods" collection="true">
-</objectproperty>
-<mapproperties>
-<key id="Code"></key>
-<key id="Description"></key>
-<key id="_view_type">UML</key>
-</mapproperties>
-</object>
 <object id="Plan Creator" type="ingenias.editor.entities.EnvironmentApplication">
 <objectproperty id="Methods" collection="true">
 </objectproperty>
@@ -224,6 +232,14 @@
 </mapproperties>
 </object>
 <object id="Plane Position Service" type="ingenias.editor.entities.EnvironmentApplication">
+<objectproperty id="Methods" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="Description"></key>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+<object id="Environment" type="ingenias.editor.entities.EnvironmentApplication">
 <objectproperty id="Methods" collection="true">
 </objectproperty>
 <mapproperties>
@@ -464,6 +480,69 @@
 <key id="_view_type">UML</key>
 </mapproperties>
 </object>
+<object id="Simulation Creator" type="ingenias.editor.entities.Agent">
+<mapproperties>
+<key id="Description"></key>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+<object id="Only One Plane" type="ingenias.editor.entities.DeploymentPackage">
+<objectproperty id="Parameters" collection="true">
+</objectproperty>
+<objectproperty id="AgentsDeployed" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="Description"></key>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+<object id="Deployment Pilot" type="ingenias.editor.entities.DeploymentUnitByType">
+<objectproperty id="AgentTypeDeployed">
+<object id="Unmanned Autonomous Pilot" type="ingenias.editor.entities.Agent">
+<mapproperties>
+<key id="Code"></key>
+<key id="Description"></key>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+</objectproperty>
+<mapproperties>
+<key id="NumberInstances">1</key>
+<key id="Description"></key>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+<object id="Deployment Plane" type="ingenias.editor.entities.DeploymentUnitByType">
+<objectproperty id="AgentTypeDeployed">
+<object id="Plane" type="ingenias.editor.entities.Agent">
+<mapproperties>
+<key id="Code"></key>
+<key id="Description"></key>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+</objectproperty>
+<mapproperties>
+<key id="NumberInstances">1</key>
+<key id="Description"></key>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+<object id="Deployment Simulator" type="ingenias.editor.entities.DeploymentUnitByType">
+<objectproperty id="AgentTypeDeployed">
+<object id="Simulation Creator" type="ingenias.editor.entities.Agent">
+<mapproperties>
+<key id="Description"></key>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+</objectproperty>
+<mapproperties>
+<key id="NumberInstances">1</key>
+<key id="Description"></key>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
 <object id="INGENIASCodeComponent0" type="ingenias.editor.entities.INGENIASCodeComponent">
 <mapproperties>
 <key id="Language">Java</key>
@@ -475,6 +554,15 @@
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}</key>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+<object id="INGENIASCodeComponent1" type="ingenias.editor.entities.INGENIASCodeComponent">
+<mapproperties>
+<key id="Language">Java</key>
+<key id="Code">		Configuration.setValue(AVKey.GLOBE_CLASS_NAME, EarthFlat.class.getName());
+		//Configuration.setValue(AVKey.VIEW_CLASS_NAME, FlatOrbitView.class.getName());
+		EnvironmentAppImp.start(&quot;World Wind Paths&quot;, EnvironmentAppImp.AppFrame.class);</key>
 <key id="_view_type">UML</key>
 </mapproperties>
 </object>
@@ -1141,6 +1229,22 @@
 <key id="_view_type">UML</key>
 </mapproperties>
 </object>
+<object id="Pilot Mind" type="ingenias.editor.entities.FrameFact">
+<objectproperty id="Slots" collection="true">
+<object id="19" type="ingenias.editor.entities.ObjectSlot">
+<mapproperties>
+<key id="Name">PilotFlightPlan</key>
+<key id="Type">Flight_Plan</key>
+<key id="Description"></key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+</objectproperty>
+<mapproperties>
+<key id="Description"></key>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
 <object id="Plane Too Close" type="ingenias.editor.entities.ApplicationEventSlots">
 <objectproperty id="Slots" collection="true">
 </objectproperty>
@@ -1161,7 +1265,7 @@
 <key id="_view_type">UML</key>
 </mapproperties>
 </object>
-<object id="MentalState0" type="ingenias.editor.entities.MentalState">
+<object id="PilotMentalState" type="ingenias.editor.entities.MentalState">
 <mapproperties>
 <key id="Code"></key>
 <key id="Description"></key>
@@ -1231,6 +1335,16 @@
 <key id="Description"></key>
 <key id="_view_type">UML</key>
 <key id="Result">Position</key>
+</mapproperties>
+</object>
+<object id="218" type="ingenias.editor.entities.Method">
+<objectproperty id="Parameter" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="Name">initialize</key>
+<key id="Description"></key>
+<key id="_view_type">INGENIAS</key>
+<key id="Result">void</key>
 </mapproperties>
 </object>
 <object id="196" type="ingenias.editor.entities.MethodParameter">
@@ -1596,6 +1710,14 @@
 <key id="_view_type">UML</key>
 </mapproperties>
 </object>
+<object id="19" type="ingenias.editor.entities.ObjectSlot">
+<mapproperties>
+<key id="Name">PilotFlightPlan</key>
+<key id="Type">Flight_Plan</key>
+<key id="Description"></key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
 <object id="GRASIASpecification0" type="ingenias.editor.entities.GRASIASpecification">
 <objectproperty id="ModelThatContainsSpecification">
 <object id="0" type="ingenias.editor.entities.InteractionModelModelEntity">
@@ -1932,6 +2054,23 @@
 <key id="_view_type">UML</key>
 </mapproperties>
 </object>
+<object id="220" type="ingenias.editor.entities.FileSpecPatternMapping">
+<objectproperty id="Entity">
+<object id="Environment" type="ingenias.editor.entities.EnvironmentApplication">
+<objectproperty id="Methods" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="Description"></key>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+</objectproperty>
+<mapproperties>
+<key id="File"></key>
+<key id="Pattern">MultipleInstances</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
 <object id="186" type="ingenias.editor.entities.FileSpecMapping">
 <objectproperty id="Entity">
 <object id="AircraftData" type="ingenias.editor.entities.FrameFact">
@@ -2120,6 +2259,31 @@
 <key id="File"></key>
 <key id="Pattern">MultipleInstances</key>
 <key id="_view_type">UML</key>
+</mapproperties>
+</object>
+</objectproperty>
+<mapproperties>
+<key id="Language">Java</key>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+<object id="INGENIASComponent4" type="ingenias.editor.entities.INGENIASComponent">
+<objectproperty id="Files" collection="true">
+<object id="220" type="ingenias.editor.entities.FileSpecPatternMapping">
+<objectproperty id="Entity">
+<object id="Environment" type="ingenias.editor.entities.EnvironmentApplication">
+<objectproperty id="Methods" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="Description"></key>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+</objectproperty>
+<mapproperties>
+<key id="File"></key>
+<key id="Pattern">MultipleInstances</key>
+<key id="_view_type">INGENIAS</key>
 </mapproperties>
 </object>
 </objectproperty>
@@ -2564,6 +2728,215 @@
 <key id="_view_type">INGENIAS</key>
 </mapproperties>
 </role></relationship>
+<relationship id="141" type="ingenias.editor.entities.WFResponsable">
+<object id="141" type="ingenias.editor.entities.WFResponsable">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Make A Decision" class="ingenias.editor.entities.Task" roleName="WFResponsabletarget" type="ingenias.editor.entities.WFResponsabletargetRole" dgcid="1665331236">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="Pilot" class="ingenias.editor.entities.Agent" roleName="WFResponsablesource" type="ingenias.editor.entities.WFResponsablesourceRole" dgcid="675972549">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="79" type="ingenias.editor.entities.WFDecomposes">
+<object id="79" type="ingenias.editor.entities.WFDecomposes">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Make A Decision" class="ingenias.editor.entities.Task" roleName="WFDecomposessource" type="ingenias.editor.entities.WFDecomposessourceRole" dgcid="1665331236">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="Change Head" class="ingenias.editor.entities.Task" roleName="WFDecomposestarget" type="ingenias.editor.entities.WFDecomposestargetRole" dgcid="1070892665">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="10" type="ingenias.editor.entities.GTSatisfies">
+<object id="10" type="ingenias.editor.entities.GTSatisfies">
+<objectproperty id="SatisfactionCondition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Make A Decision" class="ingenias.editor.entities.Task" roleName="GTSatisfiessource" type="ingenias.editor.entities.GTSatisfiessourceRole" dgcid="1665331236">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="Decision Made" class="ingenias.editor.entities.Goal" roleName="GTSatisfiestarget" type="ingenias.editor.entities.GTSatisfiestargetRole" dgcid="316371428">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="179" type="ingenias.editor.entities.WFConsumes">
+<object id="179" type="ingenias.editor.entities.WFConsumes">
+<objectproperty id="Condition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Make A Decision" class="ingenias.editor.entities.Task" roleName="WFConsumessource" type="ingenias.editor.entities.WFConsumessourceRole" dgcid="1665331236">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="DecisionFF" class="ingenias.editor.entities.FrameFact" roleName="WFConsumestarget" type="ingenias.editor.entities.WFConsumestargetRole" dgcid="1455044399">
+<mapproperties>
+<key id="Cardinality"></key>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="81" type="ingenias.editor.entities.WFDecomposes">
+<object id="81" type="ingenias.editor.entities.WFDecomposes">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Make A Decision" class="ingenias.editor.entities.Task" roleName="WFDecomposessource" type="ingenias.editor.entities.WFDecomposessourceRole" dgcid="1665331236">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="Change Speed" class="ingenias.editor.entities.Task" roleName="WFDecomposestarget" type="ingenias.editor.entities.WFDecomposestargetRole" dgcid="797341709">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="80" type="ingenias.editor.entities.WFDecomposes">
+<object id="80" type="ingenias.editor.entities.WFDecomposes">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Make A Decision" class="ingenias.editor.entities.Task" roleName="WFDecomposessource" type="ingenias.editor.entities.WFDecomposessourceRole" dgcid="1665331236">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="Change Altitud" class="ingenias.editor.entities.Task" roleName="WFDecomposestarget" type="ingenias.editor.entities.WFDecomposestargetRole" dgcid="1684897873">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="105" type="ingenias.editor.entities.ParticipatesInUseCase">
+<object id="105" type="ingenias.editor.entities.ParticipatesInUseCase">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Pilot" class="ingenias.editor.entities.Agent" roleName="ParticipatesInUseCasesource" type="ingenias.editor.entities.ParticipatesInUseCasesourceRole" dgcid="1832155537">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="Land" class="ingenias.editor.entities.INGENIASUseCase" roleName="ParticipatesInUseCasetarget" type="ingenias.editor.entities.ParticipatesInUseCasetargetRole" dgcid="1425714609">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="197" type="ingenias.editor.entities.UseCasePursues">
+<object id="197" type="ingenias.editor.entities.UseCasePursues">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Arrive Safe And Sound" class="ingenias.editor.entities.Goal" roleName="UseCasePursuestarget" type="ingenias.editor.entities.UseCasePursuestargetRole" dgcid="1609169780">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="Land" class="ingenias.editor.entities.INGENIASUseCase" roleName="UseCasePursuessource" type="ingenias.editor.entities.UseCasePursuessourceRole" dgcid="1425714609">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="149" type="ingenias.editor.entities.UseCasePursues">
+<object id="149" type="ingenias.editor.entities.UseCasePursues">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Environment Interaction" class="ingenias.editor.entities.INGENIASUseCase" roleName="UseCasePursuessource" type="ingenias.editor.entities.UseCasePursuessourceRole" dgcid="1287399760">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="Arrive Safe And Sound" class="ingenias.editor.entities.Goal" roleName="UseCasePursuestarget" type="ingenias.editor.entities.UseCasePursuestargetRole" dgcid="1609169780">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="104" type="ingenias.editor.entities.ParticipatesInUseCase">
+<object id="104" type="ingenias.editor.entities.ParticipatesInUseCase">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Environment Interaction" class="ingenias.editor.entities.INGENIASUseCase" roleName="ParticipatesInUseCasetarget" type="ingenias.editor.entities.ParticipatesInUseCasetargetRole" dgcid="1287399760">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="Pilot" class="ingenias.editor.entities.Agent" roleName="ParticipatesInUseCasesource" type="ingenias.editor.entities.ParticipatesInUseCasesourceRole" dgcid="1832155537">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="140" type="ingenias.editor.entities.UseCasePursues">
+<object id="140" type="ingenias.editor.entities.UseCasePursues">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Take Off" class="ingenias.editor.entities.INGENIASUseCase" roleName="UseCasePursuessource" type="ingenias.editor.entities.UseCasePursuessourceRole" dgcid="986001402">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="Arrive Safe And Sound" class="ingenias.editor.entities.Goal" roleName="UseCasePursuestarget" type="ingenias.editor.entities.UseCasePursuestargetRole" dgcid="1609169780">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="43" type="ingenias.editor.entities.ParticipatesInUseCase">
+<object id="43" type="ingenias.editor.entities.ParticipatesInUseCase">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Take Off" class="ingenias.editor.entities.INGENIASUseCase" roleName="ParticipatesInUseCasetarget" type="ingenias.editor.entities.ParticipatesInUseCasetargetRole" dgcid="986001402">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="Pilot" class="ingenias.editor.entities.Agent" roleName="ParticipatesInUseCasesource" type="ingenias.editor.entities.ParticipatesInUseCasesourceRole" dgcid="1832155537">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
 <relationship id="204" type="ingenias.editor.entities.WFResponsable">
 <object id="204" type="ingenias.editor.entities.WFResponsable">
 <mapproperties>
@@ -2694,25 +3067,6 @@
 <key id="_view_type">INGENIAS</key>
 </mapproperties>
 </role></relationship>
-<relationship id="27" type="ingenias.editor.entities.AContainsME">
-<object id="27" type="ingenias.editor.entities.AContainsME">
-<mapproperties>
-<key id="_view_type">INGENIAS</key>
-<key id="Label"></key>
-</mapproperties>
-</object>
-<role idEntity="MentalState0" class="ingenias.editor.entities.MentalState" roleName="AContainsMEsource" type="ingenias.editor.entities.AContainsMEsourceRole" dgcid="1522681867">
-<mapproperties>
-<key id="attributeToShow">0</key>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</role><role idEntity="Flight Plan" class="ingenias.editor.entities.FrameFact" roleName="AContainsMEtarget" type="ingenias.editor.entities.AContainsMEtargetRole" dgcid="992478354">
-<mapproperties>
-<key id="attributeToShow">0</key>
-<key id="_view_type">INGENIAS</key>
-<key id="Label"></key>
-</mapproperties>
-</role></relationship>
 <relationship id="33" type="ingenias.editor.entities.AInherits">
 <object id="33" type="ingenias.editor.entities.AInherits">
 <mapproperties>
@@ -2725,40 +3079,6 @@
 <key id="_view_type">INGENIAS</key>
 </mapproperties>
 </role><role idEntity="Secure Pilot" class="ingenias.editor.entities.Agent" roleName="AInheritssource" type="ingenias.editor.entities.AInheritssourceRole" dgcid="1222357813">
-<mapproperties>
-<key id="attributeToShow">0</key>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</role></relationship>
-<relationship id="19" type="ingenias.editor.entities.WFPlays">
-<object id="19" type="ingenias.editor.entities.WFPlays">
-<mapproperties>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</object>
-<role idEntity="Pilot" class="ingenias.editor.entities.Agent" roleName="WFPlayssource" type="ingenias.editor.entities.WFPlayssourceRole" dgcid="1549326000">
-<mapproperties>
-<key id="attributeToShow">0</key>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</role><role idEntity="Initiator" class="ingenias.editor.entities.Role" roleName="WFPlaystarget" type="ingenias.editor.entities.WFPlaystargetRole" dgcid="2127415675">
-<mapproperties>
-<key id="attributeToShow">0</key>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</role></relationship>
-<relationship id="20" type="ingenias.editor.entities.WFResponsable">
-<object id="20" type="ingenias.editor.entities.WFResponsable">
-<mapproperties>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</object>
-<role idEntity="Initiator" class="ingenias.editor.entities.Role" roleName="WFResponsablesource" type="ingenias.editor.entities.WFResponsablesourceRole" dgcid="2127415675">
-<mapproperties>
-<key id="attributeToShow">0</key>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</role><role idEntity="Avoid Collision" class="ingenias.editor.entities.Task" roleName="WFResponsabletarget" type="ingenias.editor.entities.WFResponsabletargetRole" dgcid="1539983701">
 <mapproperties>
 <key id="attributeToShow">0</key>
 <key id="_view_type">INGENIAS</key>
@@ -2809,7 +3129,7 @@
 <key id="attributeToShow">0</key>
 <key id="_view_type">INGENIAS</key>
 </mapproperties>
-</role><role idEntity="MentalState0" class="ingenias.editor.entities.MentalState" roleName="AHasMStarget" type="ingenias.editor.entities.AHasMStargetRole" dgcid="1522681867">
+</role><role idEntity="PilotMentalState" class="ingenias.editor.entities.MentalState" roleName="AHasMStarget" type="ingenias.editor.entities.AHasMStargetRole" dgcid="1522681867">
 <mapproperties>
 <key id="attributeToShow">0</key>
 <key id="_view_type">INGENIAS</key>
@@ -2827,6 +3147,23 @@
 <key id="_view_type">INGENIAS</key>
 </mapproperties>
 </role><role idEntity="Unmanned Autonomous Pilot" class="ingenias.editor.entities.Agent" roleName="AInheritssource" type="ingenias.editor.entities.AInheritssourceRole" dgcid="1675460918">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="20" type="ingenias.editor.entities.AContainsME">
+<object id="20" type="ingenias.editor.entities.AContainsME">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="PilotMentalState" class="ingenias.editor.entities.MentalState" roleName="AContainsMEsource" type="ingenias.editor.entities.AContainsMEsourceRole" dgcid="1522681867">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="Pilot Mind" class="ingenias.editor.entities.FrameFact" roleName="AContainsMEtarget" type="ingenias.editor.entities.AContainsMEtargetRole" dgcid="52811431">
 <mapproperties>
 <key id="attributeToShow">0</key>
 <key id="_view_type">INGENIAS</key>
@@ -4658,113 +4995,6 @@
 <key id="_view_type">INGENIAS</key>
 </mapproperties>
 </role></relationship>
-<relationship id="141" type="ingenias.editor.entities.WFResponsable">
-<object id="141" type="ingenias.editor.entities.WFResponsable">
-<mapproperties>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</object>
-<role idEntity="Make A Decision" class="ingenias.editor.entities.Task" roleName="WFResponsabletarget" type="ingenias.editor.entities.WFResponsabletargetRole" dgcid="1665331236">
-<mapproperties>
-<key id="attributeToShow">0</key>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</role><role idEntity="Pilot" class="ingenias.editor.entities.Agent" roleName="WFResponsablesource" type="ingenias.editor.entities.WFResponsablesourceRole" dgcid="675972549">
-<mapproperties>
-<key id="attributeToShow">0</key>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</role></relationship>
-<relationship id="79" type="ingenias.editor.entities.WFDecomposes">
-<object id="79" type="ingenias.editor.entities.WFDecomposes">
-<mapproperties>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</object>
-<role idEntity="Make A Decision" class="ingenias.editor.entities.Task" roleName="WFDecomposessource" type="ingenias.editor.entities.WFDecomposessourceRole" dgcid="1665331236">
-<mapproperties>
-<key id="attributeToShow">0</key>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</role><role idEntity="Change Head" class="ingenias.editor.entities.Task" roleName="WFDecomposestarget" type="ingenias.editor.entities.WFDecomposestargetRole" dgcid="1070892665">
-<mapproperties>
-<key id="attributeToShow">0</key>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</role></relationship>
-<relationship id="10" type="ingenias.editor.entities.GTSatisfies">
-<object id="10" type="ingenias.editor.entities.GTSatisfies">
-<objectproperty id="SatisfactionCondition">
-</objectproperty>
-<mapproperties>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</object>
-<role idEntity="Make A Decision" class="ingenias.editor.entities.Task" roleName="GTSatisfiessource" type="ingenias.editor.entities.GTSatisfiessourceRole" dgcid="1665331236">
-<mapproperties>
-<key id="attributeToShow">0</key>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</role><role idEntity="Decision Made" class="ingenias.editor.entities.Goal" roleName="GTSatisfiestarget" type="ingenias.editor.entities.GTSatisfiestargetRole" dgcid="316371428">
-<mapproperties>
-<key id="attributeToShow">0</key>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</role></relationship>
-<relationship id="179" type="ingenias.editor.entities.WFConsumes">
-<object id="179" type="ingenias.editor.entities.WFConsumes">
-<objectproperty id="Condition">
-</objectproperty>
-<mapproperties>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</object>
-<role idEntity="Make A Decision" class="ingenias.editor.entities.Task" roleName="WFConsumessource" type="ingenias.editor.entities.WFConsumessourceRole" dgcid="1665331236">
-<mapproperties>
-<key id="attributeToShow">0</key>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</role><role idEntity="DecisionFF" class="ingenias.editor.entities.FrameFact" roleName="WFConsumestarget" type="ingenias.editor.entities.WFConsumestargetRole" dgcid="1455044399">
-<mapproperties>
-<key id="Cardinality"></key>
-<key id="attributeToShow">0</key>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</role></relationship>
-<relationship id="81" type="ingenias.editor.entities.WFDecomposes">
-<object id="81" type="ingenias.editor.entities.WFDecomposes">
-<mapproperties>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</object>
-<role idEntity="Make A Decision" class="ingenias.editor.entities.Task" roleName="WFDecomposessource" type="ingenias.editor.entities.WFDecomposessourceRole" dgcid="1665331236">
-<mapproperties>
-<key id="attributeToShow">0</key>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</role><role idEntity="Change Speed" class="ingenias.editor.entities.Task" roleName="WFDecomposestarget" type="ingenias.editor.entities.WFDecomposestargetRole" dgcid="797341709">
-<mapproperties>
-<key id="attributeToShow">0</key>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</role></relationship>
-<relationship id="80" type="ingenias.editor.entities.WFDecomposes">
-<object id="80" type="ingenias.editor.entities.WFDecomposes">
-<mapproperties>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</object>
-<role idEntity="Make A Decision" class="ingenias.editor.entities.Task" roleName="WFDecomposessource" type="ingenias.editor.entities.WFDecomposessourceRole" dgcid="1665331236">
-<mapproperties>
-<key id="attributeToShow">0</key>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</role><role idEntity="Change Altitud" class="ingenias.editor.entities.Task" roleName="WFDecomposestarget" type="ingenias.editor.entities.WFDecomposestargetRole" dgcid="1684897873">
-<mapproperties>
-<key id="attributeToShow">0</key>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</role></relationship>
 <relationship id="154" type="ingenias.editor.entities.GTInherits">
 <object id="154" type="ingenias.editor.entities.GTInherits">
 <mapproperties>
@@ -5003,103 +5233,18 @@
 <key id="_view_type">INGENIAS</key>
 </mapproperties>
 </role></relationship>
-<relationship id="105" type="ingenias.editor.entities.ParticipatesInUseCase">
-<object id="105" type="ingenias.editor.entities.ParticipatesInUseCase">
+<relationship id="207" type="ingenias.editor.entities.GTDepends">
+<object id="207" type="ingenias.editor.entities.GTDepends">
 <mapproperties>
 <key id="_view_type">INGENIAS</key>
 </mapproperties>
 </object>
-<role idEntity="Pilot" class="ingenias.editor.entities.Agent" roleName="ParticipatesInUseCasesource" type="ingenias.editor.entities.ParticipatesInUseCasesourceRole" dgcid="1832155537">
+<role idEntity="Flight Plan Created" class="ingenias.editor.entities.Goal" roleName="GTDependstarget" type="ingenias.editor.entities.GTDependstargetRole" dgcid="868960203">
 <mapproperties>
 <key id="attributeToShow">0</key>
 <key id="_view_type">INGENIAS</key>
 </mapproperties>
-</role><role idEntity="Land" class="ingenias.editor.entities.INGENIASUseCase" roleName="ParticipatesInUseCasetarget" type="ingenias.editor.entities.ParticipatesInUseCasetargetRole" dgcid="1425714609">
-<mapproperties>
-<key id="attributeToShow">0</key>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</role></relationship>
-<relationship id="197" type="ingenias.editor.entities.UseCasePursues">
-<object id="197" type="ingenias.editor.entities.UseCasePursues">
-<mapproperties>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</object>
-<role idEntity="Arrive Safe And Sound" class="ingenias.editor.entities.Goal" roleName="UseCasePursuestarget" type="ingenias.editor.entities.UseCasePursuestargetRole" dgcid="1609169780">
-<mapproperties>
-<key id="attributeToShow">0</key>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</role><role idEntity="Land" class="ingenias.editor.entities.INGENIASUseCase" roleName="UseCasePursuessource" type="ingenias.editor.entities.UseCasePursuessourceRole" dgcid="1425714609">
-<mapproperties>
-<key id="attributeToShow">0</key>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</role></relationship>
-<relationship id="149" type="ingenias.editor.entities.UseCasePursues">
-<object id="149" type="ingenias.editor.entities.UseCasePursues">
-<mapproperties>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</object>
-<role idEntity="Environment Interaction" class="ingenias.editor.entities.INGENIASUseCase" roleName="UseCasePursuessource" type="ingenias.editor.entities.UseCasePursuessourceRole" dgcid="1287399760">
-<mapproperties>
-<key id="attributeToShow">0</key>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</role><role idEntity="Arrive Safe And Sound" class="ingenias.editor.entities.Goal" roleName="UseCasePursuestarget" type="ingenias.editor.entities.UseCasePursuestargetRole" dgcid="1609169780">
-<mapproperties>
-<key id="attributeToShow">0</key>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</role></relationship>
-<relationship id="104" type="ingenias.editor.entities.ParticipatesInUseCase">
-<object id="104" type="ingenias.editor.entities.ParticipatesInUseCase">
-<mapproperties>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</object>
-<role idEntity="Environment Interaction" class="ingenias.editor.entities.INGENIASUseCase" roleName="ParticipatesInUseCasetarget" type="ingenias.editor.entities.ParticipatesInUseCasetargetRole" dgcid="1287399760">
-<mapproperties>
-<key id="attributeToShow">0</key>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</role><role idEntity="Pilot" class="ingenias.editor.entities.Agent" roleName="ParticipatesInUseCasesource" type="ingenias.editor.entities.ParticipatesInUseCasesourceRole" dgcid="1832155537">
-<mapproperties>
-<key id="attributeToShow">0</key>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</role></relationship>
-<relationship id="140" type="ingenias.editor.entities.UseCasePursues">
-<object id="140" type="ingenias.editor.entities.UseCasePursues">
-<mapproperties>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</object>
-<role idEntity="Take Off" class="ingenias.editor.entities.INGENIASUseCase" roleName="UseCasePursuessource" type="ingenias.editor.entities.UseCasePursuessourceRole" dgcid="986001402">
-<mapproperties>
-<key id="attributeToShow">0</key>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</role><role idEntity="Arrive Safe And Sound" class="ingenias.editor.entities.Goal" roleName="UseCasePursuestarget" type="ingenias.editor.entities.UseCasePursuestargetRole" dgcid="1609169780">
-<mapproperties>
-<key id="attributeToShow">0</key>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</role></relationship>
-<relationship id="43" type="ingenias.editor.entities.ParticipatesInUseCase">
-<object id="43" type="ingenias.editor.entities.ParticipatesInUseCase">
-<mapproperties>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</object>
-<role idEntity="Take Off" class="ingenias.editor.entities.INGENIASUseCase" roleName="ParticipatesInUseCasetarget" type="ingenias.editor.entities.ParticipatesInUseCasetargetRole" dgcid="986001402">
-<mapproperties>
-<key id="attributeToShow">0</key>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</role><role idEntity="Pilot" class="ingenias.editor.entities.Agent" roleName="ParticipatesInUseCasesource" type="ingenias.editor.entities.ParticipatesInUseCasesourceRole" dgcid="1832155537">
+</role><role idEntity="Arrive Safe And Sound" class="ingenias.editor.entities.Goal" roleName="GTDependssource" type="ingenias.editor.entities.GTDependssourceRole" dgcid="1999077370">
 <mapproperties>
 <key id="attributeToShow">0</key>
 <key id="_view_type">INGENIAS</key>
@@ -5141,23 +5286,6 @@
 <key id="_view_type">INGENIAS</key>
 </mapproperties>
 </role></relationship>
-<relationship id="198" type="ingenias.editor.entities.WFFollows">
-<object id="198" type="ingenias.editor.entities.WFFollows">
-<mapproperties>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</object>
-<role idEntity="Create Initial Plan" class="ingenias.editor.entities.Task" roleName="WFFollowssource" type="ingenias.editor.entities.WFFollowssourceRole" dgcid="1176180194">
-<mapproperties>
-<key id="attributeToShow">0</key>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</role><role idEntity="Check Destination" class="ingenias.editor.entities.Task" roleName="WFFollowstarget" type="ingenias.editor.entities.WFFollowstargetRole" dgcid="2012075375">
-<mapproperties>
-<key id="attributeToShow">0</key>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</role></relationship>
 <relationship id="66" type="ingenias.editor.entities.WFStarts">
 <object id="66" type="ingenias.editor.entities.WFStarts">
 <mapproperties>
@@ -5194,18 +5322,190 @@
 <key id="_view_type">INGENIAS</key>
 </mapproperties>
 </role></relationship>
+<relationship id="27" type="ingenias.editor.entities.WFFollows">
+<object id="27" type="ingenias.editor.entities.WFFollows">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Create Initial Plan" class="ingenias.editor.entities.Task" roleName="WFFollowssource" type="ingenias.editor.entities.WFFollowssourceRole" dgcid="1176180194">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="Flight Plan Monitoring" class="ingenias.editor.entities.Task" roleName="WFFollowstarget" type="ingenias.editor.entities.WFFollowstargetRole" dgcid="878326218">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="198" type="ingenias.editor.entities.WFFollows">
+<object id="198" type="ingenias.editor.entities.WFFollows">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Update Plane Position" class="ingenias.editor.entities.Task" roleName="WFFollowstarget" type="ingenias.editor.entities.WFFollowstargetRole" dgcid="1725119026">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="Flight Plan Monitoring" class="ingenias.editor.entities.Task" roleName="WFFollowssource" type="ingenias.editor.entities.WFFollowssourceRole" dgcid="878326218">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
 <relationship id="201" type="ingenias.editor.entities.WFFollows">
 <object id="201" type="ingenias.editor.entities.WFFollows">
 <mapproperties>
 <key id="_view_type">INGENIAS</key>
 </mapproperties>
 </object>
-<role idEntity="Check Destination" class="ingenias.editor.entities.Task" roleName="WFFollowstarget" type="ingenias.editor.entities.WFFollowstargetRole" dgcid="2012075375">
+<role idEntity="Update Plane Position" class="ingenias.editor.entities.Task" roleName="WFFollowssource" type="ingenias.editor.entities.WFFollowssourceRole" dgcid="1725119026">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="Check Destination" class="ingenias.editor.entities.Task" roleName="WFFollowstarget" type="ingenias.editor.entities.WFFollowstargetRole" dgcid="2012075375">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="214" type="ingenias.editor.entities.WFFollows">
+<object id="214" type="ingenias.editor.entities.WFFollows">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Update Plane Position" class="ingenias.editor.entities.Task" roleName="WFFollowstarget" type="ingenias.editor.entities.WFFollowstargetRole" dgcid="1725119026">
 <mapproperties>
 <key id="attributeToShow">0</key>
 <key id="_view_type">INGENIAS</key>
 </mapproperties>
 </role><role idEntity="Create Decisions" class="ingenias.editor.entities.Task" roleName="WFFollowssource" type="ingenias.editor.entities.WFFollowssourceRole" dgcid="813226358">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="215" type="ingenias.editor.entities.DefinesDeployment">
+<object id="215" type="ingenias.editor.entities.DefinesDeployment">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Deployment Pilot" class="ingenias.editor.entities.DeploymentUnitByType" roleName="DefinesDeploymentsource" type="ingenias.editor.entities.DefinesDeploymentsourceRole" dgcid="736290139">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="Only One Plane" class="ingenias.editor.entities.DeploymentPackage" roleName="DefinesDeploymenttarget" type="ingenias.editor.entities.DefinesDeploymenttargetRole" dgcid="912639423">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="216" type="ingenias.editor.entities.DefinesDeployment">
+<object id="216" type="ingenias.editor.entities.DefinesDeployment">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Deployment Plane" class="ingenias.editor.entities.DeploymentUnitByType" roleName="DefinesDeploymentsource" type="ingenias.editor.entities.DefinesDeploymentsourceRole" dgcid="741442121">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="Only One Plane" class="ingenias.editor.entities.DeploymentPackage" roleName="DefinesDeploymenttarget" type="ingenias.editor.entities.DefinesDeploymenttargetRole" dgcid="912639423">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="222" type="ingenias.editor.entities.DefinesDeployment">
+<object id="222" type="ingenias.editor.entities.DefinesDeployment">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Only One Plane" class="ingenias.editor.entities.DeploymentPackage" roleName="DefinesDeploymenttarget" type="ingenias.editor.entities.DefinesDeploymenttargetRole" dgcid="912639423">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="Deployment Simulator" class="ingenias.editor.entities.DeploymentUnitByType" roleName="DefinesDeploymentsource" type="ingenias.editor.entities.DefinesDeploymentsourceRole" dgcid="363418647">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="217" type="ingenias.editor.entities.EPerceives">
+<object id="217" type="ingenias.editor.entities.EPerceives">
+<objectproperty id="Event">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Environment" class="ingenias.editor.entities.EnvironmentApplication" roleName="EPerceivestarget" type="ingenias.editor.entities.EPerceivestargetRole" dgcid="1528357117">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="Plane" class="ingenias.editor.entities.Agent" roleName="EPerceivessource" type="ingenias.editor.entities.EPerceivessourceRole" dgcid="1057073002">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="221" type="ingenias.editor.entities.ApplicationBelongsTo">
+<object id="221" type="ingenias.editor.entities.ApplicationBelongsTo">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Environment" class="ingenias.editor.entities.EnvironmentApplication" roleName="ApplicationBelongsTotarget" type="ingenias.editor.entities.ApplicationBelongsTotargetRole" dgcid="1528357117">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="Simulation Creator" class="ingenias.editor.entities.Agent" roleName="ApplicationBelongsTosource" type="ingenias.editor.entities.ApplicationBelongsTosourceRole" dgcid="1391955799">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="219" type="ingenias.editor.entities.UMLRealizes">
+<object id="219" type="ingenias.editor.entities.UMLRealizes">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="INGENIASComponent4" class="ingenias.editor.entities.INGENIASComponent" roleName="UMLRealizestarget" type="ingenias.editor.entities.UMLRealizestargetRole" dgcid="475342124">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="Environment" class="ingenias.editor.entities.EnvironmentApplication" roleName="UMLRealizessource" type="ingenias.editor.entities.UMLRealizessourceRole" dgcid="530775135">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="223" type="ingenias.editor.entities.CDUsesCode">
+<object id="223" type="ingenias.editor.entities.CDUsesCode">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Environment" class="ingenias.editor.entities.EnvironmentApplication" roleName="CDUsesCodesource" type="ingenias.editor.entities.CDUsesCodesourceRole" dgcid="1729903138">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="INGENIASCodeComponent1" class="ingenias.editor.entities.INGENIASCodeComponent" roleName="CDUsesCodetarget" type="ingenias.editor.entities.CDUsesCodetargetRole" dgcid="906716715">
 <mapproperties>
 <key id="attributeToShow">0</key>
 <key id="_view_type">INGENIAS</key>
@@ -5331,31 +5631,31 @@
 			
 	<node id="node2">
 		<attr name="bounds">
-			<rectangle x="67" y="32" width="35" height="57"></rectangle>		</attr>
+			<rectangle x="42" y="55" width="35" height="57"></rectangle>		</attr>
 
 	</node>
 			
 	<node id="node0">
 		<attr name="bounds">
-			<rectangle x="448" y="19" width="195" height="189"></rectangle>		</attr>
+			<rectangle x="374" y="29" width="195" height="189"></rectangle>		</attr>
 
 	</node>
 			
 	<node id="node4">
 		<attr name="bounds">
-			<rectangle x="118" y="52" width="54" height="15"></rectangle>		</attr>
+			<rectangle x="88" y="78" width="54" height="15"></rectangle>		</attr>
 
 	</node>
 			
 	<node id="node1">
 		<attr name="bounds">
-			<rectangle x="188" y="37" width="77" height="42"></rectangle>		</attr>
+			<rectangle x="154" y="68" width="77" height="42"></rectangle>		</attr>
 
 	</node>
 			
 	<node id="node3">
 		<attr name="bounds">
-			<rectangle x="318" y="73" width="76" height="15"></rectangle>		</attr>
+			<rectangle x="264" y="95" width="76" height="15"></rectangle>		</attr>
 
 	</node>
 	</layout>
@@ -5960,6 +6260,393 @@
 	</node>
 	</layout>
 </gxl> </model>
+ <model id="Pilot Making A Decision" type="ingenias.editor.models.TasksAndGoalsModelModelJGraph">
+<object id="Pilot Making A Decision" type="ingenias.editor.entities.TasksAndGoalsModelDataEntity">
+<mapproperties>
+<key id="Description"></key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+  <path>
+    <package id="Project"/>
+    <package id="Pilot"/>
+   </path>
+<gxl>
+
+	<graph>
+			
+	<node id="DecisionFF" nid="1455044399" type="FrameFact">
+
+	</node>
+			
+	<node id="Make A Decision" nid="1665331236" type="Task">
+
+	</node>
+			
+	<node id="141" nid="2097118307" type="WFResponsable">
+
+	<connected id="675972549">
+
+
+	</connected>
+	<connected id="1665331236">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="Pilot" nid="675972549" type="Agent">
+
+	</node>
+			
+	<node id="Change Speed" nid="797341709" type="Task">
+
+	</node>
+			
+	<node id="80" nid="1897882643" type="WFDecomposes">
+
+	<connected id="1665331236">
+
+
+	</connected>
+	<connected id="1684897873">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="Change Head" nid="1070892665" type="Task">
+
+	</node>
+			
+	<node id="79" nid="1427236537" type="WFDecomposes">
+
+	<connected id="1665331236">
+
+
+	</connected>
+	<connected id="1070892665">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="Decision Made" nid="316371428" type="Goal">
+
+	</node>
+			
+	<node id="81" nid="282924319" type="WFDecomposes">
+
+	<connected id="1665331236">
+
+
+	</connected>
+	<connected id="797341709">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="179" nid="1528735327" type="WFConsumes">
+
+	<connected id="1665331236">
+
+
+	</connected>
+	<connected id="1455044399">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="10" nid="1116247759" type="GTSatisfies">
+
+	<connected id="1665331236">
+
+
+	</connected>
+	<connected id="316371428">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="Change Altitud" nid="1684897873" type="Task">
+
+	</node>
+	</graph>
+
+
+	<layout>
+			
+	<node id="node2">
+		<attr name="bounds">
+			<rectangle x="315" y="5" width="53" height="46"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node1">
+		<attr name="bounds">
+			<rectangle x="286" y="105" width="99" height="43"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node7">
+		<attr name="bounds">
+			<rectangle x="173" y="77" width="91" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node0">
+		<attr name="bounds">
+			<rectangle x="102" y="0" width="49" height="103"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node5">
+		<attr name="bounds">
+			<rectangle x="478" y="199" width="54" height="43"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node12">
+		<attr name="bounds">
+			<rectangle x="287" y="167" width="91" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node4">
+		<attr name="bounds">
+			<rectangle x="10" y="189" width="65" height="43"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node8">
+		<attr name="bounds">
+			<rectangle x="135" y="163" width="91" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node6">
+		<attr name="bounds">
+			<rectangle x="562" y="81" width="78" height="50"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node11">
+		<attr name="bounds">
+			<rectangle x="381" y="169" width="91" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node10">
+		<attr name="bounds">
+			<rectangle x="298" y="71" width="79" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node9">
+		<attr name="bounds">
+			<rectangle x="439" y="108" width="69" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node3">
+		<attr name="bounds">
+			<rectangle x="296" y="201" width="70" height="40"></rectangle>		</attr>
+
+	</node>
+	</layout>
+</gxl> </model>
+ <model id="Pilot Use Cases" type="ingenias.editor.models.UseCaseDiagramModelJGraph">
+<object id="Pilot Use Cases" type="ingenias.editor.entities.UseCaseDiagramDataEntity">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+  <path>
+    <package id="Project"/>
+    <package id="Pilot"/>
+   </path>
+<gxl>
+
+	<graph>
+			
+	<node id="197" nid="113302529" type="UseCasePursues">
+
+	<connected id="1609169780">
+
+
+
+	</connected>
+	<connected id="1425714609">
+
+
+	</connected>
+	</node>
+			
+	<node id="43" nid="937925392" type="ParticipatesInUseCase">
+
+	<connected id="1832155537">
+
+
+	</connected>
+	<connected id="986001402">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="140" nid="1450832108" type="UseCasePursues">
+
+	<connected id="1609169780">
+
+
+
+	</connected>
+	<connected id="986001402">
+
+
+	</connected>
+	</node>
+			
+	<node id="105" nid="521391459" type="ParticipatesInUseCase">
+
+	<connected id="1832155537">
+
+
+	</connected>
+	<connected id="1425714609">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="104" nid="2028756648" type="ParticipatesInUseCase">
+
+	<connected id="1832155537">
+
+
+	</connected>
+	<connected id="1287399760">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="149" nid="1073460433" type="UseCasePursues">
+
+	<connected id="1609169780">
+
+
+
+	</connected>
+	<connected id="1287399760">
+
+
+	</connected>
+	</node>
+			
+	<node id="Land" nid="1425714609" type="INGENIASUseCase">
+
+	</node>
+			
+	<node id="Environment Interaction" nid="1287399760" type="INGENIASUseCase">
+
+	</node>
+			
+	<node id="Arrive Safe And Sound" nid="1609169780" type="Goal">
+
+	</node>
+			
+	<node id="Pilot" nid="1832155537" type="Agent">
+
+	</node>
+			
+	<node id="Take Off" nid="986001402" type="INGENIASUseCase">
+
+	</node>
+	</graph>
+
+
+	<layout>
+			
+	<node id="node6">
+		<attr name="bounds">
+			<rectangle x="427" y="172" width="96" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node10">
+		<attr name="bounds">
+			<rectangle x="119" y="102" width="120" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node9">
+		<attr name="bounds">
+			<rectangle x="423" y="84" width="96" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node5">
+		<attr name="bounds">
+			<rectangle x="127" y="175" width="120" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node8">
+		<attr name="bounds">
+			<rectangle x="121" y="138" width="120" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node7">
+		<attr name="bounds">
+			<rectangle x="421" y="127" width="96" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node3">
+		<attr name="bounds">
+			<rectangle x="280" y="201" width="97" height="49"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node0">
+		<attr name="bounds">
+			<rectangle x="268" y="116" width="97" height="49"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node2">
+		<attr name="bounds">
+			<rectangle x="574" y="104" width="126" height="50"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node1">
+		<attr name="bounds">
+			<rectangle x="59" y="129" width="35" height="42"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node4">
+		<attr name="bounds">
+			<rectangle x="264" y="32" width="105" height="49"></rectangle>		</attr>
+
+	</node>
+	</layout>
+</gxl> </model>
  <model id="Check Destination" type="ingenias.editor.models.TasksAndGoalsModelModelJGraph">
 <object id="Check Destination" type="ingenias.editor.entities.TasksAndGoalsModelDataEntity">
 <mapproperties>
@@ -6237,19 +6924,6 @@
 
 	<graph>
 			
-	<node id="19" nid="1775343181" type="WFPlays">
-
-	<connected id="1549326000">
-
-
-	</connected>
-	<connected id="2127415675">
-
-
-
-	</connected>
-	</node>
-			
 	<node id="Secure Pilot" nid="1222357813" type="Agent">
 
 	</node>
@@ -6284,10 +6958,6 @@
 	</connected>
 	</node>
 			
-	<node id="Flight Plan" nid="992478354" type="FrameFact">
-
-	</node>
-			
 	<node id="26" nid="353591321" type="AHasMS">
 
 	<connected id="1549326000">
@@ -6301,7 +6971,7 @@
 	</connected>
 	</node>
 			
-	<node id="Initiator" nid="2127415675" type="Role">
+	<node id="Human Pilot" nid="972820228" type="Agent">
 
 	</node>
 			
@@ -6318,24 +6988,11 @@
 	</connected>
 	</node>
 			
-	<node id="Human Pilot" nid="972820228" type="Agent">
-
-	</node>
-			
-	<node id="27" nid="563650615" type="AContainsME">
-
-	<connected id="1522681867">
-
-
-	</connected>
-	<connected id="992478354">
-
-
-
-	</connected>
-	</node>
-			
 	<node id="Corage Pilot" nid="1580958233" type="Agent">
+
+	</node>
+			
+	<node id="PilotMentalState" nid="1522681867" type="MentalState">
 
 	</node>
 			
@@ -6352,24 +7009,25 @@
 	</connected>
 	</node>
 			
-	<node id="MentalState0" nid="1522681867" type="MentalState">
+	<node id="20" nid="856082938" type="AContainsME">
 
-	</node>
-			
-	<node id="20" nid="979781372" type="WFResponsable">
+	<connected id="1522681867"><attr name="extraLabels">
+			<array>
 
-	<connected id="2127415675">
-
-
-	</connected>
-	<connected id="1539983701">
+</array>
+</attr>
 
 
 
 	</connected>
+	<connected id="52811431">
+
+
+
+	</connected>
 	</node>
 			
-	<node id="Avoid Collision" nid="1539983701" type="Task">
+	<node id="Pilot Mind" nid="52811431" type="FrameFact">
 
 	</node>
 			
@@ -6381,105 +7039,81 @@
 
 	<layout>
 			
-	<node id="node11">
+	<node id="node3">
 		<attr name="bounds">
-			<rectangle x="231" y="137" width="54" height="15"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node6">
-		<attr name="bounds">
-			<rectangle x="213" y="321" width="64" height="61"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node4">
-		<attr name="bounds">
-			<rectangle x="314" y="232" width="86" height="57"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node16">
-		<attr name="bounds">
-			<rectangle x="269" y="207" width="55" height="15"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node14">
-		<attr name="bounds">
-			<rectangle x="72" y="295" width="55" height="15"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node1">
-		<attr name="bounds">
-			<rectangle x="552" y="43" width="164" height="184"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node15">
-		<attr name="bounds">
-			<rectangle x="311" y="185" width="54" height="15"></rectangle>		</attr>
+			<rectangle x="418" y="274" width="64" height="61"></rectangle>		</attr>
 
 	</node>
 			
 	<node id="node2">
 		<attr name="bounds">
-			<rectangle x="244" y="90" width="35" height="43"></rectangle>		</attr>
+			<rectangle x="26" y="147" width="139" height="57"></rectangle>		</attr>
 
 	</node>
 			
 	<node id="node10">
 		<attr name="bounds">
-			<rectangle x="167" y="293" width="55" height="15"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node0">
-		<attr name="bounds">
-			<rectangle x="118" y="222" width="57" height="57"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node9">
-		<attr name="bounds">
-			<rectangle x="478" y="169" width="76" height="15"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node3">
-		<attr name="bounds">
-			<rectangle x="44" y="317" width="35" height="57"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node13">
-		<attr name="bounds">
-			<rectangle x="180" y="206" width="55" height="15"></rectangle>		</attr>
+			<rectangle x="149" y="107" width="55" height="15"></rectangle>		</attr>
 
 	</node>
 			
 	<node id="node8">
 		<attr name="bounds">
-			<rectangle x="403" y="183" width="77" height="42"></rectangle>		</attr>
+			<rectangle x="339" y="243" width="55" height="15"></rectangle>		</attr>
 
 	</node>
 			
-	<node id="node12">
+	<node id="node9">
 		<attr name="bounds">
-			<rectangle x="220" y="64" width="91" height="15"></rectangle>		</attr>
+			<rectangle x="296" y="61" width="54" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node0">
+		<attr name="bounds">
+			<rectangle x="378" y="161" width="70" height="57"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node6">
+		<attr name="bounds">
+			<rectangle x="404" y="239" width="55" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node1">
+		<attr name="bounds">
+			<rectangle x="280" y="282" width="84" height="57"></rectangle>		</attr>
 
 	</node>
 			
 	<node id="node5">
 		<attr name="bounds">
-			<rectangle x="238" y="9" width="67" height="43"></rectangle>		</attr>
+			<rectangle x="391" y="49" width="85" height="42"></rectangle>		</attr>
 
 	</node>
 			
 	<node id="node7">
 		<attr name="bounds">
-			<rectangle x="239" y="156" width="35" height="57"></rectangle>		</attr>
+			<rectangle x="289" y="115" width="55" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node12">
+		<attr name="bounds">
+			<rectangle x="479" y="61" width="76" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node11">
+		<attr name="bounds">
+			<rectangle x="558" y="38" width="179" height="58"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node4">
+		<attr name="bounds">
+			<rectangle x="220" y="40" width="35" height="57"></rectangle>		</attr>
 
 	</node>
 	</layout>
@@ -6809,7 +7443,7 @@
 			
 	<node id="node5">
 		<attr name="bounds">
-			<rectangle x="272" y="93" width="69" height="15"></rectangle>		</attr>
+			<rectangle x="273" y="89" width="69" height="15"></rectangle>		</attr>
 
 	</node>
 			
@@ -6839,7 +7473,7 @@
 			
 	<node id="node1">
 		<attr name="bounds">
-			<rectangle x="255" y="26" width="99" height="50"></rectangle>		</attr>
+			<rectangle x="256" y="19" width="99" height="50"></rectangle>		</attr>
 
 	</node>
 	</layout>
@@ -9846,209 +10480,6 @@
 	</node>
 	</layout>
 </gxl> </model>
- <model id="Make A Decision" type="ingenias.editor.models.TasksAndGoalsModelModelJGraph">
-<object id="Make A Decision" type="ingenias.editor.entities.TasksAndGoalsModelDataEntity">
-<mapproperties>
-<key id="Description"></key>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</object>
-  <path>
-    <package id="Project"/>
-   </path>
-<gxl>
-
-	<graph>
-			
-	<node id="DecisionFF" nid="1455044399" type="FrameFact">
-
-	</node>
-			
-	<node id="Make A Decision" nid="1665331236" type="Task">
-
-	</node>
-			
-	<node id="141" nid="2097118307" type="WFResponsable">
-
-	<connected id="675972549">
-
-
-	</connected>
-	<connected id="1665331236">
-
-
-
-	</connected>
-	</node>
-			
-	<node id="Pilot" nid="675972549" type="Agent">
-
-	</node>
-			
-	<node id="Change Speed" nid="797341709" type="Task">
-
-	</node>
-			
-	<node id="80" nid="1897882643" type="WFDecomposes">
-
-	<connected id="1665331236">
-
-
-	</connected>
-	<connected id="1684897873">
-
-
-
-	</connected>
-	</node>
-			
-	<node id="Change Head" nid="1070892665" type="Task">
-
-	</node>
-			
-	<node id="79" nid="1427236537" type="WFDecomposes">
-
-	<connected id="1665331236">
-
-
-	</connected>
-	<connected id="1070892665">
-
-
-
-	</connected>
-	</node>
-			
-	<node id="Decision Made" nid="316371428" type="Goal">
-
-	</node>
-			
-	<node id="81" nid="282924319" type="WFDecomposes">
-
-	<connected id="1665331236">
-
-
-	</connected>
-	<connected id="797341709">
-
-
-
-	</connected>
-	</node>
-			
-	<node id="179" nid="1528735327" type="WFConsumes">
-
-	<connected id="1665331236">
-
-
-	</connected>
-	<connected id="1455044399">
-
-
-
-	</connected>
-	</node>
-			
-	<node id="10" nid="1116247759" type="GTSatisfies">
-
-	<connected id="1665331236">
-
-
-	</connected>
-	<connected id="316371428">
-
-
-
-	</connected>
-	</node>
-			
-	<node id="Change Altitud" nid="1684897873" type="Task">
-
-	</node>
-	</graph>
-
-
-	<layout>
-			
-	<node id="node2">
-		<attr name="bounds">
-			<rectangle x="315" y="5" width="53" height="46"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node1">
-		<attr name="bounds">
-			<rectangle x="286" y="105" width="99" height="43"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node7">
-		<attr name="bounds">
-			<rectangle x="173" y="75" width="91" height="15"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node0">
-		<attr name="bounds">
-			<rectangle x="116" y="0" width="35" height="103"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node5">
-		<attr name="bounds">
-			<rectangle x="501" y="187" width="54" height="43"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node12">
-		<attr name="bounds">
-			<rectangle x="301" y="160" width="91" height="15"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node4">
-		<attr name="bounds">
-			<rectangle x="10" y="189" width="65" height="43"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node8">
-		<attr name="bounds">
-			<rectangle x="135" y="163" width="91" height="15"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node6">
-		<attr name="bounds">
-			<rectangle x="562" y="81" width="78" height="50"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node11">
-		<attr name="bounds">
-			<rectangle x="398" y="164" width="91" height="15"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node10">
-		<attr name="bounds">
-			<rectangle x="298" y="71" width="79" height="15"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node9">
-		<attr name="bounds">
-			<rectangle x="439" y="108" width="69" height="15"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node3">
-		<attr name="bounds">
-			<rectangle x="323" y="187" width="70" height="40"></rectangle>		</attr>
-
-	</node>
-	</layout>
-</gxl> </model>
  <model id="Arrived Safe And Sound" type="ingenias.editor.models.TasksAndGoalsModelModelJGraph">
 <object id="Arrived Safe And Sound" type="ingenias.editor.entities.TasksAndGoalsModelDataEntity">
 <mapproperties>
@@ -10062,6 +10493,10 @@
 <gxl>
 
 	<graph>
+			
+	<node id="Flight Plan Created" nid="868960203" type="Goal">
+
+	</node>
 			
 	<node id="154" nid="342183404" type="GTInherits">
 
@@ -10171,6 +10606,24 @@
 			
 	<node id="Arrived To Destination" nid="511523726" type="Goal">
 
+	</node>
+			
+	<node id="207" nid="1010576351" type="GTDepends">
+
+	<connected id="868960203"><attr name="extraLabels">
+			<array>
+
+</array>
+</attr>
+
+
+
+
+	</connected>
+	<connected id="1999077370">
+
+
+	</connected>
 	</node>
 			
 	<node id="211" nid="1088350822" type="GTDecomposesAND">
@@ -10309,6 +10762,12 @@
 
 	<layout>
 			
+	<node id="node29">
+		<attr name="bounds">
+			<rectangle x="82" y="1" width="99" height="50"></rectangle>		</attr>
+
+	</node>
+			
 	<node id="node15">
 		<attr name="bounds">
 			<rectangle x="161" y="703" width="61" height="15"></rectangle>		</attr>
@@ -10383,13 +10842,19 @@
 			
 	<node id="node25">
 		<attr name="bounds">
-			<rectangle x="400" y="71" width="111" height="15"></rectangle>		</attr>
+			<rectangle x="399" y="71" width="111" height="15"></rectangle>		</attr>
 
 	</node>
 			
 	<node id="node13">
 		<attr name="bounds">
 			<rectangle x="103" y="81" width="119" height="50"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node30">
+		<attr name="bounds">
+			<rectangle x="205" y="18" width="69" height="15"></rectangle>		</attr>
 
 	</node>
 			
@@ -10425,7 +10890,7 @@
 			
 	<node id="node17">
 		<attr name="bounds">
-			<rectangle x="206" y="58" width="111" height="15"></rectangle>		</attr>
+			<rectangle x="205" y="58" width="111" height="15"></rectangle>		</attr>
 
 	</node>
 			
@@ -10473,195 +10938,13 @@
 			
 	<node id="node3">
 		<attr name="bounds">
-			<rectangle x="300" y="0" width="124" height="50"></rectangle>		</attr>
+			<rectangle x="298" y="0" width="124" height="50"></rectangle>		</attr>
 
 	</node>
 			
 	<node id="node14">
 		<attr name="bounds">
 			<rectangle x="281" y="726" width="112" height="57"></rectangle>		</attr>
-
-	</node>
-	</layout>
-</gxl> </model>
- <model id="Use Cases" type="ingenias.editor.models.UseCaseDiagramModelJGraph">
-<object id="Use Cases" type="ingenias.editor.entities.UseCaseDiagramDataEntity">
-<mapproperties>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</object>
-  <path>
-    <package id="Project"/>
-   </path>
-<gxl>
-
-	<graph>
-			
-	<node id="197" nid="113302529" type="UseCasePursues">
-
-	<connected id="1609169780">
-
-
-
-	</connected>
-	<connected id="1425714609">
-
-
-	</connected>
-	</node>
-			
-	<node id="43" nid="937925392" type="ParticipatesInUseCase">
-
-	<connected id="1832155537">
-
-
-	</connected>
-	<connected id="986001402">
-
-
-
-	</connected>
-	</node>
-			
-	<node id="140" nid="1450832108" type="UseCasePursues">
-
-	<connected id="1609169780">
-
-
-
-	</connected>
-	<connected id="986001402">
-
-
-	</connected>
-	</node>
-			
-	<node id="105" nid="521391459" type="ParticipatesInUseCase">
-
-	<connected id="1832155537">
-
-
-	</connected>
-	<connected id="1425714609">
-
-
-
-	</connected>
-	</node>
-			
-	<node id="104" nid="2028756648" type="ParticipatesInUseCase">
-
-	<connected id="1832155537">
-
-
-	</connected>
-	<connected id="1287399760">
-
-
-
-	</connected>
-	</node>
-			
-	<node id="149" nid="1073460433" type="UseCasePursues">
-
-	<connected id="1609169780">
-
-
-
-	</connected>
-	<connected id="1287399760">
-
-
-	</connected>
-	</node>
-			
-	<node id="Land" nid="1425714609" type="INGENIASUseCase">
-
-	</node>
-			
-	<node id="Environment Interaction" nid="1287399760" type="INGENIASUseCase">
-
-	</node>
-			
-	<node id="Arrive Safe And Sound" nid="1609169780" type="Goal">
-
-	</node>
-			
-	<node id="Pilot" nid="1832155537" type="Agent">
-
-	</node>
-			
-	<node id="Take Off" nid="986001402" type="INGENIASUseCase">
-
-	</node>
-	</graph>
-
-
-	<layout>
-			
-	<node id="node6">
-		<attr name="bounds">
-			<rectangle x="427" y="172" width="96" height="15"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node10">
-		<attr name="bounds">
-			<rectangle x="119" y="102" width="120" height="15"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node9">
-		<attr name="bounds">
-			<rectangle x="423" y="84" width="96" height="15"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node5">
-		<attr name="bounds">
-			<rectangle x="127" y="175" width="120" height="15"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node8">
-		<attr name="bounds">
-			<rectangle x="121" y="138" width="120" height="15"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node7">
-		<attr name="bounds">
-			<rectangle x="421" y="127" width="96" height="15"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node3">
-		<attr name="bounds">
-			<rectangle x="280" y="201" width="97" height="49"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node0">
-		<attr name="bounds">
-			<rectangle x="268" y="116" width="97" height="49"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node2">
-		<attr name="bounds">
-			<rectangle x="574" y="104" width="126" height="50"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node1">
-		<attr name="bounds">
-			<rectangle x="59" y="129" width="35" height="42"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node4">
-		<attr name="bounds">
-			<rectangle x="264" y="32" width="105" height="49"></rectangle>		</attr>
 
 	</node>
 	</layout>
@@ -10705,17 +10988,40 @@
 	</connected>
 	</node>
 			
+	<node id="214" nid="1087668729" type="WFFollows">
+
+	<connected id="813226358"><attr name="extraLabels">
+			<array>
+
+</array>
+</attr>
+
+
+
+	</connected>
+	<connected id="1725119026">
+
+
+
+	</connected>
+	</node>
+			
 	<node id="Create Decisions" nid="813226358" type="Task">
 
 	</node>
 			
-	<node id="198" nid="1599770995" type="WFFollows">
+	<node id="27" nid="517477039" type="WFFollows">
 
-	<connected id="1176180194">
+	<connected id="1176180194"><attr name="extraLabels">
+			<array>
+
+</array>
+</attr>
+
 
 
 	</connected>
-	<connected id="2012075375">
+	<connected id="878326218">
 
 
 
@@ -10723,6 +11029,28 @@
 	</node>
 			
 	<node id="DecisionNode0" nid="1935797451" type="DecisionNode">
+
+	</node>
+			
+	<node id="198" nid="52533322" type="WFFollows">
+
+	<connected id="878326218"><attr name="extraLabels">
+			<array>
+
+</array>
+</attr>
+
+
+
+	</connected>
+	<connected id="1725119026">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="Flight Plan Monitoring" nid="878326218" type="Task">
 
 	</node>
 			
@@ -10747,13 +11075,14 @@
 
 	</node>
 			
-	<node id="Create Initial Plan" nid="1176180194" type="Task">
+	<node id="201" nid="1701917736" type="WFFollows">
 
-	</node>
-			
-	<node id="201" nid="929580078" type="WFFollows">
+	<connected id="1725119026"><attr name="extraLabels">
+			<array>
 
-	<connected id="813226358">
+</array>
+</attr>
+
 
 
 	</connected>
@@ -10762,6 +11091,14 @@
 
 
 	</connected>
+	</node>
+			
+	<node id="Create Initial Plan" nid="1176180194" type="Task">
+
+	</node>
+			
+	<node id="Update Plane Position" nid="1725119026" type="Task">
+
 	</node>
 			
 	<node id="Check Destination" nid="2012075375" type="Task">
@@ -10785,75 +11122,99 @@
 
 	<layout>
 			
-	<node id="node9">
+	<node id="node8">
 		<attr name="bounds">
-			<rectangle x="216" y="44" width="40" height="15"></rectangle>		</attr>
+			<rectangle x="228" y="44" width="40" height="15"></rectangle>		</attr>
 
 	</node>
 			
 	<node id="node6">
 		<attr name="bounds">
-			<rectangle x="402" y="297" width="34" height="25"></rectangle>		</attr>
+			<rectangle x="501" y="408" width="34" height="25"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node15">
+		<attr name="bounds">
+			<rectangle x="233" y="348" width="48" height="15"></rectangle>		</attr>
 
 	</node>
 			
 	<node id="node5">
 		<attr name="bounds">
-			<rectangle x="138" y="348" width="93" height="58"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node8">
-		<attr name="bounds">
-			<rectangle x="214" y="125" width="48" height="15"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node2">
-		<attr name="bounds">
-			<rectangle x="340" y="239" width="41" height="32"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node0">
-		<attr name="bounds">
-			<rectangle x="221" y="5" width="30" height="29"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node10">
-		<attr name="bounds">
-			<rectangle x="260" y="296" width="46" height="25"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node3">
-		<attr name="bounds">
-			<rectangle x="455" y="348" width="30" height="28"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node1">
-		<attr name="bounds">
-			<rectangle x="180" y="69" width="114" height="43"></rectangle>		</attr>
+			<rectangle x="210" y="427" width="93" height="58"></rectangle>		</attr>
 
 	</node>
 			
 	<node id="node11">
 		<attr name="bounds">
-			<rectangle x="189" y="265" width="48" height="15"></rectangle>		</attr>
+			<rectangle x="226" y="126" width="48" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node2">
+		<attr name="bounds">
+			<rectangle x="456" y="368" width="41" height="32"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node13">
+		<attr name="bounds">
+			<rectangle x="232" y="208" width="48" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node10">
+		<attr name="bounds">
+			<rectangle x="195" y="154" width="117" height="37"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node0">
+		<attr name="bounds">
+			<rectangle x="234" y="5" width="30" height="29"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node9">
+		<attr name="bounds">
+			<rectangle x="356" y="403" width="46" height="25"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node3">
+		<attr name="bounds">
+			<rectangle x="542" y="441" width="30" height="28"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node14">
+		<attr name="bounds">
+			<rectangle x="353" y="277" width="48" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node1">
+		<attr name="bounds">
+			<rectangle x="191" y="69" width="114" height="43"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node12">
+		<attr name="bounds">
+			<rectangle x="196" y="239" width="129" height="45"></rectangle>		</attr>
 
 	</node>
 			
 	<node id="node4">
 		<attr name="bounds">
-			<rectangle x="190" y="153" width="101" height="43"></rectangle>		</attr>
+			<rectangle x="430" y="284" width="101" height="43"></rectangle>		</attr>
 
 	</node>
 			
 	<node id="node7">
 		<attr name="bounds">
-			<rectangle x="282" y="211" width="48" height="15"></rectangle>		</attr>
+			<rectangle x="454" y="340" width="48" height="15"></rectangle>		</attr>
 
 	</node>
 	</layout>
@@ -10881,7 +11242,342 @@
 			
 	<node id="node0">
 		<attr name="bounds">
-			<rectangle x="0" y="111" width="527" height="210"></rectangle>		</attr>
+			<rectangle x="197" y="133" width="204" height="142"></rectangle>		</attr>
+
+	</node>
+	</layout>
+</gxl> </model>
+ <model id="Only One Plane Deployment" type="ingenias.editor.models.DeployDiagramModelJGraph">
+<object id="Only One Plane Deployment" type="ingenias.editor.entities.DeployDiagramDataEntity">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+  <path>
+    <package id="Project"/>
+   </path>
+<gxl>
+
+	<graph>
+			
+	<node id="222" nid="967642796" type="DefinesDeployment">
+
+	<connected id="363418647"><attr name="extraLabels">
+			<array>
+
+</array>
+</attr>
+
+
+
+	</connected>
+	<connected id="912639423">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="Deployment Simulator" nid="363418647" type="DeploymentUnitByType">
+
+	</node>
+			
+	<node id="215" nid="1800391151" type="DefinesDeployment">
+
+	<connected id="736290139"><attr name="extraLabels">
+			<array>
+
+</array>
+</attr>
+
+
+
+	</connected>
+	<connected id="912639423">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="216" nid="1684831339" type="DefinesDeployment">
+
+	<connected id="741442121"><attr name="extraLabels">
+			<array>
+
+</array>
+</attr>
+
+
+
+	</connected>
+	<connected id="912639423">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="Only One Plane" nid="912639423" type="DeploymentPackage">
+
+	</node>
+			
+	<node id="Deployment Plane" nid="741442121" type="DeploymentUnitByType">
+
+	</node>
+			
+	<node id="Deployment Pilot" nid="736290139" type="DeploymentUnitByType">
+
+	</node>
+	</graph>
+
+
+	<layout>
+			
+	<node id="node6">
+		<attr name="bounds">
+			<rectangle x="413" y="86" width="105" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node5">
+		<attr name="bounds">
+			<rectangle x="577" y="130" width="156" height="76"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node2">
+		<attr name="bounds">
+			<rectangle x="190" y="77" width="105" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node4">
+		<attr name="bounds">
+			<rectangle x="288" y="79" width="105" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node0">
+		<attr name="bounds">
+			<rectangle x="251" y="7" width="103" height="46"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node3">
+		<attr name="bounds">
+			<rectangle x="305" y="120" width="176" height="84"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node1">
+		<attr name="bounds">
+			<rectangle x="54" y="115" width="206" height="97"></rectangle>		</attr>
+
+	</node>
+	</layout>
+</gxl> </model>
+ <model id="Environment To Plane" type="ingenias.editor.models.EnvironmentModelModelJGraph">
+<object id="Environment To Plane" type="ingenias.editor.entities.EnvironmentModelDataEntity">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+  <path>
+    <package id="Project"/>
+    <package id="Simulation Environment"/>
+   </path>
+<gxl>
+
+	<graph>
+			
+	<node id="Plane" nid="1057073002" type="Agent">
+
+	</node>
+			
+	<node id="217" nid="463634023" type="EPerceives">
+
+	<connected id="1528357117"><attr name="extraLabels">
+			<array>
+
+</array>
+</attr>
+
+
+
+
+	</connected>
+	<connected id="1057073002">
+
+
+	</connected>
+	</node>
+			
+	<node id="221" nid="1890597030" type="ApplicationBelongsTo">
+
+	<connected id="1391955799"><attr name="extraLabels">
+			<array>
+
+</array>
+</attr>
+
+
+
+	</connected>
+	<connected id="1528357117">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="Simulation Creator" nid="1391955799" type="Agent">
+
+	</node>
+			
+	<node id="Environment" nid="1528357117" type="EnvironmentApplication">
+
+	</node>
+	</graph>
+
+
+	<layout>
+			
+	<node id="node1">
+		<attr name="bounds">
+			<rectangle x="72" y="149" width="35" height="57"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node2">
+		<attr name="bounds">
+			<rectangle x="174" y="140" width="66" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node4">
+		<attr name="bounds">
+			<rectangle x="197" y="63" width="116" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node3">
+		<attr name="bounds">
+			<rectangle x="60" y="8" width="143" height="57"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node0">
+		<attr name="bounds">
+			<rectangle x="308" y="69" width="139" height="72"></rectangle>		</attr>
+
+	</node>
+	</layout>
+</gxl> </model>
+ <model id="Environment Component" type="ingenias.editor.models.ComponentDiagramModelJGraph">
+<object id="Environment Component" type="ingenias.editor.entities.ComponentDiagramDataEntity">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+  <path>
+    <package id="Project"/>
+    <package id="Simulation Environment"/>
+    <package id="System init"/>
+   </path>
+<gxl>
+
+	<graph>
+			
+	<node id="Environment" nid="1729903138" type="EnvironmentApplication">
+
+	</node>
+			
+	<node id="223" nid="1546264812" type="CDUsesCode">
+
+	<connected id="1729903138"><attr name="extraLabels">
+			<array>
+
+</array>
+</attr>
+
+
+
+	</connected>
+	<connected id="906716715">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="INGENIASComponent4" nid="475342124" type="INGENIASComponent">
+
+	</node>
+			
+	<node id="INGENIASCodeComponent1" nid="906716715" type="INGENIASCodeComponent">
+
+	</node>
+			
+	<node id="219" nid="1398093095" type="UMLRealizes">
+
+	<connected id="530775135"><attr name="extraLabels">
+			<array>
+
+</array>
+</attr>
+
+
+
+	</connected>
+	<connected id="475342124">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="Environment" nid="530775135" type="EnvironmentApplication">
+
+	</node>
+	</graph>
+
+
+	<layout>
+			
+	<node id="node3">
+		<attr name="bounds">
+			<rectangle x="40" y="148" width="118" height="56"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node5">
+		<attr name="bounds">
+			<rectangle x="230" y="168" width="76" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node1">
+		<attr name="bounds">
+			<rectangle x="375" y="43" width="172" height="68"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node4">
+		<attr name="bounds">
+			<rectangle x="379" y="147" width="167" height="57"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node2">
+		<attr name="bounds">
+			<rectangle x="241" y="77" width="53" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node0">
+		<attr name="bounds">
+			<rectangle x="41" y="64" width="118" height="56"></rectangle>		</attr>
 
 	</node>
 	</layout>
