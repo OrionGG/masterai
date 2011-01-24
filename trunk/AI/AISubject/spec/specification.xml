@@ -7495,7 +7495,7 @@ El plan de vuelo esta compuesto por una serie de waypoints (puntos de paso), un 
 			
 	<node id="node13">
 		<attr name="bounds">
-			<rectangle x="324" y="190" width="55" height="15"></rectangle>		</attr>
+			<rectangle x="320" y="190" width="55" height="15"></rectangle>		</attr>
 
 	</node>
 			
@@ -7537,7 +7537,7 @@ El plan de vuelo esta compuesto por una serie de waypoints (puntos de paso), un 
 			
 	<node id="node7">
 		<attr name="bounds">
-			<rectangle x="382" y="214" width="64" height="61"></rectangle>		</attr>
+			<rectangle x="374" y="214" width="64" height="61"></rectangle>		</attr>
 
 	</node>
 			
