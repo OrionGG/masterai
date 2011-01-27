@@ -451,14 +451,14 @@
 <key id="_view_type">UML</key>
 </mapproperties>
 </object>
-<object id="Secure Pilot" type="ingenias.editor.entities.Agent">
+<object id="Safe Pilot" type="ingenias.editor.entities.Agent">
 <mapproperties>
 <key id="Code"></key>
 <key id="Description">Este piloto solo tomaria las decisiones que supongan maniobras en la que la seguridad del avion este garantizada casi al 100%</key>
 <key id="_view_type">UML</key>
 </mapproperties>
 </object>
-<object id="Corage Pilot" type="ingenias.editor.entities.Agent">
+<object id="Brave Pilot" type="ingenias.editor.entities.Agent">
 <mapproperties>
 <key id="Code"></key>
 <key id="Description">Este tipo de piloto podria tomar el riesgo de cruzar una tormenta con el objetivo de ahorrar tiempo</key>
@@ -3509,7 +3509,7 @@ La lista de puntos (waypoints) por los que tiene que pasar el avion durante el v
 <key id="attributeToShow">0</key>
 <key id="_view_type">INGENIAS</key>
 </mapproperties>
-</role><role idEntity="Corage Pilot" class="ingenias.editor.entities.Agent" roleName="AInheritssource" type="ingenias.editor.entities.AInheritssourceRole" dgcid="1494777135">
+</role><role idEntity="Brave Pilot" class="ingenias.editor.entities.Agent" roleName="AInheritssource" type="ingenias.editor.entities.AInheritssourceRole" dgcid="1494777135">
 <mapproperties>
 <key id="attributeToShow">0</key>
 <key id="_view_type">INGENIAS</key>
@@ -3577,7 +3577,7 @@ La lista de puntos (waypoints) por los que tiene que pasar el avion durante el v
 <key id="attributeToShow">0</key>
 <key id="_view_type">INGENIAS</key>
 </mapproperties>
-</role><role idEntity="Secure Pilot" class="ingenias.editor.entities.Agent" roleName="AInheritssource" type="ingenias.editor.entities.AInheritssourceRole" dgcid="1708436238">
+</role><role idEntity="Safe Pilot" class="ingenias.editor.entities.Agent" roleName="AInheritssource" type="ingenias.editor.entities.AInheritssourceRole" dgcid="1708436238">
 <mapproperties>
 <key id="attributeToShow">0</key>
 <key id="_view_type">INGENIAS</key>
@@ -7639,7 +7639,7 @@ Hemos modelado que ante un inminente conficto el piloto decidira cambiar la alti
 
 	</node>
 			
-	<node id="Secure Pilot" nid="1708436238" type="Agent">
+	<node id="Safe Pilot" nid="1708436238" type="Agent">
 
 	</node>
 			
@@ -7656,7 +7656,7 @@ Hemos modelado que ante un inminente conficto el piloto decidira cambiar la alti
 	</connected>
 	</node>
 			
-	<node id="Corage Pilot" nid="1494777135" type="Agent">
+	<node id="Brave Pilot" nid="1494777135" type="Agent">
 
 	</node>
 			
@@ -11310,13 +11310,13 @@ Hemos modelado que ante un inminente conficto el piloto decidira cambiar la alti
 			
 	<node id="node16">
 		<attr name="bounds">
-			<rectangle x="802" y="240" width="0" height="0"></rectangle>		</attr>
+			<rectangle x="759" y="237" width="0" height="0"></rectangle>		</attr>
 
 	</node>
 			
 	<node id="node1">
 		<attr name="bounds">
-			<rectangle x="790" y="2" width="210" height="70"></rectangle>		</attr>
+			<rectangle x="766" y="7" width="210" height="70"></rectangle>		</attr>
 
 	</node>
 			
@@ -11370,7 +11370,7 @@ Hemos modelado que ante un inminente conficto el piloto decidira cambiar la alti
 			
 	<node id="node6">
 		<attr name="bounds">
-			<rectangle x="858" y="210" width="209" height="70"></rectangle>		</attr>
+			<rectangle x="773" y="201" width="209" height="70"></rectangle>		</attr>
 
 	</node>
 			
@@ -11406,7 +11406,7 @@ Hemos modelado que ante un inminente conficto el piloto decidira cambiar la alti
 			
 	<node id="node12">
 		<attr name="bounds">
-			<rectangle x="766" y="53" width="0" height="0"></rectangle>		</attr>
+			<rectangle x="754" y="56" width="0" height="0"></rectangle>		</attr>
 
 	</node>
 			
