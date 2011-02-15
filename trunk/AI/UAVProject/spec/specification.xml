@@ -7,7 +7,7 @@
 <projectproperty id="jadeproject" module="Ingenias Agent Framework generator"  name="JADE main project folder" value="AISubject"  tooltip="The folder that will contain the project for this development" />
 <projectproperty id="jadeperm" module="Ingenias Agent Framework generator"  name="JADE generate only once folder" value="permsrc"  tooltip="The folder that will hold generated elements that should not be regenerated" />
 <projectproperty id="htmldoc" module="HTML Document generator"  name="HTML document folder" value="AISubject\html"  tooltip="The document folder that will contain HTML version of this specification" />
- <openeddiagram>Create Conflict</openeddiagram> <openeddiagram>Pilot Goal</openeddiagram> <openeddiagram>Pilot Use Cases</openeddiagram> <openeddiagram>Decision to Plane</openeddiagram> <openeddiagram>Pilot Plane Interaction Task</openeddiagram> <openeddiagram>Pilot Plane Interaction</openeddiagram> <openeddiagram>Pilot Plane Interation Model</openeddiagram> <openeddiagram>Orders to Pilot</openeddiagram> <openeddiagram>Main Program Activity</openeddiagram> <openeddiagram>Only One Plane Deployment</openeddiagram> <openeddiagram>Environment To Plane</openeddiagram> <openeddiagram>Environment Component</openeddiagram> <openeddiagram>Avoid Collision Interaction Task</openeddiagram> <openeddiagram>Interaction Roles</openeddiagram></projectproperties>
+ <openeddiagram>Create Conflict</openeddiagram> <openeddiagram>Pilot Goal</openeddiagram> <openeddiagram>Pilot Use Cases</openeddiagram> <openeddiagram>Decision to Plane</openeddiagram> <openeddiagram>Pilot Plane Interaction Task</openeddiagram> <openeddiagram>Pilot Plane Interaction</openeddiagram> <openeddiagram>Orders to Pilot</openeddiagram> <openeddiagram>Main Program Activity</openeddiagram> <openeddiagram>Only One Plane Deployment</openeddiagram> <openeddiagram>Environment To Plane</openeddiagram> <openeddiagram>Environment Component</openeddiagram> <openeddiagram>Controller Plane Interaction Model</openeddiagram> <openeddiagram>Avoid Collision Interaction Task</openeddiagram> <openeddiagram>Pilot Plane Interation Model</openeddiagram> <openeddiagram>Interaction Roles</openeddiagram></projectproperties>
 <leafpackages>
    <path>
     <package id="Project"/>
@@ -59,11 +59,6 @@
     <package id="Project"/>
     <package id="Pilot"/>
     <package id="Check Destination"/>
-   </path>
-   <path>
-    <package id="Project"/>
-    <package id="Pilot"/>
-    <package id="Avoid Collision"/>
    </path>
    <path>
     <package id="Project"/>
@@ -175,6 +170,11 @@
     <package id="Project"/>
     <package id="Interacion"/>
     <package id="Interaction Roles"/>
+   </path>
+   <path>
+    <package id="Project"/>
+    <package id="Interacion"/>
+    <package id="Controller Plane Interaction Model"/>
    </path>
    <path>
     <package id="Project"/>
@@ -295,13 +295,6 @@
 </objectproperty>
 <mapproperties>
 <key id="Description"></key>
-<key id="_view_type">UML</key>
-</mapproperties>
-</object>
-<object id="AvoidCollision" type="ingenias.editor.entities.Task">
-<mapproperties>
-<key id="Code"></key>
-<key id="Description">Tarea cuya finalidad es llevar a cavo la maniobra por defecto una vez se ha detectado que puede haber un conflicto inminente. Hemos modelado que ante un inminente conficto el piloto decidira cambiar la altitud del avion.</key>
 <key id="_view_type">UML</key>
 </mapproperties>
 </object>
@@ -430,6 +423,18 @@
 <object id="Check Change" type="ingenias.editor.entities.Task">
 <mapproperties>
 <key id="Description">Tarea que comprueba si las manobras se han completado</key>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+<object id="SendAvoidCollisionDecision" type="ingenias.editor.entities.Task">
+<mapproperties>
+<key id="Description">Tarea en la cual el controlador le manda al piloto una orden de tomar una decision.</key>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+<object id="Obey Order" type="ingenias.editor.entities.Task">
+<mapproperties>
+<key id="Description">Tarea que indica que el piloto obedece una orden del controlador</key>
 <key id="_view_type">UML</key>
 </mapproperties>
 </object>
@@ -579,10 +584,12 @@
 <key id="_view_type">UML</key>
 </mapproperties>
 </object>
-<object id="Interaction0" type="ingenias.editor.entities.Interaction">
+<object id="ControllerPilotInteracion" type="ingenias.editor.entities.Interaction">
 <objectproperty id="TransferredInfo" collection="true">
 </objectproperty>
 <mapproperties>
+<key id="Nature"></key>
+<key id="Description">Esta iteracion permite que el controlador acceda al estado mental del piloto para ver si las decisiones se han recibido bien</key>
 <key id="_view_type">UML</key>
 </mapproperties>
 </object>
@@ -620,6 +627,43 @@
 </objectproperty>
 <mapproperties>
 <key id="Code"></key>
+<key id="SpeechAct"></key>
+<key id="Timeout"></key>
+<key id="Description"></key>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+<object id="InteractionUnit0" type="ingenias.editor.entities.InteractionUnit">
+<objectproperty id="TransferredInfo" collection="true">
+<object id="Order" type="ingenias.editor.entities.FrameFact">
+<objectproperty id="Slots" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="Description">Hecho que representa una orden dada por un controlador</key>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+</objectproperty>
+<mapproperties>
+<key id="SpeechAct"></key>
+<key id="Timeout"></key>
+<key id="Description"></key>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+<object id="InteractionUnit1" type="ingenias.editor.entities.InteractionUnit">
+<objectproperty id="TransferredInfo" collection="true">
+<object id="Manoeuvre" type="ingenias.editor.entities.FrameFact">
+<objectproperty id="Slots" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="Code"></key>
+<key id="Description">Maniobra que el piloto manda al avion para que este realice.</key>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+</objectproperty>
+<mapproperties>
 <key id="SpeechAct"></key>
 <key id="Timeout"></key>
 <key id="Description"></key>
@@ -764,6 +808,12 @@ El plan de vuelo esta compuesto por una serie de waypoints (puntos de paso), un 
 <key id="_view_type">UML</key>
 </mapproperties>
 </object>
+<object id="OrderObeyed" type="ingenias.editor.entities.Goal">
+<mapproperties>
+<key id="Description">Este objetivo indica que el piloto recibio una orden del controlador y actuo en consecuencia</key>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
 <object id="Conversation0" type="ingenias.editor.entities.Conversation">
 <objectproperty id="Interaction">
 <object id="PilotPlaneInteraction" type="ingenias.editor.entities.Interaction">
@@ -794,10 +844,12 @@ El plan de vuelo esta compuesto por una serie de waypoints (puntos de paso), un 
 </object>
 <object id="Conversation1" type="ingenias.editor.entities.Conversation">
 <objectproperty id="Interaction">
-<object id="Interaction0" type="ingenias.editor.entities.Interaction">
+<object id="ControllerPilotInteracion" type="ingenias.editor.entities.Interaction">
 <objectproperty id="TransferredInfo" collection="true">
 </objectproperty>
 <mapproperties>
+<key id="Nature"></key>
+<key id="Description">Esta iteracion permite que el controlador acceda al estado mental del piloto para ver si las decisiones se han recibido bien</key>
 <key id="_view_type">UML</key>
 </mapproperties>
 </object>
@@ -1389,6 +1441,14 @@ Tipo del piloto dependiendo de su comportamiento o actitud ante el piltaje</key>
 <key id="_view_type">UML</key>
 </mapproperties>
 </object>
+<object id="Order" type="ingenias.editor.entities.FrameFact">
+<objectproperty id="Slots" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="Description">Hecho que representa una orden dada por un controlador</key>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
 <object id="Plane Too Close" type="ingenias.editor.entities.ApplicationEventSlots">
 <objectproperty id="Slots" collection="true">
 </objectproperty>
@@ -1564,38 +1624,38 @@ Tipo del piloto dependiendo de su comportamiento o actitud ante el piltaje</key>
 <object id="PilotInitiator" type="ingenias.editor.entities.Role">
 <mapproperties>
 <key id="Code"></key>
-<key id="Description"></key>
+<key id="Description">Rol que indica cuando un piloto inicia una conversacion</key>
 <key id="_view_type">UML</key>
 </mapproperties>
 </object>
 <object id="PlaneColaborator" type="ingenias.editor.entities.Role">
 <mapproperties>
 <key id="Code"></key>
-<key id="Description"></key>
+<key id="Description">Rol que indica que el avion colabora en una conversacion</key>
 <key id="_view_type">UML</key>
 </mapproperties>
 </object>
 <object id="ControllerInitiator" type="ingenias.editor.entities.Role">
 <mapproperties>
-<key id="Description"></key>
+<key id="Description">Rol que indica que el controlador inicia una conversacion</key>
 <key id="_view_type">UML</key>
 </mapproperties>
 </object>
 <object id="Initiator" type="ingenias.editor.entities.Role">
 <mapproperties>
-<key id="Description"></key>
+<key id="Description">Role iniciador de cualquier conversacion</key>
 <key id="_view_type">UML</key>
 </mapproperties>
 </object>
 <object id="Colaborator" type="ingenias.editor.entities.Role">
 <mapproperties>
-<key id="Description"></key>
+<key id="Description">Rol de agente que colabora en cualquier conversacion</key>
 <key id="_view_type">UML</key>
 </mapproperties>
 </object>
 <object id="PilotColaborator" type="ingenias.editor.entities.Role">
 <mapproperties>
-<key id="Description"></key>
+<key id="Description">Rol que indica que el piloto colabora en una conversacion</key>
 <key id="_view_type">UML</key>
 </mapproperties>
 </object>
@@ -2090,13 +2150,6 @@ Tipo del piloto dependiendo de su comportamiento o actitud ante el piltaje</key>
 <objectproperty id="Role">
 </objectproperty>
 <objectproperty id="Tasks" collection="true">
-<object id="AvoidCollision" type="ingenias.editor.entities.Task">
-<mapproperties>
-<key id="Code"></key>
-<key id="Description">Tarea cuya finalidad es llevar a cavo la maniobra por defecto una vez se ha detectado que puede haber un conflicto inminente. Hemos modelado que ante un inminente conficto el piloto decidira cambiar la altitud del avion.</key>
-<key id="_view_type">UML</key>
-</mapproperties>
-</object>
 <object id="Make Leg" type="ingenias.editor.entities.Task">
 <mapproperties>
 <key id="Code"></key>
@@ -3440,81 +3493,6 @@ La lista de puntos (waypoints) por los que tiene que pasar el avion durante el v
 <key id="_view_type">INGENIAS</key>
 </mapproperties>
 </role><role idEntity="Check Destination" class="ingenias.editor.entities.Task" roleName="WFUsessource" type="ingenias.editor.entities.WFUsessourceRole" dgcid="1648063401">
-<mapproperties>
-<key id="attributeToShow">0</key>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</role></relationship>
-<relationship id="10" type="ingenias.editor.entities.GTSatisfies">
-<object id="10" type="ingenias.editor.entities.GTSatisfies">
-<objectproperty id="SatisfactionCondition">
-</objectproperty>
-<mapproperties>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</object>
-<role idEntity="Collision Avoided" class="ingenias.editor.entities.Goal" roleName="GTSatisfiestarget" type="ingenias.editor.entities.GTSatisfiestargetRole" dgcid="820140381">
-<mapproperties>
-<key id="attributeToShow">0</key>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</role><role idEntity="AvoidCollision" class="ingenias.editor.entities.Task" roleName="GTSatisfiessource" type="ingenias.editor.entities.GTSatisfiessourceRole" dgcid="1758078637">
-<mapproperties>
-<key id="attributeToShow">0</key>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</role></relationship>
-<relationship id="238" type="ingenias.editor.entities.WFProduces">
-<object id="238" type="ingenias.editor.entities.WFProduces">
-<objectproperty id="Condition">
-</objectproperty>
-<mapproperties>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</object>
-<role idEntity="Throw Altitude Changed" class="ingenias.editor.entities.FrameFact" roleName="WFProducestarget" type="ingenias.editor.entities.WFProducestargetRole" dgcid="1741313963">
-<mapproperties>
-<key id="attributeToShow">0</key>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</role><role idEntity="AvoidCollision" class="ingenias.editor.entities.Task" roleName="WFProducessource" type="ingenias.editor.entities.WFProducessourceRole" dgcid="1758078637">
-<mapproperties>
-<key id="attributeToShow">0</key>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</role></relationship>
-<relationship id="0" type="ingenias.editor.entities.WFConsumes">
-<object id="0" type="ingenias.editor.entities.WFConsumes">
-<objectproperty id="Condition">
-</objectproperty>
-<mapproperties>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</object>
-<role idEntity="Conflict" class="ingenias.editor.entities.FrameFact" roleName="WFConsumestarget" type="ingenias.editor.entities.WFConsumestargetRole" dgcid="612999238">
-<mapproperties>
-<key id="Cardinality"></key>
-<key id="attributeToShow">0</key>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</role><role idEntity="AvoidCollision" class="ingenias.editor.entities.Task" roleName="WFConsumessource" type="ingenias.editor.entities.WFConsumessourceRole" dgcid="1758078637">
-<mapproperties>
-<key id="attributeToShow">0</key>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</role></relationship>
-<relationship id="1" type="ingenias.editor.entities.WFResponsable">
-<object id="1" type="ingenias.editor.entities.WFResponsable">
-<mapproperties>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</object>
-<role idEntity="Pilot" class="ingenias.editor.entities.Agent" roleName="WFResponsablesource" type="ingenias.editor.entities.WFResponsablesourceRole" dgcid="187820723">
-<mapproperties>
-<key id="attributeToShow">0</key>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</role><role idEntity="AvoidCollision" class="ingenias.editor.entities.Task" roleName="WFResponsabletarget" type="ingenias.editor.entities.WFResponsabletargetRole" dgcid="1758078637">
 <mapproperties>
 <key id="attributeToShow">0</key>
 <key id="_view_type">INGENIAS</key>
@@ -5668,6 +5646,154 @@ La lista de puntos (waypoints) por los que tiene que pasar el avion durante el v
 <key id="_view_type">INGENIAS</key>
 </mapproperties>
 </role></relationship>
+<relationship id="271" type="ingenias.editor.entities.WFResponsable">
+<object id="271" type="ingenias.editor.entities.WFResponsable">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="SendAvoidCollisionDecision" class="ingenias.editor.entities.Task" roleName="WFResponsabletarget" type="ingenias.editor.entities.WFResponsabletargetRole" dgcid="1408448796">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="ControllerInitiator" class="ingenias.editor.entities.Role" roleName="WFResponsablesource" type="ingenias.editor.entities.WFResponsablesourceRole" dgcid="1724193390">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="272" type="ingenias.editor.entities.WFConsumes">
+<object id="272" type="ingenias.editor.entities.WFConsumes">
+<objectproperty id="Condition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Conflict" class="ingenias.editor.entities.FrameFact" roleName="WFConsumestarget" type="ingenias.editor.entities.WFConsumestargetRole" dgcid="629840631">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="SendAvoidCollisionDecision" class="ingenias.editor.entities.Task" roleName="WFConsumessource" type="ingenias.editor.entities.WFConsumessourceRole" dgcid="1408448796">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="0" type="ingenias.editor.entities.GTSatisfies">
+<object id="0" type="ingenias.editor.entities.GTSatisfies">
+<objectproperty id="SatisfactionCondition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Collision Avoided" class="ingenias.editor.entities.Goal" roleName="GTSatisfiestarget" type="ingenias.editor.entities.GTSatisfiestargetRole" dgcid="1451605142">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="SendAvoidCollisionDecision" class="ingenias.editor.entities.Task" roleName="GTSatisfiessource" type="ingenias.editor.entities.GTSatisfiessourceRole" dgcid="1408448796">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="1" type="ingenias.editor.entities.WFProduces">
+<object id="1" type="ingenias.editor.entities.WFProduces">
+<objectproperty id="Condition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Order" class="ingenias.editor.entities.FrameFact" roleName="WFProducestarget" type="ingenias.editor.entities.WFProducestargetRole" dgcid="589058609">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="SendAvoidCollisionDecision" class="ingenias.editor.entities.Task" roleName="WFProducessource" type="ingenias.editor.entities.WFProducessourceRole" dgcid="1408448796">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="10" type="ingenias.editor.entities.WFConsumes">
+<object id="10" type="ingenias.editor.entities.WFConsumes">
+<objectproperty id="Condition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Obey Order" class="ingenias.editor.entities.Task" roleName="WFConsumessource" type="ingenias.editor.entities.WFConsumessourceRole" dgcid="229229129">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="Order" class="ingenias.editor.entities.FrameFact" roleName="WFConsumestarget" type="ingenias.editor.entities.WFConsumestargetRole" dgcid="953376791">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="238" type="ingenias.editor.entities.WFResponsable">
+<object id="238" type="ingenias.editor.entities.WFResponsable">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Obey Order" class="ingenias.editor.entities.Task" roleName="WFResponsabletarget" type="ingenias.editor.entities.WFResponsabletargetRole" dgcid="229229129">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="PilotColaborator" class="ingenias.editor.entities.Role" roleName="WFResponsablesource" type="ingenias.editor.entities.WFResponsablesourceRole" dgcid="1705759130">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="273" type="ingenias.editor.entities.WFProduces">
+<object id="273" type="ingenias.editor.entities.WFProduces">
+<objectproperty id="Condition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Obey Order" class="ingenias.editor.entities.Task" roleName="WFProducessource" type="ingenias.editor.entities.WFProducessourceRole" dgcid="229229129">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="Throw Change" class="ingenias.editor.entities.FrameFact" roleName="WFProducestarget" type="ingenias.editor.entities.WFProducestargetRole" dgcid="201721028">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="274" type="ingenias.editor.entities.GTSatisfies">
+<object id="274" type="ingenias.editor.entities.GTSatisfies">
+<objectproperty id="SatisfactionCondition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Obey Order" class="ingenias.editor.entities.Task" roleName="GTSatisfiessource" type="ingenias.editor.entities.GTSatisfiessourceRole" dgcid="229229129">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="OrderObeyed" class="ingenias.editor.entities.Goal" roleName="GTSatisfiestarget" type="ingenias.editor.entities.GTSatisfiestargetRole" dgcid="909713934">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
 <relationship id="260" type="ingenias.editor.entities.ARoleInheritance">
 <object id="260" type="ingenias.editor.entities.ARoleInheritance">
 <mapproperties>
@@ -5731,6 +5857,133 @@ La lista de puntos (waypoints) por los que tiene que pasar el avion durante el v
 <key id="_view_type">INGENIAS</key>
 </mapproperties>
 </role><role idEntity="Colaborator" class="ingenias.editor.entities.Role" roleName="ARoleInheritancetarget" type="ingenias.editor.entities.ARoleInheritancetargetRole" dgcid="1816587229">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="264" type="ingenias.editor.entities.IInitiates">
+<object id="264" type="ingenias.editor.entities.IInitiates">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="ControllerPilotInteracion" class="ingenias.editor.entities.Interaction" roleName="IInitiatessource" type="ingenias.editor.entities.IInitiatessourceRole" dgcid="500137645">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="ControllerInitiator" class="ingenias.editor.entities.Role" roleName="IInitiatestarget" type="ingenias.editor.entities.IInitiatestargetRole" dgcid="1399217937">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="265" type="ingenias.editor.entities.IColaborates">
+<object id="265" type="ingenias.editor.entities.IColaborates">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="PilotColaborator" class="ingenias.editor.entities.Role" roleName="IColaboratestarget" type="ingenias.editor.entities.IColaboratestargetRole" dgcid="160766450">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="ControllerPilotInteracion" class="ingenias.editor.entities.Interaction" roleName="IColaboratessource" type="ingenias.editor.entities.IColaboratessourceRole" dgcid="500137645">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="266" type="ingenias.editor.entities.UIInitiates">
+<object id="266" type="ingenias.editor.entities.UIInitiates">
+<objectproperty id="Condition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="InteractionUnit0" class="ingenias.editor.entities.InteractionUnit" roleName="UIInitiatessource" type="ingenias.editor.entities.UIInitiatessourceRole" dgcid="445027206">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="ControllerInitiator" class="ingenias.editor.entities.Role" roleName="UIInitiatestarget" type="ingenias.editor.entities.UIInitiatestargetRole" dgcid="1914628286">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="267" type="ingenias.editor.entities.UIColaborates">
+<object id="267" type="ingenias.editor.entities.UIColaborates">
+<objectproperty id="Condition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="InteractionUnit1" class="ingenias.editor.entities.InteractionUnit" roleName="UIColaboratessource" type="ingenias.editor.entities.UIColaboratessourceRole" dgcid="542840999">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="ControllerInitiator" class="ingenias.editor.entities.Role" roleName="UIColaboratestarget" type="ingenias.editor.entities.UIColaboratestargetRole" dgcid="1914628286">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="268" type="ingenias.editor.entities.UIPrecedes">
+<object id="268" type="ingenias.editor.entities.UIPrecedes">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="InteractionUnit0" class="ingenias.editor.entities.InteractionUnit" roleName="UIPrecedessource" type="ingenias.editor.entities.UIPrecedessourceRole" dgcid="445027206">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="InteractionUnit1" class="ingenias.editor.entities.InteractionUnit" roleName="UIPrecedestarget" type="ingenias.editor.entities.UIPrecedestargetRole" dgcid="542840999">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="269" type="ingenias.editor.entities.UIColaborates">
+<object id="269" type="ingenias.editor.entities.UIColaborates">
+<objectproperty id="Condition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="InteractionUnit0" class="ingenias.editor.entities.InteractionUnit" roleName="UIColaboratessource" type="ingenias.editor.entities.UIColaboratessourceRole" dgcid="445027206">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="PilotColaborator" class="ingenias.editor.entities.Role" roleName="UIColaboratestarget" type="ingenias.editor.entities.UIColaboratestargetRole" dgcid="1759168105">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="270" type="ingenias.editor.entities.UIInitiates">
+<object id="270" type="ingenias.editor.entities.UIInitiates">
+<objectproperty id="Condition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="InteractionUnit1" class="ingenias.editor.entities.InteractionUnit" roleName="UIInitiatessource" type="ingenias.editor.entities.UIInitiatessourceRole" dgcid="542840999">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="PilotColaborator" class="ingenias.editor.entities.Role" roleName="UIInitiatestarget" type="ingenias.editor.entities.UIInitiatestargetRole" dgcid="1759168105">
 <mapproperties>
 <key id="attributeToShow">0</key>
 <key id="_view_type">INGENIAS</key>
@@ -7517,153 +7770,6 @@ Este diagrama se mete dentro de la carpeta init para que cuando la aplicacion ll
 	<node id="node5">
 		<attr name="bounds">
 			<rectangle x="232" y="87" width="69" height="15"></rectangle>		</attr>
-
-	</node>
-	</layout>
-</gxl> </model>
- <model id="Avoid Collision" type="ingenias.editor.models.TasksAndGoalsModelModelJGraph">
-<object id="Avoid Collision" type="ingenias.editor.entities.TasksAndGoalsModelDataEntity">
-<mapproperties>
-<key id="Description">Diagrama donde se muestra la accion a tomar cuando se detecta un conflicto.
-Hemos modelado que ante un inminente conficto el piloto decidira cambiar la altitud del avion.</key>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</object>
-  <path>
-    <package id="Project"/>
-    <package id="Pilot"/>
-   </path>
-<gxl>
-
-	<graph>
-			
-	<node id="10" nid="1896029056" type="GTSatisfies">
-
-	<connected id="1758078637">
-
-
-	</connected>
-	<connected id="820140381">
-
-
-
-	</connected>
-	</node>
-			
-	<node id="238" nid="272634061" type="WFProduces">
-
-	<connected id="1741313963">
-
-
-
-	</connected>
-	<connected id="1758078637">
-
-
-	</connected>
-	</node>
-			
-	<node id="1" nid="568112622" type="WFResponsable">
-
-	<connected id="187820723">
-
-
-	</connected>
-	<connected id="1758078637">
-
-
-
-	</connected>
-	</node>
-			
-	<node id="Conflict" nid="612999238" type="FrameFact">
-
-	</node>
-			
-	<node id="Throw Altitude Changed" nid="1741313963" type="FrameFact">
-
-	</node>
-			
-	<node id="AvoidCollision" nid="1758078637" type="Task">
-
-	</node>
-			
-	<node id="0" nid="1219597575" type="WFConsumes">
-
-	<connected id="1758078637">
-
-
-	</connected>
-	<connected id="612999238">
-
-
-
-	</connected>
-	</node>
-			
-	<node id="Collision Avoided" nid="820140381" type="Goal">
-
-	</node>
-			
-	<node id="Pilot" nid="187820723" type="Agent">
-
-	</node>
-	</graph>
-
-
-	<layout>
-			
-	<node id="node5">
-		<attr name="bounds">
-			<rectangle x="179" y="78" width="69" height="15"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node6">
-		<attr name="bounds">
-			<rectangle x="275" y="136" width="74" height="15"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node8">
-		<attr name="bounds">
-			<rectangle x="55" y="115" width="107" height="16"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node4">
-		<attr name="bounds">
-			<rectangle x="374" y="1" width="66" height="47"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node0">
-		<attr name="bounds">
-			<rectangle x="362" y="137" width="122" height="31"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node1">
-		<attr name="bounds">
-			<rectangle x="158" y="114" width="105" height="44"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node7">
-		<attr name="bounds">
-			<rectangle x="264" y="70" width="94" height="16"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node3">
-		<attr name="bounds">
-			<rectangle x="176" y="7" width="83" height="50"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node2">
-		<attr name="bounds">
-			<rectangle x="23" y="87" width="35" height="58"></rectangle>		</attr>
 
 	</node>
 	</layout>
@@ -10739,7 +10845,7 @@ Hemos modelado que ante un inminente conficto el piloto decidira cambiar la alti
 			
 	<node id="node21">
 		<attr name="bounds">
-			<rectangle x="67" y="545" width="91" height="15"></rectangle>		</attr>
+			<rectangle x="79" y="545" width="91" height="15"></rectangle>		</attr>
 
 	</node>
 			
@@ -10799,7 +10905,7 @@ Hemos modelado que ante un inminente conficto el piloto decidira cambiar la alti
 			
 	<node id="node13">
 		<attr name="bounds">
-			<rectangle x="79" y="340" width="56" height="42"></rectangle>		</attr>
+			<rectangle x="45" y="340" width="90" height="42"></rectangle>		</attr>
 
 	</node>
 			
@@ -10829,7 +10935,7 @@ Hemos modelado que ante un inminente conficto el piloto decidira cambiar la alti
 			
 	<node id="node16">
 		<attr name="bounds">
-			<rectangle x="123" y="100" width="35" height="43"></rectangle>		</attr>
+			<rectangle x="87" y="100" width="71" height="43"></rectangle>		</attr>
 
 	</node>
 			
@@ -10841,7 +10947,7 @@ Hemos modelado que ante un inminente conficto el piloto decidira cambiar la alti
 			
 	<node id="node1">
 		<attr name="bounds">
-			<rectangle x="26" y="533" width="35" height="43"></rectangle>		</attr>
+			<rectangle x="4" y="533" width="80" height="43"></rectangle>		</attr>
 
 	</node>
 			
@@ -11094,7 +11200,7 @@ Hemos modelado que ante un inminente conficto el piloto decidira cambiar la alti
 			
 	<node id="node18">
 		<attr name="bounds">
-			<rectangle x="280" y="146" width="54" height="15"></rectangle>		</attr>
+			<rectangle x="279" y="147" width="54" height="15"></rectangle>		</attr>
 
 	</node>
 			
@@ -11130,13 +11236,13 @@ Hemos modelado que ante un inminente conficto el piloto decidira cambiar la alti
 			
 	<node id="node19">
 		<attr name="bounds">
-			<rectangle x="157" y="113" width="66" height="15"></rectangle>		</attr>
+			<rectangle x="153" y="113" width="66" height="15"></rectangle>		</attr>
 
 	</node>
 			
 	<node id="node11">
 		<attr name="bounds">
-			<rectangle x="235" y="73" width="54" height="15"></rectangle>		</attr>
+			<rectangle x="233" y="73" width="54" height="15"></rectangle>		</attr>
 
 	</node>
 			
@@ -11172,7 +11278,7 @@ Hemos modelado que ante un inminente conficto el piloto decidira cambiar la alti
 			
 	<node id="node10">
 		<attr name="bounds">
-			<rectangle x="249" y="104" width="35" height="40"></rectangle>		</attr>
+			<rectangle x="241" y="104" width="43" height="40"></rectangle>		</attr>
 
 	</node>
 			
@@ -11424,7 +11530,7 @@ Hemos modelado que ante un inminente conficto el piloto decidira cambiar la alti
 			
 	<node id="node14">
 		<attr name="bounds">
-			<rectangle x="282" y="118" width="72" height="15"></rectangle>		</attr>
+			<rectangle x="271" y="118" width="72" height="15"></rectangle>		</attr>
 
 	</node>
 			
@@ -11436,7 +11542,7 @@ Hemos modelado que ante un inminente conficto el piloto decidira cambiar la alti
 			
 	<node id="node8">
 		<attr name="bounds">
-			<rectangle x="337" y="138" width="56" height="43"></rectangle>		</attr>
+			<rectangle x="292" y="138" width="104" height="43"></rectangle>		</attr>
 
 	</node>
 			
@@ -11460,7 +11566,7 @@ Hemos modelado que ante un inminente conficto el piloto decidira cambiar la alti
 			
 	<node id="node0">
 		<attr name="bounds">
-			<rectangle x="123" y="132" width="35" height="43"></rectangle>		</attr>
+			<rectangle x="63" y="132" width="95" height="43"></rectangle>		</attr>
 
 	</node>
 			
@@ -11496,7 +11602,7 @@ Hemos modelado que ante un inminente conficto el piloto decidira cambiar la alti
 			
 	<node id="node15">
 		<attr name="bounds">
-			<rectangle x="161" y="120" width="50" height="15"></rectangle>		</attr>
+			<rectangle x="158" y="113" width="50" height="15"></rectangle>		</attr>
 
 	</node>
 			
@@ -11637,10 +11743,302 @@ Hemos modelado que ante un inminente conficto el piloto decidira cambiar la alti
 <gxl>
 
 	<graph>
+			
+	<node id="1" nid="1820709825" type="WFProduces">
+
+	<connected id="589058609"><attr name="extraLabels">
+			<array>
+
+</array>
+</attr>
+
+
+
+
+	</connected>
+	<connected id="1408448796">
+
+
+	</connected>
+	</node>
+			
+	<node id="Order" nid="589058609" type="FrameFact">
+
+	</node>
+			
+	<node id="10" nid="1926531449" type="WFConsumes">
+
+	<connected id="229229129"><attr name="extraLabels">
+			<array>
+
+</array>
+</attr>
+
+
+
+	</connected>
+	<connected id="953376791">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="Collision Avoided" nid="1451605142" type="Goal">
+
+	</node>
+			
+	<node id="Throw Change" nid="201721028" type="FrameFact">
+
+	</node>
+			
+	<node id="ControllerInitiator" nid="1724193390" type="Role">
+
+	</node>
+			
+	<node id="272" nid="544813930" type="WFConsumes">
+
+	<connected id="1408448796"><attr name="extraLabels">
+			<array>
+
+</array>
+</attr>
+
+
+
+	</connected>
+	<connected id="629840631">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="SendAvoidCollisionDecision" nid="1408448796" type="Task">
+
+	</node>
+			
+	<node id="274" nid="5270751" type="GTSatisfies">
+
+	<connected id="229229129"><attr name="extraLabels">
+			<array>
+
+</array>
+</attr>
+
+
+
+	</connected>
+	<connected id="909713934">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="OrderObeyed" nid="909713934" type="Goal">
+
+	</node>
+			
+	<node id="Order" nid="953376791" type="FrameFact">
+
+	</node>
+			
+	<node id="271" nid="688568638" type="WFResponsable">
+
+	<connected id="1724193390"><attr name="extraLabels">
+			<array>
+
+</array>
+</attr>
+
+
+
+	</connected>
+	<connected id="1408448796">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="Obey Order" nid="229229129" type="Task">
+
+	</node>
+			
+	<node id="Conflict" nid="629840631" type="FrameFact">
+
+	</node>
+			
+	<node id="PilotColaborator" nid="1705759130" type="Role">
+
+	</node>
+			
+	<node id="238" nid="189560085" type="WFResponsable">
+
+	<connected id="1705759130"><attr name="extraLabels">
+			<array>
+
+</array>
+</attr>
+
+
+
+	</connected>
+	<connected id="229229129">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="0" nid="1726934312" type="GTSatisfies">
+
+	<connected id="1408448796"><attr name="extraLabels">
+			<array>
+
+</array>
+</attr>
+
+
+
+	</connected>
+	<connected id="1451605142">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="273" nid="269255391" type="WFProduces">
+
+	<connected id="201721028"><attr name="extraLabels">
+			<array>
+
+</array>
+</attr>
+
+
+
+
+	</connected>
+	<connected id="229229129">
+
+
+	</connected>
+	</node>
 	</graph>
 
 
 	<layout>
+			
+	<node id="node10">
+		<attr name="bounds">
+			<rectangle x="437" y="123" width="74" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node9">
+		<attr name="bounds">
+			<rectangle x="531" y="123" width="76" height="46"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node12">
+		<attr name="bounds">
+			<rectangle x="372" y="249" width="79" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node6">
+		<attr name="bounds">
+			<rectangle x="306" y="0" width="83" height="50"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node14">
+		<attr name="bounds">
+			<rectangle x="469" y="297" width="91" height="46"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node0">
+		<attr name="bounds">
+			<rectangle x="100" y="89" width="87" height="43"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node5">
+		<attr name="bounds">
+			<rectangle x="413" y="65" width="79" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node2">
+		<attr name="bounds">
+			<rectangle x="282" y="89" width="136" height="43"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node17">
+		<attr name="bounds">
+			<rectangle x="277" y="229" width="69" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node16">
+		<attr name="bounds">
+			<rectangle x="268" y="163" width="87" height="50"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node11">
+		<attr name="bounds">
+			<rectangle x="472" y="209" width="76" height="46"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node3">
+		<attr name="bounds">
+			<rectangle x="189" y="103" width="91" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node8">
+		<attr name="bounds">
+			<rectangle x="277" y="260" width="73" height="43"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node4">
+		<attr name="bounds">
+			<rectangle x="497" y="11" width="110" height="53"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node1">
+		<attr name="bounds">
+			<rectangle x="78" y="256" width="101" height="43"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node13">
+		<attr name="bounds">
+			<rectangle x="183" y="272" width="91" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node7">
+		<attr name="bounds">
+			<rectangle x="314" y="62" width="69" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node15">
+		<attr name="bounds">
+			<rectangle x="372" y="292" width="74" height="15"></rectangle>		</attr>
+
+	</node>
 	</layout>
 </gxl> </model>
  <model id="Interaction Roles" type="ingenias.editor.models.AgentModelModelJGraph">
@@ -11814,6 +12212,275 @@ Hemos modelado que ante un inminente conficto el piloto decidira cambiar la alti
 	<node id="node2">
 		<attr name="bounds">
 			<rectangle x="110" y="22" width="35" height="43"></rectangle>		</attr>
+
+	</node>
+	</layout>
+</gxl> </model>
+ <model id="Controller Plane Interaction Model" type="ingenias.editor.models.InteractionModelModelJGraph">
+<object id="Controller Plane Interaction Model" type="ingenias.editor.entities.InteractionModelDataEntity">
+<objectproperty id="InteractionConsidered">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+  <path>
+    <package id="Project"/>
+    <package id="Interacion"/>
+   </path>
+<gxl>
+
+	<graph>
+			
+	<node id="InteractionUnit0" nid="445027206" type="InteractionUnit">
+
+	</node>
+			
+	<node id="265" nid="2117521449" type="IColaborates">
+
+	<connected id="160766450"><attr name="extraLabels">
+			<array>
+
+</array>
+</attr>
+
+
+
+
+	</connected>
+	<connected id="500137645">
+
+
+	</connected>
+	</node>
+			
+	<node id="267" nid="2102571032" type="UIColaborates">
+
+	<connected id="542840999"><attr name="extraLabels">
+			<array>
+
+</array>
+</attr>
+
+
+
+	</connected>
+	<connected id="1914628286">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="PilotColaborator" nid="1759168105" type="Role">
+
+	</node>
+			
+	<node id="PilotColaborator" nid="160766450" type="Role">
+
+	</node>
+			
+	<node id="InteractionUnit1" nid="542840999" type="InteractionUnit">
+
+	</node>
+			
+	<node id="270" nid="912196319" type="UIInitiates">
+
+	<connected id="542840999"><attr name="extraLabels">
+			<array>
+
+</array>
+</attr>
+
+
+
+	</connected>
+	<connected id="1759168105">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="269" nid="2117421872" type="UIColaborates">
+
+	<connected id="445027206"><attr name="extraLabels">
+			<array>
+
+</array>
+</attr>
+
+
+
+	</connected>
+	<connected id="1759168105">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="GRASIASpecification0" nid="1756944918" type="GRASIASpecification">
+
+	</node>
+			
+	<node id="ControllerInitiator" nid="1399217937" type="Role">
+
+	</node>
+			
+	<node id="264" nid="1763483010" type="IInitiates">
+
+	<connected id="500137645"><attr name="extraLabels">
+			<array>
+
+</array>
+</attr>
+
+
+
+	</connected>
+	<connected id="1399217937">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="268" nid="441716959" type="UIPrecedes">
+
+	<connected id="445027206"><attr name="extraLabels">
+			<array>
+
+</array>
+</attr>
+
+
+
+	</connected>
+	<connected id="542840999">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="ControllerInitiator" nid="1914628286" type="Role">
+
+	</node>
+			
+	<node id="266" nid="613749802" type="UIInitiates">
+
+	<connected id="445027206"><attr name="extraLabels">
+			<array>
+
+</array>
+</attr>
+
+
+
+	</connected>
+	<connected id="1914628286">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="ControllerPilotInteracion" nid="500137645" type="Interaction">
+
+	</node>
+	</graph>
+
+
+	<layout>
+			
+	<node id="node6">
+		<attr name="bounds">
+			<rectangle x="722" y="14" width="85" height="69"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node5">
+		<attr name="bounds">
+			<rectangle x="424" y="135" width="72" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node10">
+		<attr name="bounds">
+			<rectangle x="655" y="143" width="79" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node12">
+		<attr name="bounds">
+			<rectangle x="877" y="87" width="124" height="43"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node4">
+		<attr name="bounds">
+			<rectangle x="454" y="172" width="124" height="43"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node7">
+		<attr name="bounds">
+			<rectangle x="724" y="171" width="105" height="69"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node14">
+		<attr name="bounds">
+			<rectangle x="837" y="144" width="57" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node13">
+		<attr name="bounds">
+			<rectangle x="803" y="67" width="79" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node0">
+		<attr name="bounds">
+			<rectangle x="0" y="0" width="264" height="97"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node2">
+		<attr name="bounds">
+			<rectangle x="249" y="174" width="100" height="43"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node3">
+		<attr name="bounds">
+			<rectangle x="328" y="136" width="50" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node11">
+		<attr name="bounds">
+			<rectangle x="736" y="120" width="67" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node8">
+		<attr name="bounds">
+			<rectangle x="580" y="87" width="100" height="43"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node9">
+		<attr name="bounds">
+			<rectangle x="671" y="70" width="57" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node1">
+		<attr name="bounds">
+			<rectangle x="328" y="74" width="158" height="39"></rectangle>		</attr>
 
 	</node>
 	</layout>
