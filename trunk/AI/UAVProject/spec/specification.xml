@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project cid="330" version="1.2">
+<project cid="337" version="1.2">
 <projectproperties>
 <projectproperty id="extfolder" module="IDK"  name="Extension Module Folder" value="UAVProject\ext"  tooltip="Folder where the IDE will find its new modules" />
 <projectproperty id="jadeout" module="Ingenias Agent Framework generator"  name="JADE generated output folder" value="gensrc"  tooltip="The folder that will hold generated JADE agents" />
@@ -677,7 +677,7 @@
 <mapproperties>
 <key id="Name">AlternateAirports</key>
 <key id="Value"></key>
-<key id="Type">ArrayList&lt;Position&gt;</key>
+<key id="Type">List&lt;Position&gt;</key>
 <key id="Code"></key>
 <key id="Description"></key>
 <key id="_view_type">UML</key>
@@ -687,7 +687,7 @@
 <mapproperties>
 <key id="Name">Waypoints</key>
 <key id="Value"></key>
-<key id="Type">ArrayList&lt;Position&gt;</key>
+<key id="Type">List&lt;Position&gt;</key>
 <key id="Code"></key>
 <key id="Description"></key>
 <key id="_view_type">UML</key>
@@ -755,7 +755,7 @@ La lista de puntos (waypoints) por los que tiene que pasar el avion durante el v
 <mapproperties>
 <key id="Name">AlternateAirports</key>
 <key id="Value"></key>
-<key id="Type">ArrayList&lt;Position&gt;</key>
+<key id="Type">List&lt;Position&gt;</key>
 <key id="Code"></key>
 <key id="Description"></key>
 <key id="_view_type">UML</key>
@@ -763,8 +763,26 @@ La lista de puntos (waypoints) por los que tiene que pasar el avion durante el v
 </object>
 </objectproperty>
 <mapproperties>
-<key id="Value">Position.fromDegrees(39.5494, 2.3959, 2e4)</key>
+<key id="Value">java.util.Arrays.asList(new Position[]{Position.fromDegrees(39.5494, 2.3959, 2e4)})</key>
 <key id="_view_type">UML</key>
+</mapproperties>
+</object>
+<object id="337" type="ingenias.editor.entities.SlotValueSpecification">
+<objectproperty id="Slot">
+<object id="77" type="ingenias.editor.entities.ObjectSlot">
+<mapproperties>
+<key id="Name">Waypoints</key>
+<key id="Value"></key>
+<key id="Type">List&lt;Position&gt;</key>
+<key id="Code"></key>
+<key id="Description"></key>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+</objectproperty>
+<mapproperties>
+<key id="Value">Arrays.asList(new Position[]{Position.fromDegrees(40.5857, -3.6765, 2e4),Position.fromDegrees(40.5123, -2.0643, 2e4),Position.fromDegrees(43.1761, -2.1791, 2e4)})</key>
+<key id="_view_type">INGENIAS</key>
 </mapproperties>
 </object>
 </objectproperty>
@@ -1336,7 +1354,7 @@ El plan de vuelo esta compuesto por una serie de waypoints (puntos de paso), un 
 <mapproperties>
 <key id="Name">AlternateAirports</key>
 <key id="Value"></key>
-<key id="Type">ArrayList&lt;Position&gt;</key>
+<key id="Type">List&lt;Position&gt;</key>
 <key id="Code"></key>
 <key id="Description"></key>
 <key id="_view_type">UML</key>
@@ -1346,7 +1364,7 @@ El plan de vuelo esta compuesto por una serie de waypoints (puntos de paso), un 
 <mapproperties>
 <key id="Name">Waypoints</key>
 <key id="Value"></key>
-<key id="Type">ArrayList&lt;Position&gt;</key>
+<key id="Type">List&lt;Position&gt;</key>
 <key id="Code"></key>
 <key id="Description"></key>
 <key id="_view_type">UML</key>
@@ -2052,7 +2070,7 @@ El estress sera un valor de 1 a 0 y puede suponer la fijacion de unpiloto de rea
 <mapproperties>
 <key id="Name">AlternateAirports</key>
 <key id="Value"></key>
-<key id="Type">ArrayList&lt;Position&gt;</key>
+<key id="Type">List&lt;Position&gt;</key>
 <key id="Code"></key>
 <key id="Description"></key>
 <key id="_view_type">UML</key>
@@ -2062,7 +2080,7 @@ El estress sera un valor de 1 a 0 y puede suponer la fijacion de unpiloto de rea
 <mapproperties>
 <key id="Name">Waypoints</key>
 <key id="Value"></key>
-<key id="Type">ArrayList&lt;Position&gt;</key>
+<key id="Type">List&lt;Position&gt;</key>
 <key id="Code"></key>
 <key id="Description"></key>
 <key id="_view_type">UML</key>
@@ -2130,7 +2148,7 @@ La lista de puntos (waypoints) por los que tiene que pasar el avion durante el v
 <mapproperties>
 <key id="Name">AlternateAirports</key>
 <key id="Value"></key>
-<key id="Type">ArrayList&lt;Position&gt;</key>
+<key id="Type">List&lt;Position&gt;</key>
 <key id="Code"></key>
 <key id="Description"></key>
 <key id="_view_type">UML</key>
@@ -2138,8 +2156,26 @@ La lista de puntos (waypoints) por los que tiene que pasar el avion durante el v
 </object>
 </objectproperty>
 <mapproperties>
-<key id="Value">Position.fromDegrees(39.5494, 2.3959, 2e4)</key>
+<key id="Value">java.util.Arrays.asList(new Position[]{Position.fromDegrees(39.5494, 2.3959, 2e4)})</key>
 <key id="_view_type">UML</key>
+</mapproperties>
+</object>
+<object id="337" type="ingenias.editor.entities.SlotValueSpecification">
+<objectproperty id="Slot">
+<object id="77" type="ingenias.editor.entities.ObjectSlot">
+<mapproperties>
+<key id="Name">Waypoints</key>
+<key id="Value"></key>
+<key id="Type">List&lt;Position&gt;</key>
+<key id="Code"></key>
+<key id="Description"></key>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+</objectproperty>
+<mapproperties>
+<key id="Value">Arrays.asList(new Position[]{Position.fromDegrees(40.5857, -3.6765, 2e4),Position.fromDegrees(40.5123, -2.0643, 2e4),Position.fromDegrees(43.1761, -2.1791, 2e4)})</key>
+<key id="_view_type">INGENIAS</key>
 </mapproperties>
 </object>
 </objectproperty>
@@ -2460,7 +2496,7 @@ La lista de puntos (waypoints) por los que tiene que pasar el avion durante el v
 <mapproperties>
 <key id="Name">AlternateAirports</key>
 <key id="Value"></key>
-<key id="Type">ArrayList&lt;Position&gt;</key>
+<key id="Type">List&lt;Position&gt;</key>
 <key id="Code"></key>
 <key id="Description"></key>
 <key id="_view_type">UML</key>
@@ -2470,7 +2506,7 @@ La lista de puntos (waypoints) por los que tiene que pasar el avion durante el v
 <mapproperties>
 <key id="Name">Waypoints</key>
 <key id="Value"></key>
-<key id="Type">ArrayList&lt;Position&gt;</key>
+<key id="Type">List&lt;Position&gt;</key>
 <key id="Code"></key>
 <key id="Description"></key>
 <key id="_view_type">UML</key>
@@ -2943,7 +2979,7 @@ La lista de puntos (waypoints) por los que tiene que pasar el avion durante el v
 <mapproperties>
 <key id="Name">AlternateAirports</key>
 <key id="Value"></key>
-<key id="Type">ArrayList&lt;Position&gt;</key>
+<key id="Type">List&lt;Position&gt;</key>
 <key id="Code"></key>
 <key id="Description"></key>
 <key id="_view_type">UML</key>
@@ -2951,7 +2987,7 @@ La lista de puntos (waypoints) por los que tiene que pasar el avion durante el v
 </object>
 </objectproperty>
 <mapproperties>
-<key id="Value">Position.fromDegrees(39.5494, 2.3959, 2e4)</key>
+<key id="Value">java.util.Arrays.asList(new Position[]{Position.fromDegrees(39.5494, 2.3959, 2e4)})</key>
 <key id="_view_type">UML</key>
 </mapproperties>
 </object>
@@ -2974,6 +3010,24 @@ La lista de puntos (waypoints) por los que tiene que pasar el avion durante el v
 </objectproperty>
 <mapproperties>
 <key id="_view_type">UML</key>
+</mapproperties>
+</object>
+<object id="337" type="ingenias.editor.entities.SlotValueSpecification">
+<objectproperty id="Slot">
+<object id="77" type="ingenias.editor.entities.ObjectSlot">
+<mapproperties>
+<key id="Name">Waypoints</key>
+<key id="Value"></key>
+<key id="Type">List&lt;Position&gt;</key>
+<key id="Code"></key>
+<key id="Description"></key>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+</objectproperty>
+<mapproperties>
+<key id="Value">Arrays.asList(new Position[]{Position.fromDegrees(40.5857, -3.6765, 2e4),Position.fromDegrees(40.5123, -2.0643, 2e4),Position.fromDegrees(43.1761, -2.1791, 2e4)})</key>
+<key id="_view_type">INGENIAS</key>
 </mapproperties>
 </object>
 <object id="GRASIASpecification0" type="ingenias.editor.entities.GRASIASpecification">
@@ -3131,7 +3185,7 @@ La lista de puntos (waypoints) por los que tiene que pasar el avion durante el v
 <mapproperties>
 <key id="Name">AlternateAirports</key>
 <key id="Value"></key>
-<key id="Type">ArrayList&lt;Position&gt;</key>
+<key id="Type">List&lt;Position&gt;</key>
 <key id="Code"></key>
 <key id="Description"></key>
 <key id="_view_type">UML</key>
@@ -3141,7 +3195,7 @@ La lista de puntos (waypoints) por los que tiene que pasar el avion durante el v
 <mapproperties>
 <key id="Name">Waypoints</key>
 <key id="Value"></key>
-<key id="Type">ArrayList&lt;Position&gt;</key>
+<key id="Type">List&lt;Position&gt;</key>
 <key id="Code"></key>
 <key id="Description"></key>
 <key id="_view_type">UML</key>
@@ -11250,13 +11304,13 @@ Este diagrama se mete dentro de la carpeta init para que cuando la aplicacion ll
 			
 	<node id="node0">
 		<attr name="bounds">
-			<rectangle x="525" y="59" width="117" height="55"></rectangle>		</attr>
+			<rectangle x="510" y="57" width="117" height="55"></rectangle>		</attr>
 
 	</node>
 			
 	<node id="node4">
 		<attr name="bounds">
-			<rectangle x="432" y="79" width="76" height="15"></rectangle>		</attr>
+			<rectangle x="424" y="79" width="76" height="15"></rectangle>		</attr>
 
 	</node>
 			
