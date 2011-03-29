@@ -11114,7 +11114,7 @@ Este diagrama se mete dentro de la carpeta init para que cuando la aplicacion ll
 			
 	<node id="node20">
 		<attr name="bounds">
-			<rectangle x="393" y="350" width="64" height="15"></rectangle>		</attr>
+			<rectangle x="379" y="347" width="64" height="15"></rectangle>		</attr>
 
 	</node>
 			
@@ -11264,7 +11264,7 @@ Este diagrama se mete dentro de la carpeta init para que cuando la aplicacion ll
 			
 	<node id="node3">
 		<attr name="bounds">
-			<rectangle x="508" y="82" width="166" height="55"></rectangle>		</attr>
+			<rectangle x="513" y="74" width="166" height="55"></rectangle>		</attr>
 
 	</node>
 			
@@ -11282,13 +11282,13 @@ Este diagrama se mete dentro de la carpeta init para que cuando la aplicacion ll
 			
 	<node id="node14">
 		<attr name="bounds">
-			<rectangle x="514" y="373" width="117" height="54"></rectangle>		</attr>
+			<rectangle x="486" y="373" width="145" height="54"></rectangle>		</attr>
 
 	</node>
 			
 	<node id="node22">
 		<attr name="bounds">
-			<rectangle x="395" y="111" width="64" height="15"></rectangle>		</attr>
+			<rectangle x="398" y="108" width="64" height="15"></rectangle>		</attr>
 
 	</node>
 			
