@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project cid="341" version="1.2">
+<project cid="179" version="1.2">
 <projectproperties>
 <projectproperty id="extfolder" module="IDK"  name="Extension Module Folder" value="UAVProject\ext"  tooltip="Folder where the IDE will find its new modules" />
 <projectproperty id="jadeout" module="Ingenias Agent Framework generator"  name="JADE generated output folder" value="gensrc"  tooltip="The folder that will hold generated JADE agents" />
@@ -7,7 +7,7 @@
 <projectproperty id="jadeproject" module="Ingenias Agent Framework generator"  name="JADE main project folder" value="UAVProject"  tooltip="The folder that will contain the project for this development" />
 <projectproperty id="jadeperm" module="Ingenias Agent Framework generator"  name="JADE generate only once folder" value="permsrc"  tooltip="The folder that will hold generated elements that should not be regenerated" />
 <projectproperty id="htmldoc" module="HTML Document generator"  name="HTML document folder" value="UAVProject\html"  tooltip="The document folder that will contain HTML version of this specification" />
- <openeddiagram>Only One Plane Deployment</openeddiagram> <openeddiagram>Create Initial Plan Tasks</openeddiagram> <openeddiagram>Create Initial Plan Agents</openeddiagram> <openeddiagram>Environment To Plane</openeddiagram> <openeddiagram>Environment Component</openeddiagram> <openeddiagram>Pilot Model</openeddiagram> <openeddiagram>Orders to Pilot</openeddiagram> <openeddiagram>Avoid Collision Interaction Task</openeddiagram> <openeddiagram>Decision to Plane</openeddiagram> <openeddiagram>Pilot Goal</openeddiagram> <openeddiagram>CreatePilotMind</openeddiagram> <openeddiagram>Flight Plan Monitorization</openeddiagram> <openeddiagram>Main Program Activity</openeddiagram> <openeddiagram>Create Decisions For Leg</openeddiagram></projectproperties>
+ <openeddiagram>Only One Plane Deployment</openeddiagram> <openeddiagram>Create Initial Plan Tasks</openeddiagram> <openeddiagram>Create Initial Plan Agents</openeddiagram> <openeddiagram>Environment To Plane</openeddiagram> <openeddiagram>Environment Component</openeddiagram> <openeddiagram>Pilot Model</openeddiagram> <openeddiagram>Orders to Pilot</openeddiagram> <openeddiagram>Avoid Collision Interaction Task</openeddiagram> <openeddiagram>Decision to Plane</openeddiagram> <openeddiagram>Pilot Goal</openeddiagram> <openeddiagram>CreatePilotMind</openeddiagram> <openeddiagram>Flight Plan Monitorization</openeddiagram> <openeddiagram>Main Program Activity</openeddiagram> <openeddiagram>Create Decisions For Leg</openeddiagram> <openeddiagram>Pilot Plane Interaction Task</openeddiagram> <openeddiagram>Pilot Plane Interaction Roles</openeddiagram> <openeddiagram>Arrived Safe And Sound</openeddiagram> <openeddiagram>Obstacle Detected</openeddiagram> <openeddiagram>Avoid Obstacle Detected</openeddiagram> <openeddiagram>Avoid Obstacle</openeddiagram> <openeddiagram>Avoid Obstacle Observed In Environment</openeddiagram> <openeddiagram>Obstacle Observed</openeddiagram> <openeddiagram>Create Initial Plan Code</openeddiagram> <openeddiagram>Create Initial Plan Interaction</openeddiagram></projectproperties>
 <leafpackages>
    <path>
     <package id="Project"/>
@@ -117,6 +117,12 @@
     <package id="Plan Creation And Monitorization"/>
     <package id="Plan Creation"/>
     <package id="Create Initial Plan Interaction"/>
+   </path>
+   <path>
+    <package id="Project"/>
+    <package id="Plan Creation And Monitorization"/>
+    <package id="Plan Creation"/>
+    <package id="Create Initial Plan Code"/>
    </path>
    <path>
     <package id="Project"/>
@@ -876,6 +882,22 @@ La lista de puntos (waypoints) por los que tiene que pasar el avion durante el v
 <key id="Code">		/*Configuration.setValue(AVKey.GLOBE_CLASS_NAME, EarthFlat.class.getName());
 		//Configuration.setValue(AVKey.VIEW_CLASS_NAME, FlatOrbitView.class.getName());
 		EnvironmentAppImp.start(&quot;World Wind Paths&quot;, EnvironmentAppImp.AppFrame.class);*/</key>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+<object id="INGENIASCodeComponent2" type="ingenias.editor.entities.INGENIASCodeComponent">
+<mapproperties>
+<key id="Language">Java</key>
+<key id="Code"></key>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+<object id="INGENIASCodeComponent3" type="ingenias.editor.entities.INGENIASCodeComponent">
+<mapproperties>
+<key id="Language">Java</key>
+<key id="Code">		Flight_Plan oFlightPlan = new ingenias.jade.mental.Flight_Plan();
+	
+		outputsdefaultPlanAnswer.setFlightPlan(oFlightPlan);</key>
 <key id="_view_type">UML</key>
 </mapproperties>
 </object>
@@ -5722,6 +5744,40 @@ La lista de puntos (waypoints) por los que tiene que pasar el avion durante el v
 <key id="_view_type">INGENIAS</key>
 </mapproperties>
 </role></relationship>
+<relationship id="179" type="ingenias.editor.entities.CDUsesCode">
+<object id="179" type="ingenias.editor.entities.CDUsesCode">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="INGENIASCodeComponent2" class="ingenias.editor.entities.INGENIASCodeComponent" roleName="CDUsesCodetarget" type="ingenias.editor.entities.CDUsesCodetargetRole" dgcid="1969908131">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="Take Initial Plan" class="ingenias.editor.entities.Task" roleName="CDUsesCodesource" type="ingenias.editor.entities.CDUsesCodesourceRole" dgcid="548753987">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="274" type="ingenias.editor.entities.CDUsesCode">
+<object id="274" type="ingenias.editor.entities.CDUsesCode">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="INGENIASCodeComponent3" class="ingenias.editor.entities.INGENIASCodeComponent" roleName="CDUsesCodetarget" type="ingenias.editor.entities.CDUsesCodetargetRole" dgcid="928838334">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="GivePlan" class="ingenias.editor.entities.Task" roleName="CDUsesCodesource" type="ingenias.editor.entities.CDUsesCodesourceRole" dgcid="599024734">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
 <relationship id="187" type="ingenias.editor.entities.GTSatisfies">
 <object id="187" type="ingenias.editor.entities.GTSatisfies">
 <objectproperty id="SatisfactionCondition">
@@ -5778,6 +5834,11 @@ La lista de puntos (waypoints) por los que tiene que pasar el avion durante el v
 <relationship id="144" type="ingenias.editor.entities.WFProduces">
 <object id="144" type="ingenias.editor.entities.WFProduces">
 <objectproperty id="Condition">
+<object id="179" type="ingenias.editor.entities.SymbolicMentalStatePattern">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
 </objectproperty>
 <mapproperties>
 <key id="_view_type">INGENIAS</key>
@@ -12109,6 +12170,114 @@ Este diagrama se mete dentro de la carpeta init para que cuando la aplicacion ll
 	</node>
 	</layout>
 </gxl> </model>
+ <model id="Create Initial Plan Code" type="ingenias.editor.models.ComponentDiagramModelJGraph">
+<object id="Create Initial Plan Code" type="ingenias.editor.entities.ComponentDiagramDataEntity">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+  <path>
+    <package id="Project"/>
+    <package id="Plan Creation And Monitorization"/>
+    <package id="Plan Creation"/>
+   </path>
+<gxl>
+
+	<graph>
+			
+	<node id="179" nid="478104087" type="CDUsesCode">
+
+	<connected id="548753987"><attr name="extraLabels">
+			<array>
+
+</array>
+</attr>
+
+
+
+	</connected>
+	<connected id="1969908131">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="274" nid="1012369464" type="CDUsesCode">
+
+	<connected id="599024734"><attr name="extraLabels">
+			<array>
+
+</array>
+</attr>
+
+
+
+	</connected>
+	<connected id="928838334">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="INGENIASCodeComponent3" nid="928838334" type="INGENIASCodeComponent">
+
+	</node>
+			
+	<node id="INGENIASCodeComponent2" nid="1969908131" type="INGENIASCodeComponent">
+
+	</node>
+			
+	<node id="Take Initial Plan" nid="548753987" type="Task">
+
+	</node>
+			
+	<node id="GivePlan" nid="599024734" type="Task">
+
+	</node>
+	</graph>
+
+
+	<layout>
+			
+	<node id="node2">
+		<attr name="bounds">
+			<rectangle x="316" y="126" width="76" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node5">
+		<attr name="bounds">
+			<rectangle x="301" y="30" width="76" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node4">
+		<attr name="bounds">
+			<rectangle x="427" y="5" width="167" height="57"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node0">
+		<attr name="bounds">
+			<rectangle x="433" y="107" width="167" height="57"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node1">
+		<attr name="bounds">
+			<rectangle x="194" y="112" width="81" height="43"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node3">
+		<attr name="bounds">
+			<rectangle x="197" y="20" width="54" height="43"></rectangle>		</attr>
+
+	</node>
+	</layout>
+</gxl> </model>
  <model id="Flight Plan Monitorization" type="ingenias.editor.models.TasksAndGoalsModelModelJGraph">
 <object id="Flight Plan Monitorization" type="ingenias.editor.entities.TasksAndGoalsModelDataEntity">
 <mapproperties>
@@ -12409,7 +12578,7 @@ Este diagrama se mete dentro de la carpeta init para que cuando la aplicacion ll
 			
 	<node id="node5">
 		<attr name="bounds">
-			<rectangle x="277" y="199" width="74" height="15"></rectangle>		</attr>
+			<rectangle x="281" y="176" width="74" height="15"></rectangle>		</attr>
 
 	</node>
 			
@@ -12439,19 +12608,19 @@ Este diagrama se mete dentro de la carpeta init para que cuando la aplicacion ll
 			
 	<node id="node9">
 		<attr name="bounds">
-			<rectangle x="274" y="90" width="79" height="15"></rectangle>		</attr>
+			<rectangle x="276" y="108" width="79" height="15"></rectangle>		</attr>
 
 	</node>
 			
 	<node id="node1">
 		<attr name="bounds">
-			<rectangle x="380" y="235" width="83" height="46"></rectangle>		</attr>
+			<rectangle x="383" y="190" width="83" height="46"></rectangle>		</attr>
 
 	</node>
 			
 	<node id="node4">
 		<attr name="bounds">
-			<rectangle x="382" y="0" width="103" height="77"></rectangle>		</attr>
+			<rectangle x="378" y="39" width="103" height="77"></rectangle>		</attr>
 
 	</node>
 	</layout>
