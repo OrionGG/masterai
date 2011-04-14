@@ -7,7 +7,7 @@
 <projectproperty id="jadeproject" module="Ingenias Agent Framework generator"  name="JADE main project folder" value="UAVProject"  tooltip="The folder that will contain the project for this development" />
 <projectproperty id="jadeperm" module="Ingenias Agent Framework generator"  name="JADE generate only once folder" value="permsrc"  tooltip="The folder that will hold generated elements that should not be regenerated" />
 <projectproperty id="htmldoc" module="HTML Document generator"  name="HTML document folder" value="UAVProject\html"  tooltip="The document folder that will contain HTML version of this specification" />
- <openeddiagram>Only One Plane Deployment</openeddiagram> <openeddiagram>Create Initial Plan Tasks</openeddiagram> <openeddiagram>Create Initial Plan Agents</openeddiagram> <openeddiagram>Environment To Plane</openeddiagram> <openeddiagram>Environment Component</openeddiagram> <openeddiagram>Pilot Model</openeddiagram> <openeddiagram>Orders to Pilot</openeddiagram> <openeddiagram>Avoid Collision Interaction Task</openeddiagram> <openeddiagram>Decision to Plane</openeddiagram> <openeddiagram>Pilot Goal</openeddiagram> <openeddiagram>CreatePilotMind</openeddiagram> <openeddiagram>Flight Plan Monitorization</openeddiagram> <openeddiagram>Main Program Activity</openeddiagram> <openeddiagram>Create Decisions For Leg</openeddiagram> <openeddiagram>Pilot Plane Interaction Task</openeddiagram> <openeddiagram>Pilot Plane Interaction Roles</openeddiagram> <openeddiagram>Arrived Safe And Sound</openeddiagram> <openeddiagram>Obstacle Detected</openeddiagram> <openeddiagram>Avoid Obstacle Detected</openeddiagram> <openeddiagram>Avoid Obstacle</openeddiagram> <openeddiagram>Avoid Obstacle Observed In Environment</openeddiagram> <openeddiagram>Obstacle Observed</openeddiagram> <openeddiagram>Create Initial Plan Code</openeddiagram> <openeddiagram>Create Initial Plan Interaction</openeddiagram></projectproperties>
+ <openeddiagram>Only One Plane Deployment</openeddiagram> <openeddiagram>Create Decisions For Leg</openeddiagram> <openeddiagram>Pilot Plane Interaction Task</openeddiagram> <openeddiagram>Pilot Plane Interaction Roles</openeddiagram> <openeddiagram>Arrived Safe And Sound</openeddiagram> <openeddiagram>Avoid Obstacle Detected</openeddiagram> <openeddiagram>Avoid Obstacle</openeddiagram> <openeddiagram>Obstacle Observed</openeddiagram> <openeddiagram>Create Initial Plan Code</openeddiagram></projectproperties>
 <leafpackages>
    <path>
     <package id="Project"/>
@@ -888,7 +888,7 @@ La lista de puntos (waypoints) por los que tiene que pasar el avion durante el v
 <object id="INGENIASCodeComponent2" type="ingenias.editor.entities.INGENIASCodeComponent">
 <mapproperties>
 <key id="Language">Java</key>
-<key id="Code"></key>
+<key id="Code">        outputsdefaultFlight_Plan.setWaypoints(eiPlanAnswer.getFlightPlan().getWaypoints());</key>
 <key id="_view_type">UML</key>
 </mapproperties>
 </object>
@@ -896,7 +896,16 @@ La lista de puntos (waypoints) por los que tiene que pasar el avion durante el v
 <mapproperties>
 <key id="Language">Java</key>
 <key id="Code">		Flight_Plan oFlightPlan = new ingenias.jade.mental.Flight_Plan();
-	
+		Random generator = new Random();
+		int randomIndex = generator.nextInt(10);
+		List&lt;gov.nasa.worldwind.geom.Position&gt; oWayPoints = new ArrayList&lt;gov.nasa.worldwind.geom.Position&gt;(randomIndex);
+		for (int i = 0; i &lt; randomIndex; i++) {
+			Random generator2 = new Random();
+			int randomWaypoint = generator2.nextInt(10);
+			enums.Waypoint oWaypoint = enums.Waypoint.values()[randomWaypoint];
+			oWayPoints.add(oWaypoint.getoPosition());
+		}
+		oFlightPlan.setWaypoints(oWayPoints);
 		outputsdefaultPlanAnswer.setFlightPlan(oFlightPlan);</key>
 <key id="_view_type">UML</key>
 </mapproperties>
@@ -12243,25 +12252,25 @@ Este diagrama se mete dentro de la carpeta init para que cuando la aplicacion ll
 			
 	<node id="node2">
 		<attr name="bounds">
-			<rectangle x="316" y="126" width="76" height="15"></rectangle>		</attr>
+			<rectangle x="317" y="124" width="76" height="15"></rectangle>		</attr>
 
 	</node>
 			
 	<node id="node5">
 		<attr name="bounds">
-			<rectangle x="301" y="30" width="76" height="15"></rectangle>		</attr>
+			<rectangle x="302" y="35" width="76" height="15"></rectangle>		</attr>
 
 	</node>
 			
 	<node id="node4">
 		<attr name="bounds">
-			<rectangle x="427" y="5" width="167" height="57"></rectangle>		</attr>
+			<rectangle x="429" y="16" width="167" height="57"></rectangle>		</attr>
 
 	</node>
 			
 	<node id="node0">
 		<attr name="bounds">
-			<rectangle x="433" y="107" width="167" height="57"></rectangle>		</attr>
+			<rectangle x="435" y="101" width="167" height="57"></rectangle>		</attr>
 
 	</node>
 			
