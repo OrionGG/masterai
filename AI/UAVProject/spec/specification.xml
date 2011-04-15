@@ -5843,11 +5843,6 @@ La lista de puntos (waypoints) por los que tiene que pasar el avion durante el v
 <relationship id="144" type="ingenias.editor.entities.WFProduces">
 <object id="144" type="ingenias.editor.entities.WFProduces">
 <objectproperty id="Condition">
-<object id="179" type="ingenias.editor.entities.SymbolicMentalStatePattern">
-<mapproperties>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</object>
 </objectproperty>
 <mapproperties>
 <key id="_view_type">INGENIAS</key>
