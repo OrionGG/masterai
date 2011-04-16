@@ -34,10 +34,10 @@ import ingenias.editor.entities.*;
 
 
 
-public class CreatePilotMindTask extends Task{
+public class Check_Leg_CompletedTask extends Task{
 
- public CreatePilotMindTask(String id){
-  super(id,"CreatePilotMind");
+ public Check_Leg_CompletedTask(String id){
+  super(id,"Check_Leg_Completed");
  }
 
 
@@ -45,12 +45,14 @@ public class CreatePilotMindTask extends Task{
  public void execute() throws TaskException{
 
 
-        Flight_Plan  eiFlight_Plan=(Flight_Plan)this.getFirstInputOfType("Flight_Plan");             
+        Flight_Leg  eiFlight_Leg=(Flight_Leg)this.getFirstInputOfType("Flight_Leg");             
 
 
 
 
 
+			
+        Leg_CheckerApp eaLeg_Checker=(Leg_CheckerApp)this.getApplication("Leg_Checker");
 
 
 
@@ -64,30 +66,23 @@ public class CreatePilotMindTask extends Task{
   																			outputs);
   		
 		
-		Pilot_Mind outputsdefaultPilot_Mind=
-			(Pilot_Mind)
-				outputsdefault.getEntityByType("Pilot_Mind");
+		LegCompleted outputsdefaultLegCompleted=
+			(LegCompleted)
+				outputsdefault.getEntityByType("LegCompleted");
 		
 		
 		
         YellowPages yp=null; // only available for initiators of interactions
 
 
-//#start_node:INGENIASCodeComponent3 <--- DO NOT REMOVE THIS	
-		Random generator = new Random();
-		float fStress = generator.nextFloat();
-        outputsdefaultPilot_Mind.setStress(fStress);
+//#start_node:INGENIASCodeComponent6 <--- DO NOT REMOVE THIS	
+        if(eaLeg_Checker.isLegCompleted()){
 
-		float fExperience = generator.nextFloat();    
-        outputsdefaultPilot_Mind.setExperience(fExperience);
-        
-        float fFatigue = generator.nextFloat();
-        outputsdefaultPilot_Mind.setFatigue(fFatigue);
-        
-        outputsdefaultPilot_Mind.setPilotFlightPlan(eiFlight_Plan);
-        
-        outputsdefaultPilot_Mind.setLegsCompleted(0);
-//#end_node:INGENIASCodeComponent3 <--- DO NOT REMOVE THIS
+        }
+        else{
+        	outputsdefault.removeEntity(outputsdefaultLegCompleted);
+        }
+//#end_node:INGENIASCodeComponent6 <--- DO NOT REMOVE THIS
 
  }
  

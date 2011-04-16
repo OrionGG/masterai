@@ -64,6 +64,10 @@ public class Flight_Plan_MonitoringTask extends Task{
   																			outputs);
   		
 		
+		Pilot_Mind_Changing outputsdefaultPilot_Mind_Changing=
+			(Pilot_Mind_Changing)
+				outputsdefault.getEntityByType("Pilot_Mind_Changing");
+		
 		Flight_Leg outputsdefaultFlight_Leg=
 			(Flight_Leg)
 				outputsdefault.getEntityByType("Flight_Leg");
@@ -73,9 +77,31 @@ public class Flight_Plan_MonitoringTask extends Task{
         YellowPages yp=null; // only available for initiators of interactions
 
 
-//#start_node: <--- DO NOT REMOVE THIS	
-
-//#end_node: <--- DO NOT REMOVE THIS
+//#start_node:INGENIASCodeComponent5 <--- DO NOT REMOVE THIS	
+        int iLegsCompleted = eiPilot_Mind.getLegsCompleted();
+        Flight_Plan oFlightPlan = eiPilot_Mind.getPilotFlightPlan();
+        gov.nasa.worldwind.geom.Position oStartPoint = null;
+        gov.nasa.worldwind.geom.Position oEndPoint = null;
+        if(iLegsCompleted == 0 ){
+        	oStartPoint = oFlightPlan.getDeparturePoint();
+        }
+        else{
+        	oStartPoint = oFlightPlan.getWaypoints().get(iLegsCompleted-1);
+        }
+        
+        if(oFlightPlan.getWaypoints().size() <= iLegsCompleted){
+        	oEndPoint = oFlightPlan.getDestinationPoint();
+        }
+        else{
+        	oEndPoint = oFlightPlan.getWaypoints().get(iLegsCompleted);
+        }
+        
+        outputsdefaultFlight_Leg.setStartPoint(oStartPoint);
+        outputsdefaultFlight_Leg.setEndPont(oEndPoint);
+        
+        outputsdefaultPilot_Mind_Changing.setPilotMind(eiPilot_Mind);
+    	
+//#end_node:INGENIASCodeComponent5 <--- DO NOT REMOVE THIS
 
  }
  
