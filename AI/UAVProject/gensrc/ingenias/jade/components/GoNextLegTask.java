@@ -34,10 +34,10 @@ import ingenias.editor.entities.*;
 
 
 
-public class CreatePilotMindTask extends Task{
+public class GoNextLegTask extends Task{
 
- public CreatePilotMindTask(String id){
-  super(id,"CreatePilotMind");
+ public GoNextLegTask(String id){
+  super(id,"GoNextLeg");
  }
 
 
@@ -45,7 +45,9 @@ public class CreatePilotMindTask extends Task{
  public void execute() throws TaskException{
 
 
-        Flight_Plan  eiFlight_Plan=(Flight_Plan)this.getFirstInputOfType("Flight_Plan");             
+        Pilot_Mind_Changing  eiPilot_Mind_Changing=(Pilot_Mind_Changing)this.getFirstInputOfType("Pilot_Mind_Changing");             
+
+        LegCompleted  eiLegCompleted=(LegCompleted)this.getFirstInputOfType("LegCompleted");             
 
 
 
@@ -73,21 +75,11 @@ public class CreatePilotMindTask extends Task{
         YellowPages yp=null; // only available for initiators of interactions
 
 
-//#start_node:INGENIASCodeComponent3 <--- DO NOT REMOVE THIS	
-		Random generator = new Random();
-		float fStress = generator.nextFloat();
-        outputsdefaultPilot_Mind.setStress(fStress);
-
-		float fExperience = generator.nextFloat();    
-        outputsdefaultPilot_Mind.setExperience(fExperience);
-        
-        float fFatigue = generator.nextFloat();
-        outputsdefaultPilot_Mind.setFatigue(fFatigue);
-        
-        outputsdefaultPilot_Mind.setPilotFlightPlan(eiFlight_Plan);
-        
-        outputsdefaultPilot_Mind.setLegsCompleted(0);
-//#end_node:INGENIASCodeComponent3 <--- DO NOT REMOVE THIS
+//#start_node:INGENIASCodeComponent4 <--- DO NOT REMOVE THIS
+        int iLegsCompleted =eiPilot_Mind_Changing.getPilotMind().getLegsCompleted();
+        eiPilot_Mind_Changing.getPilotMind().setLegsCompleted(iLegsCompleted+1);
+     	outputsdefaultPilot_Mind = eiPilot_Mind_Changing.getPilotMind();
+//#end_node:INGENIASCodeComponent4 <--- DO NOT REMOVE THIS
 
  }
  

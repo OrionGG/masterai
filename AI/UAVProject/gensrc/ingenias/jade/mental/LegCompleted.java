@@ -24,61 +24,53 @@
 */
 
 
-package ingenias.jade.components;
+package ingenias.jade.mental;
 
 import java.util.*;
-import ingenias.jade.exception.*;
-import ingenias.jade.comm.*;
-import ingenias.jade.mental.*;
+import ingenias.jade.components.*;
 import ingenias.editor.entities.*;
+import ingenias.editor.entities.ViewPreferences.ViewType;
 
+public class LegCompleted extends ingenias.editor.entities.RuntimeFact{
+   
+    Flight_Leg FlightLeg;   
+    
+   
+  public LegCompleted (String id){
+   super(id);
+   this.getPrefs().setView(ViewType.UML);
+   this.type="LegCompleted";
+  }
+  
 
+  public LegCompleted (){
+   super(ingenias.jade.MentalStateManager.generateMentalEntityID());
+   this.getPrefs().setView(ViewType.UML);
+  }
+  
+  public String toString(){
+   return this.getId()+":"+this.getType();
+  }
+  
+  public String getType(){
+   return "LegCompleted";
+  }
+  
+  public String getParentType(){
+   return "RuntimeFact";
+  }
+  
+   
 
-public class Make_DecisionsTask extends Task{
-
- public Make_DecisionsTask(String id){
-  super(id,"Make_Decisions");
- }
-
-
-
- public void execute() throws TaskException{
-
-
-        Flight_Leg  eiFlight_Leg=(Flight_Leg)this.getFirstInputOfType("Flight_Leg");             
-
-
-
-
-
-
-
-
-
-
-  		Vector<TaskOutput> outputs = this.getOutputs();
-  		TaskOutput defaultOutput= outputs.firstElement();
-  		
-  		  	
-  		TaskOutput	outputsdefault=findOutputAlternative("default",
-  																			outputs);
-  		
-		
-		Throw_Change outputsdefaultThrow_Change=
-			(Throw_Change)
-				outputsdefault.getEntityByType("Throw_Change");
-		
-		
-		
-        YellowPages yp=null; // only available for initiators of interactions
-
-
-//#start_node: <--- DO NOT REMOVE THIS	
-
-//#end_node: <--- DO NOT REMOVE THIS
-
- }
- 
+   public void setFlightLeg(Flight_Leg value){
+     FlightLeg=value;   
+   };
+   
+   public Flight_Leg getFlightLeg(){
+     return FlightLeg;      
+   }
+     
+    
 }
 
  
