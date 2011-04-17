@@ -45,6 +45,8 @@ public class GoNextLegTask extends Task{
  public void execute() throws TaskException{
 
 
+        Flight_Leg  eiFlight_Leg=(Flight_Leg)this.getFirstInputOfType("Flight_Leg");             
+
         Pilot_Mind_Changing  eiPilot_Mind_Changing=(Pilot_Mind_Changing)this.getFirstInputOfType("Pilot_Mind_Changing");             
 
         LegCompleted  eiLegCompleted=(LegCompleted)this.getFirstInputOfType("LegCompleted");             
@@ -75,7 +77,7 @@ public class GoNextLegTask extends Task{
         YellowPages yp=null; // only available for initiators of interactions
 
 
-//#start_node:INGENIASCodeComponent4 <--- DO NOT REMOVE THIS
+//#start_node:INGENIASCodeComponent4 <--- DO NOT REMOVE THIS	
         int iLegsCompleted =eiPilot_Mind_Changing.getPilotMind().getLegsCompleted();
         eiPilot_Mind_Changing.getPilotMind().setLegsCompleted(iLegsCompleted+1);
      	outputsdefaultPilot_Mind = eiPilot_Mind_Changing.getPilotMind();

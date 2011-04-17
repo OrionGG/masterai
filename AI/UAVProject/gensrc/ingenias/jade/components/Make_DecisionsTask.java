@@ -73,9 +73,45 @@ public class Make_DecisionsTask extends Task{
         YellowPages yp=null; // only available for initiators of interactions
 
 
-//#start_node: <--- DO NOT REMOVE THIS	
+//#start_node:INGENIASCodeComponent7 <--- DO NOT REMOVE THIS	
+        Vector<Plane_Position_ServiceAppImp> oVector = Plane_Position_ServiceInit.getAppsInitialised();
+        if(oVector.size()> 0){
+        	Plane_Position_ServiceAppImp eaPlane_Position_ServiceAppImp = oVector.get(0);
+        	gov.nasa.worldwind.geom.Position oPosition = eaPlane_Position_ServiceAppImp.getCurrentPosition();
+        	
+        	gov.nasa.worldwind.geom.Position oEndPoint = eiFlight_Leg.getEndPont();
+        	
+        	double lat1 = oPosition.getLatitude().radians;
+        	double lat2 = oEndPoint.getLatitude().radians;
+        	double lon1 = oPosition.getLongitude().radians;
+            double lon2 = oEndPoint.getLongitude().radians;
+                		
+        	double dLat = lat2-lat1;
+        	double dLon = lon2-lon1; 
+        	double y = Math.sin(dLon) * Math.cos(lat2);
+        	double x = Math.cos(lat1)*Math.sin(lat2) -
+        	        Math.sin(lat1)*Math.cos(lat2)*Math.cos(dLon);
+        	double brng = Math.atan2(y, x);
+        	gov.nasa.worldwind.geom.Angle oAngle1 = gov.nasa.worldwind.geom.Angle.fromRadians(brng);
+        	
+        	/*
+        	Other way of calc head
+        	gov.nasa.worldwind.geom.Angle oCol1 = gov.nasa.worldwind.geom.Angle.fromDegrees(90).subtract(oPosition.getLatitude());
+        	gov.nasa.worldwind.geom.Angle oCol2 = gov.nasa.worldwind.geom.Angle.fromDegrees(90).subtract(oEndPoint.getLatitude());
+        	
+        	gov.nasa.worldwind.geom.Angle oDieAng = oPosition.getLongitude().subtract(oEndPoint.getLongitude());
+        	
+        	double oMaxCirArc = Math.cos(oCol1.radians)*Math.cos(oCol2.radians)+
+        						Math.sin(oCol1.radians)*Math.sin(oCol2.radians)*Math.cos(oDieAng.radians);
+        	double app = Math.acos(oMaxCirArc);
+        	
+        	double brng2 = Math.asin((Math.sin(oDieAng.radians)*Math.sin(oCol2.radians))/Math.sin(app));
+        	gov.nasa.worldwind.geom.Angle oAngle2 = gov.nasa.worldwind.geom.Angle.fromRadians(brng2);  	
+*/
+        	outputsdefaultThrow_Change.setHeadChange(oAngle1);
 
-//#end_node: <--- DO NOT REMOVE THIS
+        }
+//#end_node:INGENIASCodeComponent7 <--- DO NOT REMOVE THIS
 
  }
  

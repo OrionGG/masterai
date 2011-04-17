@@ -40,8 +40,6 @@ public class Flight_Leg extends ingenias.editor.entities.RuntimeFact{
     float Altitude;   
    
     float Speed;   
-   
-    Boolean Maked;   
     
    
   public Flight_Leg (String id){
@@ -103,15 +101,6 @@ public class Flight_Leg extends ingenias.editor.entities.RuntimeFact{
    
    public float getSpeed(){
      return Speed;      
-   }
-   
-
-   public void setMaked(Boolean value){
-     Maked=value;   
-   };
-   
-   public Boolean getMaked(){
-     return Maked;      
    }
      
     
