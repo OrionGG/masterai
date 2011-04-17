@@ -32,6 +32,12 @@ import ingenias.editor.entities.*;
 import ingenias.editor.entities.ViewPreferences.ViewType;
 
 public class Manoeuvre extends ingenias.editor.entities.RuntimeFact{
+   
+    gov.nasa.worldwind.geom.Angle HeadChange;   
+   
+    double SpeedChange;   
+   
+    double AltitudeChange;   
     
    
   public Manoeuvre (String id){
@@ -58,6 +64,33 @@ public class Manoeuvre extends ingenias.editor.entities.RuntimeFact{
    return "RuntimeFact";
   }
   
+   
+
+   public void setHeadChange(gov.nasa.worldwind.geom.Angle value){
+     HeadChange=value;   
+   };
+   
+   public gov.nasa.worldwind.geom.Angle getHeadChange(){
+     return HeadChange;      
+   }
+   
+
+   public void setSpeedChange(double value){
+     SpeedChange=value;   
+   };
+   
+   public double getSpeedChange(){
+     return SpeedChange;      
+   }
+   
+
+   public void setAltitudeChange(double value){
+     AltitudeChange=value;   
+   };
+   
+   public double getAltitudeChange(){
+     return AltitudeChange;      
+   }
      
     
 }
