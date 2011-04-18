@@ -35,17 +35,19 @@ public class Plane_Mind extends ingenias.editor.entities.RuntimeFact{
    
     float FuelLiters_;   
    
-    float Altitude;   
+    double Altitude;   
    
-    float Latitude;   
+    gov.nasa.worldwind.geom.Angle Latitude;   
    
-    float Longitude;   
+    gov.nasa.worldwind.geom.Angle Longitude;   
    
-    float Speed;   
+    double Speed;   
    
     List<Manoeuvre> AchievableManeuvers;   
    
     gov.nasa.worldwind.geom.Angle Head;   
+   
+    Date LastUpdate;   
     
    
   public Plane_Mind (String id){
@@ -83,38 +85,38 @@ public class Plane_Mind extends ingenias.editor.entities.RuntimeFact{
    }
    
 
-   public void setAltitude(float value){
+   public void setAltitude(double value){
      Altitude=value;   
    };
    
-   public float getAltitude(){
+   public double getAltitude(){
      return Altitude;      
    }
    
 
-   public void setLatitude(float value){
+   public void setLatitude(gov.nasa.worldwind.geom.Angle value){
      Latitude=value;   
    };
    
-   public float getLatitude(){
+   public gov.nasa.worldwind.geom.Angle getLatitude(){
      return Latitude;      
    }
    
 
-   public void setLongitude(float value){
+   public void setLongitude(gov.nasa.worldwind.geom.Angle value){
      Longitude=value;   
    };
    
-   public float getLongitude(){
+   public gov.nasa.worldwind.geom.Angle getLongitude(){
      return Longitude;      
    }
    
 
-   public void setSpeed(float value){
+   public void setSpeed(double value){
      Speed=value;   
    };
    
-   public float getSpeed(){
+   public double getSpeed(){
      return Speed;      
    }
    
@@ -134,6 +136,15 @@ public class Plane_Mind extends ingenias.editor.entities.RuntimeFact{
    
    public gov.nasa.worldwind.geom.Angle getHead(){
      return Head;      
+   }
+   
+
+   public void setLastUpdate(Date value){
+     LastUpdate=value;   
+   };
+   
+   public Date getLastUpdate(){
+     return LastUpdate;      
    }
      
     
