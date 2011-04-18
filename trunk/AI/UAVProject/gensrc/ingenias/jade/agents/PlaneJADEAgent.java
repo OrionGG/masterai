@@ -200,6 +200,75 @@ public class PlaneJADEAgent
 		return initialised;	       
 	      }
                  
+                  
+                  
+         nonExistingInputs.clear();
+  		 repeatedOutputs.clear();
+         if (tobject.getType().equals("CreatePlaneInitialStatus") ){
+            Vector<MentalEntity> expectedInput=null;
+            RuntimeFact expectedOutput=null;
+            RuntimeEvent expectedOutputEvent=null;
+			RuntimeConversation expectedInt=null;
+            ingenias.jade.components.Resource expectedResource=null;
+			ingenias.jade.components.Application expectedApp=null;        
+			boolean allEntitiesExist=true;		
+			TaskOutput to=null;
+			to=new TaskOutput("default");
+		
+             expectedInput=this.getMSM().getMentalEntityByType("Plane_Mind");
+             if (expectedInput.size()==0 && !("1".equals("0..n"))){
+				nonExistingInputs.add("Plane_Mind");
+			 } else {
+			  addExpectedInputs(tobject, "Plane_Mind","1",expectedInput);
+			 }
+             allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;             
+             
+	      
+	      
+		
+		
+             expectedInput=this.getMSM().getMentalEntityByType("MindNoInitialized");
+             if (expectedInput.size()==0 && !("1".equals("0..n"))){
+				nonExistingInputs.add("MindNoInitialized");
+			 } else {
+			    addExpectedInputs(tobject, "MindNoInitialized","1",expectedInput);
+             	addConsumedInput(to,"1",expectedInput);
+			 }
+             allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;
+
+	      
+	      
+	     
+	      
+	     // Default application for all tasks executed within a conversation
+	     expectedApp=(ingenias.jade.components.Application)getAM().getApplication("YellowPages");
+             tobject.addApplication("YellowPages",expectedApp);
+	 /*    
+	     
+	      */	  
+	      
+	      /**/	      
+	      
+ 
+	     
+	     
+     
+     		      
+	      tobject.addOutput(to);
+	      initialised= allEntitiesExist;
+
+		if (!allEntitiesExist){
+		   String[] nonexisting=new String[nonExistingInputs.size()];
+		   for (int j=0;j<nonExistingInputs.size();j++){
+				nonexisting[j]=nonExistingInputs.elementAt(j).toString();
+			}
+			EventManager.getInstance().conversationalInitializationOfTaskFailed(getLocalName(), 
+												"Plane", 
+												tobject, nonexisting);
+		}
+		return initialised;	       
+	      }
+                 
          
 	      return false;
 	}
@@ -415,6 +484,23 @@ public class PlaneJADEAgent
           }
                   
          
+         if (goalname.equals("PlaneInitialStatusCreated")){
+         
+         {
+         boolean canbescheduled=false;
+		 Task tobject=null;		 
+				// If a conversational initialization fails, a conventional one is tried
+				 tobject=new CreatePlaneInitialStatusTask(ingenias.jade.MentalStateManager.generateMentalEntityID());
+				 canbescheduled=initialiseNonConversationalTask(tobject);
+			 	 if (canbescheduled){
+					//MainInteractionManager.log("Scheduled task "+tobject.getType()+" to achieve goal PlaneInitialStatusCreated",getLocalName()+"-"+tobject.getType());
+					tasks.add(tobject);
+				 } 			
+	     }
+         
+          }
+                  
+         
          Task tobject=new DeleteNonUsedEntitiesTask("DeleteNonUsedEntitiesTask","DeleteNonUsedEntitiesTask");
          boolean canbescheduled=initialiseNonConversationalTask(tobject);
 		 if (canbescheduled && IAFProperties.getGarbageCollectionEnabled()){			
@@ -440,6 +526,10 @@ public class PlaneJADEAgent
          
          
          ttypes.add("Move_Plane");		         
+                
+         
+         
+         ttypes.add("CreatePlaneInitialStatus");		         
                 
          
          if (IAFProperties.getGraphicsOn())
@@ -470,6 +560,15 @@ public class PlaneJADEAgent
 	   e1.printStackTrace();
    }
    
+   sg= new ingenias.editor.entities.StateGoal("PlaneInitialStatusCreated");
+   sg.setState("pending");
+      try {
+	   this.getMSM().addMentalEntity(sg);
+   } catch (InvalidEntity e1) {
+
+	   e1.printStackTrace();
+   }
+   
    sg= new ingenias.editor.entities.StateGoal("Executed_Decision");
    sg.setState("pending");
       try {
@@ -482,6 +581,16 @@ public class PlaneJADEAgent
    
    
    ff= new Plane_Mind();      
+   
+   /* */
+   		try {
+			this.getMSM().addMentalEntity(ff);
+		} catch (InvalidEntity e) {
+
+			e.printStackTrace();
+		}
+   
+   ff= new MindNoInitialized();      
    
    /* */
    		try {

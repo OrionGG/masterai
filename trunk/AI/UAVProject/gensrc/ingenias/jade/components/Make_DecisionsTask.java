@@ -77,6 +77,7 @@ public class Make_DecisionsTask extends Task{
         Vector<Plane_Position_ServiceAppImp> oVector = Plane_Position_ServiceInit.getAppsInitialised();
         if(oVector.size()> 0){
         	Plane_Position_ServiceAppImp eaPlane_Position_ServiceAppImp = oVector.get(0);
+        	//eaPlane_Position_ServiceAppImp.getOwner();
         	gov.nasa.worldwind.geom.Position oPosition = eaPlane_Position_ServiceAppImp.getCurrentPosition();
         	
         	gov.nasa.worldwind.geom.Position oEndPoint = eiFlight_Leg.getEndPont();
