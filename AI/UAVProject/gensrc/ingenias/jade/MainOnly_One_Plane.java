@@ -97,19 +97,6 @@ public class MainOnly_One_Plane {
         final jade.wrapper.AgentController agcFlightPlanner_0Deployment_FlightPlan = ac.createNewAgent("FlightPlanner_0Deployment_FlightPlan",
             "ingenias.jade.agents.FlightPlannerJADEAgent", new Object[0]);	
 	
-	{ Flight_Plan ment=new Flight_Plan();
-	   
-	     ment.setDestinationPoint(gov.nasa.worldwind.geom.Position.fromDegrees(41.8728, -8.9267, 2e4));
-	   
-	     ment.setDeparturePoint(gov.nasa.worldwind.geom.Position.fromDegrees(40.4482, -3.5388, 2e4));
-	   
-	     ment.setAlternateAirports(java.util.Arrays.asList(new gov.nasa.worldwind.geom.Position[]{gov.nasa.worldwind.geom.Position.fromDegrees(39.5494, 2.3959, 2e4)}));
-	   
-	     ment.setWaypoints(java.util.Arrays.asList(new gov.nasa.worldwind.geom.Position[]{gov.nasa.worldwind.geom.Position.fromDegrees(40.5857, -3.6765, 2e4),gov.nasa.worldwind.geom.Position.fromDegrees(40.5123, -2.0643, 2e4),gov.nasa.worldwind.geom.Position.fromDegrees(43.1761, -2.1791, 2e4)}));
-	   	   
-	   agcFlightPlanner_0Deployment_FlightPlan.putO2AObject(ment, false);
-	}
-	
 	
         new Thread(){
           public void run(){
