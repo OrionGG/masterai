@@ -45,9 +45,9 @@ public class GoNextLegTask extends Task{
  public void execute() throws TaskException{
 
 
-        Flight_Leg  eiFlight_Leg=(Flight_Leg)this.getFirstInputOfType("Flight_Leg");             
-
         LegCompleted  eiLegCompleted=(LegCompleted)this.getFirstInputOfType("LegCompleted");             
+
+        Flight_Leg  eiFlight_Leg=(Flight_Leg)this.getFirstInputOfType("Flight_Leg");             
 
         Pilot_Mind_Changing  eiPilot_Mind_Changing=(Pilot_Mind_Changing)this.getFirstInputOfType("Pilot_Mind_Changing");             
 

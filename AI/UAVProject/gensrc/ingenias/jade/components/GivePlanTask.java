@@ -117,6 +117,9 @@ public class GivePlanTask extends Task{
 		}
 		oFlightPlan.setWaypoints(oWayPoints);
 		
+		oFlightPlan.setCruisingAltitudeKM(10);
+		oFlightPlan.setCruisingSpeedKMH(906);
+		//Standard for a Boeing 737
 		
 		outputsdefaultPlanAnswer.setFlightPlan(oFlightPlan);
 //#end_node:CodeForCreatingRandomPlan <--- DO NOT REMOVE THIS

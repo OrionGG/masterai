@@ -89,9 +89,10 @@ public class Execute_DecisionTask extends Task{
        	
 
 
-//#start_node: <--- DO NOT REMOVE THIS	
-
-//#end_node: <--- DO NOT REMOVE THIS
+//#start_node:INGENIASCodeComponent10 <--- DO NOT REMOVE THIS	
+        outputsdefaultManoeuvre.setHeadChange(eiThrow_Change.getHeadChange());
+        outputsdefaultManoeuvre.setPriority(eiThrow_Change.getPriority());
+//#end_node:INGENIASCodeComponent10 <--- DO NOT REMOVE THIS
 
  }
  

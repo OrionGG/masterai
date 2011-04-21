@@ -45,9 +45,9 @@ public class Change_Plane_HeadTask extends Task{
  public void execute() throws TaskException{
 
 
-        Decrease_degrees  eiDecrease_degrees=(Decrease_degrees)this.getFirstInputOfType("Decrease_degrees");             
-
         Increase_degrees  eiIncrease_degrees=(Increase_degrees)this.getFirstInputOfType("Increase_degrees");             
+
+        Decrease_degrees  eiDecrease_degrees=(Decrease_degrees)this.getFirstInputOfType("Decrease_degrees");             
 
         Plane_Mind  eiPlane_Mind=(Plane_Mind)this.getFirstInputOfType("Plane_Mind");             
 

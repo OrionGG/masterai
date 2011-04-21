@@ -35,19 +35,21 @@ public class Plane_Mind extends ingenias.editor.entities.RuntimeFact{
    
     float FuelLiters_;   
    
-    double Altitude;   
+    double AltitudeKM;   
    
     gov.nasa.worldwind.geom.Angle Latitude;   
    
     gov.nasa.worldwind.geom.Angle Longitude;   
    
-    double Speed;   
+    double SpeedKMH;   
    
     List<Manoeuvre> AchievableManeuvers;   
    
     gov.nasa.worldwind.geom.Angle Head;   
    
-    Date LastUpdate;   
+    Date LastUpdatePosition;   
+   
+    ArrayList<Manoeuvre> RunningManoeuvres;   
     
    
   public Plane_Mind (String id){
@@ -85,12 +87,12 @@ public class Plane_Mind extends ingenias.editor.entities.RuntimeFact{
    }
    
 
-   public void setAltitude(double value){
-     Altitude=value;   
+   public void setAltitudeKM(double value){
+     AltitudeKM=value;   
    };
    
-   public double getAltitude(){
-     return Altitude;      
+   public double getAltitudeKM(){
+     return AltitudeKM;      
    }
    
 
@@ -112,12 +114,12 @@ public class Plane_Mind extends ingenias.editor.entities.RuntimeFact{
    }
    
 
-   public void setSpeed(double value){
-     Speed=value;   
+   public void setSpeedKMH(double value){
+     SpeedKMH=value;   
    };
    
-   public double getSpeed(){
-     return Speed;      
+   public double getSpeedKMH(){
+     return SpeedKMH;      
    }
    
 
@@ -139,12 +141,21 @@ public class Plane_Mind extends ingenias.editor.entities.RuntimeFact{
    }
    
 
-   public void setLastUpdate(Date value){
-     LastUpdate=value;   
+   public void setLastUpdatePosition(Date value){
+     LastUpdatePosition=value;   
    };
    
-   public Date getLastUpdate(){
-     return LastUpdate;      
+   public Date getLastUpdatePosition(){
+     return LastUpdatePosition;      
+   }
+   
+
+   public void setRunningManoeuvres(ArrayList<Manoeuvre> value){
+     RunningManoeuvres=value;   
+   };
+   
+   public ArrayList<Manoeuvre> getRunningManoeuvres(){
+     return RunningManoeuvres;      
    }
      
     

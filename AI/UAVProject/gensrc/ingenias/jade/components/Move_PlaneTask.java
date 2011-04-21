@@ -34,10 +34,10 @@ import ingenias.editor.entities.*;
 
 
 
-public class Flight_Plan_MonitoringTask extends Task{
+public class Move_PlaneTask extends Task{
 
- public Flight_Plan_MonitoringTask(String id){
-  super(id,"Flight_Plan_Monitoring");
+ public Move_PlaneTask(String id){
+  super(id,"Move_Plane");
  }
 
 
@@ -45,7 +45,7 @@ public class Flight_Plan_MonitoringTask extends Task{
  public void execute() throws TaskException{
 
 
-        Pilot_Mind  eiPilot_Mind=(Pilot_Mind)this.getFirstInputOfType("Pilot_Mind");             
+        Plane_Mind  eiPlane_Mind=(Plane_Mind)this.getFirstInputOfType("Plane_Mind");             
 
 
 
@@ -64,45 +64,26 @@ public class Flight_Plan_MonitoringTask extends Task{
   																			outputs);
   		
 		
-		Pilot_Mind_Changing outputsdefaultPilot_Mind_Changing=
-			(Pilot_Mind_Changing)
-				outputsdefault.getEntityByType("Pilot_Mind_Changing");
-		
-		Flight_Leg outputsdefaultFlight_Leg=
-			(Flight_Leg)
-				outputsdefault.getEntityByType("Flight_Leg");
-		
 		
 		
         YellowPages yp=null; // only available for initiators of interactions
 
 
-//#start_node:INGENIASCodeComponent5 <--- DO NOT REMOVE THIS	
-        int iLegsCompleted = eiPilot_Mind.getLegsCompleted();
-        Flight_Plan oFlightPlan = eiPilot_Mind.getPilotFlightPlan();
-        gov.nasa.worldwind.geom.Position oStartPoint = null;
-        gov.nasa.worldwind.geom.Position oEndPoint = null;
-        if(iLegsCompleted == 0 ){
-        	oStartPoint = oFlightPlan.getDeparturePoint();
-        }
-        else{
-        	oStartPoint = oFlightPlan.getWaypoints().get(iLegsCompleted-1);
-        }
+//#start_node:INGENIASCodeComponent8 <--- DO NOT REMOVE THIS	
+        double lat1 = eiPlane_Mind.getLatitude().radians;
+    	double lon1 = eiPlane_Mind.getLongitude().radians;
+    	double brng = eiPlane_Mind.getHead().radians;
+    	double speed = eiPlane_Mind.getSpeedKMH();
+        Date oLastUpdateDate = eiPlane_Mind.getLastUpdatePosition();
+    	    	
+        gov.nasa.worldwind.geom.Position oNewPosition = 
+        	BasicFlightDynamics.BFD.getNextPos(lat1, lon1, brng, speed, oLastUpdateDate);
         
-        if(oFlightPlan.getWaypoints().size() <= iLegsCompleted){
-        	oEndPoint = oFlightPlan.getDestinationPoint();
-        }
-        else{
-        	oEndPoint = oFlightPlan.getWaypoints().get(iLegsCompleted);
-        }
+        eiPlane_Mind.setLastUpdatePosition(new Date());
+        eiPlane_Mind.setLatitude(oNewPosition.latitude);
+        eiPlane_Mind.setLongitude(oNewPosition.longitude);
         
-        outputsdefaultFlight_Leg.setStartPoint(oStartPoint);
-        outputsdefaultFlight_Leg.setEndPoint(oEndPoint);
-        
-        
-        outputsdefaultPilot_Mind_Changing.setPilotMind(eiPilot_Mind);
-    	
-//#end_node:INGENIASCodeComponent5 <--- DO NOT REMOVE THIS
+//#end_node:INGENIASCodeComponent8 <--- DO NOT REMOVE THIS
 
  }
  

@@ -31,25 +31,17 @@ import ingenias.jade.components.*;
 import ingenias.editor.entities.*;
 import ingenias.editor.entities.ViewPreferences.ViewType;
 
-public class Flight_Leg extends ingenias.editor.entities.RuntimeFact{
-   
-    gov.nasa.worldwind.geom.Position StartPoint;   
-   
-    gov.nasa.worldwind.geom.Position EndPoint;   
-   
-    double AltitudeKM;   
-   
-    double SpeedKMH;   
+public class MindNoInitialized extends ingenias.editor.entities.RuntimeFact{
     
    
-  public Flight_Leg (String id){
+  public MindNoInitialized (String id){
    super(id);
    this.getPrefs().setView(ViewType.UML);
-   this.type="Flight_Leg";
+   this.type="MindNoInitialized";
   }
   
 
-  public Flight_Leg (){
+  public MindNoInitialized (){
    super(ingenias.jade.MentalStateManager.generateMentalEntityID());
    this.getPrefs().setView(ViewType.UML);
   }
@@ -59,49 +51,13 @@ public class Flight_Leg extends ingenias.editor.entities.RuntimeFact{
   }
   
   public String getType(){
-   return "Flight_Leg";
+   return "MindNoInitialized";
   }
   
   public String getParentType(){
    return "RuntimeFact";
   }
   
-   
-
-   public void setStartPoint(gov.nasa.worldwind.geom.Position value){
-     StartPoint=value;   
-   };
-   
-   public gov.nasa.worldwind.geom.Position getStartPoint(){
-     return StartPoint;      
-   }
-   
-
-   public void setEndPoint(gov.nasa.worldwind.geom.Position value){
-     EndPoint=value;   
-   };
-   
-   public gov.nasa.worldwind.geom.Position getEndPoint(){
-     return EndPoint;      
-   }
-   
-
-   public void setAltitudeKM(double value){
-     AltitudeKM=value;   
-   };
-   
-   public double getAltitudeKM(){
-     return AltitudeKM;      
-   }
-   
-
-   public void setSpeedKMH(double value){
-     SpeedKMH=value;   
-   };
-   
-   public double getSpeedKMH(){
-     return SpeedKMH;      
-   }
      
     
 }

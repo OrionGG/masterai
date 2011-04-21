@@ -34,7 +34,7 @@ public  class Plane_Position_ServiceAppImp extends Plane_Position_ServiceApp{
 	 
 	 Plane_Mind oPlane_Mind = (Plane_Mind) oVector.get(0);
 	 
-	 return new Position(oPlane_Mind.getLatitude(),oPlane_Mind.getLongitude(), oPlane_Mind.getAltitude());
+	 return new Position(oPlane_Mind.getLatitude(),oPlane_Mind.getLongitude(), oPlane_Mind.getAltitudeKM());
 
 
 } 

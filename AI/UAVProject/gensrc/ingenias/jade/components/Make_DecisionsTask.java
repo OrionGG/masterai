@@ -80,16 +80,20 @@ public class Make_DecisionsTask extends Task{
         	//eaPlane_Position_ServiceAppImp.getOwner();
         	gov.nasa.worldwind.geom.Position oPosition = eaPlane_Position_ServiceAppImp.getCurrentPosition();
         	
-        	gov.nasa.worldwind.geom.Position oEndPoint = eiFlight_Leg.getEndPont();
+        	gov.nasa.worldwind.geom.Position oEndPoint = eiFlight_Leg.getEndPoint();
         	
         	double lat1 = oPosition.getLatitude().radians;
         	double lat2 = oEndPoint.getLatitude().radians;
         	double lon1 = oPosition.getLongitude().radians;
             double lon2 = oEndPoint.getLongitude().radians;
             
-            gov.nasa.worldwind.geom.Angle oAngle1 = BasicFlightDynamics.BFD.getHead(lat1, lon1, lat2, lon2);
-                		
-        	outputsdefaultThrow_Change.setHeadChange(oAngle1);
+            gov.nasa.worldwind.geom.Angle oAngle = BasicFlightDynamics.BFD.getHead(lat1, lon1, lat2, lon2);
+            
+            if(oAngle.degrees < 0){
+            	oAngle = oAngle.addDegrees(360);
+            }
+        	outputsdefaultThrow_Change.setHeadChange(oAngle);
+        	outputsdefaultThrow_Change.setPriority(0);
 
         }
 //#end_node:INGENIASCodeComponent7 <--- DO NOT REMOVE THIS
