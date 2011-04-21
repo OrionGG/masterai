@@ -28,7 +28,6 @@ package ingenias.jade.components;
 
 import java.util.*;
 import ingenias.jade.exception.*;
-import ingenias.jade.mental.ObjectDetected;
 
 
 
@@ -43,7 +42,7 @@ public abstract class EnvironmentApp extends Application{
  }
 
 
- public abstract ArrayList<ObjectDetected> getCloseObjects();
+ public abstract ArrayList<ingenias.jade.mental.ObjectDetected> getCloseObjects();
 
  
 }
