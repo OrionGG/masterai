@@ -47,6 +47,8 @@ public class Change_in_PlaneTask extends Task{
 
         Manoeuvre  eiManoeuvre=(Manoeuvre)this.getFirstInputOfType("Manoeuvre");             
 
+        Plane_Mind  eiPlane_Mind=(Plane_Mind)this.getFirstInputOfType("Plane_Mind");             
+
 
 
 
@@ -73,9 +75,12 @@ public class Change_in_PlaneTask extends Task{
         YellowPages yp=null; // only available for initiators of interactions
 
 
-//#start_node: <--- DO NOT REMOVE THIS	
+//#start_node:INGENIASCodeComponent11 <--- DO NOT REMOVE THIS	
 
-//#end_node: <--- DO NOT REMOVE THIS
+        thread.RunManoeuvreTurnHead.runManoeuvreTurnHead(eiManoeuvre, eiPlane_Mind);
+		
+	
+//#end_node:INGENIASCodeComponent11 <--- DO NOT REMOVE THIS
 
  }
  

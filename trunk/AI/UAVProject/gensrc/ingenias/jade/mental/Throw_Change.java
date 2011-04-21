@@ -38,6 +38,8 @@ public class Throw_Change extends ingenias.editor.entities.RuntimeFact{
     double SpeedChange;   
    
     double AltitudeChange;   
+   
+    int Priority;   
     
    
   public Throw_Change (String id){
@@ -90,6 +92,15 @@ public class Throw_Change extends ingenias.editor.entities.RuntimeFact{
    
    public double getAltitudeChange(){
      return AltitudeChange;      
+   }
+   
+
+   public void setPriority(int value){
+     Priority=value;   
+   };
+   
+   public int getPriority(){
+     return Priority;      
    }
      
     

@@ -35,13 +35,13 @@ public class Flight_Plan extends ingenias.editor.entities.RuntimeFact{
    
     float FuelCalculation;   
    
-    float CruisingSpeed;   
+    double CruisingSpeedKMH;   
    
     gov.nasa.worldwind.geom.Position DeparturePoint;   
    
     Date DepartureTime;   
    
-    float CruisingAltitude;   
+    double CruisingAltitudeKM;   
    
     gov.nasa.worldwind.geom.Position DestinationPoint;   
    
@@ -87,12 +87,12 @@ public class Flight_Plan extends ingenias.editor.entities.RuntimeFact{
    }
    
 
-   public void setCruisingSpeed(float value){
-     CruisingSpeed=value;   
+   public void setCruisingSpeedKMH(double value){
+     CruisingSpeedKMH=value;   
    };
    
-   public float getCruisingSpeed(){
-     return CruisingSpeed;      
+   public double getCruisingSpeedKMH(){
+     return CruisingSpeedKMH;      
    }
    
 
@@ -114,12 +114,12 @@ public class Flight_Plan extends ingenias.editor.entities.RuntimeFact{
    }
    
 
-   public void setCruisingAltitude(float value){
-     CruisingAltitude=value;   
+   public void setCruisingAltitudeKM(double value){
+     CruisingAltitudeKM=value;   
    };
    
-   public float getCruisingAltitude(){
-     return CruisingAltitude;      
+   public double getCruisingAltitudeKM(){
+     return CruisingAltitudeKM;      
    }
    
 

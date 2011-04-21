@@ -34,10 +34,10 @@ import ingenias.editor.entities.*;
 
 
 
-public class Flight_Plan_MonitoringTask extends Task{
+public class CreatePlaneInitialStatusTask extends Task{
 
- public Flight_Plan_MonitoringTask(String id){
-  super(id,"Flight_Plan_Monitoring");
+ public CreatePlaneInitialStatusTask(String id){
+  super(id,"CreatePlaneInitialStatus");
  }
 
 
@@ -45,7 +45,9 @@ public class Flight_Plan_MonitoringTask extends Task{
  public void execute() throws TaskException{
 
 
-        Pilot_Mind  eiPilot_Mind=(Pilot_Mind)this.getFirstInputOfType("Pilot_Mind");             
+        MindNoInitialized  eiMindNoInitialized=(MindNoInitialized)this.getFirstInputOfType("MindNoInitialized");             
+
+        Plane_Mind  eiPlane_Mind=(Plane_Mind)this.getFirstInputOfType("Plane_Mind");             
 
 
 
@@ -64,45 +66,28 @@ public class Flight_Plan_MonitoringTask extends Task{
   																			outputs);
   		
 		
-		Pilot_Mind_Changing outputsdefaultPilot_Mind_Changing=
-			(Pilot_Mind_Changing)
-				outputsdefault.getEntityByType("Pilot_Mind_Changing");
-		
-		Flight_Leg outputsdefaultFlight_Leg=
-			(Flight_Leg)
-				outputsdefault.getEntityByType("Flight_Leg");
-		
 		
 		
         YellowPages yp=null; // only available for initiators of interactions
 
 
-//#start_node:INGENIASCodeComponent5 <--- DO NOT REMOVE THIS	
-        int iLegsCompleted = eiPilot_Mind.getLegsCompleted();
-        Flight_Plan oFlightPlan = eiPilot_Mind.getPilotFlightPlan();
-        gov.nasa.worldwind.geom.Position oStartPoint = null;
-        gov.nasa.worldwind.geom.Position oEndPoint = null;
-        if(iLegsCompleted == 0 ){
-        	oStartPoint = oFlightPlan.getDeparturePoint();
-        }
-        else{
-        	oStartPoint = oFlightPlan.getWaypoints().get(iLegsCompleted-1);
-        }
-        
-        if(oFlightPlan.getWaypoints().size() <= iLegsCompleted){
-        	oEndPoint = oFlightPlan.getDestinationPoint();
-        }
-        else{
-        	oEndPoint = oFlightPlan.getWaypoints().get(iLegsCompleted);
-        }
-        
-        outputsdefaultFlight_Leg.setStartPoint(oStartPoint);
-        outputsdefaultFlight_Leg.setEndPoint(oEndPoint);
-        
-        
-        outputsdefaultPilot_Mind_Changing.setPilotMind(eiPilot_Mind);
-    	
-//#end_node:INGENIASCodeComponent5 <--- DO NOT REMOVE THIS
+//#start_node:INGENIASCodeComponent9 <--- DO NOT REMOVE THIS	
+        Random generator = new Random();
+		enums.Waypoint[] oWaypointvalues = enums.Waypoint.values();
+		
+		//set departure point
+		int iIndexDeparture = generator.nextInt(oWaypointvalues.length);
+		
+		enums.Waypoint oDeparture = oWaypointvalues[iIndexDeparture];
+		eiPlane_Mind.setLatitude(oDeparture.getoPosition().latitude);
+		eiPlane_Mind.setLongitude(oDeparture.getoPosition().longitude);
+		eiPlane_Mind.setLastUpdatePosition(new Date());
+
+		eiPlane_Mind.setAltitudeKM(Simulation.SimulationVars.dCruiseAltitudeKM);
+		eiPlane_Mind.setSpeedKMH(Simulation.SimulationVars.dCruiseSpeedKMH);
+		eiPlane_Mind.setHead(gov.nasa.worldwind.geom.Angle.fromDegrees(0));
+		eiPlane_Mind.setRunningManoeuvres(new ArrayList<Manoeuvre>());
+//#end_node:INGENIASCodeComponent9 <--- DO NOT REMOVE THIS
 
  }
  

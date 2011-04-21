@@ -371,6 +371,14 @@ public class PlaneJADEAgent
 		tobject.setConversationContext(conversation);
 		boolean allEntitiesExist=true;
 	     
+	     	expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"Plane_Mind");
+			if (expectedInput.size()==0 && !("1".equals("0..n")))
+				nonExistingInputs.add("Plane_Mind");
+			else
+				addExpectedInputs(tobject, "", 
+				"1", expectedInput);
+		    allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;
+	     
             
 		
             expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"Manoeuvre");
