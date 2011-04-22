@@ -14,9 +14,9 @@ public class BFD {
 	private static Thread oThread;
 	private static  int R = 6371; // km earth’s radius	
 
-	public static Position getNextPos(double lat1, double lon1, double brng, double speed, Date oLastUpdateDate){
+	public static Position getNextPos(double lat1, double lon1, double brng, double speed, long lMiliseconds){
 
-		long lMiliseconds = getTimeExpended(oLastUpdateDate);
+		//long lMiliseconds = getTimeExpended(oLastUpdateDate);
 
 
 		double d =  speed * ((double)lMiliseconds/(60 * 60 * 1000));
@@ -100,7 +100,7 @@ public class BFD {
 
 	public static Angle TurnHead(Plane_Mind  eiPlane_Mind,
 			Manoeuvre  eiManoeuvre,
-			Date oLastUpdateHead) {
+			long lMiliseconds) {
 		gov.nasa.worldwind.geom.Angle oInitialAngle = eiPlane_Mind.getHead();
 		gov.nasa.worldwind.geom.Angle oFinalAngle = eiManoeuvre.getHeadChange();
 		gov.nasa.worldwind.geom.Angle oTotalAngleToTurn= oFinalAngle.subtract(oInitialAngle);
@@ -111,7 +111,7 @@ public class BFD {
 		}
 
 
-		long lMiliseconds = getTimeExpended(oLastUpdateHead);
+		//long lMiliseconds = getTimeExpended(oLastUpdateHead);
 		//degrees per milisecond (3 degrees per second)
 		double dDPS = ((double)3/1000)*lMiliseconds;
 		if(Math.abs(oTotalAngleToTurn.degrees)< dDPS){

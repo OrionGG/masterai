@@ -66,6 +66,10 @@ public class CreatePlaneInitialStatusTask extends Task{
   																			outputs);
   		
 		
+		IniciateUpdateStatus outputsdefaultIniciateUpdateStatus=
+			(IniciateUpdateStatus)
+				outputsdefault.getEntityByType("IniciateUpdateStatus");
+		
 		
 		
         YellowPages yp=null; // only available for initiators of interactions
