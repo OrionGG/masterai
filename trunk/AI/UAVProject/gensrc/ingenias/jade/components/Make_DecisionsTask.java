@@ -92,8 +92,11 @@ public class Make_DecisionsTask extends Task{
             if(oAngle.degrees < 0){
             	oAngle = oAngle.addDegrees(360);
             }
-        	outputsdefaultThrow_Change.setHeadChange(oAngle);
-        	outputsdefaultThrow_Change.setPriority(0);
+            
+            if(eaPlane_Position_ServiceAppImp.getCurrentHead().degrees != oAngle.degrees){
+            	outputsdefaultThrow_Change.setHeadChange(oAngle);
+            	outputsdefaultThrow_Change.setPriority(0);
+            }
 
         }
 //#end_node:INGENIASCodeComponent7 <--- DO NOT REMOVE THIS

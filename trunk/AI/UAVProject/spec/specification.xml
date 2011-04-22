@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project cid="403" version="1.2">
+<project cid="406" version="1.2">
 <projectproperties>
 <projectproperty id="extfolder" module="IDK"  name="Extension Module Folder" value="UAVProject\ext"  tooltip="Folder where the IDE will find its new modules" />
 <projectproperty id="jadeout" module="Ingenias Agent Framework generator"  name="JADE generated output folder" value="gensrc"  tooltip="The folder that will hold generated JADE agents" />
@@ -7,7 +7,7 @@
 <projectproperty id="jadeproject" module="Ingenias Agent Framework generator"  name="JADE main project folder" value="UAVProject"  tooltip="The folder that will contain the project for this development" />
 <projectproperty id="jadeperm" module="Ingenias Agent Framework generator"  name="JADE generate only once folder" value="permsrc"  tooltip="The folder that will hold generated elements that should not be regenerated" />
 <projectproperty id="htmldoc" module="HTML Document generator"  name="HTML document folder" value="UAVProject\html"  tooltip="The document folder that will contain HTML version of this specification" />
- <openeddiagram>Obstacle Observed</openeddiagram> <openeddiagram>CreatePilotMind</openeddiagram> <openeddiagram>CreatePilotMingCode</openeddiagram> <openeddiagram>Pilot Goal</openeddiagram> <openeddiagram>Create Decisions Code</openeddiagram> <openeddiagram>Main Program Activity</openeddiagram> <openeddiagram>Orders to Pilot</openeddiagram> <openeddiagram>Avoid Obstacle</openeddiagram> <openeddiagram>Position Sensors</openeddiagram> <openeddiagram>Plane Position</openeddiagram> <openeddiagram>Plane Movement</openeddiagram> <openeddiagram>Plane Movement Code</openeddiagram> <openeddiagram>Create Initial Plan Tasks</openeddiagram> <openeddiagram>Comps Leg Checker</openeddiagram> <openeddiagram>App Leg Checker</openeddiagram> <openeddiagram>Leg Completed</openeddiagram> <openeddiagram>Pilot Plane Interaction Task</openeddiagram> <openeddiagram>Decisions Code</openeddiagram> <openeddiagram>Pilot Plane Interaction Model</openeddiagram> <openeddiagram>Pilot Plane InteractionUnit</openeddiagram> <openeddiagram>Pilot Plane Interaction Roles</openeddiagram> <openeddiagram>Create Initial Plan Agents</openeddiagram></projectproperties>
+ <openeddiagram>Obstacle Observed</openeddiagram> <openeddiagram>CreatePilotMind</openeddiagram> <openeddiagram>CreatePilotMingCode</openeddiagram> <openeddiagram>Pilot Goal</openeddiagram> <openeddiagram>Create Decisions Code</openeddiagram> <openeddiagram>Main Program Activity</openeddiagram> <openeddiagram>Orders to Pilot</openeddiagram> <openeddiagram>Avoid Obstacle</openeddiagram> <openeddiagram>Position Sensors</openeddiagram> <openeddiagram>Plane Position</openeddiagram> <openeddiagram>Plane Movement</openeddiagram> <openeddiagram>Plane Movement Code</openeddiagram> <openeddiagram>Create Initial Plan Tasks</openeddiagram> <openeddiagram>Comps Leg Checker</openeddiagram> <openeddiagram>App Leg Checker</openeddiagram> <openeddiagram>Leg Completed</openeddiagram> <openeddiagram>Pilot Plane Interaction Task</openeddiagram> <openeddiagram>Decisions Code</openeddiagram> <openeddiagram>Pilot Plane Interaction Model</openeddiagram> <openeddiagram>Pilot Plane InteractionUnit</openeddiagram> <openeddiagram>Pilot Plane Interaction Roles</openeddiagram> <openeddiagram>Create Initial Plan Agents</openeddiagram> <openeddiagram>Create Decisions For Leg</openeddiagram> <openeddiagram>Update Position</openeddiagram> <openeddiagram>Environment Component</openeddiagram></projectproperties>
 <leafpackages>
    <path>
     <package id="Project"/>
@@ -346,7 +346,17 @@
 <key id="Name">getCurrentPosition</key>
 <key id="Description"></key>
 <key id="_view_type">UML</key>
-<key id="Result">Position</key>
+<key id="Result">gov.nasa.worldwind.geom.Position</key>
+</mapproperties>
+</object>
+<object id="404" type="ingenias.editor.entities.Method">
+<objectproperty id="Parameter" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="Name">getCurrentHead</key>
+<key id="Description"></key>
+<key id="_view_type">INGENIAS</key>
+<key id="Result">gov.nasa.worldwind.geom.Angle</key>
 </mapproperties>
 </object>
 </objectproperty>
@@ -372,7 +382,7 @@
 <key id="Name">getCloseObjects</key>
 <key id="Description"></key>
 <key id="_view_type">UML</key>
-<key id="Result">ArrayList&lt;ObjectDetected&gt;</key>
+<key id="Result">ArrayList&lt;ingenias.jade.mental.ObjectDetected&gt;</key>
 </mapproperties>
 </object>
 </objectproperty>
@@ -906,7 +916,7 @@
 <object id="INGENIASCodeComponent6" type="ingenias.editor.entities.INGENIASCodeComponent">
 <mapproperties>
 <key id="Language">Java</key>
-<key id="Code">        if(eaLeg_Checker.isLegCompleted(eiFlight_Leg)){
+<key id="Code">        if(((Leg_CheckerAppImp)eaLeg_Checker).isLegCompleted(eiFlight_Leg)){
 
         }
         else{
@@ -935,8 +945,11 @@
             if(oAngle.degrees &lt; 0){
             	oAngle = oAngle.addDegrees(360);
             }
-        	outputsdefaultThrow_Change.setHeadChange(oAngle);
-        	outputsdefaultThrow_Change.setPriority(0);
+            
+            if(eaPlane_Position_ServiceAppImp.getCurrentHead().degrees != oAngle.degrees){
+            	outputsdefaultThrow_Change.setHeadChange(oAngle);
+            	outputsdefaultThrow_Change.setPriority(0);
+            }
 
         }</key>
 <key id="_view_type">UML</key>
@@ -994,6 +1007,14 @@
 		
 	</key>
 <key id="_view_type">UML</key>
+</mapproperties>
+</object>
+<object id="INGENIASCodeComponent12" type="ingenias.editor.entities.INGENIASCodeComponent">
+<mapproperties>
+<key id="Code">        eiPlane_Mind.setLastUpdatePosition(new Date());
+        eiPlane_Mind.setLatitude(eiChange_Plane_Position.getNewPosition().getLatitude());
+        eiPlane_Mind.setLongitude(eiChange_Plane_Position.getNewPosition().getLongitude());</key>
+<key id="_view_type">INGENIAS</key>
 </mapproperties>
 </object>
 <object id="ControllerPilotInteracion" type="ingenias.editor.entities.Interaction">
@@ -2256,6 +2277,14 @@ El estress sera un valor de 1 a 0 y puede suponer la fijacion de unpiloto de rea
 </object>
 <object id="Change Plane Position" type="ingenias.editor.entities.ApplicationEventSlots">
 <objectproperty id="Slots" collection="true">
+<object id="406" type="ingenias.editor.entities.ObjectSlot">
+<mapproperties>
+<key id="Name">NewPosition</key>
+<key id="Type">gov.nasa.worldwind.geom.Position </key>
+<key id="Description"></key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
 </objectproperty>
 <objectproperty id="Source">
 </objectproperty>
@@ -2315,7 +2344,7 @@ El estress sera un valor de 1 a 0 y puede suponer la fijacion de unpiloto de rea
 <key id="Name">getCurrentPosition</key>
 <key id="Description"></key>
 <key id="_view_type">UML</key>
-<key id="Result">Position</key>
+<key id="Result">gov.nasa.worldwind.geom.Position</key>
 </mapproperties>
 </object>
 <object id="302" type="ingenias.editor.entities.Method">
@@ -2333,7 +2362,7 @@ El estress sera un valor de 1 a 0 y puede suponer la fijacion de unpiloto de rea
 <key id="Name">getCloseObjects</key>
 <key id="Description"></key>
 <key id="_view_type">UML</key>
-<key id="Result">ArrayList&lt;ObjectDetected&gt;</key>
+<key id="Result">ArrayList&lt;ingenias.jade.mental.ObjectDetected&gt;</key>
 </mapproperties>
 </object>
 <object id="154" type="ingenias.editor.entities.Method">
@@ -2438,6 +2467,16 @@ El estress sera un valor de 1 a 0 y puede suponer la fijacion de unpiloto de rea
 <key id="Description"></key>
 <key id="_view_type">UML</key>
 <key id="Result">void</key>
+</mapproperties>
+</object>
+<object id="404" type="ingenias.editor.entities.Method">
+<objectproperty id="Parameter" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="Name">getCurrentHead</key>
+<key id="Description"></key>
+<key id="_view_type">INGENIAS</key>
+<key id="Result">gov.nasa.worldwind.geom.Angle</key>
 </mapproperties>
 </object>
 <object id="303" type="ingenias.editor.entities.MethodParameter">
@@ -3205,6 +3244,14 @@ El estress sera un valor de 1 a 0 y puede suponer la fijacion de unpiloto de rea
 <key id="_view_type">INGENIAS</key>
 </mapproperties>
 </object>
+<object id="406" type="ingenias.editor.entities.ObjectSlot">
+<mapproperties>
+<key id="Name">NewPosition</key>
+<key id="Type">gov.nasa.worldwind.geom.Position </key>
+<key id="Description"></key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
 <object id="235" type="ingenias.editor.entities.Slot">
 <mapproperties>
 <key id="_view_type">UML</key>
@@ -3577,7 +3624,17 @@ La lista de puntos (waypoints) por los que tiene que pasar el avion durante el v
 <key id="Name">getCurrentPosition</key>
 <key id="Description"></key>
 <key id="_view_type">UML</key>
-<key id="Result">Position</key>
+<key id="Result">gov.nasa.worldwind.geom.Position</key>
+</mapproperties>
+</object>
+<object id="404" type="ingenias.editor.entities.Method">
+<objectproperty id="Parameter" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="Name">getCurrentHead</key>
+<key id="Description"></key>
+<key id="_view_type">INGENIAS</key>
+<key id="Result">gov.nasa.worldwind.geom.Angle</key>
 </mapproperties>
 </object>
 </objectproperty>
@@ -3658,7 +3715,7 @@ La lista de puntos (waypoints) por los que tiene que pasar el avion durante el v
 <key id="Name">getCloseObjects</key>
 <key id="Description"></key>
 <key id="_view_type">UML</key>
-<key id="Result">ArrayList&lt;ObjectDetected&gt;</key>
+<key id="Result">ArrayList&lt;ingenias.jade.mental.ObjectDetected&gt;</key>
 </mapproperties>
 </object>
 </objectproperty>
@@ -3836,7 +3893,17 @@ La lista de puntos (waypoints) por los que tiene que pasar el avion durante el v
 <key id="Name">getCurrentPosition</key>
 <key id="Description"></key>
 <key id="_view_type">UML</key>
-<key id="Result">Position</key>
+<key id="Result">gov.nasa.worldwind.geom.Position</key>
+</mapproperties>
+</object>
+<object id="404" type="ingenias.editor.entities.Method">
+<objectproperty id="Parameter" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="Name">getCurrentHead</key>
+<key id="Description"></key>
+<key id="_view_type">INGENIAS</key>
+<key id="Result">gov.nasa.worldwind.geom.Angle</key>
 </mapproperties>
 </object>
 </objectproperty>
@@ -3941,7 +4008,7 @@ La lista de puntos (waypoints) por los que tiene que pasar el avion durante el v
 <key id="Name">getCloseObjects</key>
 <key id="Description"></key>
 <key id="_view_type">UML</key>
-<key id="Result">ArrayList&lt;ObjectDetected&gt;</key>
+<key id="Result">ArrayList&lt;ingenias.jade.mental.ObjectDetected&gt;</key>
 </mapproperties>
 </object>
 </objectproperty>
@@ -4151,7 +4218,7 @@ La lista de puntos (waypoints) por los que tiene que pasar el avion durante el v
 <key id="Name">getCloseObjects</key>
 <key id="Description"></key>
 <key id="_view_type">UML</key>
-<key id="Result">ArrayList&lt;ObjectDetected&gt;</key>
+<key id="Result">ArrayList&lt;ingenias.jade.mental.ObjectDetected&gt;</key>
 </mapproperties>
 </object>
 </objectproperty>
@@ -4682,6 +4749,14 @@ La lista de puntos (waypoints) por los que tiene que pasar el avion durante el v
 <objectproperty id="Event">
 <object id="Change Plane Position" type="ingenias.editor.entities.ApplicationEventSlots">
 <objectproperty id="Slots" collection="true">
+<object id="406" type="ingenias.editor.entities.ObjectSlot">
+<mapproperties>
+<key id="Name">NewPosition</key>
+<key id="Type">gov.nasa.worldwind.geom.Position </key>
+<key id="Description"></key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
 </objectproperty>
 <objectproperty id="Source">
 </objectproperty>
@@ -4911,6 +4986,23 @@ La lista de puntos (waypoints) por los que tiene que pasar el avion durante el v
 <key id="_view_type">INGENIAS</key>
 </mapproperties>
 </role><role idEntity="INGENIASCodeComponent8" class="ingenias.editor.entities.INGENIASCodeComponent" roleName="CDUsesCodetarget" type="ingenias.editor.entities.CDUsesCodetargetRole" dgcid="1978732023">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="405" type="ingenias.editor.entities.CDUsesCode">
+<object id="405" type="ingenias.editor.entities.CDUsesCode">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="INGENIASCodeComponent12" class="ingenias.editor.entities.INGENIASCodeComponent" roleName="CDUsesCodetarget" type="ingenias.editor.entities.CDUsesCodetargetRole" dgcid="152699305">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="Update Plane Position" class="ingenias.editor.entities.Task" roleName="CDUsesCodesource" type="ingenias.editor.entities.CDUsesCodesourceRole" dgcid="1284931618">
 <mapproperties>
 <key id="attributeToShow">0</key>
 <key id="_view_type">INGENIAS</key>
@@ -10615,7 +10707,7 @@ La lista de puntos (waypoints) por los que tiene que pasar el avion durante el v
 			
 	<node id="node0">
 		<attr name="bounds">
-			<rectangle x="453" y="68" width="100" height="83"></rectangle>		</attr>
+			<rectangle x="453" y="68" width="129" height="83"></rectangle>		</attr>
 
 	</node>
 			
@@ -10819,11 +10911,37 @@ La lista de puntos (waypoints) por los que tiene que pasar el avion durante el v
 	</connected>
 	</node>
 			
+	<node id="405" nid="733995257" type="CDUsesCode">
+
+	<connected id="1284931618"><attr name="extraLabels">
+			<array>
+
+</array>
+</attr>
+
+
+
+	</connected>
+	<connected id="152699305">
+
+
+
+	</connected>
+	</node>
+			
 	<node id="INGENIASCodeComponent8" nid="1978732023" type="INGENIASCodeComponent">
 
 	</node>
 			
+	<node id="Update Plane Position" nid="1284931618" type="Task">
+
+	</node>
+			
 	<node id="Move Plane" nid="630607848" type="Task">
+
+	</node>
+			
+	<node id="INGENIASCodeComponent12" nid="152699305" type="INGENIASCodeComponent">
 
 	</node>
 	</graph>
@@ -10837,15 +10955,33 @@ La lista de puntos (waypoints) por los que tiene que pasar el avion durante el v
 
 	</node>
 			
+	<node id="node5">
+		<attr name="bounds">
+			<rectangle x="349" y="140" width="76" height="15"></rectangle>		</attr>
+
+	</node>
+			
 	<node id="node0">
 		<attr name="bounds">
 			<rectangle x="462" y="59" width="167" height="57"></rectangle>		</attr>
 
 	</node>
 			
+	<node id="node3">
+		<attr name="bounds">
+			<rectangle x="202" y="130" width="116" height="43"></rectangle>		</attr>
+
+	</node>
+			
 	<node id="node1">
 		<attr name="bounds">
 			<rectangle x="214" y="75" width="71" height="43"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node4">
+		<attr name="bounds">
+			<rectangle x="456" y="115" width="173" height="57"></rectangle>		</attr>
 
 	</node>
 	</layout>
@@ -13924,7 +14060,7 @@ Este diagrama se mete dentro de la carpeta init para que cuando la aplicacion ll
 			
 	<node id="node9">
 		<attr name="bounds">
-			<rectangle x="266" y="98" width="88" height="15"></rectangle>		</attr>
+			<rectangle x="267" y="97" width="88" height="15"></rectangle>		</attr>
 
 	</node>
 			
@@ -13936,7 +14072,7 @@ Este diagrama se mete dentro de la carpeta init para que cuando la aplicacion ll
 			
 	<node id="node0">
 		<attr name="bounds">
-			<rectangle x="370" y="2" width="174" height="76"></rectangle>		</attr>
+			<rectangle x="370" y="2" width="174" height="75"></rectangle>		</attr>
 
 	</node>
 			

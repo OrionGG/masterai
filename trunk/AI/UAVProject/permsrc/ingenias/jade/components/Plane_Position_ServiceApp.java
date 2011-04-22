@@ -27,8 +27,6 @@
 package ingenias.jade.components;
 
 import java.util.*;
-
-import gov.nasa.worldwind.geom.Position;
 import ingenias.jade.exception.*;
 
 
@@ -44,7 +42,9 @@ public abstract class Plane_Position_ServiceApp extends Application{
  }
 
 
- public abstract Position getCurrentPosition();
+ public abstract gov.nasa.worldwind.geom.Position getCurrentPosition();
+
+ public abstract gov.nasa.worldwind.geom.Angle getCurrentHead();
 
  
 }
