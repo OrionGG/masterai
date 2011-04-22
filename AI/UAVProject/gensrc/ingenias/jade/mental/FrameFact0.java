@@ -31,22 +31,19 @@ import ingenias.jade.components.*;
 import ingenias.editor.entities.*;
 import ingenias.editor.entities.ViewPreferences.ViewType;
 
-public class Change_Plane_Position extends ingenias.editor.entities.RuntimeEvent{
-   
-    gov.nasa.worldwind.geom.Position  NewPosition;   
+public class FrameFact0 extends ingenias.editor.entities.RuntimeFact{
     
    
-   public Change_Plane_Position (String id){
+  public FrameFact0 (String id){
    super(id);
    this.getPrefs().setView(ViewType.UML);
-   this.type="Change_Plane_Position";
+   this.type="FrameFact0";
   }
   
 
-  public Change_Plane_Position (){
+  public FrameFact0 (){
    super(ingenias.jade.MentalStateManager.generateMentalEntityID());
    this.getPrefs().setView(ViewType.UML);
-   this.type="Change_Plane_Position";
   }
   
   public String toString(){
@@ -54,25 +51,15 @@ public class Change_Plane_Position extends ingenias.editor.entities.RuntimeEvent
   }
   
   public String getType(){
-   return "Change_Plane_Position";
+   return "FrameFact0";
   }
   
-   public String getParentType(){
-   return "RuntimeEvent";
+  public String getParentType(){
+   return "RuntimeFact";
   }
   
-   
-
-   public void setNewPosition(gov.nasa.worldwind.geom.Position  value){
-     NewPosition=value;   
-   };
-   
-   public gov.nasa.worldwind.geom.Position  getNewPosition(){
-     return NewPosition;      
-   }
+     
     
-  
-  
 }
 
  

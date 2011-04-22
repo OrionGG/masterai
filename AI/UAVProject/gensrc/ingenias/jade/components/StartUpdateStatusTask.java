@@ -34,10 +34,10 @@ import ingenias.editor.entities.*;
 
 
 
-public class Update_Plane_PositionTask extends Task{
+public class StartUpdateStatusTask extends Task{
 
- public Update_Plane_PositionTask(String id){
-  super(id,"Update_Plane_Position");
+ public StartUpdateStatusTask(String id){
+  super(id,"StartUpdateStatus");
  }
 
 
@@ -45,7 +45,7 @@ public class Update_Plane_PositionTask extends Task{
  public void execute() throws TaskException{
 
 
-        Change_Plane_Position  eiChange_Plane_Position=(Change_Plane_Position)this.getFirstInputOfType("Change_Plane_Position");             
+        IniciateUpdateStatus  eiIniciateUpdateStatus=(IniciateUpdateStatus)this.getFirstInputOfType("IniciateUpdateStatus");             
 
         Plane_Mind  eiPlane_Mind=(Plane_Mind)this.getFirstInputOfType("Plane_Mind");             
 
@@ -54,7 +54,7 @@ public class Update_Plane_PositionTask extends Task{
 
 
 			
-        Plane_Position_ServiceApp eaPlane_Position_Service=(Plane_Position_ServiceApp)this.getApplication("Plane_Position_Service");
+        UpdatePlaneStatusApp eaUpdatePlaneStatus=(UpdatePlaneStatusApp)this.getApplication("UpdatePlaneStatus");
 
 
 
@@ -73,11 +73,9 @@ public class Update_Plane_PositionTask extends Task{
         YellowPages yp=null; // only available for initiators of interactions
 
 
-//#start_node:INGENIASCodeComponent12 <--- DO NOT REMOVE THIS
-        eiPlane_Mind.setLastUpdatePosition(new Date());
-        eiPlane_Mind.setLatitude(eiChange_Plane_Position.getNewPosition().getLatitude());
-        eiPlane_Mind.setLongitude(eiChange_Plane_Position.getNewPosition().getLongitude());
-//#end_node:INGENIASCodeComponent12 <--- DO NOT REMOVE THIS
+//#start_node:INGENIASCodeComponent13 <--- DO NOT REMOVE THIS	
+        eaUpdatePlaneStatus.start(eiPlane_Mind);
+//#end_node:INGENIASCodeComponent13 <--- DO NOT REMOVE THIS
 
  }
  

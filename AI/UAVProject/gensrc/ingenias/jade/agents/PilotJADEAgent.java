@@ -386,6 +386,17 @@ public class PilotJADEAgent
 	      
 		
 		
+             expectedInput=this.getMSM().getMentalEntityByType("Flight_Leg");
+             if (expectedInput.size()==0 && !("1".equals("0..n"))){
+				nonExistingInputs.add("Flight_Leg");
+			 } else {
+			    addExpectedInputs(tobject, "Flight_Leg","1",expectedInput);
+             	addConsumedInput(to,"1",expectedInput);
+			 }
+             allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;
+
+	      
+		
              expectedInput=this.getMSM().getMentalEntityByType("LegCompleted");
              if (expectedInput.size()==0 && !("1".equals("0..n"))){
 				nonExistingInputs.add("LegCompleted");
@@ -402,17 +413,6 @@ public class PilotJADEAgent
 				nonExistingInputs.add("Pilot_Mind_Changing");
 			 } else {
 			    addExpectedInputs(tobject, "Pilot_Mind_Changing","1",expectedInput);
-             	addConsumedInput(to,"1",expectedInput);
-			 }
-             allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;
-
-	      
-		
-             expectedInput=this.getMSM().getMentalEntityByType("Flight_Leg");
-             if (expectedInput.size()==0 && !("1".equals("0..n"))){
-				nonExistingInputs.add("Flight_Leg");
-			 } else {
-			    addExpectedInputs(tobject, "Flight_Leg","1",expectedInput);
              	addConsumedInput(to,"1",expectedInput);
 			 }
              allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;
@@ -1352,7 +1352,7 @@ public class PilotJADEAgent
 	   e1.printStackTrace();
    }
    
-   sg= new ingenias.editor.entities.StateGoal("Collision_Avoided");
+   sg= new ingenias.editor.entities.StateGoal("Flight_Plan_Taken");
    sg.setState("pending");
       try {
 	   this.getMSM().addMentalEntity(sg);
@@ -1361,7 +1361,7 @@ public class PilotJADEAgent
 	   e1.printStackTrace();
    }
    
-   sg= new ingenias.editor.entities.StateGoal("Flight_Plan_Taken");
+   sg= new ingenias.editor.entities.StateGoal("Collision_Avoided");
    sg.setState("pending");
       try {
 	   this.getMSM().addMentalEntity(sg);

@@ -53,6 +53,8 @@ public class Change_in_PlaneTask extends Task{
 
 
 
+			
+        UpdatePlaneStatusApp eaUpdatePlaneStatus=(UpdatePlaneStatusApp)this.getApplication("UpdatePlaneStatus");
 
 
 
@@ -76,8 +78,9 @@ public class Change_in_PlaneTask extends Task{
 
 
 //#start_node:INGENIASCodeComponent11 <--- DO NOT REMOVE THIS	
-
-        thread.RunManoeuvreTurnHead.runManoeuvreTurnHead(eiManoeuvre, eiPlane_Mind);
+        if(eiManoeuvre.getHeadChange()!= null){
+        	thread.RunManoeuvreTurnHead.runManoeuvreTurnHead(eiManoeuvre, eiPlane_Mind,eaUpdatePlaneStatus);
+        }
 		
 	
 //#end_node:INGENIASCodeComponent11 <--- DO NOT REMOVE THIS
