@@ -73,9 +73,11 @@ public class Update_Plane_PositionTask extends Task{
         YellowPages yp=null; // only available for initiators of interactions
 
 
-//#start_node: <--- DO NOT REMOVE THIS	
-
-//#end_node: <--- DO NOT REMOVE THIS
+//#start_node:INGENIASCodeComponent12 <--- DO NOT REMOVE THIS
+        eiPlane_Mind.setLastUpdatePosition(new Date());
+        eiPlane_Mind.setLatitude(eiChange_Plane_Position.getNewPosition().getLatitude());
+        eiPlane_Mind.setLongitude(eiChange_Plane_Position.getNewPosition().getLongitude());
+//#end_node:INGENIASCodeComponent12 <--- DO NOT REMOVE THIS
 
  }
  

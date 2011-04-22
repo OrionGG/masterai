@@ -76,7 +76,7 @@ public class Check_Leg_CompletedTask extends Task{
 
 
 //#start_node:INGENIASCodeComponent6 <--- DO NOT REMOVE THIS	
-        if(eaLeg_Checker.isLegCompleted(eiFlight_Leg)){
+        if(((Leg_CheckerAppImp)eaLeg_Checker).isLegCompleted(eiFlight_Leg)){
 
         }
         else{

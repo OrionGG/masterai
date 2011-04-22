@@ -629,7 +629,13 @@ public class PlaneJADEAgent
 	 actions=new Vector();
 		
 	 event= new Change_Plane_Position();
-	 /* 
+	 /*
+	 slot=new Slot("406");
+	 slot.setName("NewPosition");
+	 slot.setType("gov.nasa.worldwind.geom.Position ");
+	 slot.setValue("");
+	 event.addSlots(slot);
+	  
 	 */ 
 	 events.add(event);
 	 actions.add(generateActionListener(Change_Plane_Position.class));		

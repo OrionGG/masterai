@@ -13,8 +13,6 @@
 package ingenias.jade.components;
 
 import java.util.*;
-
-import gov.nasa.worldwind.geom.Position;
 import ingenias.jade.exception.*;
 import ingenias.jade.mental.Plane_Mind;
 
@@ -27,14 +25,26 @@ public  class Plane_Position_ServiceAppImp extends Plane_Position_ServiceApp{
  }
 
 
- public Position getCurrentPosition(){
+ public gov.nasa.worldwind.geom.Position getCurrentPosition(){
 //TODO: INSERT HERE YOUR CODE
 	 Vector<ingenias.editor.entities.MentalEntity> oVector =  
 		 this.getOwner().getMSM().getMentalEntityByType("Plane_Mind");
 	 
 	 Plane_Mind oPlane_Mind = (Plane_Mind) oVector.get(0);
 	 
-	 return new Position(oPlane_Mind.getLatitude(),oPlane_Mind.getLongitude(), oPlane_Mind.getAltitudeKM());
+	 return new gov.nasa.worldwind.geom.Position(
+			 oPlane_Mind.getLatitude(),oPlane_Mind.getLongitude(), oPlane_Mind.getAltitudeKM());
+
+
+} 
+ 
+ public gov.nasa.worldwind.geom.Angle getCurrentHead(){
+	 Vector<ingenias.editor.entities.MentalEntity> oVector =  
+		 this.getOwner().getMSM().getMentalEntityByType("Plane_Mind");
+	 
+	 Plane_Mind oPlane_Mind = (Plane_Mind) oVector.get(0);
+	 
+	 return oPlane_Mind.getHead();
 
 
 } 

@@ -386,22 +386,22 @@ public class PilotJADEAgent
 	      
 		
 		
-             expectedInput=this.getMSM().getMentalEntityByType("Pilot_Mind_Changing");
+             expectedInput=this.getMSM().getMentalEntityByType("LegCompleted");
              if (expectedInput.size()==0 && !("1".equals("0..n"))){
-				nonExistingInputs.add("Pilot_Mind_Changing");
+				nonExistingInputs.add("LegCompleted");
 			 } else {
-			    addExpectedInputs(tobject, "Pilot_Mind_Changing","1",expectedInput);
+			    addExpectedInputs(tobject, "LegCompleted","1",expectedInput);
              	addConsumedInput(to,"1",expectedInput);
 			 }
              allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;
 
 	      
 		
-             expectedInput=this.getMSM().getMentalEntityByType("LegCompleted");
+             expectedInput=this.getMSM().getMentalEntityByType("Pilot_Mind_Changing");
              if (expectedInput.size()==0 && !("1".equals("0..n"))){
-				nonExistingInputs.add("LegCompleted");
+				nonExistingInputs.add("Pilot_Mind_Changing");
 			 } else {
-			    addExpectedInputs(tobject, "LegCompleted","1",expectedInput);
+			    addExpectedInputs(tobject, "Pilot_Mind_Changing","1",expectedInput);
              	addConsumedInput(to,"1",expectedInput);
 			 }
              allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;

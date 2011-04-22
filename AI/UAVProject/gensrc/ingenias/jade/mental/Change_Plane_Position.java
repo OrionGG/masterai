@@ -32,6 +32,8 @@ import ingenias.editor.entities.*;
 import ingenias.editor.entities.ViewPreferences.ViewType;
 
 public class Change_Plane_Position extends ingenias.editor.entities.RuntimeEvent{
+   
+    gov.nasa.worldwind.geom.Position  NewPosition;   
     
    
    public Change_Plane_Position (String id){
@@ -59,6 +61,15 @@ public class Change_Plane_Position extends ingenias.editor.entities.RuntimeEvent
    return "RuntimeEvent";
   }
   
+   
+
+   public void setNewPosition(gov.nasa.worldwind.geom.Position  value){
+     NewPosition=value;   
+   };
+   
+   public gov.nasa.worldwind.geom.Position  getNewPosition(){
+     return NewPosition;      
+   }
     
   
   

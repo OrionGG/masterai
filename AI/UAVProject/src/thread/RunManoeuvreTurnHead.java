@@ -20,7 +20,7 @@ public class RunManoeuvreTurnHead  implements Runnable{
 
 
 	public void run() {
-		eiPlane_Mind.getRunningManoeuvres().add(eiManoeuvre);
+
 		Date oLastUpdateHead =new Date();
 
 		sleep(1000);
@@ -66,6 +66,8 @@ public class RunManoeuvreTurnHead  implements Runnable{
 			eiPlane_Mind.getRunningManoeuvres().add(eiManoeuvre);
 		}
 
+		
+
 		if(eiPlane_Mind.getRunningManoeuvres().contains(eiManoeuvre)){
 			RunManoeuvreTurnHead oRunManoeuvreTurnHead = new RunManoeuvreTurnHead(eiManoeuvre, eiPlane_Mind);
 			Thread thread = new Thread(oRunManoeuvreTurnHead);
@@ -104,7 +106,7 @@ public class RunManoeuvreTurnHead  implements Runnable{
 
 			Angle oHeadChangeRunning = oRunningManoeuvre.getHeadChange();
 			Angle oHeadChange = eiManoeuvre.getHeadChange();
-			if((oHeadChangeRunning!=null)&& (oHeadChange!=null)){
+			if((oHeadChangeRunning!=null) && (oHeadChange!=null)){
 				bResult = true;
 				break;
 			}
