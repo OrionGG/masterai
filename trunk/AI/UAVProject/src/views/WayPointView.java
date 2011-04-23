@@ -1,6 +1,7 @@
 package views;
 
 import entities.WayPointEntity;
+import enums.Waypoint;
 import gov.nasa.worldwind.WorldWind;
 import gov.nasa.worldwind.avlist.AVKey;
 import gov.nasa.worldwind.geom.Position;
@@ -10,14 +11,14 @@ import gov.nasa.worldwind.render.PointPlacemark;
 import gov.nasa.worldwind.render.PointPlacemarkAttributes;
 
 public class WayPointView extends PointPlacemark {
-	private WayPointEntity oWayPointEntity;
+	private Waypoint oWayPointEntity;
 
-	public WayPointView(WayPointEntity oWayPointEntityParam) {
+	public WayPointView(Waypoint oWayPointEntityParam) {
 		super(oWayPointEntityParam.getoPosition());
 
 		oWayPointEntity = oWayPointEntityParam;
 		
-		this.setValue(AVKey.DISPLAY_NAME, oWayPointEntity.getsName());
+		this.setValue(AVKey.DISPLAY_NAME, oWayPointEntity.toString());
 		
 		// Create a placemark off the surface and with a line.
 		this.setAltitudeMode(WorldWind.RELATIVE_TO_GROUND);

@@ -1,4 +1,6 @@
 package views;
+import ingenias.jade.agents.PlaneJADEAgent;
+
 import java.awt.Color;
 
 import entities.PlaneEntity;
@@ -11,10 +13,10 @@ import gov.nasa.worldwind.render.PointPlacemarkAttributes;
 
 
 public class PlaneView extends PointPlacemark {
-	private PlaneEntity oPlaneEntity;
+	private PlaneJADEAgent oPlaneEntity;
 	
-	public PlaneView(PlaneEntity oPlaneEntityParam, String sPlaneName) {
-		super(oPlaneEntityParam.getoPosition());
+	public PlaneView(PlaneJADEAgent oPlaneEntityParam, String sPlaneName, Position oPosition) {
+		super(oPosition);
 		oPlaneEntity = oPlaneEntityParam;
 		
 		PointPlacemarkAttributes attrs2 = new PointPlacemarkAttributes();
@@ -34,17 +36,16 @@ public class PlaneView extends PointPlacemark {
         this.setLineEnabled(false);
 	}
 
-	public PlaneEntity getoPlaneEntity() {
+	public PlaneJADEAgent getoPlaneEntity() {
 		return oPlaneEntity;
 	}
 
-	public void setoPlaneEntity(PlaneEntity oPlaneEntity) {
+	public void setoPlaneEntity(PlaneJADEAgent oPlaneEntity) {
 		this.oPlaneEntity = oPlaneEntity;
 	}
 
 	public void setNewPosition(Position oNewPos) {
 		super.setPosition(oNewPos);
-		this.oPlaneEntity.setoPosition(oNewPos);
 	}
 	
 	public void render(RenderableLayer layer){
