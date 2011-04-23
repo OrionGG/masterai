@@ -5,5 +5,12 @@ public enum WaypointControl {
 	LECM,
 	LEGT,
 	LECB,
-	LEMG;
+	LEMG,
+	LEAL,
+	GCCC,
+	LECV,
+	LEBC,
+	LECS,
+	LELE,
+	LEAM;
 }
