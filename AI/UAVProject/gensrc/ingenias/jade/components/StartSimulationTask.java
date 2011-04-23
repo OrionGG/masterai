@@ -34,10 +34,10 @@ import ingenias.editor.entities.*;
 
 
 
-public class GoNextLegTask extends Task{
+public class StartSimulationTask extends Task{
 
- public GoNextLegTask(String id){
-  super(id,"GoNextLeg");
+ public StartSimulationTask(String id){
+  super(id,"StartSimulation");
  }
 
 
@@ -45,16 +45,14 @@ public class GoNextLegTask extends Task{
  public void execute() throws TaskException{
 
 
-        Pilot_Mind_Changing  eiPilot_Mind_Changing=(Pilot_Mind_Changing)this.getFirstInputOfType("Pilot_Mind_Changing");             
-
-        Flight_Leg  eiFlight_Leg=(Flight_Leg)this.getFirstInputOfType("Flight_Leg");             
-
-        LegCompleted  eiLegCompleted=(LegCompleted)this.getFirstInputOfType("LegCompleted");             
+        IniciateSimulation  eiIniciateSimulation=(IniciateSimulation)this.getFirstInputOfType("IniciateSimulation");             
 
 
 
 
 
+			
+        EnvironmentApp eaEnvironment=(EnvironmentApp)this.getApplication("Environment");
 
 
 
@@ -68,20 +66,14 @@ public class GoNextLegTask extends Task{
   																			outputs);
   		
 		
-		Pilot_Mind outputsdefaultPilot_Mind=
-			(Pilot_Mind)
-				outputsdefault.getEntityByType("Pilot_Mind");
-		
 		
 		
         YellowPages yp=null; // only available for initiators of interactions
 
 
-//#start_node:INGENIASCodeComponent4 <--- DO NOT REMOVE THIS	
-        int iLegsCompleted =eiPilot_Mind_Changing.getPilotMind().getLegsCompleted();
-        eiPilot_Mind_Changing.getPilotMind().setLegsCompleted(iLegsCompleted+1);
-     	outputsdefaultPilot_Mind = eiPilot_Mind_Changing.getPilotMind();
-//#end_node:INGENIASCodeComponent4 <--- DO NOT REMOVE THIS
+//#start_node:INGENIASCodeComponent8 <--- DO NOT REMOVE THIS	
+        eaEnvironment.start();
+//#end_node:INGENIASCodeComponent8 <--- DO NOT REMOVE THIS
 
  }
  

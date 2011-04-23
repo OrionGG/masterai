@@ -12,6 +12,7 @@ import java.util.Vector;
 
 import Simulation.SimulationVars;
 
+
 public class RunManoeuvreTurnHead  implements Runnable{
 	Manoeuvre eiManoeuvre;
 	Plane_Mind eiPlane_Mind;
@@ -28,7 +29,7 @@ public class RunManoeuvreTurnHead  implements Runnable{
 
 	public void run() {
 
-		long lMiliseconds = SimulationVars.iSleepTime * Simulation.SimulationVars.x;
+		long lMiliseconds = SimulationVars.iSleepTime * SimulationVars.x;
 		sleep(SimulationVars.iSleepTime);
 		while(eiPlane_Mind.getRunningManoeuvres().contains(eiManoeuvre)){
 			//while Manoeuvre to run is that we are running

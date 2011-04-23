@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project cid="421" version="1.2">
+<project cid="384" version="1.2">
 <projectproperties>
 <projectproperty id="extfolder" module="IDK"  name="Extension Module Folder" value="UAVProject\ext"  tooltip="Folder where the IDE will find its new modules" />
 <projectproperty id="jadeout" module="Ingenias Agent Framework generator"  name="JADE generated output folder" value="gensrc"  tooltip="The folder that will hold generated JADE agents" />
@@ -7,7 +7,7 @@
 <projectproperty id="jadeproject" module="Ingenias Agent Framework generator"  name="JADE main project folder" value="UAVProject"  tooltip="The folder that will contain the project for this development" />
 <projectproperty id="jadeperm" module="Ingenias Agent Framework generator"  name="JADE generate only once folder" value="permsrc"  tooltip="The folder that will hold generated elements that should not be regenerated" />
 <projectproperty id="htmldoc" module="HTML Document generator"  name="HTML document folder" value="UAVProject\html"  tooltip="The document folder that will contain HTML version of this specification" />
- <openeddiagram>Obstacle Observed</openeddiagram> <openeddiagram>CreatePilotMind</openeddiagram> <openeddiagram>CreatePilotMingCode</openeddiagram> <openeddiagram>Pilot Goal</openeddiagram> <openeddiagram>Create Decisions Code</openeddiagram> <openeddiagram>Main Program Activity</openeddiagram> <openeddiagram>Orders to Pilot</openeddiagram> <openeddiagram>Avoid Obstacle</openeddiagram> <openeddiagram>Position Sensors</openeddiagram> <openeddiagram>Plane Position</openeddiagram> <openeddiagram>Plane Movement Code</openeddiagram> <openeddiagram>Create Initial Plan Tasks</openeddiagram> <openeddiagram>Comps Leg Checker</openeddiagram> <openeddiagram>App Leg Checker</openeddiagram> <openeddiagram>Leg Completed</openeddiagram> <openeddiagram>Pilot Plane Interaction Task</openeddiagram> <openeddiagram>Decisions Code</openeddiagram> <openeddiagram>Pilot Plane Interaction Model</openeddiagram> <openeddiagram>Create Plane Initial Status</openeddiagram> <openeddiagram>Update Status</openeddiagram> <openeddiagram>Iniciate</openeddiagram> <openeddiagram>Update Status Code</openeddiagram> <openeddiagram>Update Position</openeddiagram> <openeddiagram>Plane Initial Status Code</openeddiagram> <openeddiagram>Plane Model</openeddiagram></projectproperties>
+ <openeddiagram>Obstacle Observed</openeddiagram> <openeddiagram>CreatePilotMind</openeddiagram> <openeddiagram>CreatePilotMingCode</openeddiagram> <openeddiagram>Pilot Goal</openeddiagram> <openeddiagram>Create Decisions Code</openeddiagram> <openeddiagram>Main Program Activity</openeddiagram> <openeddiagram>Orders to Pilot</openeddiagram> <openeddiagram>Avoid Obstacle</openeddiagram> <openeddiagram>Position Sensors</openeddiagram> <openeddiagram>Plane Position</openeddiagram> <openeddiagram>Plane Movement Code</openeddiagram> <openeddiagram>Create Initial Plan Tasks</openeddiagram> <openeddiagram>Comps Leg Checker</openeddiagram> <openeddiagram>App Leg Checker</openeddiagram> <openeddiagram>Leg Completed</openeddiagram> <openeddiagram>Pilot Plane Interaction Task</openeddiagram> <openeddiagram>Decisions Code</openeddiagram> <openeddiagram>Pilot Plane Interaction Model</openeddiagram> <openeddiagram>Create Plane Initial Status</openeddiagram> <openeddiagram>Update Status</openeddiagram> <openeddiagram>Iniciate</openeddiagram> <openeddiagram>Update Status Code</openeddiagram> <openeddiagram>Update Position</openeddiagram> <openeddiagram>Plane Initial Status Code</openeddiagram> <openeddiagram>Plane Model</openeddiagram> <openeddiagram>Environment To Plane</openeddiagram> <openeddiagram>Simulation Model</openeddiagram> <openeddiagram>Start Silulation</openeddiagram> <openeddiagram>Start Simulation Code</openeddiagram></projectproperties>
 <leafpackages>
    <path>
     <package id="Project"/>
@@ -312,6 +312,16 @@
    <path>
     <package id="Project"/>
     <package id="Simulation Environment"/>
+    <package id="Start Silulation"/>
+   </path>
+   <path>
+    <package id="Project"/>
+    <package id="Simulation Environment"/>
+    <package id="Simulation Model"/>
+   </path>
+   <path>
+    <package id="Project"/>
+    <package id="Simulation Environment"/>
     <package id="Environment To Plane"/>
    </path>
    <path>
@@ -319,6 +329,12 @@
     <package id="Simulation Environment"/>
     <package id="System init"/>
     <package id="Environment Component"/>
+   </path>
+   <path>
+    <package id="Project"/>
+    <package id="Simulation Environment"/>
+    <package id="Code"/>
+    <package id="Start Simulation Code"/>
    </path>
 </leafpackages>
 <objects>
@@ -396,6 +412,16 @@
 <key id="Description"></key>
 <key id="_view_type">UML</key>
 <key id="Result">ArrayList&lt;ingenias.jade.mental.ObjectDetected&gt;</key>
+</mapproperties>
+</object>
+<object id="384" type="ingenias.editor.entities.Method">
+<objectproperty id="Parameter" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="Name">start</key>
+<key id="Description"></key>
+<key id="_view_type">INGENIAS</key>
+<key id="Result">void</key>
 </mapproperties>
 </object>
 </objectproperty>
@@ -671,6 +697,12 @@
 </mapproperties>
 </object>
 <object id="StartUpdateStatus" type="ingenias.editor.entities.Task">
+<mapproperties>
+<key id="Description"></key>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+<object id="StartSimulation" type="ingenias.editor.entities.Task">
 <mapproperties>
 <key id="Description"></key>
 <key id="_view_type">UML</key>
@@ -1051,6 +1083,11 @@
 <key id="_view_type">UML</key>
 </mapproperties>
 </object>
+<object id="INGENIASCodeComponent8" type="ingenias.editor.entities.INGENIASCodeComponent">
+<mapproperties>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
 <object id="ControllerPilotInteracion" type="ingenias.editor.entities.Interaction">
 <objectproperty id="TransferredInfo" collection="true">
 </objectproperty>
@@ -1426,6 +1463,12 @@ El plan de vuelo esta compuesto por una serie de waypoints (puntos de paso), un 
 </mapproperties>
 </object>
 <object id="UpdateStatusStarted" type="ingenias.editor.entities.Goal">
+<mapproperties>
+<key id="Description"></key>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+<object id="SimulationStarted" type="ingenias.editor.entities.Goal">
 <mapproperties>
 <key id="Description"></key>
 <key id="_view_type">UML</key>
@@ -2320,6 +2363,14 @@ El estress sera un valor de 1 a 0 y puede suponer la fijacion de unpiloto de rea
 <key id="_view_type">INGENIAS</key>
 </mapproperties>
 </object>
+<object id="IniciateSimulation" type="ingenias.editor.entities.FrameFact">
+<objectproperty id="Slots" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="Description"></key>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
 <object id="Plane Too Close" type="ingenias.editor.entities.ApplicationEventSlots">
 <objectproperty id="Slots" collection="true">
 </objectproperty>
@@ -2377,6 +2428,11 @@ El estress sera un valor de 1 a 0 y puede suponer la fijacion de unpiloto de rea
 <mapproperties>
 <key id="Code"></key>
 <key id="Description"></key>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+<object id="MentalState0" type="ingenias.editor.entities.MentalState">
+<mapproperties>
 <key id="_view_type">UML</key>
 </mapproperties>
 </object>
@@ -2557,6 +2613,16 @@ El estress sera un valor de 1 a 0 y puede suponer la fijacion de unpiloto de rea
 <key id="Name">initialize</key>
 <key id="Description"></key>
 <key id="_view_type">UML</key>
+<key id="Result">void</key>
+</mapproperties>
+</object>
+<object id="384" type="ingenias.editor.entities.Method">
+<objectproperty id="Parameter" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="Name">start</key>
+<key id="Description"></key>
+<key id="_view_type">INGENIAS</key>
 <key id="Result">void</key>
 </mapproperties>
 </object>
@@ -3815,6 +3881,16 @@ La lista de puntos (waypoints) por los que tiene que pasar el avion durante el v
 <key id="Result">ArrayList&lt;ingenias.jade.mental.ObjectDetected&gt;</key>
 </mapproperties>
 </object>
+<object id="384" type="ingenias.editor.entities.Method">
+<objectproperty id="Parameter" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="Name">start</key>
+<key id="Description"></key>
+<key id="_view_type">INGENIAS</key>
+<key id="Result">void</key>
+</mapproperties>
+</object>
 </objectproperty>
 <mapproperties>
 <key id="Description">Entorno donde se mostrara toda la simulacion de la aplicacion.</key>
@@ -4182,6 +4258,16 @@ La lista de puntos (waypoints) por los que tiene que pasar el avion durante el v
 <key id="Description"></key>
 <key id="_view_type">UML</key>
 <key id="Result">ArrayList&lt;ingenias.jade.mental.ObjectDetected&gt;</key>
+</mapproperties>
+</object>
+<object id="384" type="ingenias.editor.entities.Method">
+<objectproperty id="Parameter" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="Name">start</key>
+<key id="Description"></key>
+<key id="_view_type">INGENIAS</key>
+<key id="Result">void</key>
 </mapproperties>
 </object>
 </objectproperty>
@@ -9734,6 +9820,129 @@ La lista de puntos (waypoints) por los que tiene que pasar el avion durante el v
 <key id="_view_type">INGENIAS</key>
 </mapproperties>
 </role></relationship>
+<relationship id="413" type="ingenias.editor.entities.GTPursues">
+<object id="413" type="ingenias.editor.entities.GTPursues">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="SimulationStarted" class="ingenias.editor.entities.Goal" roleName="GTPursuestarget" type="ingenias.editor.entities.GTPursuestargetRole" dgcid="371602130">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="Simulation Creator" class="ingenias.editor.entities.Agent" roleName="GTPursuessource" type="ingenias.editor.entities.GTPursuessourceRole" dgcid="2051275524">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="422" type="ingenias.editor.entities.GTSatisfies">
+<object id="422" type="ingenias.editor.entities.GTSatisfies">
+<objectproperty id="SatisfactionCondition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="SimulationStarted" class="ingenias.editor.entities.Goal" roleName="GTSatisfiestarget" type="ingenias.editor.entities.GTSatisfiestargetRole" dgcid="371602130">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="StartSimulation" class="ingenias.editor.entities.Task" roleName="GTSatisfiessource" type="ingenias.editor.entities.GTSatisfiessourceRole" dgcid="1270070200">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="425" type="ingenias.editor.entities.WFResponsable">
+<object id="425" type="ingenias.editor.entities.WFResponsable">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Simulation Creator" class="ingenias.editor.entities.Agent" roleName="WFResponsablesource" type="ingenias.editor.entities.WFResponsablesourceRole" dgcid="2051275524">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="StartSimulation" class="ingenias.editor.entities.Task" roleName="WFResponsabletarget" type="ingenias.editor.entities.WFResponsabletargetRole" dgcid="1270070200">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="426" type="ingenias.editor.entities.WFConsumes">
+<object id="426" type="ingenias.editor.entities.WFConsumes">
+<objectproperty id="Condition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="IniciateSimulation" class="ingenias.editor.entities.FrameFact" roleName="WFConsumestarget" type="ingenias.editor.entities.WFConsumestargetRole" dgcid="1150371999">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="StartSimulation" class="ingenias.editor.entities.Task" roleName="WFConsumessource" type="ingenias.editor.entities.WFConsumessourceRole" dgcid="1270070200">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="427" type="ingenias.editor.entities.WFUses">
+<object id="427" type="ingenias.editor.entities.WFUses">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Environment" class="ingenias.editor.entities.EnvironmentApplication" roleName="WFUsestarget" type="ingenias.editor.entities.WFUsestargetRole" dgcid="656300149">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="StartSimulation" class="ingenias.editor.entities.Task" roleName="WFUsessource" type="ingenias.editor.entities.WFUsessourceRole" dgcid="1270070200">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="385" type="ingenias.editor.entities.AHasMS">
+<object id="385" type="ingenias.editor.entities.AHasMS">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Simulation Creator" class="ingenias.editor.entities.Agent" roleName="AHasMSsource" type="ingenias.editor.entities.AHasMSsourceRole" dgcid="1190932095">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="MentalState0" class="ingenias.editor.entities.MentalState" roleName="AHasMStarget" type="ingenias.editor.entities.AHasMStargetRole" dgcid="494019176">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="387" type="ingenias.editor.entities.AContainsME">
+<object id="387" type="ingenias.editor.entities.AContainsME">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="MentalState0" class="ingenias.editor.entities.MentalState" roleName="AContainsMEsource" type="ingenias.editor.entities.AContainsMEsourceRole" dgcid="494019176">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="IniciateSimulation" class="ingenias.editor.entities.FrameFact" roleName="AContainsMEtarget" type="ingenias.editor.entities.AContainsMEtargetRole" dgcid="1987783067">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
 <relationship id="217" type="ingenias.editor.entities.EPerceives">
 <object id="217" type="ingenias.editor.entities.EPerceives">
 <objectproperty id="Event">
@@ -9799,6 +10008,23 @@ La lista de puntos (waypoints) por los que tiene que pasar el avion durante el v
 <key id="_view_type">INGENIAS</key>
 </mapproperties>
 </role><role idEntity="INGENIASComponent4" class="ingenias.editor.entities.INGENIASComponent" roleName="UMLRealizestarget" type="ingenias.editor.entities.UMLRealizestargetRole" dgcid="406624219">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="428" type="ingenias.editor.entities.CDUsesCode">
+<object id="428" type="ingenias.editor.entities.CDUsesCode">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="INGENIASCodeComponent8" class="ingenias.editor.entities.INGENIASCodeComponent" roleName="CDUsesCodetarget" type="ingenias.editor.entities.CDUsesCodetargetRole" dgcid="1522186088">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="StartSimulation" class="ingenias.editor.entities.Task" roleName="CDUsesCodesource" type="ingenias.editor.entities.CDUsesCodesourceRole" dgcid="919160259">
 <mapproperties>
 <key id="attributeToShow">0</key>
 <key id="_view_type">INGENIAS</key>
@@ -19872,6 +20098,292 @@ Este diagrama se mete dentro de la carpeta init para que cuando la aplicacion ll
 	</node>
 	</layout>
 </gxl> </model>
+ <model id="Start Silulation" type="ingenias.editor.models.TasksAndGoalsModelModelJGraph">
+<object id="Start Silulation" type="ingenias.editor.entities.TasksAndGoalsModelDataEntity">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+  <path>
+    <package id="Project"/>
+    <package id="Simulation Environment"/>
+   </path>
+<gxl>
+
+	<graph>
+			
+	<node id="IniciateSimulation" nid="1150371999" type="FrameFact">
+
+	</node>
+			
+	<node id="StartSimulation" nid="1270070200" type="Task">
+
+	</node>
+			
+	<node id="426" nid="675453038" type="WFConsumes">
+
+	<connected id="1270070200"><attr name="extraLabels">
+			<array>
+
+</array>
+</attr>
+
+
+
+	</connected>
+	<connected id="1150371999">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="Simulation Creator" nid="2051275524" type="Agent">
+
+	</node>
+			
+	<node id="SimulationStarted" nid="371602130" type="Goal">
+
+	</node>
+			
+	<node id="413" nid="134415158" type="GTPursues">
+
+	<connected id="2051275524"><attr name="extraLabels">
+			<array>
+
+</array>
+</attr>
+
+
+
+	</connected>
+	<connected id="371602130">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="422" nid="197362867" type="GTSatisfies">
+
+	<connected id="1270070200"><attr name="extraLabels">
+			<array>
+
+</array>
+</attr>
+
+
+
+	</connected>
+	<connected id="371602130">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="427" nid="2071514669" type="WFUses">
+
+	<connected id="1270070200"><attr name="extraLabels">
+			<array>
+
+</array>
+</attr>
+
+
+
+	</connected>
+	<connected id="656300149">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="425" nid="1519160860" type="WFResponsable">
+
+	<connected id="2051275524"><attr name="extraLabels">
+			<array>
+
+</array>
+</attr>
+
+
+
+	</connected>
+	<connected id="1270070200">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="Environment" nid="656300149" type="EnvironmentApplication">
+
+	</node>
+	</graph>
+
+
+	<layout>
+			
+	<node id="node6">
+		<attr name="bounds">
+			<rectangle x="560" y="41" width="90" height="46"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node1">
+		<attr name="bounds">
+			<rectangle x="349" y="100" width="94" height="43"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node7">
+		<attr name="bounds">
+			<rectangle x="462" y="85" width="79" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node0">
+		<attr name="bounds">
+			<rectangle x="79" y="95" width="143" height="57"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node2">
+		<attr name="bounds">
+			<rectangle x="327" y="9" width="114" height="50"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node3">
+		<attr name="bounds">
+			<rectangle x="241" y="68" width="66" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node4">
+		<attr name="bounds">
+			<rectangle x="356" y="72" width="69" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node9">
+		<attr name="bounds">
+			<rectangle x="468" y="124" width="53" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node5">
+		<attr name="bounds">
+			<rectangle x="240" y="114" width="91" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node8">
+		<attr name="bounds">
+			<rectangle x="545" y="110" width="139" height="72"></rectangle>		</attr>
+
+	</node>
+	</layout>
+</gxl> </model>
+ <model id="Simulation Model" type="ingenias.editor.models.AgentModelModelJGraph">
+<object id="Simulation Model" type="ingenias.editor.entities.AgentModelDataEntity">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+  <path>
+    <package id="Project"/>
+    <package id="Simulation Environment"/>
+   </path>
+<gxl>
+
+	<graph>
+			
+	<node id="385" nid="2423780" type="AHasMS">
+
+	<connected id="1190932095"><attr name="extraLabels">
+			<array>
+
+</array>
+</attr>
+
+
+
+	</connected>
+	<connected id="494019176">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="IniciateSimulation" nid="1987783067" type="FrameFact">
+
+	</node>
+			
+	<node id="387" nid="2120356010" type="AContainsME">
+
+	<connected id="494019176"><attr name="extraLabels">
+			<array>
+
+</array>
+</attr>
+
+
+
+	</connected>
+	<connected id="1987783067">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="MentalState0" nid="494019176" type="MentalState">
+
+	</node>
+			
+	<node id="Simulation Creator" nid="1190932095" type="Agent">
+
+	</node>
+	</graph>
+
+
+	<layout>
+			
+	<node id="node2">
+		<attr name="bounds">
+			<rectangle x="249" y="84" width="54" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node3">
+		<attr name="bounds">
+			<rectangle x="531" y="59" width="90" height="46"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node4">
+		<attr name="bounds">
+			<rectangle x="431" y="80" width="76" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node1">
+		<attr name="bounds">
+			<rectangle x="331" y="71" width="77" height="42"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node0">
+		<attr name="bounds">
+			<rectangle x="79" y="63" width="143" height="57"></rectangle>		</attr>
+
+	</node>
+	</layout>
+</gxl> </model>
  <model id="Environment To Plane" type="ingenias.editor.models.EnvironmentModelModelJGraph">
 <object id="Environment To Plane" type="ingenias.editor.entities.EnvironmentModelDataEntity">
 <mapproperties>
@@ -20055,6 +20567,70 @@ Este diagrama se mete dentro de la carpeta init para que cuando la aplicacion ll
 	<node id="node0">
 		<attr name="bounds">
 			<rectangle x="375" y="43" width="172" height="68"></rectangle>		</attr>
+
+	</node>
+	</layout>
+</gxl> </model>
+ <model id="Start Simulation Code" type="ingenias.editor.models.ComponentDiagramModelJGraph">
+<object id="Start Simulation Code" type="ingenias.editor.entities.ComponentDiagramDataEntity">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+  <path>
+    <package id="Project"/>
+    <package id="Simulation Environment"/>
+    <package id="Code"/>
+   </path>
+<gxl>
+
+	<graph>
+			
+	<node id="428" nid="52130352" type="CDUsesCode">
+
+	<connected id="919160259"><attr name="extraLabels">
+			<array>
+
+</array>
+</attr>
+
+
+
+	</connected>
+	<connected id="1522186088">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="StartSimulation" nid="919160259" type="Task">
+
+	</node>
+			
+	<node id="INGENIASCodeComponent8" nid="1522186088" type="INGENIASCodeComponent">
+
+	</node>
+	</graph>
+
+
+	<layout>
+			
+	<node id="node2">
+		<attr name="bounds">
+			<rectangle x="257" y="40" width="76" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node0">
+		<attr name="bounds">
+			<rectangle x="114" y="29" width="94" height="43"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node1">
+		<attr name="bounds">
+			<rectangle x="383" y="17" width="167" height="57"></rectangle>		</attr>
 
 	</node>
 	</layout>

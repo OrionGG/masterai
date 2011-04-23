@@ -87,8 +87,8 @@ public class CreatePlaneInitialStatusTask extends Task{
 		eiPlane_Mind.setLongitude(oDeparture.getoPosition().longitude);
 		eiPlane_Mind.setLastUpdatePosition(new Date());
 
-		eiPlane_Mind.setAltitudeKM(Simulation.SimulationVars.dCruiseAltitudeKM);
-		eiPlane_Mind.setSpeedKMH(Simulation.SimulationVars.dCruiseSpeedKMH);
+		eiPlane_Mind.setAltitudeKM(simulation.SimulationVars.dCruiseAltitudeKM);
+		eiPlane_Mind.setSpeedKMH(simulation.SimulationVars.dCruiseSpeedKMH);
 		eiPlane_Mind.setHead(gov.nasa.worldwind.geom.Angle.fromDegrees(0));
 		eiPlane_Mind.setRunningManoeuvres(new ArrayList<Manoeuvre>());
 //#end_node:INGENIASCodeComponent9 <--- DO NOT REMOVE THIS

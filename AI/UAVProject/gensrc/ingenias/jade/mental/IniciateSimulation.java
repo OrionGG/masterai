@@ -24,29 +24,42 @@
 */
 
 
-package ingenias.jade.components;
+package ingenias.jade.mental;
 
 import java.util.*;
-import ingenias.jade.exception.*;
+import ingenias.jade.components.*;
+import ingenias.editor.entities.*;
+import ingenias.editor.entities.ViewPreferences.ViewType;
 
+public class IniciateSimulation extends ingenias.editor.entities.RuntimeFact{
+    
+   
+  public IniciateSimulation (String id){
+   super(id);
+   this.getPrefs().setView(ViewType.UML);
+   this.type="IniciateSimulation";
+  }
+  
 
-
-
-
-
-public abstract class EnvironmentApp extends Application{
-
-
- public EnvironmentApp(){
-  super();
- }
-
-
- public abstract ArrayList<ingenias.jade.mental.ObjectDetected> getCloseObjects();
-
- public abstract void start();
-
- 
+  public IniciateSimulation (){
+   super(ingenias.jade.MentalStateManager.generateMentalEntityID());
+   this.getPrefs().setView(ViewType.UML);
+  }
+  
+  public String toString(){
+   return this.getId()+":"+this.getType();
+  }
+  
+  public String getType(){
+   return "IniciateSimulation";
+  }
+  
+  public String getParentType(){
+   return "RuntimeFact";
+  }
+  
+     
+    
 }
 
  
