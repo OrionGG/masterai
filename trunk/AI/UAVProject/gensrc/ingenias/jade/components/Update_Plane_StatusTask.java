@@ -21,7 +21,7 @@
     along with INGENIAS Agent Framework; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
- */
+*/
 
 
 package ingenias.jade.components;
@@ -36,44 +36,44 @@ import ingenias.editor.entities.*;
 
 public class Update_Plane_StatusTask extends Task{
 
-	public Update_Plane_StatusTask(String id){
-		super(id,"Update_Plane_Status");
-	}
+ public Update_Plane_StatusTask(String id){
+  super(id,"Update_Plane_Status");
+ }
 
 
 
-	public void execute() throws TaskException{
+ public void execute() throws TaskException{
 
 
-		Change_Plane_Status  eiChange_Plane_Status=(Change_Plane_Status)this.getFirstInputOfType("Change_Plane_Status");             
+        Change_Plane_Status  eiChange_Plane_Status=(Change_Plane_Status)this.getFirstInputOfType("Change_Plane_Status");             
 
-		Plane_Mind  eiPlane_Mind=(Plane_Mind)this.getFirstInputOfType("Plane_Mind");             
-
-
-
-
-
-
-		UpdatePlaneStatusApp eaUpdatePlaneStatus=(UpdatePlaneStatusApp)this.getApplication("UpdatePlaneStatus");
+        Plane_Mind  eiPlane_Mind=(Plane_Mind)this.getFirstInputOfType("Plane_Mind");             
 
 
 
 
 
-		Vector<TaskOutput> outputs = this.getOutputs();
-		TaskOutput defaultOutput= outputs.firstElement();
-
-
-		TaskOutput	outputsdefault=findOutputAlternative("default",
-				outputs);
+			
+        UpdatePlaneStatusApp eaUpdatePlaneStatus=(UpdatePlaneStatusApp)this.getApplication("UpdatePlaneStatus");
 
 
 
 
-		YellowPages yp=null; // only available for initiators of interactions
+
+  		Vector<TaskOutput> outputs = this.getOutputs();
+  		TaskOutput defaultOutput= outputs.firstElement();
+  		
+  		  	
+  		TaskOutput	outputsdefault=findOutputAlternative("default",
+  																			outputs);
+  		
+		
+		
+		
+        YellowPages yp=null; // only available for initiators of interactions
 
 
-		//#start_node:INGENIASCodeComponent12 <--- DO NOT REMOVE THIS	
+//#start_node:INGENIASCodeComponent12 <--- DO NOT REMOVE THIS	
 		if(eiChange_Plane_Status.getNewPosition()!= null){
 			eiPlane_Mind.setLastUpdatePosition(new Date());
 			eiPlane_Mind.setLatitude(eiChange_Plane_Status.getNewPosition().getLatitude());
@@ -82,9 +82,11 @@ public class Update_Plane_StatusTask extends Task{
 		if(eiChange_Plane_Status.getNewHead()!= null){
 			eiPlane_Mind.setHead(eiChange_Plane_Status.getNewHead());        	
 		}
-		//#end_node:INGENIASCodeComponent12 <--- DO NOT REMOVE THIS
+	
+//#end_node:INGENIASCodeComponent12 <--- DO NOT REMOVE THIS
 
-	}
-
+ }
+ 
 }
 
+ 
