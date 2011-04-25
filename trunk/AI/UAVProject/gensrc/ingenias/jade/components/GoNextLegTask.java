@@ -45,11 +45,11 @@ public class GoNextLegTask extends Task{
  public void execute() throws TaskException{
 
 
-        Pilot_Mind_Changing  eiPilot_Mind_Changing=(Pilot_Mind_Changing)this.getFirstInputOfType("Pilot_Mind_Changing");             
+        LegCompleted  eiLegCompleted=(LegCompleted)this.getFirstInputOfType("LegCompleted");             
 
         Flight_Leg  eiFlight_Leg=(Flight_Leg)this.getFirstInputOfType("Flight_Leg");             
 
-        LegCompleted  eiLegCompleted=(LegCompleted)this.getFirstInputOfType("LegCompleted");             
+        Pilot_Mind_Changing  eiPilot_Mind_Changing=(Pilot_Mind_Changing)this.getFirstInputOfType("Pilot_Mind_Changing");             
 
 
 
@@ -83,6 +83,10 @@ public class GoNextLegTask extends Task{
         Pilot_Mind oPilot_Mind = eiPilot_Mind_Changing.getPilotMind();
      	outputsdefaultPilot_Mind.setLegsCompleted(oPilot_Mind.getLegsCompleted());
      	outputsdefaultPilot_Mind.setPilotFlightPlan(oPilot_Mind.getPilotFlightPlan());
+     	outputsdefaultPilot_Mind.setExperience(oPilot_Mind.getExperience());
+     	outputsdefaultPilot_Mind.setFatigue(oPilot_Mind.getFatigue());
+     	outputsdefaultPilot_Mind.setStress(oPilot_Mind.getStress());
+     	//outputsdefaultPilot_Mind.setAvailableManeuvers(oPilot_Mind.get);
      	//more things
 //#end_node:INGENIASCodeComponent4 <--- DO NOT REMOVE THIS
 
