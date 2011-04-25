@@ -71,8 +71,10 @@ public class StartSimulationTask extends Task{
         YellowPages yp=null; // only available for initiators of interactions
 
 
-//#start_node:INGENIASCodeComponent8 <--- DO NOT REMOVE THIS	
-        eaEnvironment.start();
+//#start_node:INGENIASCodeComponent8 <--- DO NOT REMOVE THIS
+        if(Simulation.SimulationVars.bSimulation){
+        	eaEnvironment.start();
+        }
 //#end_node:INGENIASCodeComponent8 <--- DO NOT REMOVE THIS
 
  }

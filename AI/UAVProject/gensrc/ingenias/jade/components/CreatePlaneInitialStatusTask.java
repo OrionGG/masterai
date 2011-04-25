@@ -77,19 +77,21 @@ public class CreatePlaneInitialStatusTask extends Task{
 
 //#start_node:INGENIASCodeComponent9 <--- DO NOT REMOVE THIS	
         Random generator = new Random();
-		enums.Waypoint[] oWaypointvalues = enums.Waypoint.values();
+		enums.Airport[] oAirportvalues = enums.Airport.values();
 		
 		//set departure point
-		int iIndexDeparture = generator.nextInt(oWaypointvalues.length);
+		int iIndexDeparture = generator.nextInt(oAirportvalues.length);
 		
-		enums.Waypoint oDeparture = oWaypointvalues[iIndexDeparture];
-		eiPlane_Mind.setLatitude(oDeparture.getoPosition().latitude);
-		eiPlane_Mind.setLongitude(oDeparture.getoPosition().longitude);
+		enums.Airport oDeparture = oAirportvalues[iIndexDeparture];
+		eiPlane_Mind.setLatitude(oDeparture.getPosition().latitude);
+		eiPlane_Mind.setLongitude(oDeparture.getPosition().longitude);
 		eiPlane_Mind.setLastUpdatePosition(new Date());
 
 		eiPlane_Mind.setAltitudeKM(Simulation.SimulationVars.dCruiseAltitudeKM);
 		eiPlane_Mind.setSpeedKMH(Simulation.SimulationVars.dCruiseSpeedKMH);
-		eiPlane_Mind.setHead(gov.nasa.worldwind.geom.Angle.fromDegrees(0));
+		//set departure point
+		int iHeadDegrees = generator.nextInt(360);
+		eiPlane_Mind.setHead(gov.nasa.worldwind.geom.Angle.fromDegrees(iHeadDegrees));
 		eiPlane_Mind.setRunningManoeuvres(new ArrayList<Manoeuvre>());
 //#end_node:INGENIASCodeComponent9 <--- DO NOT REMOVE THIS
 

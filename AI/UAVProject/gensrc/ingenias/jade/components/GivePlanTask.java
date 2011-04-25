@@ -27,6 +27,7 @@
 package ingenias.jade.components;
 
 import java.util.*;
+
 import ingenias.jade.exception.*;
 import ingenias.jade.comm.*;
 import ingenias.jade.mental.*;
@@ -75,9 +76,7 @@ public class GivePlanTask extends Task{
 
 //#start_node:CodeForCreatingRandomPlan <--- DO NOT REMOVE THIS	
   		Flight_Plan oFlightPlan = new ingenias.jade.mental.Flight_Plan();
-		List<Integer> lIndexUsed = new ArrayList<Integer>();
 		Random generator = new Random();
-		enums.Waypoint[] oWaypointvalues = enums.Waypoint.values();
 		
 		/*//set departure point
 		int iIndexDeparture = generator.nextInt(oWaypointvalues.length);
@@ -93,21 +92,37 @@ public class GivePlanTask extends Task{
         	oFlightPlan.setDeparturePoint(oDeparture);
         }
 		
-		 
-		//set DestinationPoint
-		int iIndexDestination = generator.nextInt(oWaypointvalues.length);
+		enums.Airport[] oAirportvalues = enums.Airport.values();
 		
-		lIndexUsed.add(iIndexDestination);
-		enums.Waypoint oDestination = oWaypointvalues[iIndexDestination];
-		oFlightPlan.setDestinationPoint(oDestination.getoPosition());
+		//set departure point
+		int iIndexDestination = generator.nextInt(oAirportvalues.length);
+		
+		enums.Airport oDestination = oAirportvalues[iIndexDestination];
+		oFlightPlan.setDestinationPoint(oDestination.getPosition());
 		
         	
         //Adding Waypoints
-		int randomIndex = generator.nextInt(oWaypointvalues.length-2);
+		enums.Waypoint[] oWaypointvalues = enums.Waypoint.values();
+		int iWaypointsNumber = 15;
+		int randomIndex = generator.nextInt(iWaypointsNumber);
 		List<gov.nasa.worldwind.geom.Position> oWayPoints = new ArrayList<gov.nasa.worldwind.geom.Position>(randomIndex);
-       
+
+		List<Integer> lIndexUsed = new ArrayList<Integer>();
+		
 		for (int i = 0; i < randomIndex; i++) {
 			int randomWaypoint = generator.nextInt(oWaypointvalues.length);
+			
+			int j =0;
+			while((j<iWaypointsNumber) &&
+					BasicFlightDynamics.BFD.moreThanDobleDistance(oFlightPlan, i,  oWaypointvalues[randomWaypoint], oWayPoints)){
+				randomWaypoint = generator.nextInt(oWaypointvalues.length);
+				j++;
+			}
+			
+			if(j == iWaypointsNumber){
+				break;
+			}
+			
 			while(lIndexUsed.contains(randomWaypoint)){
 				randomWaypoint = generator.nextInt(oWaypointvalues.length);
 			}
@@ -117,14 +132,16 @@ public class GivePlanTask extends Task{
 		}
 		oFlightPlan.setWaypoints(oWayPoints);
 		
+		//Standard for a Boeing 737
 		oFlightPlan.setCruisingAltitudeKM(10);
 		oFlightPlan.setCruisingSpeedKMH(906);
-		//Standard for a Boeing 737
 		
 		outputsdefaultPlanAnswer.setFlightPlan(oFlightPlan);
 //#end_node:CodeForCreatingRandomPlan <--- DO NOT REMOVE THIS
 
  }
+
+
  
 }
 

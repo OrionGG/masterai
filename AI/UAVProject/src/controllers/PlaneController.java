@@ -15,7 +15,7 @@ public class PlaneController implements Runnable {
 	public PlaneController(String sPlaneName, Position oPosition) 
 	{
 		OPlaneEntity = new PlaneEntity(oPosition);
-		OPlaneView = new PlaneView(OPlaneEntity, sPlaneName);
+		//OPlaneView = new PlaneView(OPlaneEntity, sPlaneName);
 		oPlaneController = this;
 	}
 	
