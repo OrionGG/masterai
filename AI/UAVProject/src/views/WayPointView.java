@@ -1,6 +1,6 @@
 package views;
 
-import entities.WayPointEntity;
+
 import enums.Waypoint;
 import gov.nasa.worldwind.WorldWind;
 import gov.nasa.worldwind.avlist.AVKey;

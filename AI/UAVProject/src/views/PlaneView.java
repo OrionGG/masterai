@@ -3,7 +3,7 @@ import ingenias.jade.agents.PlaneJADEAgent;
 
 import java.awt.Color;
 
-import entities.PlaneEntity;
+
 import gov.nasa.worldwind.avlist.AVKey;
 import gov.nasa.worldwind.geom.Position;
 import gov.nasa.worldwind.layers.RenderableLayer;

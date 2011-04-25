@@ -27,7 +27,6 @@
 package ingenias.jade.components;
 
 import java.util.*;
-
 import ingenias.jade.exception.*;
 import ingenias.jade.comm.*;
 import ingenias.jade.mental.*;
@@ -140,8 +139,6 @@ public class GivePlanTask extends Task{
 //#end_node:CodeForCreatingRandomPlan <--- DO NOT REMOVE THIS
 
  }
-
-
  
 }
 
