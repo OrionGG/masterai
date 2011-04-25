@@ -80,7 +80,10 @@ public class GoNextLegTask extends Task{
 //#start_node:INGENIASCodeComponent4 <--- DO NOT REMOVE THIS	
         int iLegsCompleted =eiPilot_Mind_Changing.getPilotMind().getLegsCompleted();
         eiPilot_Mind_Changing.getPilotMind().setLegsCompleted(iLegsCompleted+1);
-     	outputsdefaultPilot_Mind = eiPilot_Mind_Changing.getPilotMind();
+        Pilot_Mind oPilot_Mind = eiPilot_Mind_Changing.getPilotMind();
+     	outputsdefaultPilot_Mind.setLegsCompleted(oPilot_Mind.getLegsCompleted());
+     	outputsdefaultPilot_Mind.setPilotFlightPlan(oPilot_Mind.getPilotFlightPlan());
+     	//more things
 //#end_node:INGENIASCodeComponent4 <--- DO NOT REMOVE THIS
 
  }

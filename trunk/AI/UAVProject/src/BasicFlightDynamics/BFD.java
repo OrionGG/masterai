@@ -1,10 +1,12 @@
 package BasicFlightDynamics;
 
+import ingenias.jade.mental.Flight_Plan;
 import ingenias.jade.mental.Manoeuvre;
 import ingenias.jade.mental.Plane_Mind;
 
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.List;
 
 
 import gov.nasa.worldwind.geom.*;
@@ -93,6 +95,31 @@ public class BFD {
 		double d = R * c;
 		return d;
 
+	}
+	
+
+
+	public static boolean moreThanDobleDistance(Flight_Plan oFlightPlan, int i,
+			enums.Waypoint oWaypoint, List<gov.nasa.worldwind.geom.Position> oWayPoints) {
+		boolean bResult = true;
+		Position oStartPosition;
+		
+		if(i == 0){
+			oStartPosition = oFlightPlan.getDeparturePoint();
+		}
+		else{
+			oStartPosition = oWayPoints.get(i-1);
+		}
+		Position oEndPosition = oWaypoint.getoPosition();
+		
+		double dMaxDistance = getDistance(oStartPosition, oFlightPlan.getDestinationPoint());
+		
+		double dFirstLegDistance = getDistance(oStartPosition, oEndPosition);
+		double dSecondLegDistance = getDistance(oEndPosition, oFlightPlan.getDestinationPoint());
+
+		bResult = ((dFirstLegDistance + dSecondLegDistance) > (1.5)*dMaxDistance);
+		
+		return bResult;
 	}
 	
 	
