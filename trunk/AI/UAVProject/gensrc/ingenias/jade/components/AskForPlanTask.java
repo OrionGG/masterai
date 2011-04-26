@@ -63,9 +63,9 @@ public class AskForPlanTask extends Task{
   		TaskOutput	outputsdefault=findOutputAlternative("default",
   																			outputs);
   		
-		RuntimeConversation outputsdefaultPilotFlightPlannerInteraction=
+		RuntimeConversation outputsdefaultPilotFlightPlannerPlaneInteraction=
 			(RuntimeConversation)
-				outputsdefault.getEntityByType("PilotFlightPlannerInteraction");
+				outputsdefault.getEntityByType("PilotFlightPlannerPlaneInteraction");
 		
 		
 		PlanRequest outputsdefaultPlanRequest=
@@ -76,7 +76,7 @@ public class AskForPlanTask extends Task{
 		
         YellowPages yp=null; // only available for initiators of interactions
 
-		// This task can produce an interaction of type PilotFlightPlannerInteraction by working with its conversation object
+		// This task can produce an interaction of type PilotFlightPlannerPlaneInteraction by working with its conversation object
         
         // To define manually who are the collaborator involved. Your selection will be verified
         // in runtime. Pay attention to log messages to detect errors. You can use the yello pages
@@ -84,8 +84,12 @@ public class AskForPlanTask extends Task{
         yp=(YellowPages)this.getApplication("YellowPages");
 
         //  Uncomment the following and write down a proper local id of the agent
+        // Find an agent playing the role "PlaneColaborator"
+      	//eoPilotFlightPlannerPlaneInteraction.addCollaborators("Local ID of the collaborator");
+       	
+        //  Uncomment the following and write down a proper local id of the agent
         // Find an agent playing the role "FlightPlannerConlaborator"
-      	//eoPilotFlightPlannerInteraction.addCollaborators("Local ID of the collaborator");
+      	//eoPilotFlightPlannerPlaneInteraction.addCollaborators("Local ID of the collaborator");
        	
 
 

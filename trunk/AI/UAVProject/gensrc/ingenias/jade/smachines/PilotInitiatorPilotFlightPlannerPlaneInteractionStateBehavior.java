@@ -52,9 +52,9 @@ import ingenias.jade.comm.StateBehavior;
 import ingenias.jade.comm.CommActCreator;
 import ingenias.jade.exception.NoAgentsFound;
 
-public class PilotInitiatorPilotFlightPlannerInteractionStateBehavior extends StateBehavior{
+public class PilotInitiatorPilotFlightPlannerPlaneInteractionStateBehavior extends StateBehavior{
 private MentalStateReader msr=null;
-  public PilotInitiatorPilotFlightPlannerInteractionStateBehavior( String agentName,
+  public PilotInitiatorPilotFlightPlannerPlaneInteractionStateBehavior( String agentName,
    			MentalStateReader msr,
    			MentalStateUpdater msu,
   			RuntimeConversation conv, String playedRole, 
@@ -80,6 +80,14 @@ private MentalStateReader msr=null;
 			       smf.add("waiting for InteractionUnit5","InteractionUnit6");
 			      
 			    
+			      // Receiving a message    
+			      smf.add("InteractionUnit7", "waiting for InteractionUnit7");
+			      
+			      // Next states after receiving "InteractionUnit7"
+			      
+			       smf.add("waiting for InteractionUnit7","endInteractionUnit7");
+			      
+			    
 			    
 			     // States involved in message deliver
 			     
@@ -88,7 +96,7 @@ private MentalStateReader msr=null;
 			    
 			     // States involved in message deliver
 			     
-			      smf.add("InteractionUnit6", "endInteractionUnit6");
+			      smf.add("InteractionUnit6", "InteractionUnit7");
 			      
 			    
 			
@@ -147,7 +155,7 @@ private MentalStateReader msr=null;
       actors=new AID[actorsv.size()];
       actorsv.toArray(actors);
       CommActCreator.generateSObject((JADEAgent)myAgent,rolesv,actors,this.getConversationID(),
-       "enable","PilotFlightPlannerInteraction",completelistInvolvedActors);
+       "enable","PilotFlightPlannerPlaneInteraction",completelistInvolvedActors);
       this.getDCC().notifyMessageSent("disabled",options,this);
      
       this.setRunning();   
@@ -188,12 +196,46 @@ private MentalStateReader msr=null;
       if (allexist && true){     
 		 addCreatedBehaviors(CommActCreator.generateR((JADEAgent)myAgent,
                         this.getConversationID(),"InteractionUnit5",
-                   "PilotFlightPlannerInteraction",this.getPlayedRole(),
+                   "PilotFlightPlannerPlaneInteraction",this.getPlayedRole(),
                    optionsA,this,cardinality,0));
       }	 
       this.removeState("InteractionUnit5");
       this.addState("waiting for InteractionUnit5");
       this.notifyStateTransitionExecuted("InteractionUnit5", "waiting for InteractionUnit5");
+  } 
+  
+  // Receives a message and a synchronization command
+  if (this.isState("InteractionUnit7") ) {  // State changed by other agent and upted
+    //in the parent class
+         
+      Vector options=new Vector();
+      
+      options.add("endInteractionUnit7");
+      
+      String[] optionsA=new String[options.size()];
+      options.toArray(optionsA);
+      boolean allexist=true;
+      
+      int cardinality=1;
+      if ("1".equals("n")){
+         try{
+          Vector<AID> receivers=this.getActor("PlaneColaborator");    
+          cardinality=receivers.size();          
+          } catch (NoAgentsFound ex) {
+                    ex.printStackTrace();
+                }   
+       
+      }
+      
+      if (allexist && true){     
+		 addCreatedBehaviors(CommActCreator.generateR((JADEAgent)myAgent,
+                        this.getConversationID(),"InteractionUnit7",
+                   "PilotFlightPlannerPlaneInteraction",this.getPlayedRole(),
+                   optionsA,this,cardinality,0));
+      }	 
+      this.removeState("InteractionUnit7");
+      this.addState("waiting for InteractionUnit7");
+      this.notifyStateTransitionExecuted("InteractionUnit7", "waiting for InteractionUnit7");
   } 
   
   
@@ -226,7 +268,7 @@ private MentalStateReader msr=null;
       if (this.getDCC().notifyMessageSent("InteractionUnit4",optionsA,this)){
            //If mental state conditions are met, the message is send and state changed
             CommActCreator.generateSObject((JADEAgent)myAgent,rolesv,actors,this.getConversationID(),
-           "InteractionUnit4","PilotFlightPlannerInteraction",this.getContentForNextMessage());
+           "InteractionUnit4","PilotFlightPlannerPlaneInteraction",this.getContentForNextMessage());
            getTimeout().stop();
             this.notifyStateTransitionExecuted("InteractionUnit4", options.firstElement().toString());
       } else {
@@ -265,14 +307,14 @@ private MentalStateReader msr=null;
       actorsv.toArray(actors);
       Vector options=new Vector();      
       
-      options.add("endInteractionUnit6");      
+      options.add("InteractionUnit7");      
       
       String[] optionsA=new String[options.size()];
       options.toArray(optionsA);
       if (this.getDCC().notifyMessageSent("InteractionUnit6",optionsA,this)){
            //If mental state conditions are met, the message is send and state changed
             CommActCreator.generateSObject((JADEAgent)myAgent,rolesv,actors,this.getConversationID(),
-           "InteractionUnit6","PilotFlightPlannerInteraction",this.getContentForNextMessage());
+           "InteractionUnit6","PilotFlightPlannerPlaneInteraction",this.getContentForNextMessage());
            getTimeout().stop();
             this.notifyStateTransitionExecuted("InteractionUnit6", options.firstElement().toString());
       } else {
@@ -295,7 +337,7 @@ private MentalStateReader msr=null;
 
   
   // Finishes this state machine
-  if (this.isState("endInteractionUnit6")) {
+  if (this.isState("endInteractionUnit7")) {
     this.setFinished(); // End of transitions
     this.notifyProtocolFinished();
     this.getDCC().removeDefaultLocks();

@@ -82,7 +82,7 @@ public class GivePlanTask extends Task{
 		int iIndexDeparture = generator.nextInt(oAirportvalues.length);
 		
 		enums.Airport oDeparture = oAirportvalues[iIndexDeparture];
-		oFlightPlan.setDeparturePoint(oDeparture.getPosition());
+		oFlightPlan.setDepartureAirport(oDeparture);
 		
 		/*Vector<Plane_Position_ServiceAppImp> oVector = Plane_Position_ServiceInit.getAppsInitialised();
 		gov.nasa.worldwind.geom.Position oDeparture = null;
@@ -102,7 +102,7 @@ public class GivePlanTask extends Task{
 		}
 
 		enums.Airport oDestination = oAirportvalues[iIndexDestination];
-		oFlightPlan.setDestinationPoint(oDestination.getPosition());
+		oFlightPlan.setDestinationAirport(oDestination);
 		
         	
         //Adding Waypoints

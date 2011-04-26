@@ -38,51 +38,23 @@ import ingenias.exception.NotFound;
 
 
 
-  public class PilotInitiatorPilotFlightPlannerInteractionDefaultCommControl extends DefaultCommControl{
+  public class PlaneColaboratorPilotFlightPlannerInteractionDefaultCommControl extends DefaultCommControl{
   
   	  private Vector<String> previous=new Vector<String>();
   	  private com.thoughtworks.xstream.XStream xstream=new com.thoughtworks.xstream.XStream(new com.thoughtworks.xstream.io.xml.DomDriver()); 
   	  
-  public PilotInitiatorPilotFlightPlannerInteractionDefaultCommControl(String cid, MentalStateReader msr, ingenias.jade.comm.LocksRemover lr){
+  public PlaneColaboratorPilotFlightPlannerInteractionDefaultCommControl(String cid, MentalStateReader msr, ingenias.jade.comm.LocksRemover lr){
   super(msr, lr);
   
   };
   
   public static void addDefaultLocks(LocksWriter lw){
-  
-       // Facts that cannot be removed because they are part of guards
-    
-    // Facts that cannot be removed because they must be sent
-     
-     lw.addDeletionLockExpectedType("PlanRequest");
-     
-    
-       // Facts that cannot be removed because they are part of guards
-    
-    // Facts that cannot be removed because they must be sent
-     
-     lw.addDeletionLockExpectedType("InitialAirport");
-     
-     
+   
     }
     
      public Vector<String> getDefaultLocks(){
       Vector<String> locks=new       Vector<String>();
-  
-       // Facts that cannot be removed because they are part of guards
-    
-    // Facts that cannot be removed because they must be sent
-     
-     locks.add("PlanRequest");
-     
-    
-       // Facts that cannot be removed because they are part of guards
-    
-    // Facts that cannot be removed because they must be sent
-     
-     locks.add("InitialAirport");
-     
-     
+   
     return locks;
     }
     
@@ -125,68 +97,6 @@ import ingenias.exception.NotFound;
   
   
    
-    if (stateToEvaluate.equals("InteractionUnit4") &&
-    	 sb.isState("InteractionUnit4")&& options.length>0) {         
-         boolean allexist=true;
-         Vector<MentalEntity> mfcontent=null;
-         
-		 
-		 allexist=allexist && !getMSR().obtainConversationalMentalEntityByType(sb.getConversation(),"PlanRequest").isEmpty();
-		   
-         if (allexist && true){
-           sb.clearContentNextMessage();
-           sb.removeState("InteractionUnit4");
-           
-           
-	   	   mfcontent=getMSR().obtainConversationalMentalEntityByType(sb.getConversation(),"PlanRequest");
-	   	   for (MentalEntity me:mfcontent)             
-             sb.addContentForNextMessage(me);    
-	       getLR().removeDeletionLockType("PlanRequest");
-	       lockProcessed("PlanRequest");
-           //MainInteractionManager.log("Removing lock PlanRequest",this.getAgent().getLocalName()+"-"+sb.getConversationID());
-            
-             
-           
-  		   //sb.clearState();         
-	              
-		   futureStates.add("InteractionUnit5");
-          
-          processed = true;
-      	 }
-     
-    } 
-   
-    if (stateToEvaluate.equals("InteractionUnit6") &&
-    	 sb.isState("InteractionUnit6")&& options.length>0) {         
-         boolean allexist=true;
-         Vector<MentalEntity> mfcontent=null;
-         
-		 
-		 allexist=allexist && !getMSR().obtainConversationalMentalEntityByType(sb.getConversation(),"InitialAirport").isEmpty();
-		   
-         if (allexist && true){
-           sb.clearContentNextMessage();
-           sb.removeState("InteractionUnit6");
-           
-           
-	   	   mfcontent=getMSR().obtainConversationalMentalEntityByType(sb.getConversation(),"InitialAirport");
-	   	   for (MentalEntity me:mfcontent)             
-             sb.addContentForNextMessage(me);    
-	       getLR().removeDeletionLockType("InitialAirport");
-	       lockProcessed("InitialAirport");
-           //MainInteractionManager.log("Removing lock InitialAirport",this.getAgent().getLocalName()+"-"+sb.getConversationID());
-            
-             
-           
-  		   //sb.clearState();         
-	              
-		   futureStates.add("endInteractionUnit6");
-          
-          processed = true;
-      	 }
-     
-    } 
-   
    
   if (futureStates.size()>1){
 	  previous.addAll(futureStates);
@@ -217,13 +127,13 @@ public boolean continueProcess(Vector<ACLMessage> multipleMessages,String[] opti
   
    
    
-    if (sb.isState("waiting for InteractionUnit5")&& options.length>0 && mes!=null
+    if (sb.isState("waiting for InteractionUnit6")&& options.length>0 && mes!=null
     && mes.getUserDefinedParameter("sequence")!=null &&
-    		mes.getUserDefinedParameter("sequence").equals("InteractionUnit5")){
+    		mes.getUserDefinedParameter("sequence").equals("InteractionUnit6")){
     	 boolean allexist=true;
          
          if (allexist && true){
-     	   sb.removeState("waiting for InteractionUnit5");           
+     	   sb.removeState("waiting for InteractionUnit6");           
     	   //try {
                     Vector toAdd=new Vector();
 					for (ACLMessage singleMessage:multipleMessages){
@@ -238,7 +148,7 @@ public boolean continueProcess(Vector<ACLMessage> multipleMessages,String[] opti
  		   }*/
 
 	              
-		   futureStates.add("InteractionUnit6");
+		   futureStates.add("endInteractionUnit6");
           
           processed = true;
       	 }      	 

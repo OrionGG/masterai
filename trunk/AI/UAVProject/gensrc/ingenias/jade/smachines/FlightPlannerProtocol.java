@@ -93,10 +93,10 @@ public FlightPlannerProtocol(){};
             StateBehavior   sb=null;
 		    // Interactions in which this agent appears as collaborator
                              
-		   if (conv.getInteraction().getId().equals("PilotFlightPlannerInteraction") && conv.getPlayedRole().equals("FlightPlannerConlaborator")){
-		   	DefaultCommControl dcc=new FlightPlannerConlaboratorPilotFlightPlannerInteractionDefaultCommControl(
+		   if (conv.getInteraction().getId().equals("PilotFlightPlannerPlaneInteraction") && conv.getPlayedRole().equals("FlightPlannerConlaborator")){
+		   	DefaultCommControl dcc=new FlightPlannerConlaboratorPilotFlightPlannerPlaneInteractionDefaultCommControl(
                         		   conv.getConversationID(),msr,lr);
-			sb = new FlightPlannerConlaboratorPilotFlightPlannerInteractionStateBehavior(agentName,
+			sb = new FlightPlannerConlaboratorPilotFlightPlannerPlaneInteractionStateBehavior(agentName,
 				msr, msu,
 				conv,                           		
 				conv.getPlayedRole(),
@@ -131,7 +131,7 @@ public FlightPlannerProtocol(){};
                 dfd = new DFAgentDescription();
                 
                                            
-                if (protocol.equals("PilotFlightPlannerInteraction")){
+                if (protocol.equals("PilotFlightPlannerPlaneInteraction")){
 		dfd.setName(agentID);
 		 ServiceDescription sd = new ServiceDescription();
 		 sd.setName(agentID.getLocalName()  + "-sub-df");

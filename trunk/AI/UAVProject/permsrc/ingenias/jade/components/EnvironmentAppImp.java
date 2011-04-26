@@ -55,6 +55,8 @@ public  class EnvironmentAppImp extends EnvironmentApp{
 
 				RenderableLayer layer = new RenderableLayer();
 				
+				Simulation.SimulationVars.layer = layer;
+				
 				controllers.EntitiesController oEntitiesController = new controllers.EntitiesController();
 				oEntitiesController.render(layer);
 				

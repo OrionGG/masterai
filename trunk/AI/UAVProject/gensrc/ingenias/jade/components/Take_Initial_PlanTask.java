@@ -68,15 +68,20 @@ public class Take_Initial_PlanTask extends Task{
 				outputsdefault.getEntityByType("Flight_Plan");
 		
 		
+		InitialAirport outputsdefaultInitialAirport=
+			(InitialAirport)
+				outputsdefault.getEntityByType("InitialAirport");
+		
 		
 		
         YellowPages yp=null; // only available for initiators of interactions
 
 
 //#start_node:INGENIASCodeComponent2 <--- DO NOT REMOVE THIS	
-        outputsdefaultFlight_Plan.setDeparturePoint(eiPlanAnswer.getFlightPlan().getDeparturePoint());
-        outputsdefaultFlight_Plan.setDestinationPoint(eiPlanAnswer.getFlightPlan().getDestinationPoint());
+        outputsdefaultFlight_Plan.setDepartureAirport(eiPlanAnswer.getFlightPlan().getDepartureAirport());
+        outputsdefaultFlight_Plan.setDestinationAirport(eiPlanAnswer.getFlightPlan().getDestinationAirport());
         outputsdefaultFlight_Plan.setWaypoints(eiPlanAnswer.getFlightPlan().getWaypoints());
+        outputsdefaultInitialAirport.setInitialAirport(eiPlanAnswer.getFlightPlan().getDepartureAirport());
 //#end_node:INGENIASCodeComponent2 <--- DO NOT REMOVE THIS
 
  }

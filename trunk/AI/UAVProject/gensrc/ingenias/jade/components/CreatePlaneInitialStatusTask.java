@@ -45,7 +45,7 @@ public class CreatePlaneInitialStatusTask extends Task{
  public void execute() throws TaskException{
 
 
-        PlaneMindNoInitialized  eiPlaneMindNoInitialized=(PlaneMindNoInitialized)this.getFirstInputOfType("PlaneMindNoInitialized");             
+        InitialAirport  eiInitialAirport=(InitialAirport)this.getFirstInputOfType("InitialAirport");             
 
         Plane_Mind  eiPlane_Mind=(Plane_Mind)this.getFirstInputOfType("Plane_Mind");             
 
@@ -65,10 +65,14 @@ public class CreatePlaneInitialStatusTask extends Task{
   		TaskOutput	outputsdefault=findOutputAlternative("default",
   																			outputs);
   		
-		
 		IniciateUpdateStatus outputsdefaultIniciateUpdateStatus=
 			(IniciateUpdateStatus)
 				outputsdefault.getEntityByType("IniciateUpdateStatus");
+		
+		
+		AllowDescomposingPlan outputsdefaultAllowDescomposingPlan=
+			(AllowDescomposingPlan)
+				outputsdefault.getEntityByType("AllowDescomposingPlan");
 		
 		
 		
@@ -82,7 +86,7 @@ public class CreatePlaneInitialStatusTask extends Task{
 		int iIndexDeparture = generator.nextInt(oAirportvalues.length);
 		
 		enums.Airport oDeparture = oAirportvalues[iIndexDeparture];*/
-        enums.Airport oDeparture = null;
+        enums.Airport oDeparture = eiInitialAirport.getInitialAirport();
 		eiPlane_Mind.setLatitude(oDeparture.getPosition().latitude);
 		eiPlane_Mind.setLongitude(oDeparture.getPosition().longitude);
 		eiPlane_Mind.setLastUpdatePosition(new Date());
