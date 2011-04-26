@@ -38,12 +38,12 @@ import ingenias.exception.NotFound;
 
 
 
-  public class PilotInitiatorPilotFlightPlannerInteractionDefaultCommControl extends DefaultCommControl{
+  public class PilotInitiatorPilotFlightPlannerPlaneInteractionDefaultCommControl extends DefaultCommControl{
   
   	  private Vector<String> previous=new Vector<String>();
   	  private com.thoughtworks.xstream.XStream xstream=new com.thoughtworks.xstream.XStream(new com.thoughtworks.xstream.io.xml.DomDriver()); 
   	  
-  public PilotInitiatorPilotFlightPlannerInteractionDefaultCommControl(String cid, MentalStateReader msr, ingenias.jade.comm.LocksRemover lr){
+  public PilotInitiatorPilotFlightPlannerPlaneInteractionDefaultCommControl(String cid, MentalStateReader msr, ingenias.jade.comm.LocksRemover lr){
   super(msr, lr);
   
   };
@@ -180,7 +180,7 @@ import ingenias.exception.NotFound;
            
   		   //sb.clearState();         
 	              
-		   futureStates.add("endInteractionUnit6");
+		   futureStates.add("InteractionUnit7");
           
           processed = true;
       	 }
@@ -239,6 +239,33 @@ public boolean continueProcess(Vector<ACLMessage> multipleMessages,String[] opti
 
 	              
 		   futureStates.add("InteractionUnit6");
+          
+          processed = true;
+      	 }      	 
+    } 
+   
+    if (sb.isState("waiting for InteractionUnit7")&& options.length>0 && mes!=null
+    && mes.getUserDefinedParameter("sequence")!=null &&
+    		mes.getUserDefinedParameter("sequence").equals("InteractionUnit7")){
+    	 boolean allexist=true;
+         
+         if (allexist && true){
+     	   sb.removeState("waiting for InteractionUnit7");           
+    	   //try {
+                    Vector toAdd=new Vector();
+					for (ACLMessage singleMessage:multipleMessages){
+						 String content=singleMessage.getContent();    	 				
+    	 				Vector realContent = (Vector) xstream.fromXML(content);
+						toAdd.addAll(realContent);						
+					}
+					sb.updateMentalState(toAdd);	
+		   /*} catch (UnreadableException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+ 		   }*/
+
+	              
+		   futureStates.add("endInteractionUnit7");
           
           processed = true;
       	 }      	 

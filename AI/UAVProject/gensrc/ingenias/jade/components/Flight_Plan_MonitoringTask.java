@@ -81,14 +81,14 @@ public class Flight_Plan_MonitoringTask extends Task{
         gov.nasa.worldwind.geom.Position oStartPoint = null;
         gov.nasa.worldwind.geom.Position oEndPoint = null;
         if(iLegsCompleted == 0 ){
-        	oStartPoint = oFlightPlan.getDeparturePoint();
+        	oStartPoint = oFlightPlan.getDepartureAirport().getPosition();
         }
         else{
         	oStartPoint = oFlightPlan.getWaypoints().get(iLegsCompleted-1);
         }
         
         if(oFlightPlan.getWaypoints().size() <= iLegsCompleted){
-        	oEndPoint = oFlightPlan.getDestinationPoint();
+        	oEndPoint = oFlightPlan.getDestinationAirport().getPosition();
         }
         else{
         	oEndPoint = oFlightPlan.getWaypoints().get(iLegsCompleted);

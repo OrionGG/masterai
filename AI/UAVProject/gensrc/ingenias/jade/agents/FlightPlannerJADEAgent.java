@@ -171,7 +171,7 @@ public class FlightPlannerJADEAgent
 
 		    
 		validConversationType=validConversationType||
-				conversation.getInteraction().getId().equalsIgnoreCase("PilotFlightPlannerInteraction");
+				conversation.getInteraction().getId().equalsIgnoreCase("PilotFlightPlannerPlaneInteraction");
 	 	
 				
 		if (validConversationType){
@@ -264,7 +264,7 @@ public class FlightPlannerJADEAgent
          
          typesOfConversation=new Vector<String>();
 	     
-	     typesOfConversation.add("PilotFlightPlannerInteraction");
+	     typesOfConversation.add("PilotFlightPlannerPlaneInteraction");
 		 
          
          if (goalname.equals("Flight_Plan_Taken")){
@@ -327,7 +327,7 @@ public class FlightPlannerJADEAgent
    boolean continueInit=false;
    // Interactions where this agent acts as collaborator
    
-   getCM().addKnownProtocol("PilotFlightPlannerInteraction");
+   getCM().addKnownProtocol("PilotFlightPlannerPlaneInteraction");
    
 
    // These are the initial goals of the agent. Goals determine

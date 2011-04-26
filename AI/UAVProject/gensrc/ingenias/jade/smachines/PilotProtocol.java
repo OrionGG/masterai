@@ -95,10 +95,10 @@ public PilotProtocol(){};
            
 		           // Interactions in which this agent appears as initiator                  
                   
-		   if (conv.getInteraction().getId().equals("PilotFlightPlannerInteraction") && conv.getPlayedRole().equals("PilotInitiator")){
-		   DefaultCommControl dcc=new PilotInitiatorPilotFlightPlannerInteractionDefaultCommControl(
+		   if (conv.getInteraction().getId().equals("PilotFlightPlannerPlaneInteraction") && conv.getPlayedRole().equals("PilotInitiator")){
+		   DefaultCommControl dcc=new PilotInitiatorPilotFlightPlannerPlaneInteractionDefaultCommControl(
                         		   conv.getConversationID(),msr,lr);
-			sb = new PilotInitiatorPilotFlightPlannerInteractionStateBehavior(
+			sb = new PilotInitiatorPilotFlightPlannerPlaneInteractionStateBehavior(
 			agentName,
 				msr,msu,
 					conv,                           		
@@ -136,8 +136,24 @@ public PilotProtocol(){};
 	        public AgentExternalDescription[] getInteractionActors(String interaction, YellowPages yp) throws ingenias.jade.exception.NoAgentsFound{
               AgentExternalDescription[] result=null;
              
-               if (interaction.equals("PilotFlightPlannerInteraction")){
+               if (interaction.equals("PilotFlightPlannerPlaneInteraction")){
                 Vector<AgentExternalDescription> cols=new Vector<AgentExternalDescription>();
+                 
+                 try {
+                 String cardinality="";
+		 DFAgentDescription[] agents=yp.getAgents("PlaneColaborator");
+                   if (agents==null || agents.length<=0)
+                      throw new ingenias.jade.exception.NoAgentsFound("Could not find an agent playing the role PlaneColaborator");
+                   if (cardinality.equals("1") || cardinality.equals(""))
+                    cols.add(new AgentExternalDescription(agents[0].getName(),"PlaneColaborator"));
+                    else
+                	   if (cardinality.equals("1__*"))
+						   for (int k=0;k<agents.length;k++)
+                			  cols.add(new AgentExternalDescription(agents[k].getName(),"PlaneColaborator"));
+                 } catch (FIPAException fe){
+                   fe.printStackTrace();
+                   throw new NoAgentsFound();
+                 }
                  
                  try {
                  String cardinality="";
@@ -191,7 +207,7 @@ public PilotProtocol(){};
 	        DFAgentDescription dfd=null;
                 dfd = new DFAgentDescription();
                 
-                if (protocol.equals("PilotFlightPlannerInteraction")){
+                if (protocol.equals("PilotFlightPlannerPlaneInteraction")){
 		dfd.setName(agentID);
 		 ServiceDescription sd = new ServiceDescription();
 		 sd.setName(agentID.getLocalName()  + "-sub-df");
@@ -223,10 +239,12 @@ public PilotProtocol(){};
           
         
         
-        if (protocol.equals("PilotFlightPlannerInteraction")){
+        if (protocol.equals("PilotFlightPlannerPlaneInteraction")){
             Vector<String> toVerify=new Vector<String>();
             HashSet<String> rolesFound=new HashSet<String>();
             
+         	toVerify.add("PlaneColaborator");
+         	
          	toVerify.add("FlightPlannerConlaborator");
          	
         	if (actors.length<toVerify.size())

@@ -105,6 +105,19 @@ public PlaneProtocol(){};
                         ActiveConversation aconv=new ActiveConversation(sb,dcc,conv);
 			return aconv;
                    }
+                                    
+		   if (conv.getInteraction().getId().equals("PilotFlightPlannerPlaneInteraction") && conv.getPlayedRole().equals("PlaneColaborator")){
+		   	DefaultCommControl dcc=new PlaneColaboratorPilotFlightPlannerPlaneInteractionDefaultCommControl(
+                        		   conv.getConversationID(),msr,lr);
+			sb = new PlaneColaboratorPilotFlightPlannerPlaneInteractionStateBehavior(agentName,
+				msr, msu,
+				conv,                           		
+				conv.getPlayedRole(),
+			   	actors,
+				dcc,conv.getInteraction().getId());
+                        ActiveConversation aconv=new ActiveConversation(sb,dcc,conv);
+			return aconv;
+                   }
                   
 		           // Interactions in which this agent appears as initiator                  
                   
@@ -132,6 +145,16 @@ public PlaneProtocol(){};
                 
                                            
                 if (protocol.equals("PilotPlaneInteraction")){
+		dfd.setName(agentID);
+		 ServiceDescription sd = new ServiceDescription();
+		 sd.setName(agentID.getLocalName()  + "-sub-df");
+		 sd.setType("PlaneColaborator");
+		 sd.setOwnership("JADE");
+		 dfd.addServices(sd);
+                 playedRoles.add(dfd);
+                }
+                                           
+                if (protocol.equals("PilotFlightPlannerPlaneInteraction")){
 		dfd.setName(agentID);
 		 ServiceDescription sd = new ServiceDescription();
 		 sd.setName(agentID.getLocalName()  + "-sub-df");

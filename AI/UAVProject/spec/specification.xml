@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project cid="441" version="1.2">
+<project cid="452" version="1.2">
 <projectproperties>
 <projectproperty id="extfolder" module="IDK"  name="Extension Module Folder" value="UAVProject\ext"  tooltip="Folder where the IDE will find its new modules" />
 <projectproperty id="jadeout" module="Ingenias Agent Framework generator"  name="JADE generated output folder" value="gensrc"  tooltip="The folder that will hold generated JADE agents" />
@@ -7,7 +7,7 @@
 <projectproperty id="jadeproject" module="Ingenias Agent Framework generator"  name="JADE main project folder" value="UAVProject"  tooltip="The folder that will contain the project for this development" />
 <projectproperty id="jadeperm" module="Ingenias Agent Framework generator"  name="JADE generate only once folder" value="permsrc"  tooltip="The folder that will hold generated elements that should not be regenerated" />
 <projectproperty id="htmldoc" module="HTML Document generator"  name="HTML document folder" value="UAVProject\html"  tooltip="The document folder that will contain HTML version of this specification" />
- <openeddiagram>Obstacle Observed</openeddiagram> <openeddiagram>CreatePilotMind</openeddiagram> <openeddiagram>CreatePilotMingCode</openeddiagram> <openeddiagram>Pilot Goal</openeddiagram> <openeddiagram>Create Decisions Code</openeddiagram> <openeddiagram>Main Program Activity</openeddiagram> <openeddiagram>Orders to Pilot</openeddiagram> <openeddiagram>Avoid Obstacle</openeddiagram> <openeddiagram>Position Sensors</openeddiagram> <openeddiagram>Plane Movement Code</openeddiagram> <openeddiagram>Comps Leg Checker</openeddiagram> <openeddiagram>App Leg Checker</openeddiagram> <openeddiagram>Leg Completed</openeddiagram> <openeddiagram>Create Plane Initial Status</openeddiagram> <openeddiagram>Iniciate</openeddiagram> <openeddiagram>Update Status</openeddiagram> <openeddiagram>Arrived Safe And Sound</openeddiagram> <openeddiagram>Check Destination</openeddiagram> <openeddiagram>Flight Plan Monitorization</openeddiagram> <openeddiagram>Create Decisions For Leg</openeddiagram> <openeddiagram>Flight Plan Monitoring Code</openeddiagram> <openeddiagram>Go Next Leg</openeddiagram> <openeddiagram>Check Destination Code</openeddiagram> <openeddiagram>Plane Model</openeddiagram> <openeddiagram>Create Initial Plan Tasks</openeddiagram> <openeddiagram>Pilot Model</openeddiagram></projectproperties>
+ <openeddiagram>Obstacle Observed</openeddiagram> <openeddiagram>CreatePilotMind</openeddiagram> <openeddiagram>CreatePilotMingCode</openeddiagram> <openeddiagram>Pilot Goal</openeddiagram> <openeddiagram>Create Decisions Code</openeddiagram> <openeddiagram>Main Program Activity</openeddiagram> <openeddiagram>Orders to Pilot</openeddiagram> <openeddiagram>Avoid Obstacle</openeddiagram> <openeddiagram>Position Sensors</openeddiagram> <openeddiagram>Plane Movement Code</openeddiagram> <openeddiagram>Comps Leg Checker</openeddiagram> <openeddiagram>App Leg Checker</openeddiagram> <openeddiagram>Leg Completed</openeddiagram> <openeddiagram>Iniciate</openeddiagram> <openeddiagram>Update Status</openeddiagram> <openeddiagram>Arrived Safe And Sound</openeddiagram> <openeddiagram>Check Destination</openeddiagram> <openeddiagram>Flight Plan Monitorization</openeddiagram> <openeddiagram>Go Next Leg</openeddiagram> <openeddiagram>Check Destination Code</openeddiagram> <openeddiagram>Plane Model</openeddiagram> <openeddiagram>Pilot Model</openeddiagram> <openeddiagram>Create Initial Plan Tasks</openeddiagram> <openeddiagram>Create Initial Plan Agents</openeddiagram> <openeddiagram>Create Initial Plan Code</openeddiagram> <openeddiagram>Avoid Collision Interaction Task</openeddiagram> <openeddiagram>Plane Initial Status Code</openeddiagram> <openeddiagram>Create Initial Plan Interaction</openeddiagram> <openeddiagram>Create Initial Plan Tasks 1</openeddiagram> <openeddiagram>Create Initial Plan Tasks 2</openeddiagram> <openeddiagram>Start Silulation</openeddiagram> <openeddiagram>Simulation Model</openeddiagram></projectproperties>
 <leafpackages>
    <path>
     <package id="Project"/>
@@ -51,11 +51,6 @@
     <package id="Plane"/>
     <package id="Update Plane Status"/>
     <package id="Update Status Code"/>
-   </path>
-   <path>
-    <package id="Project"/>
-    <package id="Plane"/>
-    <package id="Create Plane Initial Status"/>
    </path>
    <path>
     <package id="Project"/>
@@ -150,7 +145,13 @@
     <package id="Project"/>
     <package id="Plan Creation And Monitorization"/>
     <package id="Plan Creation"/>
-    <package id="Create Initial Plan Tasks"/>
+    <package id="Create Initial Plan Tasks 1"/>
+   </path>
+   <path>
+    <package id="Project"/>
+    <package id="Plan Creation And Monitorization"/>
+    <package id="Plan Creation"/>
+    <package id="Create Initial Plan Tasks 2"/>
    </path>
    <path>
     <package id="Project"/>
@@ -347,6 +348,10 @@
     <package id="Simulation Environment"/>
     <package id="Code"/>
     <package id="Start Simulation Code"/>
+   </path>
+   <path>
+    <package id="Project"/>
+    <package id="Start Descompose Plan"/>
    </path>
 </leafpackages>
 <objects>
@@ -720,6 +725,12 @@
 <key id="_view_type">UML</key>
 </mapproperties>
 </object>
+<object id="StartDescomposingPlan" type="ingenias.editor.entities.Task">
+<mapproperties>
+<key id="Description"></key>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
 <object id="Plane" type="ingenias.editor.entities.Agent">
 <mapproperties>
 <key id="Code"></key>
@@ -878,9 +889,10 @@
 <object id="INGENIASCodeComponent2" type="ingenias.editor.entities.INGENIASCodeComponent">
 <mapproperties>
 <key id="Language">Java</key>
-<key id="Code">        outputsdefaultFlight_Plan.setDeparturePoint(eiPlanAnswer.getFlightPlan().getDeparturePoint());
-        outputsdefaultFlight_Plan.setDestinationPoint(eiPlanAnswer.getFlightPlan().getDestinationPoint());
-        outputsdefaultFlight_Plan.setWaypoints(eiPlanAnswer.getFlightPlan().getWaypoints());</key>
+<key id="Code">        outputsdefaultFlight_Plan.setDepartureAirport(eiPlanAnswer.getFlightPlan().getDepartureAirport());
+        outputsdefaultFlight_Plan.setDestinationAirport(eiPlanAnswer.getFlightPlan().getDestinationAirport());
+        outputsdefaultFlight_Plan.setWaypoints(eiPlanAnswer.getFlightPlan().getWaypoints());
+        outputsdefaultInitialAirport.setInitialAirport(eiPlanAnswer.getFlightPlan().getDepartureAirport());</key>
 <key id="_view_type">UML</key>
 </mapproperties>
 </object>
@@ -890,13 +902,14 @@
 <key id="Code">  		Flight_Plan oFlightPlan = new ingenias.jade.mental.Flight_Plan();
 		Random generator = new Random();
 		
-		/*//set departure point
-		int iIndexDeparture = generator.nextInt(oWaypointvalues.length);
+		enums.Airport[] oAirportvalues = enums.Airport.values();
+		//set departure point
+		int iIndexDeparture = generator.nextInt(oAirportvalues.length);
 		
-		lIndexUsed.add(iIndexDeparture);
-		enums.Waypoint oDeparture = oWaypointvalues[iIndexDeparture];
-		oFlightPlan.setDeparturePoint(oDeparture.getoPosition());*/
-		Vector&lt;Plane_Position_ServiceAppImp&gt; oVector = Plane_Position_ServiceInit.getAppsInitialised();
+		enums.Airport oDeparture = oAirportvalues[iIndexDeparture];
+		oFlightPlan.setDepartureAirport(oDeparture);
+		
+		/*Vector&lt;Plane_Position_ServiceAppImp&gt; oVector = Plane_Position_ServiceInit.getAppsInitialised();
 		gov.nasa.worldwind.geom.Position oDeparture = null;
 			
         if(oVector.size()&gt; 0){
@@ -904,21 +917,17 @@
         	//eaPlane_Position_ServiceAppImp.getOwner();
         	oDeparture = eaPlane_Position_ServiceAppImp.getCurrentPosition();
         	oFlightPlan.setDeparturePoint(oDeparture);
-        }
-		
-		enums.Airport[] oAirportvalues = enums.Airport.values();
+        }*/
 		
 		//set departure point
 		int iIndexDestination = generator.nextInt(oAirportvalues.length);
-		enums.Airport oDestination = oAirportvalues[iIndexDestination];
 		
-		while(oDeparture != null &amp;&amp; oDeparture.equals(oDestination.getPosition())){
+		while(iIndexDeparture == iIndexDestination){
 			iIndexDestination = generator.nextInt(oAirportvalues.length);
-			oDestination = oAirportvalues[iIndexDestination];
 		}
-		
-		
-		oFlightPlan.setDestinationPoint(oDestination.getPosition());
+
+		enums.Airport oDestination = oAirportvalues[iIndexDestination];
+		oFlightPlan.setDestinationAirport(oDestination);
 		
         	
         //Adding Waypoints
@@ -1001,14 +1010,14 @@
         gov.nasa.worldwind.geom.Position oStartPoint = null;
         gov.nasa.worldwind.geom.Position oEndPoint = null;
         if(iLegsCompleted == 0 ){
-        	oStartPoint = oFlightPlan.getDeparturePoint();
+        	oStartPoint = oFlightPlan.getDepartureAirport().getPosition();
         }
         else{
         	oStartPoint = oFlightPlan.getWaypoints().get(iLegsCompleted-1);
         }
         
         if(oFlightPlan.getWaypoints().size() &lt;= iLegsCompleted){
-        	oEndPoint = oFlightPlan.getDestinationPoint();
+        	oEndPoint = oFlightPlan.getDestinationAirport().getPosition();
         }
         else{
         	oEndPoint = oFlightPlan.getWaypoints().get(iLegsCompleted);
@@ -1023,7 +1032,9 @@
 <object id="INGENIASCodeComponent6" type="ingenias.editor.entities.INGENIASCodeComponent">
 <mapproperties>
 <key id="Language">Java</key>
-<key id="Code">        if(((Leg_CheckerAppImp)eaLeg_Checker).isLegCompleted(eiFlight_Leg)){
+<key id="Code">        boolean bIsLegCompleted = false;//((Leg_CheckerAppImp)eaLeg_Checker).isLegCompleted(eiFlight_Leg);
+
+        if(bIsLegCompleted){
 
         }
         else{
@@ -1068,20 +1079,22 @@
 </object>
 <object id="INGENIASCodeComponent9" type="ingenias.editor.entities.INGENIASCodeComponent">
 <mapproperties>
-<key id="Code">        Random generator = new Random();
-		enums.Airport[] oAirportvalues = enums.Airport.values();
+<key id="Language"></key>
+<key id="Code">		/*enums.Airport[] oAirportvalues = enums.Airport.values();
 		
 		//set departure point
 		int iIndexDeparture = generator.nextInt(oAirportvalues.length);
 		
-		enums.Airport oDeparture = oAirportvalues[iIndexDeparture];
+		enums.Airport oDeparture = oAirportvalues[iIndexDeparture];*/
+        enums.Airport oDeparture = eiInitialAirport.getInitialAirport();
 		eiPlane_Mind.setLatitude(oDeparture.getPosition().latitude);
 		eiPlane_Mind.setLongitude(oDeparture.getPosition().longitude);
 		eiPlane_Mind.setLastUpdatePosition(new Date());
 
 		eiPlane_Mind.setAltitudeKM(Simulation.SimulationVars.dCruiseAltitudeKM);
 		eiPlane_Mind.setSpeedKMH(Simulation.SimulationVars.dCruiseSpeedKMH);
-		//set departure point
+		//set head in departure point
+        Random generator = new Random();
 		int iHeadDegrees = generator.nextInt(360);
 		eiPlane_Mind.setHead(gov.nasa.worldwind.geom.Angle.fromDegrees(iHeadDegrees));
 		eiPlane_Mind.setRunningManoeuvres(new ArrayList&lt;Manoeuvre&gt;());</key>
@@ -1169,7 +1182,7 @@
 <key id="_view_type">UML</key>
 </mapproperties>
 </object>
-<object id="PilotFlightPlannerInteraction" type="ingenias.editor.entities.Interaction">
+<object id="PilotFlightPlannerPlaneInteraction" type="ingenias.editor.entities.Interaction">
 <objectproperty id="TransferredInfo" collection="true">
 </objectproperty>
 <mapproperties>
@@ -1361,6 +1374,50 @@
 <key id="Timeout"></key>
 <key id="Description"></key>
 <key id="_view_type">UML</key>
+</mapproperties>
+</object>
+<object id="InteractionUnit6" type="ingenias.editor.entities.InteractionUnit">
+<objectproperty id="TransferredInfo" collection="true">
+<object id="InitialAirport" type="ingenias.editor.entities.FrameFact">
+<objectproperty id="Slots" collection="true">
+<object id="446" type="ingenias.editor.entities.ObjectSlot">
+<mapproperties>
+<key id="Name">InitialAirport</key>
+<key id="Type">enums.Airport</key>
+<key id="Description"></key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+</objectproperty>
+<mapproperties>
+<key id="Description"></key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+</objectproperty>
+<mapproperties>
+<key id="SpeechAct"></key>
+<key id="Timeout"></key>
+<key id="Description"></key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="InteractionUnit7" type="ingenias.editor.entities.InteractionUnit">
+<objectproperty id="TransferredInfo" collection="true">
+<object id="AllowDescomposingPlan" type="ingenias.editor.entities.FrameFact">
+<objectproperty id="Slots" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="Description"></key>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+</objectproperty>
+<mapproperties>
+<key id="SpeechAct"></key>
+<key id="Timeout"></key>
+<key id="Description"></key>
+<key id="_view_type">INGENIAS</key>
 </mapproperties>
 </object>
 <object id="Arrived To Destination" type="ingenias.editor.entities.Goal">
@@ -1606,7 +1663,7 @@ El plan de vuelo esta compuesto por una serie de waypoints (puntos de paso), un 
 </object>
 <object id="Conversation3" type="ingenias.editor.entities.Conversation">
 <objectproperty id="Interaction">
-<object id="PilotFlightPlannerInteraction" type="ingenias.editor.entities.Interaction">
+<object id="PilotFlightPlannerPlaneInteraction" type="ingenias.editor.entities.Interaction">
 <objectproperty id="TransferredInfo" collection="true">
 </objectproperty>
 <mapproperties>
@@ -1772,9 +1829,9 @@ El plan de vuelo esta compuesto por una serie de waypoints (puntos de paso), un 
 </object>
 <object id="71" type="ingenias.editor.entities.ObjectSlot">
 <mapproperties>
-<key id="Name">DeparturePoint</key>
+<key id="Name">DepartureAirport</key>
 <key id="Value"></key>
-<key id="Type">gov.nasa.worldwind.geom.Position</key>
+<key id="Type">enums.Airport</key>
 <key id="Code"></key>
 <key id="Description"></key>
 <key id="_view_type">UML</key>
@@ -1802,9 +1859,9 @@ El plan de vuelo esta compuesto por una serie de waypoints (puntos de paso), un 
 </object>
 <object id="74" type="ingenias.editor.entities.ObjectSlot">
 <mapproperties>
-<key id="Name">DestinationPoint</key>
+<key id="Name">DestinationAirport</key>
 <key id="Value"></key>
-<key id="Type">gov.nasa.worldwind.geom.Position</key>
+<key id="Type">enums.Airport</key>
 <key id="Code"></key>
 <key id="Description"></key>
 <key id="_view_type">UML</key>
@@ -2389,8 +2446,16 @@ LegsCompleted el numero de tramos completados
 <key id="_view_type">UML</key>
 </mapproperties>
 </object>
-<object id="PlaneMindNoInitialized" type="ingenias.editor.entities.FrameFact">
+<object id="InitializePlaneMind" type="ingenias.editor.entities.FrameFact">
 <objectproperty id="Slots" collection="true">
+<object id="452" type="ingenias.editor.entities.ObjectSlot">
+<mapproperties>
+<key id="Name">InitialAirport</key>
+<key id="Type">enums.Airport</key>
+<key id="Description"></key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
 </objectproperty>
 <mapproperties>
 <key id="Description"></key>
@@ -2422,6 +2487,30 @@ LegsCompleted el numero de tramos completados
 </mapproperties>
 </object>
 <object id="AllLegsCompleted" type="ingenias.editor.entities.FrameFact">
+<objectproperty id="Slots" collection="true">
+</objectproperty>
+<mapproperties>
+<key id="Description"></key>
+<key id="_view_type">UML</key>
+</mapproperties>
+</object>
+<object id="InitialAirport" type="ingenias.editor.entities.FrameFact">
+<objectproperty id="Slots" collection="true">
+<object id="446" type="ingenias.editor.entities.ObjectSlot">
+<mapproperties>
+<key id="Name">InitialAirport</key>
+<key id="Type">enums.Airport</key>
+<key id="Description"></key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+</objectproperty>
+<mapproperties>
+<key id="Description"></key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="AllowDescomposingPlan" type="ingenias.editor.entities.FrameFact">
 <objectproperty id="Slots" collection="true">
 </objectproperty>
 <mapproperties>
@@ -2899,9 +2988,9 @@ LegsCompleted el numero de tramos completados
 </object>
 <object id="71" type="ingenias.editor.entities.ObjectSlot">
 <mapproperties>
-<key id="Name">DeparturePoint</key>
+<key id="Name">DepartureAirport</key>
 <key id="Value"></key>
-<key id="Type">gov.nasa.worldwind.geom.Position</key>
+<key id="Type">enums.Airport</key>
 <key id="Code"></key>
 <key id="Description"></key>
 <key id="_view_type">UML</key>
@@ -2929,9 +3018,9 @@ LegsCompleted el numero de tramos completados
 </object>
 <object id="74" type="ingenias.editor.entities.ObjectSlot">
 <mapproperties>
-<key id="Name">DestinationPoint</key>
+<key id="Name">DestinationAirport</key>
 <key id="Value"></key>
-<key id="Type">gov.nasa.worldwind.geom.Position</key>
+<key id="Type">enums.Airport</key>
 <key id="Code"></key>
 <key id="Description"></key>
 <key id="_view_type">UML</key>
@@ -3520,6 +3609,22 @@ LegsCompleted el numero de tramos completados
 <key id="_view_type">INGENIAS</key>
 </mapproperties>
 </object>
+<object id="446" type="ingenias.editor.entities.ObjectSlot">
+<mapproperties>
+<key id="Name">InitialAirport</key>
+<key id="Type">enums.Airport</key>
+<key id="Description"></key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<object id="452" type="ingenias.editor.entities.ObjectSlot">
+<mapproperties>
+<key id="Name">InitialAirport</key>
+<key id="Type">enums.Airport</key>
+<key id="Description"></key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
 <object id="235" type="ingenias.editor.entities.Slot">
 <mapproperties>
 <key id="_view_type">UML</key>
@@ -3529,9 +3634,9 @@ LegsCompleted el numero de tramos completados
 <objectproperty id="Slot">
 <object id="74" type="ingenias.editor.entities.ObjectSlot">
 <mapproperties>
-<key id="Name">DestinationPoint</key>
+<key id="Name">DestinationAirport</key>
 <key id="Value"></key>
-<key id="Type">gov.nasa.worldwind.geom.Position</key>
+<key id="Type">enums.Airport</key>
 <key id="Code"></key>
 <key id="Description"></key>
 <key id="_view_type">UML</key>
@@ -3547,9 +3652,9 @@ LegsCompleted el numero de tramos completados
 <objectproperty id="Slot">
 <object id="71" type="ingenias.editor.entities.ObjectSlot">
 <mapproperties>
-<key id="Name">DeparturePoint</key>
+<key id="Name">DepartureAirport</key>
 <key id="Value"></key>
-<key id="Type">gov.nasa.worldwind.geom.Position</key>
+<key id="Type">enums.Airport</key>
 <key id="Code"></key>
 <key id="Description"></key>
 <key id="_view_type">UML</key>
@@ -3721,9 +3826,9 @@ LegsCompleted el numero de tramos completados
 </object>
 <object id="71" type="ingenias.editor.entities.ObjectSlot">
 <mapproperties>
-<key id="Name">DeparturePoint</key>
+<key id="Name">DepartureAirport</key>
 <key id="Value"></key>
-<key id="Type">gov.nasa.worldwind.geom.Position</key>
+<key id="Type">enums.Airport</key>
 <key id="Code"></key>
 <key id="Description"></key>
 <key id="_view_type">UML</key>
@@ -3751,9 +3856,9 @@ LegsCompleted el numero de tramos completados
 </object>
 <object id="74" type="ingenias.editor.entities.ObjectSlot">
 <mapproperties>
-<key id="Name">DestinationPoint</key>
+<key id="Name">DestinationAirport</key>
 <key id="Value"></key>
-<key id="Type">gov.nasa.worldwind.geom.Position</key>
+<key id="Type">enums.Airport</key>
 <key id="Code"></key>
 <key id="Description"></key>
 <key id="_view_type">UML</key>
@@ -5238,116 +5343,6 @@ La lista de puntos (waypoints) por los que tiene que pasar el avion durante el v
 <key id="_view_type">INGENIAS</key>
 </mapproperties>
 </role></relationship>
-<relationship id="383" type="ingenias.editor.entities.WFProduces">
-<object id="383" type="ingenias.editor.entities.WFProduces">
-<objectproperty id="Condition">
-</objectproperty>
-<mapproperties>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</object>
-<role idEntity="IniciateUpdateStatus" class="ingenias.editor.entities.FrameFact" roleName="WFProducestarget" type="ingenias.editor.entities.WFProducestargetRole" dgcid="1482565107">
-<mapproperties>
-<key id="attributeToShow">0</key>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</role><role idEntity="CreatePlaneInitialStatus" class="ingenias.editor.entities.Task" roleName="WFProducessource" type="ingenias.editor.entities.WFProducessourceRole" dgcid="1414135615">
-<mapproperties>
-<key id="attributeToShow">0</key>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</role></relationship>
-<relationship id="388" type="ingenias.editor.entities.GTPursues">
-<object id="388" type="ingenias.editor.entities.GTPursues">
-<mapproperties>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</object>
-<role idEntity="PlaneInitialStatusCreated" class="ingenias.editor.entities.Goal" roleName="GTPursuestarget" type="ingenias.editor.entities.GTPursuestargetRole" dgcid="1649907150">
-<mapproperties>
-<key id="attributeToShow">0</key>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</role><role idEntity="Plane" class="ingenias.editor.entities.Agent" roleName="GTPursuessource" type="ingenias.editor.entities.GTPursuessourceRole" dgcid="1460633769">
-<mapproperties>
-<key id="attributeToShow">0</key>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</role></relationship>
-<relationship id="314" type="ingenias.editor.entities.GTSatisfies">
-<object id="314" type="ingenias.editor.entities.GTSatisfies">
-<objectproperty id="SatisfactionCondition">
-</objectproperty>
-<mapproperties>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</object>
-<role idEntity="CreatePlaneInitialStatus" class="ingenias.editor.entities.Task" roleName="GTSatisfiessource" type="ingenias.editor.entities.GTSatisfiessourceRole" dgcid="1414135615">
-<mapproperties>
-<key id="attributeToShow">0</key>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</role><role idEntity="PlaneInitialStatusCreated" class="ingenias.editor.entities.Goal" roleName="GTSatisfiestarget" type="ingenias.editor.entities.GTSatisfiestargetRole" dgcid="1649907150">
-<mapproperties>
-<key id="attributeToShow">0</key>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</role></relationship>
-<relationship id="391" type="ingenias.editor.entities.WFConsumes">
-<object id="391" type="ingenias.editor.entities.WFConsumes">
-<objectproperty id="Condition">
-</objectproperty>
-<mapproperties>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</object>
-<role idEntity="PlaneMindNoInitialized" class="ingenias.editor.entities.FrameFact" roleName="WFConsumestarget" type="ingenias.editor.entities.WFConsumestargetRole" dgcid="844042135">
-<mapproperties>
-<key id="attributeToShow">0</key>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</role><role idEntity="CreatePlaneInitialStatus" class="ingenias.editor.entities.Task" roleName="WFConsumessource" type="ingenias.editor.entities.WFConsumessourceRole" dgcid="1414135615">
-<mapproperties>
-<key id="attributeToShow">0</key>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</role></relationship>
-<relationship id="308" type="ingenias.editor.entities.WFResponsable">
-<object id="308" type="ingenias.editor.entities.WFResponsable">
-<mapproperties>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</object>
-<role idEntity="CreatePlaneInitialStatus" class="ingenias.editor.entities.Task" roleName="WFResponsabletarget" type="ingenias.editor.entities.WFResponsabletargetRole" dgcid="1414135615">
-<mapproperties>
-<key id="attributeToShow">0</key>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</role><role idEntity="Plane" class="ingenias.editor.entities.Agent" roleName="WFResponsablesource" type="ingenias.editor.entities.WFResponsablesourceRole" dgcid="1460633769">
-<mapproperties>
-<key id="attributeToShow">0</key>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</role></relationship>
-<relationship id="389" type="ingenias.editor.entities.GTModifies">
-<object id="389" type="ingenias.editor.entities.GTModifies">
-<objectproperty id="Condition">
-</objectproperty>
-<mapproperties>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</object>
-<role idEntity="CreatePlaneInitialStatus" class="ingenias.editor.entities.Task" roleName="WFConsumessource" type="ingenias.editor.entities.WFConsumessourceRole" dgcid="1414135615">
-<mapproperties>
-<key id="attributeToShow">0</key>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</role><role idEntity="Plane Mind" class="ingenias.editor.entities.FrameFact" roleName="WFConsumestarget" type="ingenias.editor.entities.WFConsumestargetRole" dgcid="1177842774">
-<mapproperties>
-<key id="attributeToShow">0</key>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</role></relationship>
 <relationship id="5" type="ingenias.editor.entities.UMLRealizes">
 <object id="5" type="ingenias.editor.entities.UMLRealizes">
 <mapproperties>
@@ -6309,25 +6304,6 @@ La lista de puntos (waypoints) por los que tiene que pasar el avion durante el v
 <key id="_view_type">INGENIAS</key>
 </mapproperties>
 </role></relationship>
-<relationship id="431" type="ingenias.editor.entities.WFProduces">
-<object id="431" type="ingenias.editor.entities.WFProduces">
-<objectproperty id="Condition">
-</objectproperty>
-<mapproperties>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</object>
-<role idEntity="NotAllLegsCompleted" class="ingenias.editor.entities.FrameFact" roleName="WFProducestarget" type="ingenias.editor.entities.WFProducestargetRole" dgcid="1107220168">
-<mapproperties>
-<key id="attributeToShow">0</key>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</role><role idEntity="CreatePilotMind" class="ingenias.editor.entities.Task" roleName="WFProducessource" type="ingenias.editor.entities.WFProducessourceRole" dgcid="668804377">
-<mapproperties>
-<key id="attributeToShow">0</key>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</role></relationship>
 <relationship id="351" type="ingenias.editor.entities.CDUsesCode">
 <object id="351" type="ingenias.editor.entities.CDUsesCode">
 <mapproperties>
@@ -6392,7 +6368,7 @@ La lista de puntos (waypoints) por los que tiene que pasar el avion durante el v
 <key id="attributeToShow">0</key>
 <key id="_view_type">INGENIAS</key>
 </mapproperties>
-</role><role idEntity="PilotFlightPlannerInteraction" class="ingenias.editor.entities.Interaction" roleName="IAccessestarget" type="ingenias.editor.entities.IAccessestargetRole" dgcid="1154371034">
+</role><role idEntity="PilotFlightPlannerPlaneInteraction" class="ingenias.editor.entities.Interaction" roleName="IAccessestarget" type="ingenias.editor.entities.IAccessestargetRole" dgcid="1154371034">
 <mapproperties>
 <key id="attributeToShow">0</key>
 <key id="_view_type">INGENIAS</key>
@@ -6450,25 +6426,6 @@ La lista de puntos (waypoints) por los que tiene que pasar el avion durante el v
 <key id="_view_type">INGENIAS</key>
 </mapproperties>
 </role><role idEntity="PlanRequest" class="ingenias.editor.entities.FrameFact" roleName="WFProducestarget" type="ingenias.editor.entities.WFProducestargetRole" dgcid="1461496897">
-<mapproperties>
-<key id="attributeToShow">0</key>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</role></relationship>
-<relationship id="393" type="ingenias.editor.entities.WFUsesMethod">
-<object id="393" type="ingenias.editor.entities.WFUsesMethod">
-<objectproperty id="ApplicationMethod">
-</objectproperty>
-<mapproperties>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</object>
-<role idEntity="GivePlan" class="ingenias.editor.entities.Task" roleName="WFUsessource" type="ingenias.editor.entities.WFUsessourceRole" dgcid="73511583">
-<mapproperties>
-<key id="attributeToShow">0</key>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</role><role idEntity="Plane Position Service" class="ingenias.editor.entities.EnvironmentApplication" roleName="WFUsestarget" type="ingenias.editor.entities.WFUsestargetRole" dgcid="2109357978">
 <mapproperties>
 <key id="attributeToShow">0</key>
 <key id="_view_type">INGENIAS</key>
@@ -6541,23 +6498,6 @@ La lista de puntos (waypoints) por los que tiene que pasar el avion durante el v
 <key id="_view_type">INGENIAS</key>
 </mapproperties>
 </role><role idEntity="AskForPlan" class="ingenias.editor.entities.Task" roleName="WFResponsabletarget" type="ingenias.editor.entities.WFResponsabletargetRole" dgcid="1599287530">
-<mapproperties>
-<key id="attributeToShow">0</key>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</role></relationship>
-<relationship id="326" type="ingenias.editor.entities.IAccesses">
-<object id="326" type="ingenias.editor.entities.IAccesses">
-<mapproperties>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</object>
-<role idEntity="GivePlan" class="ingenias.editor.entities.Task" roleName="IAccessessource" type="ingenias.editor.entities.IAccessessourceRole" dgcid="73511583">
-<mapproperties>
-<key id="attributeToShow">0</key>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</role><role idEntity="PilotFlightPlannerInteraction" class="ingenias.editor.entities.Interaction" roleName="IAccessestarget" type="ingenias.editor.entities.IAccessestargetRole" dgcid="827145041">
 <mapproperties>
 <key id="attributeToShow">0</key>
 <key id="_view_type">INGENIAS</key>
@@ -6651,6 +6591,262 @@ La lista de puntos (waypoints) por los que tiene que pasar el avion durante el v
 <key id="_view_type">INGENIAS</key>
 </mapproperties>
 </role><role idEntity="PlanAnswer" class="ingenias.editor.entities.FrameFact" roleName="WFProducestarget" type="ingenias.editor.entities.WFProducestargetRole" dgcid="444161828">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="326" type="ingenias.editor.entities.IAccesses">
+<object id="326" type="ingenias.editor.entities.IAccesses">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="GivePlan" class="ingenias.editor.entities.Task" roleName="IAccessessource" type="ingenias.editor.entities.IAccessessourceRole" dgcid="73511583">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="PilotFlightPlannerPlaneInteraction" class="ingenias.editor.entities.Interaction" roleName="IAccessestarget" type="ingenias.editor.entities.IAccessestargetRole" dgcid="1312414250">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="393" type="ingenias.editor.entities.WFProduces">
+<object id="393" type="ingenias.editor.entities.WFProduces">
+<objectproperty id="Condition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Take Initial Plan" class="ingenias.editor.entities.Task" roleName="WFProducessource" type="ingenias.editor.entities.WFProducessourceRole" dgcid="2100832407">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="InitialAirport" class="ingenias.editor.entities.FrameFact" roleName="WFProducestarget" type="ingenias.editor.entities.WFProducestargetRole" dgcid="1547394304">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="389" type="ingenias.editor.entities.GTModifies">
+<object id="389" type="ingenias.editor.entities.GTModifies">
+<objectproperty id="Condition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="CreatePlaneInitialStatus" class="ingenias.editor.entities.Task" roleName="WFConsumessource" type="ingenias.editor.entities.WFConsumessourceRole" dgcid="1414135615">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="Plane Mind" class="ingenias.editor.entities.FrameFact" roleName="WFConsumestarget" type="ingenias.editor.entities.WFConsumestargetRole" dgcid="1177842774">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="451" type="ingenias.editor.entities.WFConsumes">
+<object id="451" type="ingenias.editor.entities.WFConsumes">
+<objectproperty id="Condition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="InitialAirport" class="ingenias.editor.entities.FrameFact" roleName="WFConsumestarget" type="ingenias.editor.entities.WFConsumestargetRole" dgcid="716980008">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="CreatePlaneInitialStatus" class="ingenias.editor.entities.Task" roleName="WFConsumessource" type="ingenias.editor.entities.WFConsumessourceRole" dgcid="179871327">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="447" type="ingenias.editor.entities.WFResponsable">
+<object id="447" type="ingenias.editor.entities.WFResponsable">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="CreatePlaneInitialStatus" class="ingenias.editor.entities.Task" roleName="WFResponsabletarget" type="ingenias.editor.entities.WFResponsabletargetRole" dgcid="179871327">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="PlaneColaborator" class="ingenias.editor.entities.Role" roleName="WFResponsablesource" type="ingenias.editor.entities.WFResponsablesourceRole" dgcid="1129032925">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="448" type="ingenias.editor.entities.GTSatisfies">
+<object id="448" type="ingenias.editor.entities.GTSatisfies">
+<objectproperty id="SatisfactionCondition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Flight Plan Taken" class="ingenias.editor.entities.Goal" roleName="GTSatisfiestarget" type="ingenias.editor.entities.GTSatisfiestargetRole" dgcid="1093507265">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="CreatePlaneInitialStatus" class="ingenias.editor.entities.Task" roleName="GTSatisfiessource" type="ingenias.editor.entities.GTSatisfiessourceRole" dgcid="179871327">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="308" type="ingenias.editor.entities.WFResponsable">
+<object id="308" type="ingenias.editor.entities.WFResponsable">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="PilotInitiator" class="ingenias.editor.entities.Role" roleName="WFResponsablesource" type="ingenias.editor.entities.WFResponsablesourceRole" dgcid="423242615">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="StartDescomposingPlan" class="ingenias.editor.entities.Task" roleName="WFResponsabletarget" type="ingenias.editor.entities.WFResponsabletargetRole" dgcid="1755198088">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="431" type="ingenias.editor.entities.GTSatisfies">
+<object id="431" type="ingenias.editor.entities.GTSatisfies">
+<objectproperty id="SatisfactionCondition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Flight Plan Taken" class="ingenias.editor.entities.Goal" roleName="GTSatisfiestarget" type="ingenias.editor.entities.GTSatisfiestargetRole" dgcid="1098838960">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="StartDescomposingPlan" class="ingenias.editor.entities.Task" roleName="GTSatisfiessource" type="ingenias.editor.entities.GTSatisfiessourceRole" dgcid="1755198088">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="454" type="ingenias.editor.entities.IAccesses">
+<object id="454" type="ingenias.editor.entities.IAccesses">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="PilotFlightPlannerPlaneInteraction" class="ingenias.editor.entities.Interaction" roleName="IAccessestarget" type="ingenias.editor.entities.IAccessestargetRole" dgcid="1128870594">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="StartDescomposingPlan" class="ingenias.editor.entities.Task" roleName="IAccessessource" type="ingenias.editor.entities.IAccessessourceRole" dgcid="1755198088">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="456" type="ingenias.editor.entities.WFConsumes">
+<object id="456" type="ingenias.editor.entities.WFConsumes">
+<objectproperty id="Condition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="AllowDescomposingPlan" class="ingenias.editor.entities.FrameFact" roleName="WFConsumestarget" type="ingenias.editor.entities.WFConsumestargetRole" dgcid="1271196687">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="StartDescomposingPlan" class="ingenias.editor.entities.Task" roleName="WFConsumessource" type="ingenias.editor.entities.WFConsumessourceRole" dgcid="1755198088">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="458" type="ingenias.editor.entities.IAccesses">
+<object id="458" type="ingenias.editor.entities.IAccesses">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="CreatePlaneInitialStatus" class="ingenias.editor.entities.Task" roleName="IAccessessource" type="ingenias.editor.entities.IAccessessourceRole" dgcid="1351497917">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="PilotFlightPlannerPlaneInteraction" class="ingenias.editor.entities.Interaction" roleName="IAccessestarget" type="ingenias.editor.entities.IAccessestargetRole" dgcid="2092946121">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="445" type="ingenias.editor.entities.GTCreates">
+<object id="445" type="ingenias.editor.entities.GTCreates">
+<objectproperty id="Condition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="NotAllLegsCompleted" class="ingenias.editor.entities.FrameFact" roleName="GTCreatestarget" type="ingenias.editor.entities.GTCreatestargetRole" dgcid="1743491526">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="StartDescomposingPlan" class="ingenias.editor.entities.Task" roleName="GTCreatessource" type="ingenias.editor.entities.GTCreatessourceRole" dgcid="1755198088">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="450" type="ingenias.editor.entities.WFProduces">
+<object id="450" type="ingenias.editor.entities.WFProduces">
+<objectproperty id="Condition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="AllowDescomposingPlan" class="ingenias.editor.entities.FrameFact" roleName="WFProducestarget" type="ingenias.editor.entities.WFProducestargetRole" dgcid="762292209">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="CreatePlaneInitialStatus" class="ingenias.editor.entities.Task" roleName="WFProducessource" type="ingenias.editor.entities.WFProducessourceRole" dgcid="1351497917">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="383" type="ingenias.editor.entities.GTCreates">
+<object id="383" type="ingenias.editor.entities.GTCreates">
+<objectproperty id="Condition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="IniciateUpdateStatus" class="ingenias.editor.entities.FrameFact" roleName="GTCreatestarget" type="ingenias.editor.entities.GTCreatestargetRole" dgcid="1465177571">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="CreatePlaneInitialStatus" class="ingenias.editor.entities.Task" roleName="GTCreatessource" type="ingenias.editor.entities.GTCreatessourceRole" dgcid="1351497917">
 <mapproperties>
 <key id="attributeToShow">0</key>
 <key id="_view_type">INGENIAS</key>
@@ -6809,6 +7005,40 @@ La lista de puntos (waypoints) por los que tiene que pasar el avion durante el v
 <key id="_view_type">INGENIAS</key>
 </mapproperties>
 </role></relationship>
+<relationship id="453" type="ingenias.editor.entities.WFPlays">
+<object id="453" type="ingenias.editor.entities.WFPlays">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Plane" class="ingenias.editor.entities.Agent" roleName="WFPlayssource" type="ingenias.editor.entities.WFPlayssourceRole" dgcid="692313530">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="PlaneColaborator" class="ingenias.editor.entities.Role" roleName="WFPlaystarget" type="ingenias.editor.entities.WFPlaystargetRole" dgcid="1740472903">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="449" type="ingenias.editor.entities.GTPursues">
+<object id="449" type="ingenias.editor.entities.GTPursues">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Flight Plan Taken" class="ingenias.editor.entities.Goal" roleName="GTPursuestarget" type="ingenias.editor.entities.GTPursuestargetRole" dgcid="276607632">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="Plane" class="ingenias.editor.entities.Agent" roleName="GTPursuessource" type="ingenias.editor.entities.GTPursuessourceRole" dgcid="692313530">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
 <relationship id="333" type="ingenias.editor.entities.UIInitiates">
 <object id="333" type="ingenias.editor.entities.UIInitiates">
 <objectproperty id="Condition">
@@ -6834,7 +7064,7 @@ La lista de puntos (waypoints) por los que tiene que pasar el avion durante el v
 <key id="_view_type">INGENIAS</key>
 </mapproperties>
 </object>
-<role idEntity="PilotFlightPlannerInteraction" class="ingenias.editor.entities.Interaction" roleName="IColaboratessource" type="ingenias.editor.entities.IColaboratessourceRole" dgcid="2124032139">
+<role idEntity="PilotFlightPlannerPlaneInteraction" class="ingenias.editor.entities.Interaction" roleName="IColaboratessource" type="ingenias.editor.entities.IColaboratessourceRole" dgcid="2124032139">
 <mapproperties>
 <key id="attributeToShow">0</key>
 <key id="_view_type">INGENIAS</key>
@@ -6906,7 +7136,7 @@ La lista de puntos (waypoints) por los que tiene que pasar el avion durante el v
 <key id="_view_type">INGENIAS</key>
 </mapproperties>
 </object>
-<role idEntity="PilotFlightPlannerInteraction" class="ingenias.editor.entities.Interaction" roleName="IHasSpecsource" type="ingenias.editor.entities.IHasSpecsourceRole" dgcid="2124032139">
+<role idEntity="PilotFlightPlannerPlaneInteraction" class="ingenias.editor.entities.Interaction" roleName="IHasSpecsource" type="ingenias.editor.entities.IHasSpecsourceRole" dgcid="2124032139">
 <mapproperties>
 <key id="attributeToShow">0</key>
 <key id="_view_type">INGENIAS</key>
@@ -6923,7 +7153,7 @@ La lista de puntos (waypoints) por los que tiene que pasar el avion durante el v
 <key id="_view_type">INGENIAS</key>
 </mapproperties>
 </object>
-<role idEntity="PilotFlightPlannerInteraction" class="ingenias.editor.entities.Interaction" roleName="IInitiatessource" type="ingenias.editor.entities.IInitiatessourceRole" dgcid="2124032139">
+<role idEntity="PilotFlightPlannerPlaneInteraction" class="ingenias.editor.entities.Interaction" roleName="IInitiatessource" type="ingenias.editor.entities.IInitiatessourceRole" dgcid="2124032139">
 <mapproperties>
 <key id="attributeToShow">0</key>
 <key id="_view_type">INGENIAS</key>
@@ -6948,6 +7178,133 @@ La lista de puntos (waypoints) por los que tiene que pasar el avion durante el v
 <key id="_view_type">INGENIAS</key>
 </mapproperties>
 </role><role idEntity="PilotInitiator" class="ingenias.editor.entities.Role" roleName="UIColaboratestarget" type="ingenias.editor.entities.UIColaboratestargetRole" dgcid="1202740272">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="359" type="ingenias.editor.entities.IColaborates">
+<object id="359" type="ingenias.editor.entities.IColaborates">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="PlaneColaborator" class="ingenias.editor.entities.Role" roleName="IColaboratestarget" type="ingenias.editor.entities.IColaboratestargetRole" dgcid="683365982">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="PilotFlightPlannerPlaneInteraction" class="ingenias.editor.entities.Interaction" roleName="IColaboratessource" type="ingenias.editor.entities.IColaboratessourceRole" dgcid="2124032139">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="443" type="ingenias.editor.entities.UIColaborates">
+<object id="443" type="ingenias.editor.entities.UIColaborates">
+<objectproperty id="Condition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="PlaneColaborator" class="ingenias.editor.entities.Role" roleName="UIColaboratestarget" type="ingenias.editor.entities.UIColaboratestargetRole" dgcid="1664635563">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="InteractionUnit6" class="ingenias.editor.entities.InteractionUnit" roleName="UIColaboratessource" type="ingenias.editor.entities.UIColaboratessourceRole" dgcid="1848058596">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="444" type="ingenias.editor.entities.UIPrecedes">
+<object id="444" type="ingenias.editor.entities.UIPrecedes">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="InteractionUnit6" class="ingenias.editor.entities.InteractionUnit" roleName="UIPrecedestarget" type="ingenias.editor.entities.UIPrecedestargetRole" dgcid="1848058596">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="InteractionUnit5" class="ingenias.editor.entities.InteractionUnit" roleName="UIPrecedessource" type="ingenias.editor.entities.UIPrecedessourceRole" dgcid="81176996">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="314" type="ingenias.editor.entities.UIInitiates">
+<object id="314" type="ingenias.editor.entities.UIInitiates">
+<objectproperty id="Condition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="PilotInitiator" class="ingenias.editor.entities.Role" roleName="UIInitiatestarget" type="ingenias.editor.entities.UIInitiatestargetRole" dgcid="915063877">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="InteractionUnit6" class="ingenias.editor.entities.InteractionUnit" roleName="UIInitiatessource" type="ingenias.editor.entities.UIInitiatessourceRole" dgcid="1848058596">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="388" type="ingenias.editor.entities.UIPrecedes">
+<object id="388" type="ingenias.editor.entities.UIPrecedes">
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="InteractionUnit6" class="ingenias.editor.entities.InteractionUnit" roleName="UIPrecedessource" type="ingenias.editor.entities.UIPrecedessourceRole" dgcid="1848058596">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="InteractionUnit7" class="ingenias.editor.entities.InteractionUnit" roleName="UIPrecedestarget" type="ingenias.editor.entities.UIPrecedestargetRole" dgcid="345277543">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="391" type="ingenias.editor.entities.UIInitiates">
+<object id="391" type="ingenias.editor.entities.UIInitiates">
+<objectproperty id="Condition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="PlaneColaborator" class="ingenias.editor.entities.Role" roleName="UIInitiatestarget" type="ingenias.editor.entities.UIInitiatestargetRole" dgcid="1664635563">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="InteractionUnit7" class="ingenias.editor.entities.InteractionUnit" roleName="UIInitiatessource" type="ingenias.editor.entities.UIInitiatessourceRole" dgcid="345277543">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="392" type="ingenias.editor.entities.UIColaborates">
+<object id="392" type="ingenias.editor.entities.UIColaborates">
+<objectproperty id="Condition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="PilotInitiator" class="ingenias.editor.entities.Role" roleName="UIColaboratestarget" type="ingenias.editor.entities.UIColaboratestargetRole" dgcid="915063877">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="InteractionUnit7" class="ingenias.editor.entities.InteractionUnit" roleName="UIColaboratessource" type="ingenias.editor.entities.UIColaboratessourceRole" dgcid="345277543">
 <mapproperties>
 <key id="attributeToShow">0</key>
 <key id="_view_type">INGENIAS</key>
@@ -11291,199 +11648,6 @@ La lista de puntos (waypoints) por los que tiene que pasar el avion durante el v
 	</node>
 	</layout>
 </gxl> </model>
- <model id="Create Plane Initial Status" type="ingenias.editor.models.TasksAndGoalsModelModelJGraph">
-<object id="Create Plane Initial Status" type="ingenias.editor.entities.TasksAndGoalsModelDataEntity">
-<mapproperties>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</object>
-  <path>
-    <package id="Project"/>
-    <package id="Plane"/>
-   </path>
-<gxl>
-
-	<graph>
-			
-	<node id="314" nid="1778858866" type="GTSatisfies">
-
-	<connected id="1414135615">
-
-
-	</connected>
-	<connected id="1649907150">
-
-
-
-	</connected>
-	</node>
-			
-	<node id="388" nid="1123445436" type="GTPursues">
-
-	<connected id="1460633769">
-
-
-	</connected>
-	<connected id="1649907150">
-
-
-
-	</connected>
-	</node>
-			
-	<node id="391" nid="1051858901" type="WFConsumes">
-
-	<connected id="1414135615">
-
-
-	</connected>
-	<connected id="844042135">
-
-
-
-	</connected>
-	</node>
-			
-	<node id="308" nid="664294338" type="WFResponsable">
-
-	<connected id="1460633769">
-
-
-	</connected>
-	<connected id="1414135615">
-
-
-
-	</connected>
-	</node>
-			
-	<node id="PlaneInitialStatusCreated" nid="1649907150" type="Goal">
-
-	</node>
-			
-	<node id="IniciateUpdateStatus" nid="1482565107" type="FrameFact">
-
-	</node>
-			
-	<node id="389" nid="1066557918" type="GTModifies">
-
-	<connected id="1414135615">
-
-
-	</connected>
-	<connected id="1177842774">
-
-
-
-	</connected>
-	</node>
-			
-	<node id="Plane Mind" nid="1177842774" type="FrameFact">
-
-	</node>
-			
-	<node id="CreatePlaneInitialStatus" nid="1414135615" type="Task">
-
-	</node>
-			
-	<node id="PlaneMindNoInitialized" nid="844042135" type="FrameFact">
-
-	</node>
-			
-	<node id="383" nid="119635951" type="WFProduces">
-
-	<connected id="1482565107">
-
-
-
-	</connected>
-	<connected id="1414135615">
-
-
-	</connected>
-	</node>
-			
-	<node id="Plane" nid="1460633769" type="Agent">
-
-	</node>
-	</graph>
-
-
-	<layout>
-			
-	<node id="node8">
-		<attr name="bounds">
-			<rectangle x="268" y="64" width="69" height="15"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node7">
-		<attr name="bounds">
-			<rectangle x="126" y="67" width="66" height="15"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node9">
-		<attr name="bounds">
-			<rectangle x="402" y="69" width="79" height="15"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node10">
-		<attr name="bounds">
-			<rectangle x="115" y="99" width="91" height="15"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node1">
-		<attr name="bounds">
-			<rectangle x="239" y="4" width="132" height="50"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node2">
-		<attr name="bounds">
-			<rectangle x="512" y="175" width="106" height="46"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node11">
-		<attr name="bounds">
-			<rectangle x="407" y="113" width="66" height="15"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node3">
-		<attr name="bounds">
-			<rectangle x="517" y="106" width="60" height="46"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node0">
-		<attr name="bounds">
-			<rectangle x="241" y="88" width="123" height="43"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node4">
-		<attr name="bounds">
-			<rectangle x="519" y="23" width="119" height="46"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node6">
-		<attr name="bounds">
-			<rectangle x="401" y="147" width="74" height="15"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node5">
-		<attr name="bounds">
-			<rectangle x="44" y="77" width="35" height="57"></rectangle>		</attr>
-
-	</node>
-	</layout>
-</gxl> </model>
  <model id="Position Sensors" type="ingenias.editor.models.ComponentDiagramModelJGraph">
 <object id="Position Sensors" type="ingenias.editor.entities.ComponentDiagramDataEntity">
 <mapproperties>
@@ -13379,30 +13543,8 @@ Este diagrama se mete dentro de la carpeta init para que cuando la aplicacion ll
 	</connected>
 	</node>
 			
-	<node id="NotAllLegsCompleted" nid="1107220168" type="FrameFact">
-
-	</node>
-			
 	<node id="Flight Plan" nid="689559925" type="FrameFact">
 
-	</node>
-			
-	<node id="431" nid="1775223725" type="WFProduces">
-
-	<connected id="1107220168"><attr name="extraLabels">
-			<array>
-
-</array>
-</attr>
-
-
-
-
-	</connected>
-	<connected id="668804377">
-
-
-	</connected>
 	</node>
 			
 	<node id="CreatePilotMind" nid="668804377" type="Task">
@@ -13459,21 +13601,9 @@ Este diagrama se mete dentro de la carpeta init para que cuando la aplicacion ll
 
 	</node>
 			
-	<node id="node10">
-		<attr name="bounds">
-			<rectangle x="464" y="204" width="139" height="46"></rectangle>		</attr>
-
-	</node>
-			
 	<node id="node1">
 		<attr name="bounds">
 			<rectangle x="467" y="46" width="116" height="46"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node11">
-		<attr name="bounds">
-			<rectangle x="345" y="163" width="74" height="15"></rectangle>		</attr>
 
 	</node>
 			
@@ -13612,8 +13742,8 @@ Este diagrama se mete dentro de la carpeta init para que cuando la aplicacion ll
 	</node>
 	</layout>
 </gxl> </model>
- <model id="Create Initial Plan Tasks" type="ingenias.editor.models.TasksAndGoalsModelModelJGraph">
-<object id="Create Initial Plan Tasks" type="ingenias.editor.entities.TasksAndGoalsModelDataEntity">
+ <model id="Create Initial Plan Tasks 1" type="ingenias.editor.models.TasksAndGoalsModelModelJGraph">
+<object id="Create Initial Plan Tasks 1" type="ingenias.editor.entities.TasksAndGoalsModelDataEntity">
 <mapproperties>
 <key id="Description">En este diagrama representamos como se le suministra al piloto el plan de vuelo inicial. Para esta aproximacion se suministra al piloto un plan de vuelo predefinido y que no va a cambiar durante toda la duraciondel vuelo.</key>
 <key id="_view_type">INGENIAS</key>
@@ -13628,27 +13758,6 @@ Este diagrama se mete dentro de la carpeta init para que cuando la aplicacion ll
 
 	<graph>
 			
-	<node id="Plane Position Service" nid="2109357978" type="EnvironmentApplication">
-
-	</node>
-			
-	<node id="393" nid="1871852078" type="WFUsesMethod">
-
-	<connected id="73511583">
-
-
-	</connected>
-	<connected id="2109357978">
-
-
-
-	</connected>
-	</node>
-			
-	<node id="Flight Plan Taken" nid="731416578" type="Goal">
-
-	</node>
-			
 	<node id="InteractionTriggerer" nid="287593087" type="FrameFact">
 
 	</node>
@@ -13658,6 +13767,10 @@ Este diagrama se mete dentro de la carpeta init para que cuando la aplicacion ll
 	</node>
 			
 	<node id="Take Initial Plan" nid="2100832407" type="Task">
+
+	</node>
+			
+	<node id="Flight Plan Taken" nid="731416578" type="Goal">
 
 	</node>
 			
@@ -13674,7 +13787,7 @@ Este diagrama se mete dentro de la carpeta init para que cuando la aplicacion ll
 	</connected>
 	</node>
 			
-	<node id="PilotFlightPlannerInteraction" nid="1154371034" type="Interaction">
+	<node id="PilotFlightPlannerPlaneInteraction" nid="1154371034" type="Interaction">
 
 	</node>
 			
@@ -13696,10 +13809,6 @@ Este diagrama se mete dentro de la carpeta init para que cuando la aplicacion ll
 	</node>
 			
 	<node id="PlanAnswer" nid="444161828" type="FrameFact">
-
-	</node>
-			
-	<node id="PilotFlightPlannerInteraction" nid="827145041" type="Interaction">
 
 	</node>
 			
@@ -13746,19 +13855,6 @@ Este diagrama se mete dentro de la carpeta init para que cuando la aplicacion ll
 
 	</node>
 			
-	<node id="326" nid="1770136445" type="IAccesses">
-
-	<connected id="73511583">
-
-
-	</connected>
-	<connected id="827145041">
-
-
-
-	</connected>
-	</node>
-			
 	<node id="Flight Plan Taken" nid="2020208828" type="Goal">
 
 	</node>
@@ -13779,6 +13875,24 @@ Este diagrama se mete dentro de la carpeta init para que cuando la aplicacion ll
 
 	</node>
 			
+	<node id="393" nid="1131372696" type="WFProduces">
+
+	<connected id="1547394304"><attr name="extraLabels">
+			<array>
+
+</array>
+</attr>
+
+
+
+
+	</connected>
+	<connected id="2100832407">
+
+
+	</connected>
+	</node>
+			
 	<node id="321" nid="144013098" type="WFResponsable">
 
 	<connected id="857843509">
@@ -13790,6 +13904,10 @@ Este diagrama se mete dentro de la carpeta init para que cuando la aplicacion ll
 
 
 	</connected>
+	</node>
+			
+	<node id="PilotFlightPlannerPlaneInteraction" nid="1312414250" type="Interaction">
+
 	</node>
 			
 	<node id="336" nid="1666949018" type="GTSatisfies">
@@ -13886,6 +14004,28 @@ Este diagrama se mete dentro de la carpeta init para que cuando la aplicacion ll
 	</connected>
 	</node>
 			
+	<node id="InitialAirport" nid="1547394304" type="FrameFact">
+
+	</node>
+			
+	<node id="326" nid="1399482107" type="IAccesses">
+
+	<connected id="73511583"><attr name="extraLabels">
+			<array>
+
+</array>
+</attr>
+
+
+
+	</connected>
+	<connected id="1312414250">
+
+
+
+	</connected>
+	</node>
+			
 	<node id="30" nid="420914142" type="Consumes">
 
 	<connected id="1599287530">
@@ -13916,91 +14056,73 @@ Este diagrama se mete dentro de la carpeta init para que cuando la aplicacion ll
 
 	<layout>
 			
-	<node id="node5">
-		<attr name="bounds">
-			<rectangle x="499" y="267" width="175" height="51"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node24">
-		<attr name="bounds">
-			<rectangle x="374" y="304" width="88" height="15"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node18">
-		<attr name="bounds">
-			<rectangle x="269" y="13" width="99" height="50"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node17">
+	<node id="node15">
 		<attr name="bounds">
 			<rectangle x="503" y="14" width="126" height="40"></rectangle>		</attr>
 
 	</node>
 			
-	<node id="node16">
+	<node id="node14">
 		<attr name="bounds">
 			<rectangle x="40" y="305" width="123" height="43"></rectangle>		</attr>
 
 	</node>
 			
-	<node id="node13">
+	<node id="node12">
 		<attr name="bounds">
 			<rectangle x="259" y="531" width="81" height="43"></rectangle>		</attr>
 
 	</node>
 			
-	<node id="node32">
+	<node id="node16">
+		<attr name="bounds">
+			<rectangle x="269" y="13" width="99" height="50"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node28">
 		<attr name="bounds">
 			<rectangle x="398" y="108" width="64" height="15"></rectangle>		</attr>
 
 	</node>
 			
-	<node id="node7">
+	<node id="node6">
 		<attr name="bounds">
 			<rectangle x="502" y="528" width="153" height="54"></rectangle>		</attr>
 
 	</node>
 			
-	<node id="node27">
+	<node id="node24">
 		<attr name="bounds">
 			<rectangle x="260" y="500" width="69" height="15"></rectangle>		</attr>
 
 	</node>
 			
-	<node id="node8">
+	<node id="node7">
 		<attr name="bounds">
 			<rectangle x="501" y="163" width="96" height="46"></rectangle>		</attr>
 
 	</node>
 			
-	<node id="node15">
+	<node id="node13">
 		<attr name="bounds">
 			<rectangle x="518" y="394" width="57" height="46"></rectangle>		</attr>
 
 	</node>
 			
-	<node id="node14">
-		<attr name="bounds">
-			<rectangle x="501" y="329" width="145" height="54"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node20">
+	<node id="node18">
 		<attr name="bounds">
 			<rectangle x="389" y="545" width="64" height="15"></rectangle>		</attr>
 
 	</node>
 			
-	<node id="node31">
+	<node id="node27">
 		<attr name="bounds">
 			<rectangle x="178" y="317" width="91" height="15"></rectangle>		</attr>
 
 	</node>
 			
-	<node id="node23">
+	<node id="node21">
 		<attr name="bounds">
 			<rectangle x="387" y="146" width="74" height="15"></rectangle>		</attr>
 
@@ -14012,19 +14134,13 @@ Este diagrama se mete dentro de la carpeta init para que cuando la aplicacion ll
 
 	</node>
 			
-	<node id="node29">
-		<attr name="bounds">
-			<rectangle x="387" y="330" width="64" height="15"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node11">
+	<node id="node10">
 		<attr name="bounds">
 			<rectangle x="273" y="204" width="99" height="50"></rectangle>		</attr>
 
 	</node>
 			
-	<node id="node6">
+	<node id="node5">
 		<attr name="bounds">
 			<rectangle x="44" y="530" width="123" height="43"></rectangle>		</attr>
 
@@ -14042,31 +14158,43 @@ Este diagrama se mete dentro de la carpeta init para que cuando la aplicacion ll
 
 	</node>
 			
-	<node id="node12">
+	<node id="node11">
 		<attr name="bounds">
 			<rectangle x="514" y="450" width="57" height="46"></rectangle>		</attr>
 
 	</node>
 			
-	<node id="node28">
+	<node id="node34">
+		<attr name="bounds">
+			<rectangle x="382" y="609" width="74" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node25">
 		<attr name="bounds">
 			<rectangle x="176" y="111" width="91" height="15"></rectangle>		</attr>
 
 	</node>
 			
-	<node id="node19">
+	<node id="node32">
+		<attr name="bounds">
+			<rectangle x="505" y="291" width="153" height="54"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node17">
 		<attr name="bounds">
 			<rectangle x="281" y="271" width="69" height="15"></rectangle>		</attr>
 
 	</node>
 			
-	<node id="node10">
+	<node id="node9">
 		<attr name="bounds">
-			<rectangle x="505" y="605" width="150" height="46"></rectangle>		</attr>
+			<rectangle x="505" y="596" width="150" height="46"></rectangle>		</attr>
 
 	</node>
 			
-	<node id="node9">
+	<node id="node8">
 		<attr name="bounds">
 			<rectangle x="274" y="104" width="73" height="43"></rectangle>		</attr>
 
@@ -14078,7 +14206,7 @@ Este diagrama se mete dentro de la carpeta init para que cuando la aplicacion ll
 
 	</node>
 			
-	<node id="node21">
+	<node id="node19">
 		<attr name="bounds">
 			<rectangle x="366" y="278" width="79" height="15"></rectangle>		</attr>
 
@@ -14090,39 +14218,583 @@ Este diagrama se mete dentro de la carpeta init para que cuando la aplicacion ll
 
 	</node>
 			
-	<node id="node34">
+	<node id="node30">
 		<attr name="bounds">
 			<rectangle x="390" y="362" width="74" height="15"></rectangle>		</attr>
 
 	</node>
 			
-	<node id="node26">
+	<node id="node23">
 		<attr name="bounds">
 			<rectangle x="168" y="544" width="91" height="15"></rectangle>		</attr>
 
 	</node>
 			
-	<node id="node25">
+	<node id="node22">
 		<attr name="bounds">
 			<rectangle x="388" y="503" width="79" height="15"></rectangle>		</attr>
 
 	</node>
 			
-	<node id="node30">
+	<node id="node26">
 		<attr name="bounds">
-			<rectangle x="390" y="578" width="64" height="15"></rectangle>		</attr>
+			<rectangle x="390" y="573" width="64" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node31">
+		<attr name="bounds">
+			<rectangle x="500" y="651" width="57" height="46"></rectangle>		</attr>
 
 	</node>
 			
 	<node id="node33">
 		<attr name="bounds">
+			<rectangle x="389" y="314" width="64" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node29">
+		<attr name="bounds">
 			<rectangle x="397" y="76" width="63" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node20">
+		<attr name="bounds">
+			<rectangle x="279" y="76" width="69" height="15"></rectangle>		</attr>
+
+	</node>
+	</layout>
+</gxl> </model>
+ <model id="Create Initial Plan Tasks 2" type="ingenias.editor.models.TasksAndGoalsModelModelJGraph">
+<object id="Create Initial Plan Tasks 2" type="ingenias.editor.entities.TasksAndGoalsModelDataEntity">
+<mapproperties>
+<key id="Description"></key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+  <path>
+    <package id="Project"/>
+    <package id="Plan Creation And Monitorization"/>
+    <package id="Plan Creation"/>
+   </path>
+<gxl>
+
+	<graph>
+			
+	<node id="IniciateUpdateStatus" nid="1465177571" type="FrameFact">
+
+	</node>
+			
+	<node id="458" nid="871746498" type="IAccesses">
+
+	<connected id="1351497917"><attr name="extraLabels">
+			<array>
+
+</array>
+</attr>
+
+
+
+	</connected>
+	<connected id="2092946121">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="CreatePlaneInitialStatus" nid="1351497917" type="Task">
+
+	</node>
+			
+	<node id="451" nid="782023169" type="WFConsumes">
+
+	<connected id="1351497917"><attr name="extraLabels">
+			<array>
+
+</array>
+</attr>
+
+		<attr name="points">
+			<list>
+		<attr name="points0">
+			<point x="454.5" y="64.5"></point>
+		</attr>
+		<attr name="points1">
+			<point x="313.5" y="105.5"></point>
+		</attr>
+
+</list>
+		</attr>
+
+
+	</connected>
+	<connected id="1944627137">
+
+		<attr name="points">
+			<list>
+		<attr name="points0">
+			<point x="454.5" y="64.5"></point>
+		</attr>
+		<attr name="points1">
+			<point x="561.5" y="34.0"></point>
+		</attr>
+
+</list>
+		</attr>
+
+
+	</connected>
+	</node>
+			
+	<node id="456" nid="1709262237" type="WFConsumes">
+
+	<connected id="1755198088"><attr name="extraLabels">
+			<array>
+
+</array>
+</attr>
+
+
+
+	</connected>
+	<connected id="1271196687">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="PilotFlightPlannerPlaneInteraction" nid="2092946121" type="Interaction">
+
+	</node>
+			
+	<node id="InitialAirport" nid="1944627137" type="FrameFact">
+
+	</node>
+			
+	<node id="450" nid="1390242630" type="WFProduces">
+
+	<connected id="762292209"><attr name="extraLabels">
+			<array>
+
+</array>
+</attr>
+
+
+
+
+	</connected>
+	<connected id="1351497917">
+
+
+	</connected>
+	</node>
+			
+	<node id="383" nid="810556848" type="GTCreates">
+
+	<connected id="1351497917"><attr name="extraLabels">
+			<array>
+
+</array>
+</attr>
+
+
+
+	</connected>
+	<connected id="1465177571">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="NotAllLegsCompleted" nid="1743491526" type="FrameFact">
+
+	</node>
+			
+	<node id="Flight Plan Taken" nid="1098838960" type="Goal">
+
+	</node>
+			
+	<node id="448" nid="635599157" type="GTSatisfies">
+
+	<connected id="1351497917"><attr name="extraLabels">
+			<array>
+
+</array>
+</attr>
+
+		<attr name="points">
+			<list>
+		<attr name="points0">
+			<point x="313.5" y="71.5"></point>
+		</attr>
+		<attr name="points1">
+			<point x="313.5" y="105.5"></point>
+		</attr>
+
+</list>
+		</attr>
+
+
+	</connected>
+	<connected id="2054505037">
+
+		<attr name="points">
+			<list>
+		<attr name="points0">
+			<point x="313.5" y="71.5"></point>
+		</attr>
+		<attr name="points1">
+			<point x="314.5" y="34.0"></point>
+		</attr>
+
+</list>
+		</attr>
+
+
+	</connected>
+	</node>
+			
+	<node id="447" nid="445926143" type="WFResponsable">
+
+	<connected id="832230184"><attr name="extraLabels">
+			<array>
+
+</array>
+</attr>
+
+		<attr name="points">
+			<list>
+		<attr name="points0">
+			<point x="200.5" y="99.5"></point>
+		</attr>
+		<attr name="points1">
+			<point x="81.0" y="93.5"></point>
+		</attr>
+
+</list>
+		</attr>
+
+
+	</connected>
+	<connected id="1351497917">
+
+		<attr name="points">
+			<list>
+		<attr name="points0">
+			<point x="200.5" y="99.5"></point>
+		</attr>
+		<attr name="points1">
+			<point x="313.5" y="105.5"></point>
+		</attr>
+
+</list>
+		</attr>
+
+
+	</connected>
+	</node>
+			
+	<node id="PilotFlightPlannerPlaneInteraction" nid="1128870594" type="Interaction">
+
+	</node>
+			
+	<node id="445" nid="54039201" type="GTCreates">
+
+	<connected id="1755198088"><attr name="extraLabels">
+			<array>
+
+</array>
+</attr>
+
+
+
+	</connected>
+	<connected id="1743491526">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="389" nid="1103308372" type="GTModifies">
+
+	<connected id="1351497917">
+		<attr name="points">
+			<list>
+		<attr name="points0">
+			<point x="458.0" y="138.5"></point>
+		</attr>
+		<attr name="points1">
+			<point x="313.5" y="105.5"></point>
+		</attr>
+
+</list>
+		</attr>
+
+
+	</connected>
+	<connected id="1989250427">
+
+		<attr name="points">
+			<list>
+		<attr name="points0">
+			<point x="458.0" y="138.5"></point>
+		</attr>
+		<attr name="points1">
+			<point x="571.0" y="164.0"></point>
+		</attr>
+
+</list>
+		</attr>
+
+
+	</connected>
+	</node>
+			
+	<node id="PlaneColaborator" nid="832230184" type="Role">
+
+	</node>
+			
+	<node id="431" nid="1623014537" type="GTSatisfies">
+
+	<connected id="1755198088"><attr name="extraLabels">
+			<array>
+
+</array>
+</attr>
+
+
+
+	</connected>
+	<connected id="1098838960">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="AllowDescomposingPlan" nid="762292209" type="FrameFact">
+
+	</node>
+			
+	<node id="Plane Mind" nid="1989250427" type="FrameFact">
+
+	</node>
+			
+	<node id="StartDescomposingPlan" nid="1755198088" type="Task">
+
+	</node>
+			
+	<node id="Flight Plan Taken" nid="2054505037" type="Goal">
+
+	</node>
+			
+	<node id="308" nid="2055460029" type="WFResponsable">
+
+	<connected id="423242615"><attr name="extraLabels">
+			<array>
+
+</array>
+</attr>
+
+
+
+	</connected>
+	<connected id="1755198088">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="AllowDescomposingPlan" nid="1271196687" type="FrameFact">
+
+	</node>
+			
+	<node id="PilotInitiator" nid="423242615" type="Role">
+
+	</node>
+			
+	<node id="454" nid="220428026" type="IAccesses">
+
+	<connected id="1755198088"><attr name="extraLabels">
+			<array>
+
+</array>
+</attr>
+
+
+
+	</connected>
+	<connected id="1128870594">
+
+
+
+	</connected>
+	</node>
+	</graph>
+
+
+	<layout>
+			
+	<node id="node2">
+		<attr name="bounds">
+			<rectangle x="536" y="176" width="106" height="46"></rectangle>		</attr>
 
 	</node>
 			
 	<node id="node22">
 		<attr name="bounds">
-			<rectangle x="279" y="76" width="69" height="15"></rectangle>		</attr>
+			<rectangle x="422" y="92" width="64" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node1">
+		<attr name="bounds">
+			<rectangle x="252" y="84" width="123" height="43"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node6">
+		<attr name="bounds">
+			<rectangle x="415" y="57" width="79" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node20">
+		<attr name="bounds">
+			<rectangle x="386" y="353" width="79" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node21">
+		<attr name="bounds">
+			<rectangle x="533" y="66" width="153" height="54"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node5">
+		<attr name="bounds">
+			<rectangle x="533" y="11" width="57" height="46"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node24">
+		<attr name="bounds">
+			<rectangle x="421" y="171" width="74" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node25">
+		<attr name="bounds">
+			<rectangle x="423" y="146" width="64" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node10">
+		<attr name="bounds">
+			<rectangle x="518" y="455" width="139" height="46"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node11">
+		<attr name="bounds">
+			<rectangle x="252" y="283" width="99" height="50"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node9">
+		<attr name="bounds">
+			<rectangle x="276" y="60" width="69" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node7">
+		<attr name="bounds">
+			<rectangle x="155" y="92" width="91" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node16">
+		<attr name="bounds">
+			<rectangle x="518" y="369" width="153" height="54"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node23">
+		<attr name="bounds">
+			<rectangle x="392" y="428" width="64" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node4">
+		<attr name="bounds">
+			<rectangle x="422" y="121" width="66" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node0">
+		<attr name="bounds">
+			<rectangle x="14" y="68" width="134" height="51"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node15">
+		<attr name="bounds">
+			<rectangle x="247" y="346" width="69" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node18">
+		<attr name="bounds">
+			<rectangle x="537" y="229" width="140" height="46"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node3">
+		<attr name="bounds">
+			<rectangle x="536" y="124" width="60" height="46"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node13">
+		<attr name="bounds">
+			<rectangle x="198" y="373" width="132" height="43"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node8">
+		<attr name="bounds">
+			<rectangle x="259" y="0" width="99" height="50"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node14">
+		<attr name="bounds">
+			<rectangle x="117" y="387" width="91" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node19">
+		<attr name="bounds">
+			<rectangle x="520" y="304" width="138" height="46"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node12">
+		<attr name="bounds">
+			<rectangle x="3" y="376" width="123" height="43"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node17">
+		<attr name="bounds">
+			<rectangle x="392" y="387" width="64" height="15"></rectangle>		</attr>
 
 	</node>
 	</layout>
@@ -14150,6 +14822,24 @@ Este diagrama se mete dentro de la carpeta init para que cuando la aplicacion ll
 
 	</node>
 			
+	<node id="449" nid="1137222852" type="GTPursues">
+
+	<connected id="692313530"><attr name="extraLabels">
+			<array>
+
+</array>
+</attr>
+
+
+
+	</connected>
+	<connected id="276607632">
+
+
+
+	</connected>
+	</node>
+			
 	<node id="348" nid="1857068972" type="WFPlays">
 
 	<connected id="598929607">
@@ -14161,6 +14851,10 @@ Este diagrama se mete dentro de la carpeta init para que cuando la aplicacion ll
 
 
 	</connected>
+	</node>
+			
+	<node id="Flight Plan Taken" nid="276607632" type="Goal">
+
 	</node>
 			
 	<node id="GivePlan" nid="1312432211" type="Task">
@@ -14204,6 +14898,10 @@ Este diagrama se mete dentro de la carpeta init para que cuando la aplicacion ll
 
 
 	</connected>
+	</node>
+			
+	<node id="PlaneColaborator" nid="1740472903" type="Role">
+
 	</node>
 			
 	<node id="InteractionTriggerer" nid="103063119" type="FrameFact">
@@ -14273,6 +14971,10 @@ Este diagrama se mete dentro de la carpeta init para que cuando la aplicacion ll
 
 	</node>
 			
+	<node id="Plane" nid="692313530" type="Agent">
+
+	</node>
+			
 	<node id="347" nid="1431031375" type="WFResponsable">
 
 	<connected id="598929607">
@@ -14288,6 +14990,24 @@ Este diagrama se mete dentro de la carpeta init para que cuando la aplicacion ll
 			
 	<node id="AskForPlan" nid="1861834785" type="Task">
 
+	</node>
+			
+	<node id="453" nid="1890105753" type="WFPlays">
+
+	<connected id="692313530"><attr name="extraLabels">
+			<array>
+
+</array>
+</attr>
+
+
+
+	</connected>
+	<connected id="1740472903">
+
+
+
+	</connected>
 	</node>
 			
 	<node id="338" nid="502709274" type="WFPlays">
@@ -14319,9 +15039,21 @@ Este diagrama se mete dentro de la carpeta init para que cuando la aplicacion ll
 
 	</node>
 			
+	<node id="node24">
+		<attr name="bounds">
+			<rectangle x="281" y="543" width="66" height="15"></rectangle>		</attr>
+
+	</node>
+			
 	<node id="node13">
 		<attr name="bounds">
 			<rectangle x="178" y="301" width="54" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node23">
+		<attr name="bounds">
+			<rectangle x="383" y="521" width="99" height="50"></rectangle>		</attr>
 
 	</node>
 			
@@ -14346,6 +15078,12 @@ Este diagrama se mete dentro de la carpeta init para que cuando la aplicacion ll
 	<node id="node19">
 		<attr name="bounds">
 			<rectangle x="340" y="264" width="91" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node20">
+		<attr name="bounds">
+			<rectangle x="168" y="441" width="134" height="51"></rectangle>		</attr>
 
 	</node>
 			
@@ -14409,6 +15147,12 @@ Este diagrama se mete dentro de la carpeta init para que cuando la aplicacion ll
 
 	</node>
 			
+	<node id="node21">
+		<attr name="bounds">
+			<rectangle x="211" y="533" width="35" height="42"></rectangle>		</attr>
+
+	</node>
+			
 	<node id="node12">
 		<attr name="bounds">
 			<rectangle x="320" y="341" width="91" height="15"></rectangle>		</attr>
@@ -14418,6 +15162,12 @@ Este diagrama se mete dentro de la carpeta init para que cuando la aplicacion ll
 	<node id="node1">
 		<attr name="bounds">
 			<rectangle x="506" y="318" width="73" height="43"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node22">
+		<attr name="bounds">
+			<rectangle x="203" y="505" width="54" height="15"></rectangle>		</attr>
 
 	</node>
 			
@@ -14445,9 +15195,9 @@ Este diagrama se mete dentro de la carpeta init para que cuando la aplicacion ll
 
 	<graph>
 			
-	<node id="151" nid="878787402" type="IHasSpec">
+	<node id="320" nid="1204433655" type="IColaborates">
 
-	<connected id="2025114565">
+	<connected id="1121383976">
 
 
 
@@ -14456,6 +15206,70 @@ Este diagrama se mete dentro de la carpeta init para que cuando la aplicacion ll
 
 
 	</connected>
+	</node>
+			
+	<node id="PlaneColaborator" nid="1664635563" type="Role">
+
+	</node>
+			
+	<node id="GRASIASpecification2" nid="2025114565" type="GRASIASpecification">
+
+	</node>
+			
+	<node id="PlaneColaborator" nid="683365982" type="Role">
+
+	</node>
+			
+	<node id="InteractionUnit7" nid="345277543" type="InteractionUnit">
+
+	</node>
+			
+	<node id="InteractionUnit6" nid="1848058596" type="InteractionUnit">
+
+	</node>
+			
+	<node id="388" nid="801566510" type="UIPrecedes">
+
+	<connected id="1848058596"><attr name="extraLabels">
+			<array>
+
+</array>
+</attr>
+
+
+
+	</connected>
+	<connected id="345277543">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="314" nid="1685167590" type="UIInitiates">
+
+	<connected id="1848058596"><attr name="extraLabels">
+			<array>
+
+</array>
+</attr>
+
+
+
+	</connected>
+	<connected id="915063877">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="PilotInitiator" nid="1202740272" type="Role">
+
+	</node>
+			
+	<node id="FlightPlannerConlaborator" nid="1121383976" type="Role">
+
 	</node>
 			
 	<node id="331" nid="441966640" type="UIColaborates">
@@ -14471,6 +15285,28 @@ Este diagrama se mete dentro de la carpeta init para que cuando la aplicacion ll
 	</connected>
 	</node>
 			
+	<node id="391" nid="2028516358" type="UIInitiates">
+
+	<connected id="345277543"><attr name="extraLabels">
+			<array>
+
+</array>
+</attr>
+
+
+
+	</connected>
+	<connected id="1664635563">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="InteractionUnit4" nid="1055213050" type="InteractionUnit">
+
+	</node>
+			
 	<node id="334" nid="317065876" type="UIPrecedes">
 
 	<connected id="1055213050">
@@ -14484,9 +15320,27 @@ Este diagrama se mete dentro de la carpeta init para que cuando la aplicacion ll
 	</connected>
 	</node>
 			
-	<node id="320" nid="1204433655" type="IColaborates">
+	<node id="332" nid="48139677" type="UIColaborates">
 
-	<connected id="1121383976">
+	<connected id="1055213050">
+
+
+	</connected>
+	<connected id="1155181041">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="359" nid="1956594366" type="IColaborates">
+
+	<connected id="683365982"><attr name="extraLabels">
+			<array>
+
+</array>
+</attr>
+
 
 
 
@@ -14497,7 +15351,90 @@ Este diagrama se mete dentro de la carpeta init para que cuando la aplicacion ll
 	</connected>
 	</node>
 			
-	<node id="FlightPlannerConlaborator" nid="1155181041" type="Role">
+	<node id="443" nid="1509945609" type="UIColaborates">
+
+	<connected id="1848058596"><attr name="extraLabels">
+			<array>
+
+</array>
+</attr>
+
+
+
+	</connected>
+	<connected id="1664635563">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="151" nid="878787402" type="IHasSpec">
+
+	<connected id="2025114565">
+
+
+
+	</connected>
+	<connected id="2124032139">
+
+
+	</connected>
+	</node>
+			
+	<node id="444" nid="2137895968" type="UIPrecedes">
+
+	<connected id="81176996"><attr name="extraLabels">
+			<array>
+
+</array>
+</attr>
+
+
+
+	</connected>
+	<connected id="1848058596">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="330" nid="1297812422" type="UIInitiates">
+
+	<connected id="1055213050">
+
+
+	</connected>
+	<connected id="1202740272">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="PilotInitiator" nid="915063877" type="Role">
+
+	</node>
+			
+	<node id="333" nid="1211345531" type="UIInitiates">
+
+	<connected id="81176996">
+
+
+	</connected>
+	<connected id="1155181041">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="PilotFlightPlannerPlaneInteraction" nid="2124032139" type="Interaction">
+
+	</node>
+			
+	<node id="InteractionUnit5" nid="81176996" type="InteractionUnit">
 
 	</node>
 			
@@ -14514,67 +15451,26 @@ Este diagrama se mete dentro de la carpeta init para que cuando la aplicacion ll
 	</connected>
 	</node>
 			
-	<node id="InteractionUnit5" nid="81176996" type="InteractionUnit">
-
-	</node>
-			
-	<node id="332" nid="48139677" type="UIColaborates">
-
-	<connected id="1055213050">
-
-
-	</connected>
-	<connected id="1155181041">
-
-
-
-	</connected>
-	</node>
-			
-	<node id="PilotFlightPlannerInteraction" nid="2124032139" type="Interaction">
-
-	</node>
-			
-	<node id="GRASIASpecification2" nid="2025114565" type="GRASIASpecification">
-
-	</node>
-			
-	<node id="PilotInitiator" nid="1202740272" type="Role">
-
-	</node>
-			
-	<node id="InteractionUnit4" nid="1055213050" type="InteractionUnit">
-
-	</node>
-			
 	<node id="PilotInitiator" nid="1592789911" type="Role">
 
 	</node>
 			
-	<node id="330" nid="1297812422" type="UIInitiates">
-
-	<connected id="1055213050">
-
-
-	</connected>
-	<connected id="1202740272">
-
-
-
-	</connected>
-	</node>
-			
-	<node id="FlightPlannerConlaborator" nid="1121383976" type="Role">
+	<node id="FlightPlannerConlaborator" nid="1155181041" type="Role">
 
 	</node>
 			
-	<node id="333" nid="1211345531" type="UIInitiates">
+	<node id="392" nid="1577927052" type="UIColaborates">
 
-	<connected id="81176996">
+	<connected id="345277543"><attr name="extraLabels">
+			<array>
+
+</array>
+</attr>
+
 
 
 	</connected>
-	<connected id="1155181041">
+	<connected id="915063877">
 
 
 
@@ -14585,57 +15481,15 @@ Este diagrama se mete dentro de la carpeta init para que cuando la aplicacion ll
 
 	<layout>
 			
-	<node id="node13">
-		<attr name="bounds">
-			<rectangle x="324" y="69" width="58" height="15"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node15">
-		<attr name="bounds">
-			<rectangle x="114" y="350" width="79" height="15"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node10">
-		<attr name="bounds">
-			<rectangle x="215" y="318" width="67" height="15"></rectangle>		</attr>
-
-	</node>
-			
 	<node id="node9">
 		<attr name="bounds">
-			<rectangle x="287" y="122" width="72" height="15"></rectangle>		</attr>
+			<rectangle x="241" y="112" width="72" height="15"></rectangle>		</attr>
 
 	</node>
 			
-	<node id="node7">
+	<node id="node19">
 		<attr name="bounds">
-			<rectangle x="404" y="284" width="167" height="43"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node14">
-		<attr name="bounds">
-			<rectangle x="143" y="115" width="50" height="15"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node1">
-		<attr name="bounds">
-			<rectangle x="184" y="369" width="127" height="73"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node11">
-		<attr name="bounds">
-			<rectangle x="318" y="265" width="79" height="15"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node5">
-		<attr name="bounds">
-			<rectangle x="184" y="45" width="101" height="54"></rectangle>		</attr>
+			<rectangle x="410" y="536" width="134" height="51"></rectangle>		</attr>
 
 	</node>
 			
@@ -14645,9 +15499,57 @@ Este diagrama se mete dentro de la carpeta init para que cuando la aplicacion ll
 
 	</node>
 			
+	<node id="node16">
+		<attr name="bounds">
+			<rectangle x="507" y="156" width="134" height="51"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node22">
+		<attr name="bounds">
+			<rectangle x="214" y="595" width="74" height="47"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node18">
+		<attr name="bounds">
+			<rectangle x="215" y="509" width="74" height="47"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node25">
+		<attr name="bounds">
+			<rectangle x="218" y="568" width="67" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node24">
+		<attr name="bounds">
+			<rectangle x="141" y="546" width="57" height="15"></rectangle>		</attr>
+
+	</node>
+			
 	<node id="node0">
 		<attr name="bounds">
-			<rectangle x="63" y="303" width="60" height="50"></rectangle>		</attr>
+			<rectangle x="30" y="269" width="60" height="50"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node4">
+		<attr name="bounds">
+			<rectangle x="238" y="140" width="156" height="43"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node15">
+		<attr name="bounds">
+			<rectangle x="99" y="333" width="79" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node26">
+		<attr name="bounds">
+			<rectangle x="321" y="585" width="57" height="15"></rectangle>		</attr>
 
 	</node>
 			
@@ -14657,27 +15559,93 @@ Este diagrama se mete dentro de la carpeta init para que cuando la aplicacion ll
 
 	</node>
 			
-	<node id="node6">
+	<node id="node10">
 		<attr name="bounds">
-			<rectangle x="78" y="145" width="60" height="50"></rectangle>		</attr>
+			<rectangle x="215" y="318" width="67" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node11">
+		<attr name="bounds">
+			<rectangle x="318" y="265" width="79" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node17">
+		<attr name="bounds">
+			<rectangle x="360" y="116" width="72" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node20">
+		<attr name="bounds">
+			<rectangle x="310" y="537" width="79" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node13">
+		<attr name="bounds">
+			<rectangle x="324" y="69" width="58" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node21">
+		<attr name="bounds">
+			<rectangle x="216" y="468" width="67" height="15"></rectangle>		</attr>
 
 	</node>
 			
 	<node id="node12">
 		<attr name="bounds">
-			<rectangle x="128" y="287" width="57" height="15"></rectangle>		</attr>
+			<rectangle x="111" y="266" width="57" height="15"></rectangle>		</attr>
 
 	</node>
 			
-	<node id="node4">
+	<node id="node23">
 		<attr name="bounds">
-			<rectangle x="325" y="160" width="156" height="43"></rectangle>		</attr>
+			<rectangle x="63" y="549" width="60" height="50"></rectangle>		</attr>
 
 	</node>
 			
 	<node id="node8">
 		<attr name="bounds">
 			<rectangle x="345" y="345" width="57" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node5">
+		<attr name="bounds">
+			<rectangle x="184" y="45" width="101" height="54"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node1">
+		<attr name="bounds">
+			<rectangle x="184" y="369" width="127" height="73"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node14">
+		<attr name="bounds">
+			<rectangle x="143" y="115" width="50" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node6">
+		<attr name="bounds">
+			<rectangle x="78" y="145" width="60" height="50"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node7">
+		<attr name="bounds">
+			<rectangle x="404" y="284" width="167" height="43"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node27">
+		<attr name="bounds">
+			<rectangle x="129" y="587" width="79" height="15"></rectangle>		</attr>
 
 	</node>
 	</layout>
@@ -14729,11 +15697,33 @@ Este diagrama se mete dentro de la carpeta init para que cuando la aplicacion ll
 	<node id="179" nid="663199416" type="CDUsesCode">
 
 	<connected id="834479">
+		<attr name="points">
+			<list>
+		<attr name="points0">
+			<point x="374.0" y="119.5"></point>
+		</attr>
+		<attr name="points1">
+			<point x="241.5" y="120.5"></point>
+		</attr>
+
+</list>
+		</attr>
 
 
 	</connected>
 	<connected id="269841844">
 
+		<attr name="points">
+			<list>
+		<attr name="points0">
+			<point x="374.0" y="119.5"></point>
+		</attr>
+		<attr name="points1">
+			<point x="550.5" y="118.5"></point>
+		</attr>
+
+</list>
+		</attr>
 
 
 	</connected>
@@ -14751,13 +15741,13 @@ Este diagrama se mete dentro de la carpeta init para que cuando la aplicacion ll
 			
 	<node id="node3">
 		<attr name="bounds">
-			<rectangle x="189" y="194" width="81" height="43"></rectangle>		</attr>
+			<rectangle x="201" y="99" width="81" height="43"></rectangle>		</attr>
 
 	</node>
 			
 	<node id="node0">
 		<attr name="bounds">
-			<rectangle x="455" y="185" width="167" height="57"></rectangle>		</attr>
+			<rectangle x="467" y="90" width="167" height="57"></rectangle>		</attr>
 
 	</node>
 			
@@ -14775,7 +15765,7 @@ Este diagrama se mete dentro de la carpeta init para que cuando la aplicacion ll
 			
 	<node id="node4">
 		<attr name="bounds">
-			<rectangle x="324" y="207" width="76" height="15"></rectangle>		</attr>
+			<rectangle x="336" y="112" width="76" height="15"></rectangle>		</attr>
 
 	</node>
 	</layout>

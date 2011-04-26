@@ -85,6 +85,10 @@
                    if (interaction.equals("PilotPlaneInteraction") && role.equals("PlaneColaborator") ){
                             PlaneColaboratorPilotPlaneInteractionDefaultCommControl.addDefaultLocks(lw);
                    }
+                                    
+                   if (interaction.equals("PilotFlightPlannerPlaneInteraction") && role.equals("PlaneColaborator") ){
+                            PlaneColaboratorPilotFlightPlannerPlaneInteractionDefaultCommControl.addDefaultLocks(lw);
+                   }
                   
 		           // Interactions in which this agent appears as initiator                  
                   

@@ -37,13 +37,13 @@ public class Flight_Plan extends ingenias.editor.entities.RuntimeFact{
    
     double CruisingSpeedKMH;   
    
-    gov.nasa.worldwind.geom.Position DeparturePoint;   
+    enums.Airport DepartureAirport;   
    
     Date DepartureTime;   
    
     double CruisingAltitudeKM;   
    
-    gov.nasa.worldwind.geom.Position DestinationPoint;   
+    enums.Airport DestinationAirport;   
    
     Date EstimatedTimeEnrout;   
    
@@ -96,12 +96,12 @@ public class Flight_Plan extends ingenias.editor.entities.RuntimeFact{
    }
    
 
-   public void setDeparturePoint(gov.nasa.worldwind.geom.Position value){
-     DeparturePoint=value;   
+   public void setDepartureAirport(enums.Airport value){
+     DepartureAirport=value;   
    };
    
-   public gov.nasa.worldwind.geom.Position getDeparturePoint(){
-     return DeparturePoint;      
+   public enums.Airport getDepartureAirport(){
+     return DepartureAirport;      
    }
    
 
@@ -123,12 +123,12 @@ public class Flight_Plan extends ingenias.editor.entities.RuntimeFact{
    }
    
 
-   public void setDestinationPoint(gov.nasa.worldwind.geom.Position value){
-     DestinationPoint=value;   
+   public void setDestinationAirport(enums.Airport value){
+     DestinationAirport=value;   
    };
    
-   public gov.nasa.worldwind.geom.Position getDestinationPoint(){
-     return DestinationPoint;      
+   public enums.Airport getDestinationAirport(){
+     return DestinationAirport;      
    }
    
 

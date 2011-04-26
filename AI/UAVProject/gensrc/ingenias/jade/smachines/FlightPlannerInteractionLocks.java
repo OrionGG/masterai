@@ -82,8 +82,8 @@
 			
 			        public void addInteractionLocks(String interaction, LocksWriter lw, String role){
                                     
-                   if (interaction.equals("PilotFlightPlannerInteraction") && role.equals("FlightPlannerConlaborator") ){
-                            FlightPlannerConlaboratorPilotFlightPlannerInteractionDefaultCommControl.addDefaultLocks(lw);
+                   if (interaction.equals("PilotFlightPlannerPlaneInteraction") && role.equals("FlightPlannerConlaborator") ){
+                            FlightPlannerConlaboratorPilotFlightPlannerPlaneInteractionDefaultCommControl.addDefaultLocks(lw);
                    }
                   
 		           // Interactions in which this agent appears as initiator                  

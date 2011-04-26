@@ -34,10 +34,10 @@ import ingenias.editor.entities.*;
 
 
 
-public class CreatePilotMindTask extends Task{
+public class StartDescomposingPlanTask extends Task{
 
- public CreatePilotMindTask(String id){
-  super(id,"CreatePilotMind");
+ public StartDescomposingPlanTask(String id){
+  super(id,"StartDescomposingPlan");
  }
 
 
@@ -45,7 +45,7 @@ public class CreatePilotMindTask extends Task{
  public void execute() throws TaskException{
 
 
-        Flight_Plan  eiFlight_Plan=(Flight_Plan)this.getFirstInputOfType("Flight_Plan");             
+        AllowDescomposingPlan  eiAllowDescomposingPlan=(AllowDescomposingPlan)this.getFirstInputOfType("AllowDescomposingPlan");             
 
 
 
@@ -63,31 +63,19 @@ public class CreatePilotMindTask extends Task{
   		TaskOutput	outputsdefault=findOutputAlternative("default",
   																			outputs);
   		
+		NotAllLegsCompleted outputsdefaultNotAllLegsCompleted=
+			(NotAllLegsCompleted)
+				outputsdefault.getEntityByType("NotAllLegsCompleted");
 		
-		Pilot_Mind outputsdefaultPilot_Mind=
-			(Pilot_Mind)
-				outputsdefault.getEntityByType("Pilot_Mind");
 		
 		
 		
         YellowPages yp=null; // only available for initiators of interactions
 
 
-//#start_node:INGENIASCodeComponent3 <--- DO NOT REMOVE THIS	
-		Random generator = new Random();
-		float fStress = generator.nextFloat();
-        outputsdefaultPilot_Mind.setStress(fStress);
+//#start_node: <--- DO NOT REMOVE THIS	
 
-		float fExperience = generator.nextFloat();    
-        outputsdefaultPilot_Mind.setExperience(fExperience);
-        
-        float fFatigue = generator.nextFloat();
-        outputsdefaultPilot_Mind.setFatigue(fFatigue);
-        
-        outputsdefaultPilot_Mind.setPilotFlightPlan(eiFlight_Plan);
-        
-        outputsdefaultPilot_Mind.setLegsCompleted(0);
-//#end_node:INGENIASCodeComponent3 <--- DO NOT REMOVE THIS
+//#end_node: <--- DO NOT REMOVE THIS
 
  }
  

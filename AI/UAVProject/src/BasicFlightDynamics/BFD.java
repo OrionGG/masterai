@@ -105,17 +105,17 @@ public class BFD {
 		Position oStartPosition;
 		
 		if(i == 0){
-			oStartPosition = oFlightPlan.getDeparturePoint();
+			oStartPosition = oFlightPlan.getDepartureAirport().getPosition();
 		}
 		else{
 			oStartPosition = oWayPoints.get(i-1);
 		}
 		Position oEndPosition = oWaypoint.getoPosition();
 		
-		double dMaxDistance = getDistance(oStartPosition, oFlightPlan.getDestinationPoint());
+		double dMaxDistance = getDistance(oStartPosition, oFlightPlan.getDestinationAirport().getPosition());
 		
 		double dFirstLegDistance = getDistance(oStartPosition, oEndPosition);
-		double dSecondLegDistance = getDistance(oEndPosition, oFlightPlan.getDestinationPoint());
+		double dSecondLegDistance = getDistance(oEndPosition, oFlightPlan.getDestinationAirport().getPosition());
 
 		bResult = ((dFirstLegDistance + dSecondLegDistance) > (1.5)*dMaxDistance);
 		
