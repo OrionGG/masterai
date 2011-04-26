@@ -45,7 +45,7 @@ public class CreatePlaneInitialStatusTask extends Task{
  public void execute() throws TaskException{
 
 
-        MindNoInitialized  eiMindNoInitialized=(MindNoInitialized)this.getFirstInputOfType("MindNoInitialized");             
+        PlaneMindNoInitialized  eiPlaneMindNoInitialized=(PlaneMindNoInitialized)this.getFirstInputOfType("PlaneMindNoInitialized");             
 
         Plane_Mind  eiPlane_Mind=(Plane_Mind)this.getFirstInputOfType("Plane_Mind");             
 
@@ -76,20 +76,21 @@ public class CreatePlaneInitialStatusTask extends Task{
 
 
 //#start_node:INGENIASCodeComponent9 <--- DO NOT REMOVE THIS	
-        Random generator = new Random();
-		enums.Airport[] oAirportvalues = enums.Airport.values();
+		/*enums.Airport[] oAirportvalues = enums.Airport.values();
 		
 		//set departure point
 		int iIndexDeparture = generator.nextInt(oAirportvalues.length);
 		
-		enums.Airport oDeparture = oAirportvalues[iIndexDeparture];
+		enums.Airport oDeparture = oAirportvalues[iIndexDeparture];*/
+        enums.Airport oDeparture = null;
 		eiPlane_Mind.setLatitude(oDeparture.getPosition().latitude);
 		eiPlane_Mind.setLongitude(oDeparture.getPosition().longitude);
 		eiPlane_Mind.setLastUpdatePosition(new Date());
 
 		eiPlane_Mind.setAltitudeKM(Simulation.SimulationVars.dCruiseAltitudeKM);
 		eiPlane_Mind.setSpeedKMH(Simulation.SimulationVars.dCruiseSpeedKMH);
-		//set departure point
+		//set head in departure point
+        Random generator = new Random();
 		int iHeadDegrees = generator.nextInt(360);
 		eiPlane_Mind.setHead(gov.nasa.worldwind.geom.Angle.fromDegrees(iHeadDegrees));
 		eiPlane_Mind.setRunningManoeuvres(new ArrayList<Manoeuvre>());

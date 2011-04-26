@@ -90,6 +90,8 @@ public class Execute_DecisionTask extends Task{
 
 
 //#start_node:INGENIASCodeComponent10 <--- DO NOT REMOVE THIS	
+        outputsdefaultManoeuvre.setSpeedChange(eiThrow_Change.getSpeedChange());
+        outputsdefaultManoeuvre.setAltitudeChange(eiThrow_Change.getAltitudeChange());
         outputsdefaultManoeuvre.setHeadChange(eiThrow_Change.getHeadChange());
         outputsdefaultManoeuvre.setPriority(eiThrow_Change.getPriority());
 //#end_node:INGENIASCodeComponent10 <--- DO NOT REMOVE THIS

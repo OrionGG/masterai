@@ -64,6 +64,10 @@ public class CreatePilotMindTask extends Task{
   																			outputs);
   		
 		
+		NotAllLegsCompleted outputsdefaultNotAllLegsCompleted=
+			(NotAllLegsCompleted)
+				outputsdefault.getEntityByType("NotAllLegsCompleted");
+		
 		Pilot_Mind outputsdefaultPilot_Mind=
 			(Pilot_Mind)
 				outputsdefault.getEntityByType("Pilot_Mind");

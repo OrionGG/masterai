@@ -45,7 +45,7 @@ public class Check_DestinationTask extends Task{
  public void execute() throws TaskException{
 
 
-        Flight_Plan  eiFlight_Plan=(Flight_Plan)this.getFirstInputOfType("Flight_Plan");             
+        AllLegsCompleted  eiAllLegsCompleted=(AllLegsCompleted)this.getFirstInputOfType("AllLegsCompleted");             
 
 
 
@@ -64,14 +64,22 @@ public class Check_DestinationTask extends Task{
   																			outputs);
   		
 		
+		Throw_Change outputsdefaultThrow_Change=
+			(Throw_Change)
+				outputsdefault.getEntityByType("Throw_Change");
+		
 		
 		
         YellowPages yp=null; // only available for initiators of interactions
 
 
-//#start_node: <--- DO NOT REMOVE THIS	
-
-//#end_node: <--- DO NOT REMOVE THIS
+//#start_node:INGENIASCodeComponent14 <--- DO NOT REMOVE THIS	
+    	outputsdefaultThrow_Change.setAltitudeChange(-1);
+    	outputsdefaultThrow_Change.setHeadChange(null);	
+    	//stop the plane
+        outputsdefaultThrow_Change.setSpeedChange(0);
+        outputsdefaultThrow_Change.setPriority(0);
+//#end_node:INGENIASCodeComponent14 <--- DO NOT REMOVE THIS
 
  }
  
