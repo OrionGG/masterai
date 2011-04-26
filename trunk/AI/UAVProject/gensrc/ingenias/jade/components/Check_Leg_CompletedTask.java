@@ -80,6 +80,7 @@ public class Check_Leg_CompletedTask extends Task{
 
         }
         else{
+        	
         	outputsdefault.removeEntity(outputsdefaultLegCompleted);
         }
 //#end_node:INGENIASCodeComponent6 <--- DO NOT REMOVE THIS

@@ -4,6 +4,7 @@ import ingenias.jade.agents.PlaneJADEAgent;
 import java.awt.Color;
 
 
+import gov.nasa.worldwind.WorldWind;
 import gov.nasa.worldwind.avlist.AVKey;
 import gov.nasa.worldwind.geom.Position;
 import gov.nasa.worldwind.layers.RenderableLayer;
@@ -14,6 +15,7 @@ import gov.nasa.worldwind.render.PointPlacemarkAttributes;
 
 public class PlaneView extends PointPlacemark {
 	private PlaneJADEAgent oPlaneEntity;
+	RenderableLayer layer = null;
 	
 	public PlaneView(PlaneJADEAgent oPlaneEntityParam, String sPlaneName, Position oPosition) {
 		super(oPosition);
@@ -26,12 +28,13 @@ public class PlaneView extends PointPlacemark {
         int iGreen = new java.util.Random().nextInt(255);
         int iBlue = new java.util.Random().nextInt(255);*/
         
-        Material m = Material.BLACK;
+        Material m = Material.YELLOW;
         attrs2.setLineMaterial(m);
-        attrs2.setScale(5d);
+        attrs2.setScale(10d);
         this.setAttributes(attrs2);
 
         this.setValue(AVKey.DISPLAY_NAME, sPlaneName);
+		this.setAltitudeMode(WorldWind.RELATIVE_TO_GROUND);
 
         this.setLineEnabled(false);
 	}
@@ -49,7 +52,7 @@ public class PlaneView extends PointPlacemark {
 	}
 	
 	public void render(RenderableLayer layer){
-        layer.addRenderable(this);
+	        layer.addRenderable(this);
 	}
 	
 	

@@ -56,13 +56,13 @@ public  class EnvironmentAppImp extends EnvironmentApp{
 				RenderableLayer layer = new RenderableLayer();
 				
 				controllers.EntitiesController oEntitiesController = new controllers.EntitiesController();
-				
 				oEntitiesController.render(layer);
 				
 				
 
 				
 				// Add the layer to the model.
+				
 				insertBeforeCompass(getWwd(), layer);
 
 				// Update layer panel

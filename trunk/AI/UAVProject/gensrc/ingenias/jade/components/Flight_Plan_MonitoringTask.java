@@ -45,6 +45,8 @@ public class Flight_Plan_MonitoringTask extends Task{
  public void execute() throws TaskException{
 
 
+        NotAllLegsCompleted  eiNotAllLegsCompleted=(NotAllLegsCompleted)this.getFirstInputOfType("NotAllLegsCompleted");             
+
         Pilot_Mind  eiPilot_Mind=(Pilot_Mind)this.getFirstInputOfType("Pilot_Mind");             
 
 
@@ -63,10 +65,6 @@ public class Flight_Plan_MonitoringTask extends Task{
   		TaskOutput	outputsdefault=findOutputAlternative("default",
   																			outputs);
   		
-		
-		Pilot_Mind_Changing outputsdefaultPilot_Mind_Changing=
-			(Pilot_Mind_Changing)
-				outputsdefault.getEntityByType("Pilot_Mind_Changing");
 		
 		Flight_Leg outputsdefaultFlight_Leg=
 			(Flight_Leg)
@@ -98,9 +96,6 @@ public class Flight_Plan_MonitoringTask extends Task{
         
         outputsdefaultFlight_Leg.setStartPoint(oStartPoint);
         outputsdefaultFlight_Leg.setEndPoint(oEndPoint);
-        
-        
-        outputsdefaultPilot_Mind_Changing.setPilotMind(eiPilot_Mind);
     	
 //#end_node:INGENIASCodeComponent5 <--- DO NOT REMOVE THIS
 

@@ -169,11 +169,11 @@ public class PlaneJADEAgent
 	      
 		
 		
-             expectedInput=this.getMSM().getMentalEntityByType("MindNoInitialized");
+             expectedInput=this.getMSM().getMentalEntityByType("PlaneMindNoInitialized");
              if (expectedInput.size()==0 && !("1".equals("0..n"))){
-				nonExistingInputs.add("MindNoInitialized");
+				nonExistingInputs.add("PlaneMindNoInitialized");
 			 } else {
-			    addExpectedInputs(tobject, "MindNoInitialized","1",expectedInput);
+			    addExpectedInputs(tobject, "PlaneMindNoInitialized","1",expectedInput);
              	addConsumedInput(to,"1",expectedInput);
 			 }
              allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;
@@ -713,16 +713,6 @@ public class PlaneJADEAgent
    
    
    ff= new Plane_Mind();      
-   
-   /* */
-   		try {
-			this.getMSM().addMentalEntity(ff);
-		} catch (InvalidEntity e) {
-
-			e.printStackTrace();
-		}
-   
-   ff= new MindNoInitialized();      
    
    /* */
    		try {

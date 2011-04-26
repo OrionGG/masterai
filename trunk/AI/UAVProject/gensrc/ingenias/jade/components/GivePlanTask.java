@@ -77,33 +77,38 @@ public class GivePlanTask extends Task{
   		Flight_Plan oFlightPlan = new ingenias.jade.mental.Flight_Plan();
 		Random generator = new Random();
 		
-		/*//set departure point
-		int iIndexDeparture = generator.nextInt(oWaypointvalues.length);
+		enums.Airport[] oAirportvalues = enums.Airport.values();
+		//set departure point
+		int iIndexDeparture = generator.nextInt(oAirportvalues.length);
 		
-		lIndexUsed.add(iIndexDeparture);
-		enums.Waypoint oDeparture = oWaypointvalues[iIndexDeparture];
-		oFlightPlan.setDeparturePoint(oDeparture.getoPosition());*/
-		Vector<Plane_Position_ServiceAppImp> oVector = Plane_Position_ServiceInit.getAppsInitialised();
+		enums.Airport oDeparture = oAirportvalues[iIndexDeparture];
+		oFlightPlan.setDeparturePoint(oDeparture.getPosition());
+		
+		/*Vector<Plane_Position_ServiceAppImp> oVector = Plane_Position_ServiceInit.getAppsInitialised();
+		gov.nasa.worldwind.geom.Position oDeparture = null;
+			
         if(oVector.size()> 0){
         	Plane_Position_ServiceAppImp eaPlane_Position_ServiceAppImp = oVector.get(0);
         	//eaPlane_Position_ServiceAppImp.getOwner();
-        	gov.nasa.worldwind.geom.Position oDeparture = eaPlane_Position_ServiceAppImp.getCurrentPosition();
+        	oDeparture = eaPlane_Position_ServiceAppImp.getCurrentPosition();
         	oFlightPlan.setDeparturePoint(oDeparture);
-        }
-		
-		enums.Airport[] oAirportvalues = enums.Airport.values();
+        }*/
 		
 		//set departure point
 		int iIndexDestination = generator.nextInt(oAirportvalues.length);
 		
+		while(iIndexDeparture == iIndexDestination){
+			iIndexDestination = generator.nextInt(oAirportvalues.length);
+		}
+
 		enums.Airport oDestination = oAirportvalues[iIndexDestination];
 		oFlightPlan.setDestinationPoint(oDestination.getPosition());
 		
         	
         //Adding Waypoints
 		enums.Waypoint[] oWaypointvalues = enums.Waypoint.values();
-		int iWaypointsNumber = 15;
-		int randomIndex = generator.nextInt(iWaypointsNumber);
+		int iWaypointsNumber = global.GlobalVars.iMaxNumWaypoints;
+		int randomIndex = generator.nextInt(iWaypointsNumber + 1);
 		List<gov.nasa.worldwind.geom.Position> oWayPoints = new ArrayList<gov.nasa.worldwind.geom.Position>(randomIndex);
 
 		List<Integer> lIndexUsed = new ArrayList<Integer>();

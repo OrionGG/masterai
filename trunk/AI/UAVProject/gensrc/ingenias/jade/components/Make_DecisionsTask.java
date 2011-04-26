@@ -74,6 +74,9 @@ public class Make_DecisionsTask extends Task{
 
 
 //#start_node:INGENIASCodeComponent7 <--- DO NOT REMOVE THIS	
+        outputsdefaultThrow_Change.setSpeedChange(-1);
+    	outputsdefaultThrow_Change.setAltitudeChange(-1);
+    	outputsdefaultThrow_Change.setHeadChange(null);
         Vector<Plane_Position_ServiceAppImp> oVector = Plane_Position_ServiceInit.getAppsInitialised();
         if(oVector.size()> 0){
         	Plane_Position_ServiceAppImp eaPlane_Position_ServiceAppImp = oVector.get(0);

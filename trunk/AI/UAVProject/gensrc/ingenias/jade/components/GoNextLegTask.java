@@ -45,11 +45,11 @@ public class GoNextLegTask extends Task{
  public void execute() throws TaskException{
 
 
-        LegCompleted  eiLegCompleted=(LegCompleted)this.getFirstInputOfType("LegCompleted");             
-
         Flight_Leg  eiFlight_Leg=(Flight_Leg)this.getFirstInputOfType("Flight_Leg");             
 
-        Pilot_Mind_Changing  eiPilot_Mind_Changing=(Pilot_Mind_Changing)this.getFirstInputOfType("Pilot_Mind_Changing");             
+        LegCompleted  eiLegCompleted=(LegCompleted)this.getFirstInputOfType("LegCompleted");             
+
+        Pilot_Mind  eiPilot_Mind=(Pilot_Mind)this.getFirstInputOfType("Pilot_Mind");             
 
 
 
@@ -68,9 +68,13 @@ public class GoNextLegTask extends Task{
   																			outputs);
   		
 		
-		Pilot_Mind outputsdefaultPilot_Mind=
-			(Pilot_Mind)
-				outputsdefault.getEntityByType("Pilot_Mind");
+		AllLegsCompleted outputsdefaultAllLegsCompleted=
+			(AllLegsCompleted)
+				outputsdefault.getEntityByType("AllLegsCompleted");
+		
+		NotAllLegsCompleted outputsdefaultNotAllLegsCompleted=
+			(NotAllLegsCompleted)
+				outputsdefault.getEntityByType("NotAllLegsCompleted");
 		
 		
 		
@@ -78,16 +82,14 @@ public class GoNextLegTask extends Task{
 
 
 //#start_node:INGENIASCodeComponent4 <--- DO NOT REMOVE THIS	
-        int iLegsCompleted =eiPilot_Mind_Changing.getPilotMind().getLegsCompleted();
-        eiPilot_Mind_Changing.getPilotMind().setLegsCompleted(iLegsCompleted+1);
-        Pilot_Mind oPilot_Mind = eiPilot_Mind_Changing.getPilotMind();
-     	outputsdefaultPilot_Mind.setLegsCompleted(oPilot_Mind.getLegsCompleted());
-     	outputsdefaultPilot_Mind.setPilotFlightPlan(oPilot_Mind.getPilotFlightPlan());
-     	outputsdefaultPilot_Mind.setExperience(oPilot_Mind.getExperience());
-     	outputsdefaultPilot_Mind.setFatigue(oPilot_Mind.getFatigue());
-     	outputsdefaultPilot_Mind.setStress(oPilot_Mind.getStress());
-     	//outputsdefaultPilot_Mind.setAvailableManeuvers(oPilot_Mind.get);
-     	//more things
+        int iLegsCompleted =eiPilot_Mind.getLegsCompleted();
+        eiPilot_Mind.setLegsCompleted(iLegsCompleted+1);
+        if(eiPilot_Mind.getPilotFlightPlan().getWaypoints().size() + 1 == eiPilot_Mind.getLegsCompleted()){
+        	outputsdefault.removeEntity(outputsdefaultNotAllLegsCompleted);
+        }
+        else{
+        	outputsdefault.removeEntity(outputsdefaultAllLegsCompleted);
+        }
 //#end_node:INGENIASCodeComponent4 <--- DO NOT REMOVE THIS
 
  }

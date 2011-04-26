@@ -31,17 +31,17 @@ import ingenias.jade.components.*;
 import ingenias.editor.entities.*;
 import ingenias.editor.entities.ViewPreferences.ViewType;
 
-public class FrameFact0 extends ingenias.editor.entities.RuntimeFact{
+public class LegFlown extends ingenias.editor.entities.RuntimeFact{
     
    
-  public FrameFact0 (String id){
+  public LegFlown (String id){
    super(id);
    this.getPrefs().setView(ViewType.UML);
-   this.type="FrameFact0";
+   this.type="LegFlown";
   }
   
 
-  public FrameFact0 (){
+  public LegFlown (){
    super(ingenias.jade.MentalStateManager.generateMentalEntityID());
    this.getPrefs().setView(ViewType.UML);
   }
@@ -51,7 +51,7 @@ public class FrameFact0 extends ingenias.editor.entities.RuntimeFact{
   }
   
   public String getType(){
-   return "FrameFact0";
+   return "LegFlown";
   }
   
   public String getParentType(){

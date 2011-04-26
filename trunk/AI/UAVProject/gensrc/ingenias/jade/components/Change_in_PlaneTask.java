@@ -78,6 +78,11 @@ public class Change_in_PlaneTask extends Task{
 
 
 //#start_node:INGENIASCodeComponent11 <--- DO NOT REMOVE THIS	
+        if(eiManoeuvre.getSpeedChange()!= -1){
+        	thread.RunManoeuvreChangeSpeed.runManoeuvreTurnHead(eiManoeuvre, eiPlane_Mind,eaUpdatePlaneStatus);
+        }if(eiManoeuvre.getAltitudeChange()!= -1){
+        	//thread.RunManoeuvreChangeAltitude.runManoeuvreTurnHead(eiManoeuvre, eiPlane_Mind,eaUpdatePlaneStatus);
+        }
         if(eiManoeuvre.getHeadChange()!= null){
         	thread.RunManoeuvreTurnHead.runManoeuvreTurnHead(eiManoeuvre, eiPlane_Mind,eaUpdatePlaneStatus);
         }
