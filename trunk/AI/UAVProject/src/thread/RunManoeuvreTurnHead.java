@@ -78,7 +78,7 @@ public class RunManoeuvreTurnHead  implements Runnable{
 			Plane_Mind eiPlane_Mind, 
 			UpdatePlaneStatusApp oUpdatePlaneStatusAppImp) {
 		
-		global.GlobalVars.addManoeuvre(eiManoeuvre, eiPlane_Mind);
+		global.GlobalVarsAndMethods.addManoeuvre(eiManoeuvre, eiPlane_Mind);
 
 		
 

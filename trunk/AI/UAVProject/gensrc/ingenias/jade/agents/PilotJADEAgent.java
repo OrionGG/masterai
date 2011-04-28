@@ -707,22 +707,22 @@ public class PilotJADEAgent
 	      
 		
 		
-             expectedInput=this.getMSM().getMentalEntityByType("Flight_Leg");
+             expectedInput=this.getMSM().getMentalEntityByType("LegCompleted");
              if (expectedInput.size()==0 && !("1".equals("0..n"))){
-				nonExistingInputs.add("Flight_Leg");
+				nonExistingInputs.add("LegCompleted");
 			 } else {
-			    addExpectedInputs(tobject, "Flight_Leg","1",expectedInput);
+			    addExpectedInputs(tobject, "LegCompleted","1",expectedInput);
              	addConsumedInput(to,"1",expectedInput);
 			 }
              allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;
 
 	      
 		
-             expectedInput=this.getMSM().getMentalEntityByType("LegCompleted");
+             expectedInput=this.getMSM().getMentalEntityByType("Flight_Leg");
              if (expectedInput.size()==0 && !("1".equals("0..n"))){
-				nonExistingInputs.add("LegCompleted");
+				nonExistingInputs.add("Flight_Leg");
 			 } else {
-			    addExpectedInputs(tobject, "LegCompleted","1",expectedInput);
+			    addExpectedInputs(tobject, "Flight_Leg","1",expectedInput);
              	addConsumedInput(to,"1",expectedInput);
 			 }
              allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;
@@ -1864,16 +1864,6 @@ public class PilotJADEAgent
    }
    
    
-   
-   ff= new InteractionTriggerer();      
-   
-   /* */
-   		try {
-			this.getMSM().addMentalEntity(ff);
-		} catch (InvalidEntity e) {
-
-			e.printStackTrace();
-		}
      
 
 		//Initializing the applications panel in the manager

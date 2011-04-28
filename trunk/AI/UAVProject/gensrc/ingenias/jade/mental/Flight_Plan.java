@@ -50,6 +50,10 @@ public class Flight_Plan extends ingenias.editor.entities.RuntimeFact{
     List<gov.nasa.worldwind.geom.Position> AlternateAirports;   
    
     List<gov.nasa.worldwind.geom.Position> Waypoints;   
+   
+    String PlaneID;   
+   
+    String PilotID;   
     
    
   public Flight_Plan (String id){
@@ -156,6 +160,24 @@ public class Flight_Plan extends ingenias.editor.entities.RuntimeFact{
    
    public List<gov.nasa.worldwind.geom.Position> getWaypoints(){
      return Waypoints;      
+   }
+   
+
+   public void setPlaneID(String value){
+     PlaneID=value;   
+   };
+   
+   public String getPlaneID(){
+     return PlaneID;      
+   }
+   
+
+   public void setPilotID(String value){
+     PilotID=value;   
+   };
+   
+   public String getPilotID(){
+     return PilotID;      
    }
      
     
