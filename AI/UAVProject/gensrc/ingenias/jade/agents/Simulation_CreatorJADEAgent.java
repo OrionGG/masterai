@@ -138,11 +138,11 @@ public class Simulation_CreatorJADEAgent
 	      
 		
 		
-             expectedInput=this.getMSM().getMentalEntityByType("IniciateSimulation");
+             expectedInput=this.getMSM().getMentalEntityByType("InitiateSimulation");
              if (expectedInput.size()==0 && !("1".equals("0..n"))){
-				nonExistingInputs.add("IniciateSimulation");
+				nonExistingInputs.add("InitiateSimulation");
 			 } else {
-			    addExpectedInputs(tobject, "IniciateSimulation","1",expectedInput);
+			    addExpectedInputs(tobject, "InitiateSimulation","1",expectedInput);
              	addConsumedInput(to,"1",expectedInput);
 			 }
              allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;
@@ -314,7 +314,7 @@ public class Simulation_CreatorJADEAgent
    
    
    
-   ff= new IniciateSimulation();      
+   ff= new InitiateSimulation();      
    
    /* */
    		try {

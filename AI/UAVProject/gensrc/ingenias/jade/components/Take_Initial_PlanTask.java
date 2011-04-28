@@ -63,14 +63,14 @@ public class Take_Initial_PlanTask extends Task{
   		TaskOutput	outputsdefault=findOutputAlternative("default",
   																			outputs);
   		
+		InitiateStartPlane outputsdefaultInitiateStartPlane=
+			(InitiateStartPlane)
+				outputsdefault.getEntityByType("InitiateStartPlane");
+		
 		Flight_Plan outputsdefaultFlight_Plan=
 			(Flight_Plan)
 				outputsdefault.getEntityByType("Flight_Plan");
 		
-		
-		InitialAirport outputsdefaultInitialAirport=
-			(InitialAirport)
-				outputsdefault.getEntityByType("InitialAirport");
 		
 		
 		
@@ -81,7 +81,6 @@ public class Take_Initial_PlanTask extends Task{
         outputsdefaultFlight_Plan.setDepartureAirport(eiPlanAnswer.getFlightPlan().getDepartureAirport());
         outputsdefaultFlight_Plan.setDestinationAirport(eiPlanAnswer.getFlightPlan().getDestinationAirport());
         outputsdefaultFlight_Plan.setWaypoints(eiPlanAnswer.getFlightPlan().getWaypoints());
-        outputsdefaultInitialAirport.setInitialAirport(eiPlanAnswer.getFlightPlan().getDepartureAirport());
 //#end_node:INGENIASCodeComponent2 <--- DO NOT REMOVE THIS
 
  }

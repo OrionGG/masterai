@@ -65,9 +65,9 @@ public class CreatePlaneInitialStatusTask extends Task{
   		TaskOutput	outputsdefault=findOutputAlternative("default",
   																			outputs);
   		
-		IniciateUpdateStatus outputsdefaultIniciateUpdateStatus=
-			(IniciateUpdateStatus)
-				outputsdefault.getEntityByType("IniciateUpdateStatus");
+		InitiateUpdateStatus outputsdefaultInitiateUpdateStatus=
+			(InitiateUpdateStatus)
+				outputsdefault.getEntityByType("InitiateUpdateStatus");
 		
 		
 		AllowDescomposingPlan outputsdefaultAllowDescomposingPlan=

@@ -45,7 +45,7 @@ public class StartUpdateStatusTask extends Task{
  public void execute() throws TaskException{
 
 
-        IniciateUpdateStatus  eiIniciateUpdateStatus=(IniciateUpdateStatus)this.getFirstInputOfType("IniciateUpdateStatus");             
+        InitiateUpdateStatus  eiInitiateUpdateStatus=(InitiateUpdateStatus)this.getFirstInputOfType("InitiateUpdateStatus");             
 
         Plane_Mind  eiPlane_Mind=(Plane_Mind)this.getFirstInputOfType("Plane_Mind");             
 

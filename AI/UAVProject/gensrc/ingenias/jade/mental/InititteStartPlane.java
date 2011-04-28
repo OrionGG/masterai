@@ -24,61 +24,42 @@
 */
 
 
-package ingenias.jade.components;
+package ingenias.jade.mental;
 
 import java.util.*;
-import ingenias.jade.exception.*;
-import ingenias.jade.comm.*;
-import ingenias.jade.mental.*;
+import ingenias.jade.components.*;
 import ingenias.editor.entities.*;
+import ingenias.editor.entities.ViewPreferences.ViewType;
 
+public class InititteStartPlane extends ingenias.editor.entities.RuntimeFact{
+    
+   
+  public InititteStartPlane (String id){
+   super(id);
+   this.getPrefs().setView(ViewType.UML);
+   this.type="InititteStartPlane";
+  }
+  
 
-
-public class StartDescomposingPlanTask extends Task{
-
- public StartDescomposingPlanTask(String id){
-  super(id,"StartDescomposingPlan");
- }
-
-
-
- public void execute() throws TaskException{
-
-
-        PlaneOn  eiPlaneOn=(PlaneOn)this.getFirstInputOfType("PlaneOn");             
-
-
-
-
-
-
-
-
-
-
-  		Vector<TaskOutput> outputs = this.getOutputs();
-  		TaskOutput defaultOutput= outputs.firstElement();
-  		
-  		  	
-  		TaskOutput	outputsdefault=findOutputAlternative("default",
-  																			outputs);
-  		
-		NotAllLegsCompleted outputsdefaultNotAllLegsCompleted=
-			(NotAllLegsCompleted)
-				outputsdefault.getEntityByType("NotAllLegsCompleted");
-		
-		
-		
-		
-        YellowPages yp=null; // only available for initiators of interactions
-
-
-//#start_node: <--- DO NOT REMOVE THIS	
-
-//#end_node: <--- DO NOT REMOVE THIS
-
- }
- 
+  public InititteStartPlane (){
+   super(ingenias.jade.MentalStateManager.generateMentalEntityID());
+   this.getPrefs().setView(ViewType.UML);
+  }
+  
+  public String toString(){
+   return this.getId()+":"+this.getType();
+  }
+  
+  public String getType(){
+   return "InititteStartPlane";
+  }
+  
+  public String getParentType(){
+   return "RuntimeFact";
+  }
+  
+     
+    
 }
 
  

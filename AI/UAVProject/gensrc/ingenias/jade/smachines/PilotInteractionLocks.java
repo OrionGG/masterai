@@ -84,8 +84,12 @@
                   
 		           // Interactions in which this agent appears as initiator                  
                   
-                  if (interaction.equals("PilotFlightPlannerPlaneInteraction")&& role.equals("PilotInitiator")){
-                    PilotInitiatorPilotFlightPlannerPlaneInteractionDefaultCommControl.addDefaultLocks(lw);
+                  if (interaction.equals("StartPlaneInteraction")&& role.equals("PilotInitiator")){
+                    PilotInitiatorStartPlaneInteractionDefaultCommControl.addDefaultLocks(lw);
+                  }
+				  
+                  if (interaction.equals("PilotFlightPlannerInteraction")&& role.equals("PilotInitiator")){
+                    PilotInitiatorPilotFlightPlannerInteractionDefaultCommControl.addDefaultLocks(lw);
                   }
 				  
                   if (interaction.equals("PilotPlaneInteraction")&& role.equals("PilotInitiator")){
