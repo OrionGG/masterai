@@ -34,10 +34,10 @@ import ingenias.editor.entities.*;
 
 
 
-public class StartDescomposingPlanTask extends Task{
+public class StartPlaneTask extends Task{
 
- public StartDescomposingPlanTask(String id){
-  super(id,"StartDescomposingPlan");
+ public StartPlaneTask(String id){
+  super(id,"StartPlane");
  }
 
 
@@ -45,7 +45,9 @@ public class StartDescomposingPlanTask extends Task{
  public void execute() throws TaskException{
 
 
-        PlaneOn  eiPlaneOn=(PlaneOn)this.getFirstInputOfType("PlaneOn");             
+        TurningOnPlane  eiTurningOnPlane=(TurningOnPlane)this.getFirstInputOfType("TurningOnPlane");             
+
+        Plane_Mind  eiPlane_Mind=(Plane_Mind)this.getFirstInputOfType("Plane_Mind");             
 
 
 
@@ -63,19 +65,40 @@ public class StartDescomposingPlanTask extends Task{
   		TaskOutput	outputsdefault=findOutputAlternative("default",
   																			outputs);
   		
-		NotAllLegsCompleted outputsdefaultNotAllLegsCompleted=
-			(NotAllLegsCompleted)
-				outputsdefault.getEntityByType("NotAllLegsCompleted");
+		InitiateUpdateStatus outputsdefaultInitiateUpdateStatus=
+			(InitiateUpdateStatus)
+				outputsdefault.getEntityByType("InitiateUpdateStatus");
 		
+		
+		PlaneOn outputsdefaultPlaneOn=
+			(PlaneOn)
+				outputsdefault.getEntityByType("PlaneOn");
 		
 		
 		
         YellowPages yp=null; // only available for initiators of interactions
 
 
-//#start_node: <--- DO NOT REMOVE THIS	
+//#start_node:INGENIASCodeComponent9 <--- DO NOT REMOVE THIS	
+		/*enums.Airport[] oAirportvalues = enums.Airport.values();
+		
+		//set departure point
+		int iIndexDeparture = generator.nextInt(oAirportvalues.length);
+		
+		enums.Airport oDeparture = oAirportvalues[iIndexDeparture];*/
+        enums.Airport oDeparture = eiTurningOnPlane.getInitialAirport();
+		eiPlane_Mind.setLatitude(oDeparture.getPosition().latitude);
+		eiPlane_Mind.setLongitude(oDeparture.getPosition().longitude);
+		eiPlane_Mind.setLastUpdatePosition(new Date());
 
-//#end_node: <--- DO NOT REMOVE THIS
+		eiPlane_Mind.setAltitudeKM(Simulation.SimulationVars.dCruiseAltitudeKM);
+		eiPlane_Mind.setSpeedKMH(Simulation.SimulationVars.dCruiseSpeedKMH);
+		//set head in departure point
+        Random generator = new Random();
+		int iHeadDegrees = generator.nextInt(360);
+		eiPlane_Mind.setHead(gov.nasa.worldwind.geom.Angle.fromDegrees(iHeadDegrees));
+		eiPlane_Mind.setRunningManoeuvres(new ArrayList<Manoeuvre>());
+//#end_node:INGENIASCodeComponent9 <--- DO NOT REMOVE THIS
 
  }
  

@@ -95,10 +95,24 @@ public PilotProtocol(){};
            
 		           // Interactions in which this agent appears as initiator                  
                   
-		   if (conv.getInteraction().getId().equals("PilotFlightPlannerPlaneInteraction") && conv.getPlayedRole().equals("PilotInitiator")){
-		   DefaultCommControl dcc=new PilotInitiatorPilotFlightPlannerPlaneInteractionDefaultCommControl(
+		   if (conv.getInteraction().getId().equals("StartPlaneInteraction") && conv.getPlayedRole().equals("PilotInitiator")){
+		   DefaultCommControl dcc=new PilotInitiatorStartPlaneInteractionDefaultCommControl(
                         		   conv.getConversationID(),msr,lr);
-			sb = new PilotInitiatorPilotFlightPlannerPlaneInteractionStateBehavior(
+			sb = new PilotInitiatorStartPlaneInteractionStateBehavior(
+			agentName,
+				msr,msu,
+					conv,                           		
+				   conv.getPlayedRole(),
+				   actors,
+				dcc,conv.getInteraction().getId());
+                           ActiveConversation aconv=new ActiveConversation(sb,dcc,conv);
+			   return aconv;
+                   }
+		
+		   if (conv.getInteraction().getId().equals("PilotFlightPlannerInteraction") && conv.getPlayedRole().equals("PilotInitiator")){
+		   DefaultCommControl dcc=new PilotInitiatorPilotFlightPlannerInteractionDefaultCommControl(
+                        		   conv.getConversationID(),msr,lr);
+			sb = new PilotInitiatorPilotFlightPlannerInteractionStateBehavior(
 			agentName,
 				msr,msu,
 					conv,                           		
@@ -136,7 +150,7 @@ public PilotProtocol(){};
 	        public AgentExternalDescription[] getInteractionActors(String interaction, YellowPages yp) throws ingenias.jade.exception.NoAgentsFound{
               AgentExternalDescription[] result=null;
              
-               if (interaction.equals("PilotFlightPlannerPlaneInteraction")){
+               if (interaction.equals("StartPlaneInteraction")){
                 Vector<AgentExternalDescription> cols=new Vector<AgentExternalDescription>();
                  
                  try {
@@ -155,17 +169,24 @@ public PilotProtocol(){};
                    throw new NoAgentsFound();
                  }
                  
+                result=new AgentExternalDescription[cols.size()];
+                cols.toArray(result);
+               }
+             
+               if (interaction.equals("PilotFlightPlannerInteraction")){
+                Vector<AgentExternalDescription> cols=new Vector<AgentExternalDescription>();
+                 
                  try {
                  String cardinality="";
-		 DFAgentDescription[] agents=yp.getAgents("FlightPlannerConlaborator");
+		 DFAgentDescription[] agents=yp.getAgents("FlightPlannerColaborator");
                    if (agents==null || agents.length<=0)
-                      throw new ingenias.jade.exception.NoAgentsFound("Could not find an agent playing the role FlightPlannerConlaborator");
+                      throw new ingenias.jade.exception.NoAgentsFound("Could not find an agent playing the role FlightPlannerColaborator");
                    if (cardinality.equals("1") || cardinality.equals(""))
-                    cols.add(new AgentExternalDescription(agents[0].getName(),"FlightPlannerConlaborator"));
+                    cols.add(new AgentExternalDescription(agents[0].getName(),"FlightPlannerColaborator"));
                     else
                 	   if (cardinality.equals("1__*"))
 						   for (int k=0;k<agents.length;k++)
-                			  cols.add(new AgentExternalDescription(agents[k].getName(),"FlightPlannerConlaborator"));
+                			  cols.add(new AgentExternalDescription(agents[k].getName(),"FlightPlannerColaborator"));
                  } catch (FIPAException fe){
                    fe.printStackTrace();
                    throw new NoAgentsFound();
@@ -179,7 +200,7 @@ public PilotProtocol(){};
                 Vector<AgentExternalDescription> cols=new Vector<AgentExternalDescription>();
                  
                  try {
-                 String cardinality="";
+                 String cardinality="1";
 		 DFAgentDescription[] agents=yp.getAgents("PlaneColaborator");
                    if (agents==null || agents.length<=0)
                       throw new ingenias.jade.exception.NoAgentsFound("Could not find an agent playing the role PlaneColaborator");
@@ -207,7 +228,17 @@ public PilotProtocol(){};
 	        DFAgentDescription dfd=null;
                 dfd = new DFAgentDescription();
                 
-                if (protocol.equals("PilotFlightPlannerPlaneInteraction")){
+                if (protocol.equals("StartPlaneInteraction")){
+		dfd.setName(agentID);
+		 ServiceDescription sd = new ServiceDescription();
+		 sd.setName(agentID.getLocalName()  + "-sub-df");
+		 sd.setType("PilotInitiator");
+		 sd.setOwnership("JADE");
+		 dfd.addServices(sd);
+                 playedRoles.add(dfd);
+                }
+                
+                if (protocol.equals("PilotFlightPlannerInteraction")){
 		dfd.setName(agentID);
 		 ServiceDescription sd = new ServiceDescription();
 		 sd.setName(agentID.getLocalName()  + "-sub-df");
@@ -239,13 +270,28 @@ public PilotProtocol(){};
           
         
         
-        if (protocol.equals("PilotFlightPlannerPlaneInteraction")){
+        if (protocol.equals("StartPlaneInteraction")){
             Vector<String> toVerify=new Vector<String>();
             HashSet<String> rolesFound=new HashSet<String>();
             
          	toVerify.add("PlaneColaborator");
          	
-         	toVerify.add("FlightPlannerConlaborator");
+        	if (actors.length<toVerify.size())
+        		return false;
+        	boolean found=false;
+        	for (int k=0;k<actors.length ;k++){
+        		if (toVerify.contains(actors[k].role)){
+    				rolesFound.add(actors[k].role);    			
+    			}
+        	}
+        	return toVerify.size()==rolesFound.size();
+        }
+        
+        if (protocol.equals("PilotFlightPlannerInteraction")){
+            Vector<String> toVerify=new Vector<String>();
+            HashSet<String> rolesFound=new HashSet<String>();
+            
+         	toVerify.add("FlightPlannerColaborator");
          	
         	if (actors.length<toVerify.size())
         		return false;

@@ -56,13 +56,6 @@ import ingenias.exception.NotFound;
      
      lw.addDeletionLockExpectedType("PlanRequest");
      
-    
-       // Facts that cannot be removed because they are part of guards
-    
-    // Facts that cannot be removed because they must be sent
-     
-     lw.addDeletionLockExpectedType("InitialAirport");
-     
      
     }
     
@@ -74,13 +67,6 @@ import ingenias.exception.NotFound;
     // Facts that cannot be removed because they must be sent
      
      locks.add("PlanRequest");
-     
-    
-       // Facts that cannot be removed because they are part of guards
-    
-    // Facts that cannot be removed because they must be sent
-     
-     locks.add("InitialAirport");
      
      
     return locks;
@@ -156,37 +142,6 @@ import ingenias.exception.NotFound;
      
     } 
    
-    if (stateToEvaluate.equals("InteractionUnit6") &&
-    	 sb.isState("InteractionUnit6")&& options.length>0) {         
-         boolean allexist=true;
-         Vector<MentalEntity> mfcontent=null;
-         
-		 
-		 allexist=allexist && !getMSR().obtainConversationalMentalEntityByType(sb.getConversation(),"InitialAirport").isEmpty();
-		   
-         if (allexist && true){
-           sb.clearContentNextMessage();
-           sb.removeState("InteractionUnit6");
-           
-           
-	   	   mfcontent=getMSR().obtainConversationalMentalEntityByType(sb.getConversation(),"InitialAirport");
-	   	   for (MentalEntity me:mfcontent)             
-             sb.addContentForNextMessage(me);    
-	       getLR().removeDeletionLockType("InitialAirport");
-	       lockProcessed("InitialAirport");
-           //MainInteractionManager.log("Removing lock InitialAirport",this.getAgent().getLocalName()+"-"+sb.getConversationID());
-            
-             
-           
-  		   //sb.clearState();         
-	              
-		   futureStates.add("endInteractionUnit6");
-          
-          processed = true;
-      	 }
-     
-    } 
-   
    
   if (futureStates.size()>1){
 	  previous.addAll(futureStates);
@@ -238,7 +193,7 @@ public boolean continueProcess(Vector<ACLMessage> multipleMessages,String[] opti
  		   }*/
 
 	              
-		   futureStates.add("InteractionUnit6");
+		   futureStates.add("endInteractionUnit5");
           
           processed = true;
       	 }      	 

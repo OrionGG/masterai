@@ -34,10 +34,10 @@ import ingenias.editor.entities.*;
 
 
 
-public class AskForPlanTask extends Task{
+public class GoingToStartPlaneTask extends Task{
 
- public AskForPlanTask(String id){
-  super(id,"AskForPlan");
+ public GoingToStartPlaneTask(String id){
+  super(id,"GoingToStartPlane");
  }
 
 
@@ -45,7 +45,9 @@ public class AskForPlanTask extends Task{
  public void execute() throws TaskException{
 
 
-        InteractionTriggerer  eiInteractionTriggerer=(InteractionTriggerer)this.getFirstInputOfType("InteractionTriggerer");             
+        InitiateStartPlane  eiInitiateStartPlane=(InitiateStartPlane)this.getFirstInputOfType("InitiateStartPlane");             
+
+        Pilot_Mind  eiPilot_Mind=(Pilot_Mind)this.getFirstInputOfType("Pilot_Mind");             
 
 
 
@@ -63,20 +65,20 @@ public class AskForPlanTask extends Task{
   		TaskOutput	outputsdefault=findOutputAlternative("default",
   																			outputs);
   		
-		RuntimeConversation outputsdefaultPilotFlightPlannerInteraction=
+		RuntimeConversation outputsdefaultStartPlaneInteraction=
 			(RuntimeConversation)
-				outputsdefault.getEntityByType("PilotFlightPlannerInteraction");
+				outputsdefault.getEntityByType("StartPlaneInteraction");
 		
 		
-		PlanRequest outputsdefaultPlanRequest=
-			(PlanRequest)
-				outputsdefault.getEntityByType("PlanRequest");
+		TurningOnPlane outputsdefaultTurningOnPlane=
+			(TurningOnPlane)
+				outputsdefault.getEntityByType("TurningOnPlane");
 		
 		
 		
         YellowPages yp=null; // only available for initiators of interactions
 
-		// This task can produce an interaction of type PilotFlightPlannerInteraction by working with its conversation object
+		// This task can produce an interaction of type StartPlaneInteraction by working with its conversation object
         
         // To define manually who are the collaborator involved. Your selection will be verified
         // in runtime. Pay attention to log messages to detect errors. You can use the yello pages
@@ -84,14 +86,15 @@ public class AskForPlanTask extends Task{
         yp=(YellowPages)this.getApplication("YellowPages");
 
         //  Uncomment the following and write down a proper local id of the agent
-        // Find an agent playing the role "FlightPlannerColaborator"
-      	//eoPilotFlightPlannerInteraction.addCollaborators("Local ID of the collaborator");
+        // Find an agent playing the role "PlaneColaborator"
+      	//eoStartPlaneInteraction.addCollaborators("Local ID of the collaborator");
        	
 
 
-//#start_node: <--- DO NOT REMOVE THIS	
-
-//#end_node: <--- DO NOT REMOVE THIS
+//#start_node:INGENIASCodeComponent15 <--- DO NOT REMOVE THIS	
+        outputsdefaultTurningOnPlane.setInitialAirport(eiPilot_Mind.getPilotFlightPlan().getDepartureAirport());
+        outputsdefaultStartPlaneInteraction.addCollaborators(eiPilot_Mind.getPilotFlightPlan().getPlane().getAID());
+//#end_node:INGENIASCodeComponent15 <--- DO NOT REMOVE THIS
 
  }
  

@@ -69,17 +69,9 @@ private MentalStateReader msr=null;
 			    
 			      // States involved into colaborator initialization
 			      smf.add("disabled", "waiting for enable");
-			      smf.add("waiting for enable","InteractionUnit6");
+			      smf.add("waiting for enable","");
 			    
 			    
-			    
-			      // Receiving a message    
-			      smf.add("InteractionUnit6", "waiting for InteractionUnit6");
-			      
-			      // Next states after receiving "InteractionUnit6"
-			      
-			       smf.add("waiting for InteractionUnit6","endInteractionUnit6");
-			      
 			    
 			    
 			
@@ -103,7 +95,7 @@ private MentalStateReader msr=null;
 
     
     if (this.isState("disabled")){     
-     String[] options=new String[]{"InteractionUnit6"};
+     String[] options=new String[]{""};
      CommActCreator.generateRWithoutCID((JADEAgent)myAgent,
       "PilotFlightPlannerInteraction","enable",this.getPlayedRole(),options,this);
       this.removeState("disabled");
@@ -120,52 +112,11 @@ private MentalStateReader msr=null;
 
   
   
-  // Receives a message and a synchronization command
-  if (this.isState("InteractionUnit6") ) {  // State changed by other agent and upted
-    //in the parent class
-         
-      Vector options=new Vector();
-      
-      options.add("endInteractionUnit6");
-      
-      String[] optionsA=new String[options.size()];
-      options.toArray(optionsA);
-      boolean allexist=true;
-      
-      int cardinality=1;
-      if ("1".equals("n")){
-         try{
-          Vector<AID> receivers=this.getActor("PilotInitiator");    
-          cardinality=receivers.size();          
-          } catch (NoAgentsFound ex) {
-                    ex.printStackTrace();
-                }   
-       
-      }
-      
-      if (allexist && true){     
-		 addCreatedBehaviors(CommActCreator.generateR((JADEAgent)myAgent,
-                        this.getConversationID(),"InteractionUnit6",
-                   "PilotFlightPlannerInteraction",this.getPlayedRole(),
-                   optionsA,this,cardinality,0));
-      }	 
-      this.removeState("InteractionUnit6");
-      this.addState("waiting for InteractionUnit6");
-      this.notifyStateTransitionExecuted("InteractionUnit6", "waiting for InteractionUnit6");
-  } 
-  
   
   
   
    
 
-  
-  // Finishes this state machine
-  if (this.isState("endInteractionUnit6")) {
-    this.setFinished(); // End of transitions
-    this.notifyProtocolFinished();
-    this.getDCC().removeDefaultLocks();
-  }
   
   
   if (this.isState("ABORTED")) {	    

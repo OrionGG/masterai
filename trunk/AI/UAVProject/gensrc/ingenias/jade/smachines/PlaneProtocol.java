@@ -93,10 +93,10 @@ public PlaneProtocol(){};
             StateBehavior   sb=null;
 		    // Interactions in which this agent appears as collaborator
                              
-		   if (conv.getInteraction().getId().equals("PilotPlaneInteraction") && conv.getPlayedRole().equals("PlaneColaborator")){
-		   	DefaultCommControl dcc=new PlaneColaboratorPilotPlaneInteractionDefaultCommControl(
+		   if (conv.getInteraction().getId().equals("StartPlaneInteraction") && conv.getPlayedRole().equals("PlaneColaborator")){
+		   	DefaultCommControl dcc=new PlaneColaboratorStartPlaneInteractionDefaultCommControl(
                         		   conv.getConversationID(),msr,lr);
-			sb = new PlaneColaboratorPilotPlaneInteractionStateBehavior(agentName,
+			sb = new PlaneColaboratorStartPlaneInteractionStateBehavior(agentName,
 				msr, msu,
 				conv,                           		
 				conv.getPlayedRole(),
@@ -106,10 +106,10 @@ public PlaneProtocol(){};
 			return aconv;
                    }
                                     
-		   if (conv.getInteraction().getId().equals("PilotFlightPlannerPlaneInteraction") && conv.getPlayedRole().equals("PlaneColaborator")){
-		   	DefaultCommControl dcc=new PlaneColaboratorPilotFlightPlannerPlaneInteractionDefaultCommControl(
+		   if (conv.getInteraction().getId().equals("PilotPlaneInteraction") && conv.getPlayedRole().equals("PlaneColaborator")){
+		   	DefaultCommControl dcc=new PlaneColaboratorPilotPlaneInteractionDefaultCommControl(
                         		   conv.getConversationID(),msr,lr);
-			sb = new PlaneColaboratorPilotFlightPlannerPlaneInteractionStateBehavior(agentName,
+			sb = new PlaneColaboratorPilotPlaneInteractionStateBehavior(agentName,
 				msr, msu,
 				conv,                           		
 				conv.getPlayedRole(),
@@ -144,7 +144,7 @@ public PlaneProtocol(){};
                 dfd = new DFAgentDescription();
                 
                                            
-                if (protocol.equals("PilotPlaneInteraction")){
+                if (protocol.equals("StartPlaneInteraction")){
 		dfd.setName(agentID);
 		 ServiceDescription sd = new ServiceDescription();
 		 sd.setName(agentID.getLocalName()  + "-sub-df");
@@ -154,7 +154,7 @@ public PlaneProtocol(){};
                  playedRoles.add(dfd);
                 }
                                            
-                if (protocol.equals("PilotFlightPlannerPlaneInteraction")){
+                if (protocol.equals("PilotPlaneInteraction")){
 		dfd.setName(agentID);
 		 ServiceDescription sd = new ServiceDescription();
 		 sd.setName(agentID.getLocalName()  + "-sub-df");

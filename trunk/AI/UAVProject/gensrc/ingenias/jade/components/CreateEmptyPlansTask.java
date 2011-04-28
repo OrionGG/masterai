@@ -34,10 +34,10 @@ import ingenias.editor.entities.*;
 
 
 
-public class StartDescomposingPlanTask extends Task{
+public class CreateEmptyPlansTask extends Task{
 
- public StartDescomposingPlanTask(String id){
-  super(id,"StartDescomposingPlan");
+ public CreateEmptyPlansTask(String id){
+  super(id,"CreateEmptyPlans");
  }
 
 
@@ -45,7 +45,7 @@ public class StartDescomposingPlanTask extends Task{
  public void execute() throws TaskException{
 
 
-        PlaneOn  eiPlaneOn=(PlaneOn)this.getFirstInputOfType("PlaneOn");             
+        CreatingEmptyPlans  eiCreatingEmptyPlans=(CreatingEmptyPlans)this.getFirstInputOfType("CreatingEmptyPlans");             
 
 
 
@@ -63,10 +63,6 @@ public class StartDescomposingPlanTask extends Task{
   		TaskOutput	outputsdefault=findOutputAlternative("default",
   																			outputs);
   		
-		NotAllLegsCompleted outputsdefaultNotAllLegsCompleted=
-			(NotAllLegsCompleted)
-				outputsdefault.getEntityByType("NotAllLegsCompleted");
-		
 		
 		
 		

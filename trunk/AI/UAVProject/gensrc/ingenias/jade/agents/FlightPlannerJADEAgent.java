@@ -171,7 +171,7 @@ public class FlightPlannerJADEAgent
 
 		    
 		validConversationType=validConversationType||
-				conversation.getInteraction().getId().equalsIgnoreCase("PilotFlightPlannerPlaneInteraction");
+				conversation.getInteraction().getId().equalsIgnoreCase("PilotFlightPlannerInteraction");
 	 	
 				
 		if (validConversationType){
@@ -179,7 +179,7 @@ public class FlightPlannerJADEAgent
          
 	   	nonExistingInputs.clear();
   	   	repeatedOutputs.clear();
-  	   	boolean correctRole=conversation.getPlayedRole().equals ("FlightPlannerConlaborator");
+  	   	boolean correctRole=conversation.getPlayedRole().equals ("FlightPlannerColaborator");
   	   	// Now all ascendant roles are verified, to enable tasks belonging to roles specializing a more
   	   	// generic one involved in an interaction
   	   	
@@ -264,7 +264,7 @@ public class FlightPlannerJADEAgent
          
          typesOfConversation=new Vector<String>();
 	     
-	     typesOfConversation.add("PilotFlightPlannerPlaneInteraction");
+	     typesOfConversation.add("PilotFlightPlannerInteraction");
 		 
          
          if (goalname.equals("Flight_Plan_Taken")){
@@ -327,7 +327,7 @@ public class FlightPlannerJADEAgent
    boolean continueInit=false;
    // Interactions where this agent acts as collaborator
    
-   getCM().addKnownProtocol("PilotFlightPlannerPlaneInteraction");
+   getCM().addKnownProtocol("PilotFlightPlannerInteraction");
    
 
    // These are the initial goals of the agent. Goals determine
@@ -348,6 +348,16 @@ public class FlightPlannerJADEAgent
    }
    
    
+   
+   ff= new CreatingEmptyPlans();      
+   
+   /* */
+   		try {
+			this.getMSM().addMentalEntity(ff);
+		} catch (InvalidEntity e) {
+
+			e.printStackTrace();
+		}
      
 
 		//Initializing the applications panel in the manager
@@ -401,7 +411,7 @@ public class FlightPlannerJADEAgent
 		dfd.setName(getAID());
 		sd = new ServiceDescription();
 		sd.setName(getLocalName() + "-sub-df");
-		sd.setType("FlightPlannerConlaborator");
+		sd.setType("Colaborator");
 		sd.setOwnership("JADE");
 		dfd.addServices(sd);
                 playedRoles.add(dfd);
@@ -409,7 +419,7 @@ public class FlightPlannerJADEAgent
 		dfd.setName(getAID());
 		sd = new ServiceDescription();
 		sd.setName(getLocalName() + "-sub-df");
-		sd.setType("Colaborator");
+		sd.setType("FlightPlannerColaborator");
 		sd.setOwnership("JADE");
 		dfd.addServices(sd);
                 playedRoles.add(dfd);

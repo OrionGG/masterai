@@ -127,33 +127,6 @@ public boolean continueProcess(Vector<ACLMessage> multipleMessages,String[] opti
   
    
    
-    if (sb.isState("waiting for InteractionUnit6")&& options.length>0 && mes!=null
-    && mes.getUserDefinedParameter("sequence")!=null &&
-    		mes.getUserDefinedParameter("sequence").equals("InteractionUnit6")){
-    	 boolean allexist=true;
-         
-         if (allexist && true){
-     	   sb.removeState("waiting for InteractionUnit6");           
-    	   //try {
-                    Vector toAdd=new Vector();
-					for (ACLMessage singleMessage:multipleMessages){
-						 String content=singleMessage.getContent();    	 				
-    	 				Vector realContent = (Vector) xstream.fromXML(content);
-						toAdd.addAll(realContent);						
-					}
-					sb.updateMentalState(toAdd);	
-		   /*} catch (UnreadableException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
- 		   }*/
-
-	              
-		   futureStates.add("endInteractionUnit6");
-          
-          processed = true;
-      	 }      	 
-    } 
-   
  
    
   if (futureStates.size()>1){

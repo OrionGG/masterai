@@ -45,7 +45,7 @@ public class StartSimulationTask extends Task{
  public void execute() throws TaskException{
 
 
-        IniciateSimulation  eiIniciateSimulation=(IniciateSimulation)this.getFirstInputOfType("IniciateSimulation");             
+        InitiateSimulation  eiInitiateSimulation=(InitiateSimulation)this.getFirstInputOfType("InitiateSimulation");             
 
 
 
