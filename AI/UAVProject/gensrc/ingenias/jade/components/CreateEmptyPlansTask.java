@@ -69,9 +69,35 @@ public class CreateEmptyPlansTask extends Task{
         YellowPages yp=null; // only available for initiators of interactions
 
 
-//#start_node: <--- DO NOT REMOVE THIS	
+//#start_node:INGENIASCodeComponent16 <--- DO NOT REMOVE THIS	
+        //outputsdefault.remove(outputsdefaultFlight_Plan);
+        yp=(YellowPages)this.getApplication("YellowPages");
+        List<jade.domain.FIPAAgentManagement.DFAgentDescription> lDFPilotsAgentDescription = new java.util.ArrayList();
+        List<jade.domain.FIPAAgentManagement.DFAgentDescription> lDFPlanesAgentDescription = new java.util.ArrayList();
+		try {
+			jade.domain.FIPAAgentManagement.DFAgentDescription[] aDFPilotsAgentDescription  = yp.getAgents("PilotInitiator");
+			lDFPilotsAgentDescription = Arrays.asList(aDFPilotsAgentDescription);
+			jade.domain.FIPAAgentManagement.DFAgentDescription[] aDFPlanesAgentDescription = yp.getAgents("PlaneColaborator");
+			lDFPlanesAgentDescription = Arrays.asList(aDFPlanesAgentDescription);
+		} catch (jade.domain.FIPAException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		for (int i = 0; i < lDFPilotsAgentDescription.size(); i++) {
+			jade.domain.FIPAAgentManagement.DFAgentDescription dfPilotAgentDescription = lDFPilotsAgentDescription.get(i); 
+			if(i >= lDFPlanesAgentDescription.size()){
+				break;
+			}
+			jade.domain.FIPAAgentManagement.DFAgentDescription dfPlaneAgentDescription = lDFPlanesAgentDescription.get(i); 
+			Flight_Plan oFlightPlan = global.GlobalVarsAndMethods.CreateNewPlan();
+			oFlightPlan.setPilotID(dfPilotAgentDescription.getName().getLocalName());
+			oFlightPlan.setPlaneID(dfPlaneAgentDescription.getName().getLocalName());
 
-//#end_node: <--- DO NOT REMOVE THIS
+			outputsdefault.add(new OutputEntity(oFlightPlan,TaskOperations.CreateWF));
+			
+		}
+//#end_node:INGENIASCodeComponent16 <--- DO NOT REMOVE THIS
 
  }
  
