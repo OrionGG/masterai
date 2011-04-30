@@ -135,17 +135,19 @@ public class FlightPlannerJADEAgent
 			TaskOutput to=null;
 			to=new TaskOutput("default");
 		
+	      
+		
+		
              expectedInput=this.getMSM().getMentalEntityByType("Flight_Plan");
              if (expectedInput.size()==0 && !("1".equals("0..n"))){
 				nonExistingInputs.add("Flight_Plan");
 			 } else {
-			  addExpectedInputs(tobject, "Flight_Plan","1",expectedInput);
+			    addExpectedInputs(tobject, "Flight_Plan","1",expectedInput);
+             	addConsumedInput(to,"1",expectedInput);
 			 }
-             allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;             
-             
+             allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;
+
 	      
-	      
-		
 	      
 	     
 	      
@@ -357,15 +359,6 @@ public class FlightPlannerJADEAgent
 	     
             
 		
-            expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"Flight_Plan");
-			if (expectedInput.size()==0 && !("1".equals("0..n")))
-				nonExistingInputs.add("Flight_Plan");
-			else {
-			    addExpectedInputs(tobject, "Flight_Plan","1",expectedInput);
-			    addConsumedInput(to, "1", expectedInput);
-			}
-	      allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;
-	      
             expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"PlanReceived");
 			if (expectedInput.size()==0 && !("1".equals("0..n")))
 				nonExistingInputs.add("PlanReceived");

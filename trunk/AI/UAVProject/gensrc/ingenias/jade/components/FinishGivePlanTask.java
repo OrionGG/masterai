@@ -45,8 +45,6 @@ public class FinishGivePlanTask extends Task{
  public void execute() throws TaskException{
 
 
-        Flight_Plan  eiFlight_Plan=(Flight_Plan)this.getFirstInputOfType("Flight_Plan");             
-
         PlanReceived  eiPlanReceived=(PlanReceived)this.getFirstInputOfType("PlanReceived");             
 
 

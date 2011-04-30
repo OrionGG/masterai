@@ -7,7 +7,7 @@
 <projectproperty id="jadeproject" module="Ingenias Agent Framework generator"  name="JADE main project folder" value="UAVProject"  tooltip="The folder that will contain the project for this development" />
 <projectproperty id="jadeperm" module="Ingenias Agent Framework generator"  name="JADE generate only once folder" value="permsrc"  tooltip="The folder that will hold generated elements that should not be regenerated" />
 <projectproperty id="htmldoc" module="HTML Document generator"  name="HTML document folder" value="UAVProject\html"  tooltip="The document folder that will contain HTML version of this specification" />
- <openeddiagram>Deployment</openeddiagram> <openeddiagram>Create Initial Plan Tasks</openeddiagram> <openeddiagram>Create Initial Plan Interaction</openeddiagram> <openeddiagram>Create Initial Plan Agents</openeddiagram> <openeddiagram>Create Initial Plan Code</openeddiagram></projectproperties>
+ <openeddiagram>Deployment</openeddiagram> <openeddiagram>Create Initial Plan Tasks</openeddiagram> <openeddiagram>Create Initial Plan Interaction</openeddiagram> <openeddiagram>Create Initial Plan Agents</openeddiagram> <openeddiagram>Create Initial Plan Code</openeddiagram> <openeddiagram>Pilot Plane Interaction Task</openeddiagram> <openeddiagram>Start Plane InteractionUnit</openeddiagram> <openeddiagram>Start Plane Interaction Model</openeddiagram> <openeddiagram>Start Plane Agents</openeddiagram> <openeddiagram>Start Plane Tasks</openeddiagram> <openeddiagram>CreatePilotMind</openeddiagram> <openeddiagram>Pilot Plane Interaction Roles</openeddiagram> <openeddiagram>Pilot Plane InteractionUnit</openeddiagram></projectproperties>
 <leafpackages>
    <path>
     <package id="Project"/>
@@ -940,7 +940,9 @@
 <key id="Language">Java</key>
 <key id="Code">        outputsdefaultFlight_Plan.setDepartureAirport(eiPlanAnswer.getFlightPlan().getDepartureAirport());
         outputsdefaultFlight_Plan.setDestinationAirport(eiPlanAnswer.getFlightPlan().getDestinationAirport());
-        outputsdefaultFlight_Plan.setWaypoints(eiPlanAnswer.getFlightPlan().getWaypoints());</key>
+        outputsdefaultFlight_Plan.setWaypoints(eiPlanAnswer.getFlightPlan().getWaypoints());
+        outputsdefaultFlight_Plan.setPilotID(eiPlanAnswer.getFlightPlan().getPilotID());
+        outputsdefaultFlight_Plan.setPlaneID(eiPlanAnswer.getFlightPlan().getPlaneID());</key>
 <key id="_view_type">UML</key>
 </mapproperties>
 </object>
@@ -1152,7 +1154,7 @@
 <object id="INGENIASCodeComponent15" type="ingenias.editor.entities.INGENIASCodeComponent">
 <mapproperties>
 <key id="Code">        outputsdefaultTurningOnPlane.setInitialAirport(eiPilot_Mind.getPilotFlightPlan().getDepartureAirport());
-       // outputsdefaultStartPlaneInteraction.addCollaborators(eiPilot_Mind.getPilotFlightPlan().getPlane().getAID());</key>
+        outputsdefaultStartPlaneInteraction.addCollaborators(eiPilot_Mind.getPilotFlightPlan().getPlaneID());</key>
 <key id="_view_type">INGENIAS</key>
 </mapproperties>
 </object>
@@ -1160,12 +1162,14 @@
 <mapproperties>
 <key id="Code">        //outputsdefault.remove(outputsdefaultFlight_Plan);
         yp=(YellowPages)this.getApplication(&quot;YellowPages&quot;);
+        String PilotRole = &quot;PilotColaborator&quot;;
+        String PlaneRole = &quot;PlaneColaborator&quot;;
         List&lt;jade.domain.FIPAAgentManagement.DFAgentDescription&gt; lDFPilotsAgentDescription = new java.util.ArrayList();
         List&lt;jade.domain.FIPAAgentManagement.DFAgentDescription&gt; lDFPlanesAgentDescription = new java.util.ArrayList();
 		try {
-			jade.domain.FIPAAgentManagement.DFAgentDescription[] aDFPilotsAgentDescription  = yp.getAgents(&quot;PilotColaborator&quot;);
+			jade.domain.FIPAAgentManagement.DFAgentDescription[] aDFPilotsAgentDescription  = yp.getAgents(PilotRole);
 			lDFPilotsAgentDescription = Arrays.asList(aDFPilotsAgentDescription);
-			jade.domain.FIPAAgentManagement.DFAgentDescription[] aDFPlanesAgentDescription = yp.getAgents(&quot;PlaneColaborator&quot;);
+			jade.domain.FIPAAgentManagement.DFAgentDescription[] aDFPlanesAgentDescription = yp.getAgents(PlaneRole);
 			lDFPlanesAgentDescription = Arrays.asList(aDFPlanesAgentDescription);
 		} catch (jade.domain.FIPAException e) {
 			// TODO Auto-generated catch block
@@ -1182,8 +1186,10 @@
 			}
 			jade.domain.FIPAAgentManagement.DFAgentDescription dfPlaneAgentDescription = lDFPlanesAgentDescription.get(i); 
 			Flight_Plan oFlightPlan = global.GlobalVarsAndMethods.CreateNewPlan();
-			oFlightPlan.setPilotID(dfPilotAgentDescription.getName().getLocalName());
-			oFlightPlan.setPlaneID(dfPlaneAgentDescription.getName().getLocalName());
+			ingenias.jade.AgentExternalDescription oPilotAgentExternalDescription = new ingenias.jade.AgentExternalDescription(dfPilotAgentDescription.getName(), PilotRole);
+			oFlightPlan.setPilotID(oPilotAgentExternalDescription);
+			ingenias.jade.AgentExternalDescription oPlaneAgentExternalDescription = new ingenias.jade.AgentExternalDescription(dfPlaneAgentDescription.getName(), PilotRole);
+			oFlightPlan.setPlaneID(oPlaneAgentExternalDescription);
 
 			outputsdefault.add(new OutputEntity(oFlightPlan,TaskOperations.CreateWF));
 			
@@ -1453,7 +1459,7 @@
 <key id="SpeechAct"></key>
 <key id="Timeout"></key>
 <key id="Description"></key>
-<key id="_view_type">INGENIAS</key>
+<key id="_view_type">UML</key>
 </mapproperties>
 </object>
 <object id="Arrived To Destination" type="ingenias.editor.entities.Goal">
@@ -1985,7 +1991,7 @@ El plan de vuelo esta compuesto por una serie de waypoints (puntos de paso), un 
 <object id="441" type="ingenias.editor.entities.ObjectSlot">
 <mapproperties>
 <key id="Name">PlaneID</key>
-<key id="Type">String</key>
+<key id="Type">ingenias.jade.AgentExternalDescription</key>
 <key id="Description"></key>
 <key id="_view_type">INGENIAS</key>
 </mapproperties>
@@ -1993,7 +1999,7 @@ El plan de vuelo esta compuesto por una serie de waypoints (puntos de paso), un 
 <object id="349" type="ingenias.editor.entities.ObjectSlot">
 <mapproperties>
 <key id="Name">PilotID</key>
-<key id="Type">String</key>
+<key id="Type">ingenias.jade.AgentExternalDescription</key>
 <key id="Description"></key>
 <key id="_view_type">INGENIAS</key>
 </mapproperties>
@@ -3141,7 +3147,7 @@ LegsCompleted el numero de tramos completados
 <object id="441" type="ingenias.editor.entities.ObjectSlot">
 <mapproperties>
 <key id="Name">PlaneID</key>
-<key id="Type">String</key>
+<key id="Type">ingenias.jade.AgentExternalDescription</key>
 <key id="Description"></key>
 <key id="_view_type">INGENIAS</key>
 </mapproperties>
@@ -3149,7 +3155,7 @@ LegsCompleted el numero de tramos completados
 <object id="349" type="ingenias.editor.entities.ObjectSlot">
 <mapproperties>
 <key id="Name">PilotID</key>
-<key id="Type">String</key>
+<key id="Type">ingenias.jade.AgentExternalDescription</key>
 <key id="Description"></key>
 <key id="_view_type">INGENIAS</key>
 </mapproperties>
@@ -3968,7 +3974,7 @@ LegsCompleted el numero de tramos completados
 <object id="441" type="ingenias.editor.entities.ObjectSlot">
 <mapproperties>
 <key id="Name">PlaneID</key>
-<key id="Type">String</key>
+<key id="Type">ingenias.jade.AgentExternalDescription</key>
 <key id="Description"></key>
 <key id="_view_type">INGENIAS</key>
 </mapproperties>
@@ -3976,7 +3982,7 @@ LegsCompleted el numero de tramos completados
 <object id="349" type="ingenias.editor.entities.ObjectSlot">
 <mapproperties>
 <key id="Name">PilotID</key>
-<key id="Type">String</key>
+<key id="Type">ingenias.jade.AgentExternalDescription</key>
 <key id="Description"></key>
 <key id="_view_type">INGENIAS</key>
 </mapproperties>
@@ -6715,25 +6721,6 @@ La lista de puntos (waypoints) por los que tiene que pasar el avion durante el v
 <key id="_view_type">INGENIAS</key>
 </mapproperties>
 </role></relationship>
-<relationship id="324" type="ingenias.editor.entities.GTModifies">
-<object id="324" type="ingenias.editor.entities.GTModifies">
-<objectproperty id="Condition">
-</objectproperty>
-<mapproperties>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</object>
-<role idEntity="Flight Plan" class="ingenias.editor.entities.FrameFact" roleName="WFConsumestarget" type="ingenias.editor.entities.WFConsumestargetRole" dgcid="702492364">
-<mapproperties>
-<key id="attributeToShow">0</key>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</role><role idEntity="GivePlan" class="ingenias.editor.entities.Task" roleName="WFConsumessource" type="ingenias.editor.entities.WFConsumessourceRole" dgcid="64384057">
-<mapproperties>
-<key id="attributeToShow">0</key>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</role></relationship>
 <relationship id="334" type="ingenias.editor.entities.WFProduces">
 <object id="334" type="ingenias.editor.entities.WFProduces">
 <objectproperty id="Condition">
@@ -6789,25 +6776,6 @@ La lista de puntos (waypoints) por los que tiene que pasar el avion durante el v
 <key id="_view_type">INGENIAS</key>
 </mapproperties>
 </role></relationship>
-<relationship id="350" type="ingenias.editor.entities.WFConsumes">
-<object id="350" type="ingenias.editor.entities.WFConsumes">
-<objectproperty id="Condition">
-</objectproperty>
-<mapproperties>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</object>
-<role idEntity="Flight Plan" class="ingenias.editor.entities.FrameFact" roleName="WFConsumestarget" type="ingenias.editor.entities.WFConsumestargetRole" dgcid="1372800363">
-<mapproperties>
-<key id="attributeToShow">0</key>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</role><role idEntity="FinishGivePlan" class="ingenias.editor.entities.Task" roleName="WFConsumessource" type="ingenias.editor.entities.WFConsumessourceRole" dgcid="1875740047">
-<mapproperties>
-<key id="attributeToShow">0</key>
-<key id="_view_type">INGENIAS</key>
-</mapproperties>
-</role></relationship>
 <relationship id="341" type="ingenias.editor.entities.GTSatisfies">
 <object id="341" type="ingenias.editor.entities.GTSatisfies">
 <objectproperty id="SatisfactionCondition">
@@ -6856,6 +6824,25 @@ La lista de puntos (waypoints) por los que tiene que pasar el avion durante el v
 <key id="_view_type">INGENIAS</key>
 </mapproperties>
 </role><role idEntity="Take Initial Plan" class="ingenias.editor.entities.Task" roleName="IAccessessource" type="ingenias.editor.entities.IAccessessourceRole" dgcid="85406629">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
+<relationship id="324" type="ingenias.editor.entities.WFConsumes">
+<object id="324" type="ingenias.editor.entities.WFConsumes">
+<objectproperty id="Condition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Flight Plan" class="ingenias.editor.entities.FrameFact" roleName="WFConsumestarget" type="ingenias.editor.entities.WFConsumestargetRole" dgcid="702492364">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="GivePlan" class="ingenias.editor.entities.Task" roleName="WFConsumessource" type="ingenias.editor.entities.WFConsumessourceRole" dgcid="64384057">
 <mapproperties>
 <key id="attributeToShow">0</key>
 <key id="_view_type">INGENIAS</key>
@@ -9577,6 +9564,11 @@ La lista de puntos (waypoints) por los que tiene que pasar el avion durante el v
 <key id="attributeToShow">0</key>
 <key id="_view_type">INGENIAS</key>
 </mapproperties>
+</role><role idEntity="StartPlane" class="ingenias.editor.entities.Task" roleName="UIExecutestarget" type="ingenias.editor.entities.UIExecutestargetRole" dgcid="2059504772">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
 </role><role idEntity="InteractionUnit7" class="ingenias.editor.entities.InteractionUnit" roleName="UIInitiatessource" type="ingenias.editor.entities.UIInitiatessourceRole" dgcid="273875858">
 <mapproperties>
 <key id="attributeToShow">0</key>
@@ -9678,10 +9670,12 @@ La lista de puntos (waypoints) por los que tiene que pasar el avion durante el v
 <object id="231" type="ingenias.editor.entities.IColaborates">
 <mapproperties>
 <key id="_view_type">INGENIAS</key>
+<key id="Label"></key>
 </mapproperties>
 </object>
 <role idEntity="PlaneColaborator" class="ingenias.editor.entities.Role" roleName="IColaboratestarget" type="ingenias.editor.entities.IColaboratestargetRole" dgcid="426396914">
 <mapproperties>
+<key id="Cardinality">1..*</key>
 <key id="attributeToShow">0</key>
 <key id="_view_type">INGENIAS</key>
 </mapproperties>
@@ -14313,6 +14307,27 @@ Este diagrama se mete dentro de la carpeta init para que cuando la aplicacion ll
 
 	<graph>
 			
+	<node id="336" nid="65976670" type="GTSatisfies">
+
+	<connected id="64384057">
+
+
+	</connected>
+	<connected id="167894475">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="PlanAnswer" nid="1183019793" type="FrameFact">
+
+	</node>
+			
+	<node id="Flight Plan Taken" nid="167894475" type="Goal">
+
+	</node>
+			
 	<node id="205" nid="1298564404" type="GTSatisfies">
 
 	<connected id="85406629">
@@ -14326,7 +14341,24 @@ Este diagrama se mete dentro de la carpeta init para que cuando la aplicacion ll
 	</connected>
 	</node>
 			
-	<node id="PlanAnswer" nid="843003018" type="FrameFact">
+	<node id="26" nid="1154371034" type="GTCreates">
+
+	<connected id="85406629">
+
+
+	</connected>
+	<connected id="1723648722">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="Conversation3" nid="690981489" type="Conversation">
+
+	</node>
+			
+	<node id="FlightPlannerInitiator" nid="1394454928" type="Role">
 
 	</node>
 			
@@ -14348,75 +14380,11 @@ Este diagrama se mete dentro de la carpeta init para que cuando la aplicacion ll
 	</connected>
 	</node>
 			
-	<node id="FlightPlannerInitiator" nid="1394454928" type="Role">
+	<node id="FinishGivePlan" nid="1875740047" type="Task">
 
 	</node>
 			
-	<node id="PlanAnswer" nid="1183019793" type="FrameFact">
-
-	</node>
-			
-	<node id="FlightPlannerPilotInteraction" nid="984970822" type="Interaction">
-
-	</node>
-			
-	<node id="GivePlan" nid="64384057" type="Task">
-
-	</node>
-			
-	<node id="Flight Plan Taken" nid="2064954287" type="Goal">
-
-	</node>
-			
-	<node id="PlanReceived" nid="122963998" type="FrameFact">
-
-	</node>
-			
-	<node id="350" nid="1612498823" type="WFConsumes">
-
-	<connected id="1875740047"><attr name="extraLabels">
-			<array>
-
-</array>
-</attr>
-
-
-
-	</connected>
-	<connected id="1372800363">
-
-
-
-	</connected>
-	</node>
-			
-	<node id="331" nid="2083162356" type="GTCreates">
-
-	<connected id="64384057"><attr name="extraLabels">
-			<array>
-
-</array>
-</attr>
-
-
-
-	</connected>
-	<connected id="690981489">
-
-
-
-	</connected>
-	</node>
-			
-	<node id="Flight Plan" nid="1723648722" type="FrameFact">
-
-	</node>
-			
-	<node id="PilotColaborator" nid="1324407987" type="Role">
-
-	</node>
-			
-	<node id="324" nid="434761960" type="GTModifies">
+	<node id="324" nid="1885555667" type="WFConsumes">
 
 	<connected id="64384057"><attr name="extraLabels">
 			<array>
@@ -14434,76 +14402,28 @@ Este diagrama se mete dentro de la carpeta init para que cuando la aplicacion ll
 	</connected>
 	</node>
 			
-	<node id="322" nid="1101578066" type="WFResponsable">
-
-	<connected id="744425448">
-
-
-	</connected>
-	<connected id="64384057">
-
-
-
-	</connected>
-	</node>
-			
-	<node id="Flight Plan" nid="702492364" type="FrameFact">
+	<node id="InitiateStartPlane" nid="1058330425" type="FrameFact">
 
 	</node>
 			
-	<node id="328" nid="2098409254" type="WFProduces">
-
-	<connected id="843003018">
-
-
-
-	</connected>
-	<connected id="64384057">
-
-
-	</connected>
-	</node>
-			
-	<node id="335" nid="54618292" type="WFConsumes">
-
-	<connected id="1875740047"><attr name="extraLabels">
-			<array>
-
-</array>
-</attr>
-
-
-
-	</connected>
-	<connected id="122963998">
-
-
-
-	</connected>
-	</node>
-			
-	<node id="Conversation3" nid="690981489" type="Conversation">
+	<node id="Flight Plan Taken" nid="2064954287" type="Goal">
 
 	</node>
 			
-	<node id="121" nid="14607708" type="GTCreates">
+	<node id="29" nid="1694978134" type="WFResponsable">
 
+	<connected id="1324407987">
+
+
+	</connected>
 	<connected id="85406629">
 
 
-	</connected>
-	<connected id="1058330425">
-
-
 
 	</connected>
 	</node>
 			
-	<node id="FlightPlannerInitiator" nid="744425448" type="Role">
-
-	</node>
-			
-	<node id="PlanReceived" nid="988504668" type="FrameFact">
+	<node id="GivePlan" nid="64384057" type="Task">
 
 	</node>
 			
@@ -14514,27 +14434,6 @@ Este diagrama se mete dentro de la carpeta init para que cuando la aplicacion ll
 
 	</connected>
 	<connected id="1183019793">
-
-
-
-	</connected>
-	</node>
-			
-	<node id="InitiateStartPlane" nid="1058330425" type="FrameFact">
-
-	</node>
-			
-	<node id="Flight Plan Taken" nid="167894475" type="Goal">
-
-	</node>
-			
-	<node id="336" nid="65976670" type="GTSatisfies">
-
-	<connected id="64384057">
-
-
-	</connected>
-	<connected id="167894475">
 
 
 
@@ -14559,15 +14458,124 @@ Este diagrama se mete dentro de la carpeta init para que cuando la aplicacion ll
 	</connected>
 	</node>
 			
-	<node id="FlightPlannerPilotInteraction" nid="1609823464" type="Interaction">
+	<node id="347" nid="381740976" type="WFResponsable">
 
+	<connected id="1394454928"><attr name="extraLabels">
+			<array>
+
+</array>
+</attr>
+
+
+
+	</connected>
+	<connected id="1875740047">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="PlanAnswer" nid="843003018" type="FrameFact">
+
+	</node>
+			
+	<node id="328" nid="2098409254" type="WFProduces">
+
+	<connected id="843003018">
+
+
+
+	</connected>
+	<connected id="64384057">
+
+
+	</connected>
+	</node>
+			
+	<node id="PilotColaborator" nid="1324407987" type="Role">
+
+	</node>
+			
+	<node id="335" nid="54618292" type="WFConsumes">
+
+	<connected id="1875740047"><attr name="extraLabels">
+			<array>
+
+</array>
+</attr>
+
+
+
+	</connected>
+	<connected id="122963998">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="331" nid="2083162356" type="GTCreates">
+
+	<connected id="64384057"><attr name="extraLabels">
+			<array>
+
+</array>
+</attr>
+
+
+
+	</connected>
+	<connected id="690981489">
+
+
+
+	</connected>
 	</node>
 			
 	<node id="Take Initial Plan" nid="85406629" type="Task">
 
 	</node>
 			
-	<node id="Flight Plan" nid="1372800363" type="FrameFact">
+	<node id="FlightPlannerInitiator" nid="744425448" type="Role">
+
+	</node>
+			
+	<node id="121" nid="14607708" type="GTCreates">
+
+	<connected id="85406629">
+
+
+	</connected>
+	<connected id="1058330425">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="PlanReceived" nid="122963998" type="FrameFact">
+
+	</node>
+			
+	<node id="PlanReceived" nid="988504668" type="FrameFact">
+
+	</node>
+			
+	<node id="322" nid="1101578066" type="WFResponsable">
+
+	<connected id="744425448">
+
+
+	</connected>
+	<connected id="64384057">
+
+
+
+	</connected>
+	</node>
+			
+	<node id="Flight Plan Taken" nid="1285174071" type="Goal">
 
 	</node>
 			
@@ -14589,7 +14597,11 @@ Este diagrama se mete dentro de la carpeta init para que cuando la aplicacion ll
 	</connected>
 	</node>
 			
-	<node id="Flight Plan Taken" nid="1285174071" type="Goal">
+	<node id="FlightPlannerPilotInteraction" nid="1609823464" type="Interaction">
+
+	</node>
+			
+	<node id="Flight Plan" nid="1723648722" type="FrameFact">
 
 	</node>
 			
@@ -14611,79 +14623,21 @@ Este diagrama se mete dentro de la carpeta init para que cuando la aplicacion ll
 	</connected>
 	</node>
 			
-	<node id="29" nid="1694978134" type="WFResponsable">
-
-	<connected id="1324407987">
-
-
-	</connected>
-	<connected id="85406629">
-
-
-
-	</connected>
-	</node>
-			
-	<node id="FinishGivePlan" nid="1875740047" type="Task">
+	<node id="Flight Plan" nid="702492364" type="FrameFact">
 
 	</node>
 			
-	<node id="347" nid="381740976" type="WFResponsable">
+	<node id="FlightPlannerPilotInteraction" nid="984970822" type="Interaction">
 
-	<connected id="1394454928"><attr name="extraLabels">
-			<array>
-
-</array>
-</attr>
-
-
-
-	</connected>
-	<connected id="1875740047">
-
-
-
-	</connected>
-	</node>
-			
-	<node id="26" nid="1154371034" type="GTCreates">
-
-	<connected id="85406629">
-
-
-	</connected>
-	<connected id="1723648722">
-
-
-
-	</connected>
 	</node>
 	</graph>
 
 
 	<layout>
 			
-	<node id="node14">
+	<node id="node16">
 		<attr name="bounds">
-			<rectangle x="299" y="324" width="69" height="15"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node9">
-		<attr name="bounds">
-			<rectangle x="555" y="184" width="57" height="46"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node33">
-		<attr name="bounds">
-			<rectangle x="306" y="534" width="69" height="15"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node30">
-		<attr name="bounds">
-			<rectangle x="49" y="573" width="123" height="43"></rectangle>		</attr>
+			<rectangle x="320" y="95" width="69" height="15"></rectangle>		</attr>
 
 	</node>
 			
@@ -14693,81 +14647,21 @@ Este diagrama se mete dentro de la carpeta init para que cuando la aplicacion ll
 
 	</node>
 			
-	<node id="node12">
+	<node id="node0">
 		<attr name="bounds">
-			<rectangle x="564" y="284" width="153" height="54"></rectangle>		</attr>
+			<rectangle x="312" y="28" width="99" height="50"></rectangle>		</attr>
 
 	</node>
 			
-	<node id="node10">
+	<node id="node14">
 		<attr name="bounds">
-			<rectangle x="322" y="127" width="54" height="43"></rectangle>		</attr>
+			<rectangle x="299" y="324" width="69" height="15"></rectangle>		</attr>
 
 	</node>
 			
-	<node id="node1">
+	<node id="node19">
 		<attr name="bounds">
-			<rectangle x="280" y="258" width="99" height="50"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node25">
-		<attr name="bounds">
-			<rectangle x="562" y="507" width="96" height="46"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node32">
-		<attr name="bounds">
-			<rectangle x="453" y="584" width="79" height="15"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node21">
-		<attr name="bounds">
-			<rectangle x="428" y="137" width="64" height="15"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node5">
-		<attr name="bounds">
-			<rectangle x="564" y="342" width="150" height="46"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node11">
-		<attr name="bounds">
-			<rectangle x="80" y="344" width="96" height="59"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node22">
-		<attr name="bounds">
-			<rectangle x="428" y="107" width="66" height="15"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node18">
-		<attr name="bounds">
-			<rectangle x="217" y="141" width="91" height="15"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node7">
-		<attr name="bounds">
-			<rectangle x="546" y="43" width="150" height="46"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node20">
-		<attr name="bounds">
-			<rectangle x="428" y="170" width="74" height="15"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node28">
-		<attr name="bounds">
-			<rectangle x="444" y="552" width="79" height="15"></rectangle>		</attr>
+			<rectangle x="439" y="363" width="64" height="15"></rectangle>		</attr>
 
 	</node>
 			
@@ -14777,27 +14671,27 @@ Este diagrama se mete dentro de la carpeta init para que cuando la aplicacion ll
 
 	</node>
 			
-	<node id="node15">
+	<node id="node28">
 		<attr name="bounds">
-			<rectangle x="430" y="386" width="64" height="15"></rectangle>		</attr>
+			<rectangle x="49" y="573" width="123" height="43"></rectangle>		</attr>
 
 	</node>
 			
-	<node id="node2">
+	<node id="node30">
 		<attr name="bounds">
-			<rectangle x="79" y="129" width="123" height="43"></rectangle>		</attr>
+			<rectangle x="306" y="534" width="69" height="15"></rectangle>		</attr>
 
 	</node>
 			
-	<node id="node23">
+	<node id="node26">
 		<attr name="bounds">
-			<rectangle x="562" y="438" width="96" height="46"></rectangle>		</attr>
+			<rectangle x="287" y="572" width="118" height="43"></rectangle>		</attr>
 
 	</node>
 			
-	<node id="node17">
+	<node id="node34">
 		<attr name="bounds">
-			<rectangle x="428" y="308" width="79" height="15"></rectangle>		</attr>
+			<rectangle x="422" y="107" width="79" height="15"></rectangle>		</attr>
 
 	</node>
 			
@@ -14807,57 +14701,9 @@ Este diagrama se mete dentro de la carpeta init para que cuando la aplicacion ll
 
 	</node>
 			
-	<node id="node0">
+	<node id="node1">
 		<attr name="bounds">
-			<rectangle x="312" y="28" width="99" height="50"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node16">
-		<attr name="bounds">
-			<rectangle x="320" y="95" width="69" height="15"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node36">
-		<attr name="bounds">
-			<rectangle x="439" y="340" width="64" height="15"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node34">
-		<attr name="bounds">
-			<rectangle x="583" y="628" width="153" height="54"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node8">
-		<attr name="bounds">
-			<rectangle x="298" y="355" width="81" height="43"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node29">
-		<attr name="bounds">
-			<rectangle x="580" y="568" width="150" height="46"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node35">
-		<attr name="bounds">
-			<rectangle x="462" y="615" width="64" height="15"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node26">
-		<attr name="bounds">
-			<rectangle x="285" y="461" width="99" height="50"></rectangle>		</attr>
-
-	</node>
-			
-	<node id="node24">
-		<attr name="bounds">
-			<rectangle x="433" y="409" width="74" height="15"></rectangle>		</attr>
+			<rectangle x="280" y="258" width="99" height="50"></rectangle>		</attr>
 
 	</node>
 			
@@ -14867,21 +14713,135 @@ Este diagrama se mete dentro de la carpeta init para que cuando la aplicacion ll
 
 	</node>
 			
-	<node id="node27">
+	<node id="node10">
 		<attr name="bounds">
-			<rectangle x="287" y="572" width="118" height="43"></rectangle>		</attr>
+			<rectangle x="322" y="127" width="54" height="43"></rectangle>		</attr>
 
 	</node>
 			
-	<node id="node31">
+	<node id="node17">
+		<attr name="bounds">
+			<rectangle x="428" y="308" width="79" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node33">
+		<attr name="bounds">
+			<rectangle x="439" y="340" width="64" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node29">
 		<attr name="bounds">
 			<rectangle x="184" y="586" width="91" height="15"></rectangle>		</attr>
 
 	</node>
 			
-	<node id="node19">
+	<node id="node9">
 		<attr name="bounds">
-			<rectangle x="439" y="363" width="64" height="15"></rectangle>		</attr>
+			<rectangle x="555" y="184" width="57" height="46"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node20">
+		<attr name="bounds">
+			<rectangle x="428" y="170" width="74" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node11">
+		<attr name="bounds">
+			<rectangle x="80" y="344" width="96" height="59"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node27">
+		<attr name="bounds">
+			<rectangle x="444" y="552" width="79" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node21">
+		<attr name="bounds">
+			<rectangle x="428" y="137" width="64" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node8">
+		<attr name="bounds">
+			<rectangle x="298" y="355" width="81" height="43"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node2">
+		<attr name="bounds">
+			<rectangle x="79" y="129" width="123" height="43"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node15">
+		<attr name="bounds">
+			<rectangle x="430" y="386" width="64" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node24">
+		<attr name="bounds">
+			<rectangle x="562" y="507" width="96" height="46"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node22">
+		<attr name="bounds">
+			<rectangle x="562" y="438" width="96" height="46"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node18">
+		<attr name="bounds">
+			<rectangle x="217" y="141" width="91" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node25">
+		<attr name="bounds">
+			<rectangle x="285" y="461" width="99" height="50"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node32">
+		<attr name="bounds">
+			<rectangle x="462" y="615" width="64" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node31">
+		<attr name="bounds">
+			<rectangle x="583" y="628" width="153" height="54"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node5">
+		<attr name="bounds">
+			<rectangle x="564" y="342" width="150" height="46"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node23">
+		<attr name="bounds">
+			<rectangle x="433" y="409" width="74" height="15"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node7">
+		<attr name="bounds">
+			<rectangle x="546" y="43" width="150" height="46"></rectangle>		</attr>
+
+	</node>
+			
+	<node id="node12">
+		<attr name="bounds">
+			<rectangle x="564" y="284" width="153" height="54"></rectangle>		</attr>
 
 	</node>
 	</layout>
@@ -15126,7 +15086,7 @@ Este diagrama se mete dentro de la carpeta init para que cuando la aplicacion ll
 			
 	<node id="node16">
 		<attr name="bounds">
-			<rectangle x="345" y="342" width="67" height="15"></rectangle>		</attr>
+			<rectangle x="333" y="339" width="67" height="15"></rectangle>		</attr>
 
 	</node>
 			
@@ -15156,7 +15116,7 @@ Este diagrama se mete dentro de la carpeta init para que cuando la aplicacion ll
 			
 	<node id="node12">
 		<attr name="bounds">
-			<rectangle x="349" y="389" width="74" height="47"></rectangle>		</attr>
+			<rectangle x="305" y="384" width="117" height="66"></rectangle>		</attr>
 
 	</node>
 			
@@ -15168,13 +15128,13 @@ Este diagrama se mete dentro de la carpeta init para que cuando la aplicacion ll
 			
 	<node id="node13">
 		<attr name="bounds">
-			<rectangle x="512" y="390" width="57" height="15"></rectangle>		</attr>
+			<rectangle x="511" y="390" width="57" height="15"></rectangle>		</attr>
 
 	</node>
 			
 	<node id="node14">
 		<attr name="bounds">
-			<rectangle x="221" y="374" width="79" height="15"></rectangle>		</attr>
+			<rectangle x="195" y="373" width="79" height="15"></rectangle>		</attr>
 
 	</node>
 			
@@ -20007,6 +19967,10 @@ Este diagrama se mete dentro de la carpeta init para que cuando la aplicacion ll
 	</connected>
 	</node>
 			
+	<node id="StartPlane" nid="2059504772" type="Task">
+
+	</node>
+			
 	<node id="314" nid="1436418073" type="UIInitiates">
 
 	<connected id="1854098567">
@@ -20039,6 +20003,16 @@ Este diagrama se mete dentro de la carpeta init para que cuando la aplicacion ll
 			
 	<node id="391" nid="1770478210" type="UIInitiates">
 
+	<connected id="2059504772"><attr name="extraLabels">
+			<array>
+
+</array>
+</attr>
+
+
+
+
+	</connected>
 	<connected id="273875858">
 
 
@@ -20085,6 +20059,12 @@ Este diagrama se mete dentro de la carpeta init para que cuando la aplicacion ll
 
 	</node>
 			
+	<node id="node9">
+		<attr name="bounds">
+			<rectangle x="332" y="141" width="123" height="43"></rectangle>		</attr>
+
+	</node>
+			
 	<node id="node5">
 		<attr name="bounds">
 			<rectangle x="118" y="48" width="57" height="15"></rectangle>		</attr>
@@ -20105,7 +20085,7 @@ Este diagrama se mete dentro de la carpeta init para que cuando la aplicacion ll
 			
 	<node id="node4">
 		<attr name="bounds">
-			<rectangle x="298" y="87" width="57" height="15"></rectangle>		</attr>
+			<rectangle x="321" y="109" width="57" height="15"></rectangle>		</attr>
 
 	</node>
 			
@@ -20213,7 +20193,7 @@ Este diagrama se mete dentro de la carpeta init para que cuando la aplicacion ll
 			
 	<node id="node1">
 		<attr name="bounds">
-			<rectangle x="242" y="102" width="134" height="51"></rectangle>		</attr>
+			<rectangle x="262" y="123" width="134" height="51"></rectangle>		</attr>
 
 	</node>
 			
@@ -20243,7 +20223,7 @@ Este diagrama se mete dentro de la carpeta init para que cuando la aplicacion ll
 			
 	<node id="node5">
 		<attr name="bounds">
-			<rectangle x="227" y="77" width="72" height="15"></rectangle>		</attr>
+			<rectangle x="238" y="87" width="72" height="15"></rectangle>		</attr>
 
 	</node>
 			

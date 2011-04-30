@@ -166,7 +166,7 @@ public PilotProtocol(){};
                 Vector<AgentExternalDescription> cols=new Vector<AgentExternalDescription>();
                  
                  try {
-                 String cardinality="";
+                 String cardinality="1__*";
 		 DFAgentDescription[] agents=yp.getAgents("PlaneColaborator");
                    if (agents==null || agents.length<=0)
                       throw new ingenias.jade.exception.NoAgentsFound("Could not find an agent playing the role PlaneColaborator");

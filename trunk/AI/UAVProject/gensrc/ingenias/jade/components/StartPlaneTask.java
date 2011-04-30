@@ -57,6 +57,9 @@ public class StartPlaneTask extends Task{
 
 
 
+        // This means that the task participates in the interaction StartPlaneInteraction
+        RuntimeConversation  conversationContextStartPlaneInteraction=this.getConversationContext();
+
 
   		Vector<TaskOutput> outputs = this.getOutputs();
   		TaskOutput defaultOutput= outputs.firstElement();
