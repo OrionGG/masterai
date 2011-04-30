@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Random;
 
 public class GlobalVarsAndMethods {
-	public static int iMaxNumWaypoints = 0;
+	public static int iMaxNumWaypoints = 2;
 	
 	//public static Hashtable<PlaneJADEAgent, Thread> hUpdatePlanesThreads = new Hashtable<PlaneJADEAgent, Thread>();
 	

@@ -30,7 +30,7 @@ public class UpdatePlaneStatusThread  implements Runnable{
 				eiPlane_Mind.getLatitude(), eiPlane_Mind.getLongitude(), eiPlane_Mind.getAltitudeKM());
 		oPlaneView = new PlaneView((PlaneJADEAgent)oUpdatePlaneStatusAppImp.getOwner(), "Plane", oPosition);
 		Simulation.SimulationVars.lPlanesFlying.add(oPlaneView);
-		//oPlaneView.render(Simulation.SimulationVars.layer);
+		oPlaneView.render(Simulation.SimulationVars.layer);
 	}
 
 	@Override

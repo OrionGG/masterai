@@ -96,6 +96,7 @@ public class Flight_Plan_MonitoringTask extends Task{
         
         outputsdefaultFlight_Leg.setStartPoint(oStartPoint);
         outputsdefaultFlight_Leg.setEndPoint(oEndPoint);
+        outputsdefaultFlight_Leg.setPlaneID(oFlightPlan.getPlaneID());
     	
 //#end_node:INGENIASCodeComponent5 <--- DO NOT REMOVE THIS
 

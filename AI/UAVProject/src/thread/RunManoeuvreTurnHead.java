@@ -93,15 +93,4 @@ public class RunManoeuvreTurnHead  implements Runnable{
 
 
 
-
-
-
-	private static boolean checkSimilarManoeuvres(
-			ArrayList<Manoeuvre> runningManoeuvres, Manoeuvre eiManoeuvre2) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-
-
 }

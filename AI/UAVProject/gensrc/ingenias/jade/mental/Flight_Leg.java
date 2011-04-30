@@ -40,6 +40,8 @@ public class Flight_Leg extends ingenias.editor.entities.RuntimeFact{
     double AltitudeKM;   
    
     double SpeedKMH;   
+   
+    ingenias.jade.AgentExternalDescription PlaneID;   
     
    
   public Flight_Leg (String id){
@@ -101,6 +103,15 @@ public class Flight_Leg extends ingenias.editor.entities.RuntimeFact{
    
    public double getSpeedKMH(){
      return SpeedKMH;      
+   }
+   
+
+   public void setPlaneID(ingenias.jade.AgentExternalDescription value){
+     PlaneID=value;   
+   };
+   
+   public ingenias.jade.AgentExternalDescription getPlaneID(){
+     return PlaneID;      
    }
      
     

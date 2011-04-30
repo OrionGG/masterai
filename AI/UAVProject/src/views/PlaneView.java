@@ -52,7 +52,9 @@ public class PlaneView extends PointPlacemark {
 	}
 	
 	public void render(RenderableLayer layer){
+		if(layer != null){
 	        layer.addRenderable(this);
+		}
 	}
 	
 	

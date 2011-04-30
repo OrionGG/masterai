@@ -7,7 +7,7 @@
 <projectproperty id="jadeproject" module="Ingenias Agent Framework generator"  name="JADE main project folder" value="UAVProject"  tooltip="The folder that will contain the project for this development" />
 <projectproperty id="jadeperm" module="Ingenias Agent Framework generator"  name="JADE generate only once folder" value="permsrc"  tooltip="The folder that will hold generated elements that should not be regenerated" />
 <projectproperty id="htmldoc" module="HTML Document generator"  name="HTML document folder" value="UAVProject\html"  tooltip="The document folder that will contain HTML version of this specification" />
- <openeddiagram>Deployment</openeddiagram> <openeddiagram>Create Initial Plan Tasks</openeddiagram> <openeddiagram>Create Initial Plan Interaction</openeddiagram> <openeddiagram>Create Initial Plan Agents</openeddiagram> <openeddiagram>Create Initial Plan Code</openeddiagram> <openeddiagram>Pilot Plane Interaction Task</openeddiagram> <openeddiagram>Start Plane InteractionUnit</openeddiagram> <openeddiagram>Start Plane Interaction Model</openeddiagram> <openeddiagram>Start Plane Agents</openeddiagram> <openeddiagram>Start Plane Tasks</openeddiagram> <openeddiagram>CreatePilotMind</openeddiagram> <openeddiagram>Pilot Plane Interaction Roles</openeddiagram> <openeddiagram>Pilot Plane InteractionUnit</openeddiagram></projectproperties>
+ <openeddiagram>Deployment</openeddiagram> <openeddiagram>Create Initial Plan Tasks</openeddiagram> <openeddiagram>Create Initial Plan Interaction</openeddiagram> <openeddiagram>Create Initial Plan Agents</openeddiagram> <openeddiagram>Create Initial Plan Code</openeddiagram> <openeddiagram>Pilot Plane Interaction Task</openeddiagram> <openeddiagram>Start Plane InteractionUnit</openeddiagram> <openeddiagram>Start Plane Interaction Model</openeddiagram> <openeddiagram>Start Plane Agents</openeddiagram> <openeddiagram>Start Plane Tasks</openeddiagram> <openeddiagram>CreatePilotMind</openeddiagram> <openeddiagram>Pilot Plane Interaction Roles</openeddiagram> <openeddiagram>Pilot Plane InteractionUnit</openeddiagram> <openeddiagram>Update Status</openeddiagram> <openeddiagram>Iniciate</openeddiagram> <openeddiagram>Update Status Code</openeddiagram> <openeddiagram>Update Position</openeddiagram> <openeddiagram>Pilot Plane Interaction Model</openeddiagram> <openeddiagram>Create Decisions Code</openeddiagram> <openeddiagram>Create Decisions For Leg</openeddiagram> <openeddiagram>Leg Completed</openeddiagram> <openeddiagram>App Leg Checker</openeddiagram></projectproperties>
 <leafpackages>
    <path>
     <package id="Project"/>
@@ -1012,6 +1012,7 @@
         
         outputsdefaultFlight_Leg.setStartPoint(oStartPoint);
         outputsdefaultFlight_Leg.setEndPoint(oEndPoint);
+        outputsdefaultFlight_Leg.setPlaneID(oFlightPlan.getPlaneID());
     	</key>
 <key id="_view_type">UML</key>
 </mapproperties>
@@ -1019,7 +1020,7 @@
 <object id="INGENIASCodeComponent6" type="ingenias.editor.entities.INGENIASCodeComponent">
 <mapproperties>
 <key id="Language">Java</key>
-<key id="Code">        boolean bIsLegCompleted = false;//((Leg_CheckerAppImp)eaLeg_Checker).isLegCompleted(eiFlight_Leg);
+<key id="Code">        boolean bIsLegCompleted = ((Leg_CheckerAppImp)eaLeg_Checker).isLegCompleted(eiFlight_Leg);
 
         if(bIsLegCompleted){
 
@@ -1033,34 +1034,39 @@
 </object>
 <object id="INGENIASCodeComponent7" type="ingenias.editor.entities.INGENIASCodeComponent">
 <mapproperties>
-<key id="Code">        outputsdefaultThrow_Change.setSpeedChange(-1);
-    	outputsdefaultThrow_Change.setAltitudeChange(-1);
-    	outputsdefaultThrow_Change.setHeadChange(null);
-        Vector&lt;Plane_Position_ServiceAppImp&gt; oVector = Plane_Position_ServiceInit.getAppsInitialised();
-        if(oVector.size()&gt; 0){
-        	Plane_Position_ServiceAppImp eaPlane_Position_ServiceAppImp = oVector.get(0);
-        	//eaPlane_Position_ServiceAppImp.getOwner();
-        	gov.nasa.worldwind.geom.Position oPosition = eaPlane_Position_ServiceAppImp.getCurrentPosition();
-        	
-        	gov.nasa.worldwind.geom.Position oEndPoint = eiFlight_Leg.getEndPoint();
-        	
-        	double lat1 = oPosition.getLatitude().radians;
-        	double lat2 = oEndPoint.getLatitude().radians;
-        	double lon1 = oPosition.getLongitude().radians;
-            double lon2 = oEndPoint.getLongitude().radians;
-            
-            gov.nasa.worldwind.geom.Angle oAngle = BasicFlightDynamics.BFD.getHead(lat1, lon1, lat2, lon2);
-            
-            if(oAngle.degrees &lt; 0){
-            	oAngle = oAngle.addDegrees(360);
-            }
-            
-            if(eaPlane_Position_ServiceAppImp.getCurrentHead().degrees != oAngle.degrees){
-            	outputsdefaultThrow_Change.setHeadChange(oAngle);
-            	outputsdefaultThrow_Change.setPriority(0);
-            }
+<key id="Code">		outputsdefaultThrow_Change.setSpeedChange(-1);
+		outputsdefaultThrow_Change.setAltitudeChange(-1);
+		outputsdefaultThrow_Change.setHeadChange(null);
+		Vector&lt;Plane_Position_ServiceAppImp&gt; oVector = Plane_Position_ServiceInit.getAppsInitialised();
+		
+		for (Plane_Position_ServiceAppImp plane_Position_ServiceAppImp : oVector) {
+			jade.core.AID oPlaneAID = eiFlight_Leg.getPlaneID().id;
+			if(oPlaneAID.equals(plane_Position_ServiceAppImp.getOwner().getAID())){
+				//eaPlane_Position_ServiceAppImp.getOwner();
+				gov.nasa.worldwind.geom.Position oPosition = plane_Position_ServiceAppImp.getCurrentPosition();
 
-        }</key>
+				gov.nasa.worldwind.geom.Position oEndPoint = eiFlight_Leg.getEndPoint();
+
+				double lat1 = oPosition.getLatitude().radians;
+				double lat2 = oEndPoint.getLatitude().radians;
+				double lon1 = oPosition.getLongitude().radians;
+				double lon2 = oEndPoint.getLongitude().radians;
+
+				gov.nasa.worldwind.geom.Angle oAngle = BasicFlightDynamics.BFD.getHead(lat1, lon1, lat2, lon2);
+
+				if(oAngle.degrees &lt; 0){
+					oAngle = oAngle.addDegrees(360);
+				}
+
+				if(plane_Position_ServiceAppImp.getCurrentHead().degrees != oAngle.degrees){
+					outputsdefaultThrow_Change.setHeadChange(oAngle);
+					outputsdefaultThrow_Change.setPriority(0);
+				}
+				break;
+			}
+
+		}
+	</key>
 <key id="_view_type">UML</key>
 </mapproperties>
 </object>
@@ -1093,14 +1099,15 @@
 <key id="Code">        outputsdefaultManoeuvre.setSpeedChange(eiThrow_Change.getSpeedChange());
         outputsdefaultManoeuvre.setAltitudeChange(eiThrow_Change.getAltitudeChange());
         outputsdefaultManoeuvre.setHeadChange(eiThrow_Change.getHeadChange());
-        outputsdefaultManoeuvre.setPriority(eiThrow_Change.getPriority());</key>
+        outputsdefaultManoeuvre.setPriority(eiThrow_Change.getPriority());
+        outputsdefaultPilotPlaneInteraction.addCollaborators(eiPilot_Mind.getPilotFlightPlan().getPlaneID());</key>
 <key id="_view_type">UML</key>
 </mapproperties>
 </object>
 <object id="INGENIASCodeComponent11" type="ingenias.editor.entities.INGENIASCodeComponent">
 <mapproperties>
 <key id="Code">        if(eiManoeuvre.getSpeedChange()!= -1){
-        	thread.RunManoeuvreChangeSpeed.runManoeuvreTurnHead(eiManoeuvre, eiPlane_Mind,eaUpdatePlaneStatus);
+        	thread.RunManoeuvreChangeSpeed.runManoeuvre(eiManoeuvre, eiPlane_Mind,eaUpdatePlaneStatus);
         }if(eiManoeuvre.getAltitudeChange()!= -1){
         	//thread.RunManoeuvreChangeAltitude.runManoeuvreTurnHead(eiManoeuvre, eiPlane_Mind,eaUpdatePlaneStatus);
         }
@@ -1147,7 +1154,7 @@
     	outputsdefaultThrow_Change.setHeadChange(null);	
     	//stop the plane
         outputsdefaultThrow_Change.setSpeedChange(0);
-        outputsdefaultThrow_Change.setPriority(0);</key>
+        outputsdefaultThrow_Change.setPriority(10);</key>
 <key id="_view_type">UML</key>
 </mapproperties>
 </object>
@@ -1188,7 +1195,7 @@
 			Flight_Plan oFlightPlan = global.GlobalVarsAndMethods.CreateNewPlan();
 			ingenias.jade.AgentExternalDescription oPilotAgentExternalDescription = new ingenias.jade.AgentExternalDescription(dfPilotAgentDescription.getName(), PilotRole);
 			oFlightPlan.setPilotID(oPilotAgentExternalDescription);
-			ingenias.jade.AgentExternalDescription oPlaneAgentExternalDescription = new ingenias.jade.AgentExternalDescription(dfPlaneAgentDescription.getName(), PilotRole);
+			ingenias.jade.AgentExternalDescription oPlaneAgentExternalDescription = new ingenias.jade.AgentExternalDescription(dfPlaneAgentDescription.getName(), PlaneRole);
 			oFlightPlan.setPlaneID(oPlaneAgentExternalDescription);
 
 			outputsdefault.add(new OutputEntity(oFlightPlan,TaskOperations.CreateWF));
@@ -1228,7 +1235,7 @@
 <objectproperty id="TransferredInfo" collection="true">
 </objectproperty>
 <mapproperties>
-<key id="Nature"></key>
+<key id="Nature">coordination</key>
 <key id="Description"></key>
 <key id="_view_type">UML</key>
 </mapproperties>
@@ -1742,7 +1749,7 @@ El plan de vuelo esta compuesto por una serie de waypoints (puntos de paso), un 
 <objectproperty id="TransferredInfo" collection="true">
 </objectproperty>
 <mapproperties>
-<key id="Nature"></key>
+<key id="Nature">coordination</key>
 <key id="Description"></key>
 <key id="_view_type">UML</key>
 </mapproperties>
@@ -2306,6 +2313,14 @@ Ultima vez que la orientacion fue actualizada</key>
 <key id="Code"></key>
 <key id="Description"></key>
 <key id="_view_type">UML</key>
+</mapproperties>
+</object>
+<object id="441" type="ingenias.editor.entities.ObjectSlot">
+<mapproperties>
+<key id="Name">PlaneID</key>
+<key id="Type">ingenias.jade.AgentExternalDescription</key>
+<key id="Description"></key>
+<key id="_view_type">INGENIAS</key>
 </mapproperties>
 </object>
 </objectproperty>
@@ -9216,6 +9231,25 @@ La lista de puntos (waypoints) por los que tiene que pasar el avion durante el v
 <key id="_view_type">INGENIAS</key>
 </mapproperties>
 </role></relationship>
+<relationship id="350" type="ingenias.editor.entities.GTModifies">
+<object id="350" type="ingenias.editor.entities.GTModifies">
+<objectproperty id="Condition">
+</objectproperty>
+<mapproperties>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</object>
+<role idEntity="Pilot Mind" class="ingenias.editor.entities.FrameFact" roleName="WFConsumestarget" type="ingenias.editor.entities.WFConsumestargetRole" dgcid="1536161174">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role><role idEntity="Execute Decision" class="ingenias.editor.entities.Task" roleName="WFConsumessource" type="ingenias.editor.entities.WFConsumessourceRole" dgcid="1338485244">
+<mapproperties>
+<key id="attributeToShow">0</key>
+<key id="_view_type">INGENIAS</key>
+</mapproperties>
+</role></relationship>
 <relationship id="188" type="ingenias.editor.entities.WFResponsable">
 <object id="188" type="ingenias.editor.entities.WFResponsable">
 <mapproperties>
@@ -15838,13 +15872,13 @@ Este diagrama se mete dentro de la carpeta init para que cuando la aplicacion ll
 			
 	<node id="node1">
 		<attr name="bounds">
-			<rectangle x="371" y="98" width="161" height="117"></rectangle>		</attr>
+			<rectangle x="390" y="93" width="161" height="117"></rectangle>		</attr>
 
 	</node>
 			
 	<node id="node10">
 		<attr name="bounds">
-			<rectangle x="295" y="210" width="74" height="15"></rectangle>		</attr>
+			<rectangle x="285" y="198" width="74" height="15"></rectangle>		</attr>
 
 	</node>
 			
@@ -15856,7 +15890,7 @@ Este diagrama se mete dentro de la carpeta init para que cuando la aplicacion ll
 			
 	<node id="node4">
 		<attr name="bounds">
-			<rectangle x="405" y="260" width="155" height="64"></rectangle>		</attr>
+			<rectangle x="388" y="236" width="155" height="64"></rectangle>		</attr>
 
 	</node>
 			
@@ -15874,7 +15908,7 @@ Este diagrama se mete dentro de la carpeta init para que cuando la aplicacion ll
 			
 	<node id="node6">
 		<attr name="bounds">
-			<rectangle x="279" y="146" width="66" height="15"></rectangle>		</attr>
+			<rectangle x="288" y="144" width="66" height="15"></rectangle>		</attr>
 
 	</node>
 			
@@ -18749,6 +18783,24 @@ Este diagrama se mete dentro de la carpeta init para que cuando la aplicacion ll
 
 	<graph>
 			
+	<node id="350" nid="2128340097" type="GTModifies">
+
+	<connected id="1338485244"><attr name="extraLabels">
+			<array>
+
+</array>
+</attr>
+
+
+
+	</connected>
+	<connected id="1536161174">
+
+
+
+	</connected>
+	</node>
+			
 	<node id="Manoeuvre" nid="1948956726" type="FrameFact">
 
 	</node>
@@ -18881,6 +18933,10 @@ Este diagrama se mete dentro de la carpeta init para que cuando la aplicacion ll
 	</node>
 			
 	<node id="Executed Decision" nid="1137181887" type="Goal">
+
+	</node>
+			
+	<node id="Pilot Mind" nid="1536161174" type="FrameFact">
 
 	</node>
 			
@@ -19041,6 +19097,12 @@ Este diagrama se mete dentro de la carpeta init para que cuando la aplicacion ll
 
 	<layout>
 			
+	<node id="node37">
+		<attr name="bounds">
+			<rectangle x="397" y="133" width="66" height="15"></rectangle>		</attr>
+
+	</node>
+			
 	<node id="node3">
 		<attr name="bounds">
 			<rectangle x="505" y="195" width="81" height="46"></rectangle>		</attr>
@@ -19133,7 +19195,7 @@ Este diagrama se mete dentro de la carpeta init para que cuando la aplicacion ll
 			
 	<node id="node35">
 		<attr name="bounds">
-			<rectangle x="387" y="68" width="79" height="15"></rectangle>		</attr>
+			<rectangle x="388" y="63" width="79" height="15"></rectangle>		</attr>
 
 	</node>
 			
@@ -19149,9 +19211,15 @@ Este diagrama se mete dentro de la carpeta init para que cuando la aplicacion ll
 
 	</node>
 			
+	<node id="node36">
+		<attr name="bounds">
+			<rectangle x="501" y="134" width="79" height="46"></rectangle>		</attr>
+
+	</node>
+			
 	<node id="node23">
 		<attr name="bounds">
-			<rectangle x="388" y="138" width="74" height="15"></rectangle>		</attr>
+			<rectangle x="345" y="155" width="74" height="15"></rectangle>		</attr>
 
 	</node>
 			
@@ -19187,7 +19255,7 @@ Este diagrama se mete dentro de la carpeta init para que cuando la aplicacion ll
 			
 	<node id="node4">
 		<attr name="bounds">
-			<rectangle x="492" y="145" width="81" height="46"></rectangle>		</attr>
+			<rectangle x="405" y="173" width="81" height="46"></rectangle>		</attr>
 
 	</node>
 			
@@ -19235,7 +19303,7 @@ Este diagrama se mete dentro de la carpeta init para que cuando la aplicacion ll
 			
 	<node id="node2">
 		<attr name="bounds">
-			<rectangle x="493" y="11" width="83" height="46"></rectangle>		</attr>
+			<rectangle x="496" y="1" width="83" height="46"></rectangle>		</attr>
 
 	</node>
 			
@@ -20193,7 +20261,7 @@ Este diagrama se mete dentro de la carpeta init para que cuando la aplicacion ll
 			
 	<node id="node1">
 		<attr name="bounds">
-			<rectangle x="262" y="123" width="134" height="51"></rectangle>		</attr>
+			<rectangle x="273" y="126" width="134" height="51"></rectangle>		</attr>
 
 	</node>
 			
@@ -20223,7 +20291,7 @@ Este diagrama se mete dentro de la carpeta init para que cuando la aplicacion ll
 			
 	<node id="node5">
 		<attr name="bounds">
-			<rectangle x="238" y="87" width="72" height="15"></rectangle>		</attr>
+			<rectangle x="243" y="89" width="72" height="15"></rectangle>		</attr>
 
 	</node>
 			
