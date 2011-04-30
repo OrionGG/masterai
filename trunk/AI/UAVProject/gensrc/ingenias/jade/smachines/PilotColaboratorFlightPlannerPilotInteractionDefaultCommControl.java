@@ -38,37 +38,23 @@ import ingenias.exception.NotFound;
 
 
 
-  public class FlightPlannerColaboratorPilotFlightPlannerPlaneInteractionDefaultCommControl extends DefaultCommControl{
+  public class PilotColaboratorFlightPlannerPilotInteractionDefaultCommControl extends DefaultCommControl{
   
   	  private Vector<String> previous=new Vector<String>();
   	  private com.thoughtworks.xstream.XStream xstream=new com.thoughtworks.xstream.XStream(new com.thoughtworks.xstream.io.xml.DomDriver()); 
   	  
-  public FlightPlannerColaboratorPilotFlightPlannerPlaneInteractionDefaultCommControl(String cid, MentalStateReader msr, ingenias.jade.comm.LocksRemover lr){
+  public PilotColaboratorFlightPlannerPilotInteractionDefaultCommControl(String cid, MentalStateReader msr, ingenias.jade.comm.LocksRemover lr){
   super(msr, lr);
   
   };
   
   public static void addDefaultLocks(LocksWriter lw){
-  
-       // Facts that cannot be removed because they are part of guards
-    
-    // Facts that cannot be removed because they must be sent
-     
-     lw.addDeletionLockExpectedType("PlanAnswer");
-     
-     
+   
     }
     
      public Vector<String> getDefaultLocks(){
       Vector<String> locks=new       Vector<String>();
-  
-       // Facts that cannot be removed because they are part of guards
-    
-    // Facts that cannot be removed because they must be sent
-     
-     locks.add("PlanAnswer");
-     
-     
+   
     return locks;
     }
     
@@ -111,37 +97,6 @@ import ingenias.exception.NotFound;
   
   
    
-    if (stateToEvaluate.equals("InteractionUnit5") &&
-    	 sb.isState("InteractionUnit5")&& options.length>0) {         
-         boolean allexist=true;
-         Vector<MentalEntity> mfcontent=null;
-         
-		 
-		 allexist=allexist && !getMSR().obtainConversationalMentalEntityByType(sb.getConversation(),"PlanAnswer").isEmpty();
-		   
-         if (allexist && true){
-           sb.clearContentNextMessage();
-           sb.removeState("InteractionUnit5");
-           
-           
-	   	   mfcontent=getMSR().obtainConversationalMentalEntityByType(sb.getConversation(),"PlanAnswer");
-	   	   for (MentalEntity me:mfcontent)             
-             sb.addContentForNextMessage(me);    
-	       getLR().removeDeletionLockType("PlanAnswer");
-	       lockProcessed("PlanAnswer");
-           //MainInteractionManager.log("Removing lock PlanAnswer",this.getAgent().getLocalName()+"-"+sb.getConversationID());
-            
-             
-           
-  		   //sb.clearState();         
-	              
-		   futureStates.add("endInteractionUnit5");
-          
-          processed = true;
-      	 }
-     
-    } 
-   
    
   if (futureStates.size()>1){
 	  previous.addAll(futureStates);
@@ -172,13 +127,13 @@ public boolean continueProcess(Vector<ACLMessage> multipleMessages,String[] opti
   
    
    
-    if (sb.isState("waiting for InteractionUnit4")&& options.length>0 && mes!=null
+    if (sb.isState("waiting for InteractionUnit5")&& options.length>0 && mes!=null
     && mes.getUserDefinedParameter("sequence")!=null &&
-    		mes.getUserDefinedParameter("sequence").equals("InteractionUnit4")){
+    		mes.getUserDefinedParameter("sequence").equals("InteractionUnit5")){
     	 boolean allexist=true;
          
          if (allexist && true){
-     	   sb.removeState("waiting for InteractionUnit4");           
+     	   sb.removeState("waiting for InteractionUnit5");           
     	   //try {
                     Vector toAdd=new Vector();
 					for (ACLMessage singleMessage:multipleMessages){
@@ -193,7 +148,7 @@ public boolean continueProcess(Vector<ACLMessage> multipleMessages,String[] opti
  		   }*/
 
 	              
-		   futureStates.add("InteractionUnit5");
+		   futureStates.add("endInteractionUnit5");
           
           processed = true;
       	 }      	 

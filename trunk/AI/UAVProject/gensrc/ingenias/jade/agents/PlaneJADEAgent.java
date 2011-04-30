@@ -756,15 +756,6 @@ public class PlaneJADEAgent
    ObjectSlot oslot=null;
    ingenias.jade.components.Application app=null;	  
    
-   sg= new ingenias.editor.entities.StateGoal("Flight_Plan_Taken");
-   sg.setState("pending");
-      try {
-	   this.getMSM().addMentalEntity(sg);
-   } catch (InvalidEntity e1) {
-
-	   e1.printStackTrace();
-   }
-   
    sg= new ingenias.editor.entities.StateGoal("Executed_Decision");
    sg.setState("pending");
       try {

@@ -75,7 +75,7 @@ public class CreateEmptyPlansTask extends Task{
         List<jade.domain.FIPAAgentManagement.DFAgentDescription> lDFPilotsAgentDescription = new java.util.ArrayList();
         List<jade.domain.FIPAAgentManagement.DFAgentDescription> lDFPlanesAgentDescription = new java.util.ArrayList();
 		try {
-			jade.domain.FIPAAgentManagement.DFAgentDescription[] aDFPilotsAgentDescription  = yp.getAgents("PilotInitiator");
+			jade.domain.FIPAAgentManagement.DFAgentDescription[] aDFPilotsAgentDescription  = yp.getAgents("PilotColaborator");
 			lDFPilotsAgentDescription = Arrays.asList(aDFPilotsAgentDescription);
 			jade.domain.FIPAAgentManagement.DFAgentDescription[] aDFPlanesAgentDescription = yp.getAgents("PlaneColaborator");
 			lDFPlanesAgentDescription = Arrays.asList(aDFPlanesAgentDescription);
@@ -83,6 +83,9 @@ public class CreateEmptyPlansTask extends Task{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		//lDFPilotsAgentDescription = global.GlobalVarsAndMethods.deleteRepeated(lDFPilotsAgentDescription);
+		//lDFPlanesAgentDescription = global.GlobalVarsAndMethods.deleteRepeated(lDFPlanesAgentDescription);
 		
 		for (int i = 0; i < lDFPilotsAgentDescription.size(); i++) {
 			jade.domain.FIPAAgentManagement.DFAgentDescription dfPilotAgentDescription = lDFPilotsAgentDescription.get(i); 

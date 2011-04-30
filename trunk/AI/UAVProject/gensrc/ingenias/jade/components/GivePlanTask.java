@@ -45,7 +45,7 @@ public class GivePlanTask extends Task{
  public void execute() throws TaskException{
 
 
-        PlanRequest  eiPlanRequest=(PlanRequest)this.getFirstInputOfType("PlanRequest");             
+        Flight_Plan  eiFlight_Plan=(Flight_Plan)this.getFirstInputOfType("Flight_Plan");             
 
 
 
@@ -63,6 +63,10 @@ public class GivePlanTask extends Task{
   		TaskOutput	outputsdefault=findOutputAlternative("default",
   																			outputs);
   		
+		RuntimeConversation outputsdefaultFlightPlannerPilotInteraction=
+			(RuntimeConversation)
+				outputsdefault.getEntityByType("FlightPlannerPilotInteraction");
+		
 		
 		PlanAnswer outputsdefaultPlanAnswer=
 			(PlanAnswer)
@@ -72,11 +76,40 @@ public class GivePlanTask extends Task{
 		
         YellowPages yp=null; // only available for initiators of interactions
 
+		// This task can produce an interaction of type FlightPlannerPilotInteraction by working with its conversation object
+        
+        // To define manually who are the collaborator involved. Your selection will be verified
+        // in runtime. Pay attention to log messages to detect errors. You can use the yello pages
+        // service to locate other agents
+        yp=(YellowPages)this.getApplication("YellowPages");
+
+        //  Uncomment the following and write down a proper local id of the agent
+        // Find an agent playing the role "PilotColaborator"
+      	//eoFlightPlannerPilotInteraction.addCollaborators("Local ID of the collaborator");
+       	
+
 
 //#start_node:CodeForCreatingRandomPlan <--- DO NOT REMOVE THIS	
-        Flight_Plan oFlightPlan = global.GlobalVarsAndMethods.CreateNewPlan();
+        outputsdefaultFlightPlannerPilotInteraction.addCollaborators(eiFlight_Plan.getPilotID());
+        List<jade.domain.FIPAAgentManagement.DFAgentDescription> lDFPilotsAgentDescription = new java.util.ArrayList();
+        List<jade.domain.FIPAAgentManagement.DFAgentDescription> lDFPlanesAgentDescription = new java.util.ArrayList();
+		try {
+			jade.domain.FIPAAgentManagement.DFAgentDescription[] aDFPilotsAgentDescription  = yp.getAgents("PilotColaborator");
+			lDFPilotsAgentDescription = Arrays.asList(aDFPilotsAgentDescription);
+			jade.domain.FIPAAgentManagement.DFAgentDescription[] aDFPlanesAgentDescription = yp.getAgents("PlaneColaborator");
+			lDFPlanesAgentDescription = Arrays.asList(aDFPlanesAgentDescription);
+		} catch (jade.domain.FIPAException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
-		outputsdefaultPlanAnswer.setFlightPlan(oFlightPlan);
+        jade.domain.FIPAAgentManagement.DFAgentDescription[] descr;
+		try {
+			descr = yp.getAgentFromLocalID(eiFlight_Plan.getPilotID());
+		} catch (jade.domain.FIPAException e) {
+			e.printStackTrace();
+		}
+        outputsdefaultPlanAnswer.setFlightPlan(eiFlight_Plan);
 //#end_node:CodeForCreatingRandomPlan <--- DO NOT REMOVE THIS
 
  }
