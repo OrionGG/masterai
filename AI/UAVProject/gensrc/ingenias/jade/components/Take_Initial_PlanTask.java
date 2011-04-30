@@ -88,6 +88,8 @@ public class Take_Initial_PlanTask extends Task{
         outputsdefaultFlight_Plan.setDepartureAirport(eiPlanAnswer.getFlightPlan().getDepartureAirport());
         outputsdefaultFlight_Plan.setDestinationAirport(eiPlanAnswer.getFlightPlan().getDestinationAirport());
         outputsdefaultFlight_Plan.setWaypoints(eiPlanAnswer.getFlightPlan().getWaypoints());
+        outputsdefaultFlight_Plan.setPilotID(eiPlanAnswer.getFlightPlan().getPilotID());
+        outputsdefaultFlight_Plan.setPlaneID(eiPlanAnswer.getFlightPlan().getPlaneID());
 //#end_node:INGENIASCodeComponent2 <--- DO NOT REMOVE THIS
 
  }

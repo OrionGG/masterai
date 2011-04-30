@@ -51,9 +51,9 @@ public class Flight_Plan extends ingenias.editor.entities.RuntimeFact{
    
     List<gov.nasa.worldwind.geom.Position> Waypoints;   
    
-    String PlaneID;   
+    ingenias.jade.AgentExternalDescription PlaneID;   
    
-    String PilotID;   
+    ingenias.jade.AgentExternalDescription PilotID;   
     
    
   public Flight_Plan (String id){
@@ -163,20 +163,20 @@ public class Flight_Plan extends ingenias.editor.entities.RuntimeFact{
    }
    
 
-   public void setPlaneID(String value){
+   public void setPlaneID(ingenias.jade.AgentExternalDescription value){
      PlaneID=value;   
    };
    
-   public String getPlaneID(){
+   public ingenias.jade.AgentExternalDescription getPlaneID(){
      return PlaneID;      
    }
    
 
-   public void setPilotID(String value){
+   public void setPilotID(ingenias.jade.AgentExternalDescription value){
      PilotID=value;   
    };
    
-   public String getPilotID(){
+   public ingenias.jade.AgentExternalDescription getPilotID(){
      return PilotID;      
    }
      

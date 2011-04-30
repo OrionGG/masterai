@@ -93,7 +93,7 @@ public class GoingToStartPlaneTask extends Task{
 
 //#start_node:INGENIASCodeComponent15 <--- DO NOT REMOVE THIS	
         outputsdefaultTurningOnPlane.setInitialAirport(eiPilot_Mind.getPilotFlightPlan().getDepartureAirport());
-       // outputsdefaultStartPlaneInteraction.addCollaborators(eiPilot_Mind.getPilotFlightPlan().getPlane().getAID());
+        outputsdefaultStartPlaneInteraction.addCollaborators(eiPilot_Mind.getPilotFlightPlan().getPlaneID());
 //#end_node:INGENIASCodeComponent15 <--- DO NOT REMOVE THIS
 
  }

@@ -160,7 +160,7 @@ private MentalStateReader msr=null;
       boolean allexist=true;
       
       int cardinality=1;
-      if ("1".equals("n")){
+      if ("n".equals("n")){
          try{
           Vector<AID> receivers=this.getActor("PlaneColaborator");    
           cardinality=receivers.size();          

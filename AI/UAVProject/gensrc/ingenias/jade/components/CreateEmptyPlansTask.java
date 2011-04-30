@@ -72,12 +72,14 @@ public class CreateEmptyPlansTask extends Task{
 //#start_node:INGENIASCodeComponent16 <--- DO NOT REMOVE THIS	
         //outputsdefault.remove(outputsdefaultFlight_Plan);
         yp=(YellowPages)this.getApplication("YellowPages");
+        String PilotRole = "PilotColaborator";
+        String PlaneRole = "PlaneColaborator";
         List<jade.domain.FIPAAgentManagement.DFAgentDescription> lDFPilotsAgentDescription = new java.util.ArrayList();
         List<jade.domain.FIPAAgentManagement.DFAgentDescription> lDFPlanesAgentDescription = new java.util.ArrayList();
 		try {
-			jade.domain.FIPAAgentManagement.DFAgentDescription[] aDFPilotsAgentDescription  = yp.getAgents("PilotColaborator");
+			jade.domain.FIPAAgentManagement.DFAgentDescription[] aDFPilotsAgentDescription  = yp.getAgents(PilotRole);
 			lDFPilotsAgentDescription = Arrays.asList(aDFPilotsAgentDescription);
-			jade.domain.FIPAAgentManagement.DFAgentDescription[] aDFPlanesAgentDescription = yp.getAgents("PlaneColaborator");
+			jade.domain.FIPAAgentManagement.DFAgentDescription[] aDFPlanesAgentDescription = yp.getAgents(PlaneRole);
 			lDFPlanesAgentDescription = Arrays.asList(aDFPlanesAgentDescription);
 		} catch (jade.domain.FIPAException e) {
 			// TODO Auto-generated catch block
@@ -94,8 +96,10 @@ public class CreateEmptyPlansTask extends Task{
 			}
 			jade.domain.FIPAAgentManagement.DFAgentDescription dfPlaneAgentDescription = lDFPlanesAgentDescription.get(i); 
 			Flight_Plan oFlightPlan = global.GlobalVarsAndMethods.CreateNewPlan();
-			oFlightPlan.setPilotID(dfPilotAgentDescription.getName().getLocalName());
-			oFlightPlan.setPlaneID(dfPlaneAgentDescription.getName().getLocalName());
+			ingenias.jade.AgentExternalDescription oPilotAgentExternalDescription = new ingenias.jade.AgentExternalDescription(dfPilotAgentDescription.getName(), PilotRole);
+			oFlightPlan.setPilotID(oPilotAgentExternalDescription);
+			ingenias.jade.AgentExternalDescription oPlaneAgentExternalDescription = new ingenias.jade.AgentExternalDescription(dfPlaneAgentDescription.getName(), PlaneRole);
+			oFlightPlan.setPlaneID(oPlaneAgentExternalDescription);
 
 			outputsdefault.add(new OutputEntity(oFlightPlan,TaskOperations.CreateWF));
 			
