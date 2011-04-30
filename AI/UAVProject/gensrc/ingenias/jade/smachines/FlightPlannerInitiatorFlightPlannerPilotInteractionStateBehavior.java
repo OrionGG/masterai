@@ -72,10 +72,18 @@ private MentalStateReader msr=null;
 			      smf.add("disabled", "InteractionUnit5");
 			    
 			    
+			      // Receiving a message    
+			      smf.add("InteractionUnit4", "waiting for InteractionUnit4");
+			      
+			      // Next states after receiving "InteractionUnit4"
+			      
+			       smf.add("waiting for InteractionUnit4","endInteractionUnit4");
+			      
+			    
 			    
 			     // States involved in message deliver
 			     
-			      smf.add("InteractionUnit5", "endInteractionUnit5");
+			      smf.add("InteractionUnit5", "InteractionUnit4");
 			      
 			    
 			
@@ -139,6 +147,40 @@ private MentalStateReader msr=null;
 
   
   
+  // Receives a message and a synchronization command
+  if (this.isState("InteractionUnit4") ) {  // State changed by other agent and upted
+    //in the parent class
+         
+      Vector options=new Vector();
+      
+      options.add("endInteractionUnit4");
+      
+      String[] optionsA=new String[options.size()];
+      options.toArray(optionsA);
+      boolean allexist=true;
+      
+      int cardinality=1;
+      if ("n".equals("n")){
+         try{
+          Vector<AID> receivers=this.getActor("PilotColaborator");    
+          cardinality=receivers.size();          
+          } catch (NoAgentsFound ex) {
+                    ex.printStackTrace();
+                }   
+       
+      }
+      
+      if (allexist && true){     
+		 addCreatedBehaviors(CommActCreator.generateR((JADEAgent)myAgent,
+                        this.getConversationID(),"InteractionUnit4",
+                   "FlightPlannerPilotInteraction",this.getPlayedRole(),
+                   optionsA,this,cardinality,0));
+      }	 
+      this.removeState("InteractionUnit4");
+      this.addState("waiting for InteractionUnit4");
+      this.notifyStateTransitionExecuted("InteractionUnit4", "waiting for InteractionUnit4");
+  } 
+  
   
   
   
@@ -162,7 +204,7 @@ private MentalStateReader msr=null;
       actorsv.toArray(actors);
       Vector options=new Vector();      
       
-      options.add("endInteractionUnit5");      
+      options.add("InteractionUnit4");      
       
       String[] optionsA=new String[options.size()];
       options.toArray(optionsA);
@@ -192,7 +234,7 @@ private MentalStateReader msr=null;
 
   
   // Finishes this state machine
-  if (this.isState("endInteractionUnit5")) {
+  if (this.isState("endInteractionUnit4")) {
     this.setFinished(); // End of transitions
     this.notifyProtocolFinished();
     this.getDCC().removeDefaultLocks();

@@ -34,10 +34,10 @@ import ingenias.editor.entities.*;
 
 
 
-public class Take_Initial_PlanTask extends Task{
+public class FinishGivePlanTask extends Task{
 
- public Take_Initial_PlanTask(String id){
-  super(id,"Take_Initial_Plan");
+ public FinishGivePlanTask(String id){
+  super(id,"FinishGivePlan");
  }
 
 
@@ -45,7 +45,9 @@ public class Take_Initial_PlanTask extends Task{
  public void execute() throws TaskException{
 
 
-        PlanAnswer  eiPlanAnswer=(PlanAnswer)this.getFirstInputOfType("PlanAnswer");             
+        Flight_Plan  eiFlight_Plan=(Flight_Plan)this.getFirstInputOfType("Flight_Plan");             
+
+        PlanReceived  eiPlanReceived=(PlanReceived)this.getFirstInputOfType("PlanReceived");             
 
 
 
@@ -54,9 +56,6 @@ public class Take_Initial_PlanTask extends Task{
 
 
 
-
-        // This means that the task participates in the interaction FlightPlannerPilotInteraction
-        RuntimeConversation  conversationContextFlightPlannerPilotInteraction=this.getConversationContext();
 
 
   		Vector<TaskOutput> outputs = this.getOutputs();
@@ -66,29 +65,15 @@ public class Take_Initial_PlanTask extends Task{
   		TaskOutput	outputsdefault=findOutputAlternative("default",
   																			outputs);
   		
-		InitiateStartPlane outputsdefaultInitiateStartPlane=
-			(InitiateStartPlane)
-				outputsdefault.getEntityByType("InitiateStartPlane");
-		
-		Flight_Plan outputsdefaultFlight_Plan=
-			(Flight_Plan)
-				outputsdefault.getEntityByType("Flight_Plan");
-		
-		
-		PlanReceived outputsdefaultPlanReceived=
-			(PlanReceived)
-				outputsdefault.getEntityByType("PlanReceived");
 		
 		
 		
         YellowPages yp=null; // only available for initiators of interactions
 
 
-//#start_node:INGENIASCodeComponent2 <--- DO NOT REMOVE THIS	
-        outputsdefaultFlight_Plan.setDepartureAirport(eiPlanAnswer.getFlightPlan().getDepartureAirport());
-        outputsdefaultFlight_Plan.setDestinationAirport(eiPlanAnswer.getFlightPlan().getDestinationAirport());
-        outputsdefaultFlight_Plan.setWaypoints(eiPlanAnswer.getFlightPlan().getWaypoints());
-//#end_node:INGENIASCodeComponent2 <--- DO NOT REMOVE THIS
+//#start_node: <--- DO NOT REMOVE THIS	
+
+//#end_node: <--- DO NOT REMOVE THIS
 
  }
  

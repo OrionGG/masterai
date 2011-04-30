@@ -78,9 +78,14 @@ private MentalStateReader msr=null;
 			      
 			      // Next states after receiving "InteractionUnit5"
 			      
-			       smf.add("waiting for InteractionUnit5","endInteractionUnit5");
+			       smf.add("waiting for InteractionUnit5","InteractionUnit4");
 			      
 			    
+			    
+			     // States involved in message deliver
+			     
+			      smf.add("InteractionUnit4", "endInteractionUnit4");
+			      
 			    
 			
 			    this.updateStates(agentName);
@@ -126,7 +131,7 @@ private MentalStateReader msr=null;
          
       Vector options=new Vector();
       
-      options.add("endInteractionUnit5");
+      options.add("InteractionUnit4");
       
       String[] optionsA=new String[options.size()];
       options.toArray(optionsA);
@@ -157,11 +162,57 @@ private MentalStateReader msr=null;
   
   
   
+  // Sends a message and synchronization commands
+  if (this.isState("InteractionUnit4")) {
+     
+     try {
+      AID[] actors=null;
+      Vector actorsv=new Vector();
+      Vector<String> rolesv=new Vector<String>();
+      
+      {      
+       Vector<AID> receivers=this.getActor("FlightPlannerInitiator");      
+       actorsv.addAll(receivers);
+       for (AID aid:receivers){
+        rolesv.add("FlightPlannerInitiator");
+       }
+      }
+      
+      actors=new AID[actorsv.size()];
+      actorsv.toArray(actors);
+      Vector options=new Vector();      
+      
+      options.add("endInteractionUnit4");      
+      
+      String[] optionsA=new String[options.size()];
+      options.toArray(optionsA);
+      if (this.getDCC().notifyMessageSent("InteractionUnit4",optionsA,this)){
+           //If mental state conditions are met, the message is send and state changed
+            CommActCreator.generateSObject((JADEAgent)myAgent,rolesv,actors,this.getConversationID(),
+           "InteractionUnit4","FlightPlannerPilotInteraction",this.getContentForNextMessage());
+           getTimeout().stop();
+            this.notifyStateTransitionExecuted("InteractionUnit4", options.firstElement().toString());
+      } else {
+    	  if (getTimeout().isStarted() && getTimeout().isFinished()){
+    	    		 this.abortDueTimeout();   	        
+    	    		  this.notifyStateTransitionExecuted("InteractionUnit4", "ABORTED");
+    	  } else  {
+    		  if (!getTimeout().isStarted())
+    		  getTimeout().start(0);
+    	  }
+      }
+      additionalRound=true; // To enable a reevaluation of the state since this is a cyclicbehavior
+
+      } catch (NoAgentsFound e) {
+      e.printStackTrace();
+  	}
+  } 
+  
    
 
   
   // Finishes this state machine
-  if (this.isState("endInteractionUnit5")) {
+  if (this.isState("endInteractionUnit4")) {
     this.setFinished(); // End of transitions
     this.notifyProtocolFinished();
     this.getDCC().removeDefaultLocks();

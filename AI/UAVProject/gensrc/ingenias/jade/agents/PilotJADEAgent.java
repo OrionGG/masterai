@@ -95,6 +95,17 @@ public class PilotJADEAgent
 			to=new TaskOutput("default");
   
 		
+		expectedInput=this.getMSM().getMentalEntityByType("PlanReceived");
+		if (this.getLM().canBeDeleted(expectedInput)){             
+             if (expectedInput.size()==0){
+				nonExistingInputs.add("PlanReceived");
+			 } else {
+			    addExpectedInputs(tobject, "PlanReceived","1",expectedInput);
+             	addConsumedInput(to,"PlanReceived",expectedInput);
+			 }
+             allEntitiesExist=allEntitiesExist || expectedInput.size()!=0;
+		} 
+	      
 		expectedInput=this.getMSM().getMentalEntityByType("ObjectDetected");
 		if (this.getLM().canBeDeleted(expectedInput)){             
              if (expectedInput.size()==0){
@@ -599,22 +610,22 @@ public class PilotJADEAgent
 	      
 		
 		
-             expectedInput=this.getMSM().getMentalEntityByType("Flight_Leg");
+             expectedInput=this.getMSM().getMentalEntityByType("LegCompleted");
              if (expectedInput.size()==0 && !("1".equals("0..n"))){
-				nonExistingInputs.add("Flight_Leg");
+				nonExistingInputs.add("LegCompleted");
 			 } else {
-			    addExpectedInputs(tobject, "Flight_Leg","1",expectedInput);
+			    addExpectedInputs(tobject, "LegCompleted","1",expectedInput);
              	addConsumedInput(to,"1",expectedInput);
 			 }
              allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;
 
 	      
 		
-             expectedInput=this.getMSM().getMentalEntityByType("LegCompleted");
+             expectedInput=this.getMSM().getMentalEntityByType("Flight_Leg");
              if (expectedInput.size()==0 && !("1".equals("0..n"))){
-				nonExistingInputs.add("LegCompleted");
+				nonExistingInputs.add("Flight_Leg");
 			 } else {
-			    addExpectedInputs(tobject, "LegCompleted","1",expectedInput);
+			    addExpectedInputs(tobject, "Flight_Leg","1",expectedInput);
              	addConsumedInput(to,"1",expectedInput);
 			 }
              allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;
@@ -857,6 +868,17 @@ public class PilotJADEAgent
 			tobject.setConversationContext(conversation);
   
 		
+		expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"PlanReceived");
+		if (this.getLM().canBeDeleted(expectedInput)){                          
+             if (expectedInput.size()==0){
+				nonExistingInputs.add("PlanReceived");
+			 } else {
+			    addExpectedInputs(tobject, "PlanReceived","1",expectedInput);
+             	addConsumedInput(to,"PlanReceived",expectedInput);
+			 }
+             allEntitiesExist=allEntitiesExist|| expectedInput.size()!=0;
+		} 
+	      
 		expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"ObjectDetected");
 		if (this.getLM().canBeDeleted(expectedInput)){                          
              if (expectedInput.size()==0){
@@ -1235,6 +1257,11 @@ public class PilotJADEAgent
             to.add(new OutputEntity(expectedOutputFlight_Plan,TaskOperations.CreateMS));
             }
 	     
+	     
+		    {PlanReceived expectedOutputPlanReceived=		    
+		     new PlanReceived(MentalStateManager.generateMentalEntityID());			
+             to.add(new OutputEntity(expectedOutputPlanReceived,TaskOperations.CreateWF));
+            }
 	     
      
 	     tobject.addOutput(to);

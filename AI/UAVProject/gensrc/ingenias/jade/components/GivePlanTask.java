@@ -90,26 +90,10 @@ public class GivePlanTask extends Task{
 
 
 //#start_node:CodeForCreatingRandomPlan <--- DO NOT REMOVE THIS	
-        outputsdefaultFlightPlannerPilotInteraction.addCollaborators(eiFlight_Plan.getPilotID());
-        List<jade.domain.FIPAAgentManagement.DFAgentDescription> lDFPilotsAgentDescription = new java.util.ArrayList();
-        List<jade.domain.FIPAAgentManagement.DFAgentDescription> lDFPlanesAgentDescription = new java.util.ArrayList();
-		try {
-			jade.domain.FIPAAgentManagement.DFAgentDescription[] aDFPilotsAgentDescription  = yp.getAgents("PilotColaborator");
-			lDFPilotsAgentDescription = Arrays.asList(aDFPilotsAgentDescription);
-			jade.domain.FIPAAgentManagement.DFAgentDescription[] aDFPlanesAgentDescription = yp.getAgents("PlaneColaborator");
-			lDFPlanesAgentDescription = Arrays.asList(aDFPlanesAgentDescription);
-		} catch (jade.domain.FIPAException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-        jade.domain.FIPAAgentManagement.DFAgentDescription[] descr;
-		try {
-			descr = yp.getAgentFromLocalID(eiFlight_Plan.getPilotID());
-		} catch (jade.domain.FIPAException e) {
-			e.printStackTrace();
-		}
-        outputsdefaultPlanAnswer.setFlightPlan(eiFlight_Plan);
+                outputsdefaultPlanAnswer.setFlightPlan(eiFlight_Plan);
+	outputsdefaultFlightPlannerPilotInteraction.addCollaborators(eiFlight_Plan.getPilotID());
+      
+
 //#end_node:CodeForCreatingRandomPlan <--- DO NOT REMOVE THIS
 
  }

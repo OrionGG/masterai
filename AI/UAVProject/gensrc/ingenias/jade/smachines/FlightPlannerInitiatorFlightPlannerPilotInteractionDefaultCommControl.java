@@ -135,7 +135,7 @@ import ingenias.exception.NotFound;
            
   		   //sb.clearState();         
 	              
-		   futureStates.add("endInteractionUnit5");
+		   futureStates.add("InteractionUnit4");
           
           processed = true;
       	 }
@@ -171,6 +171,33 @@ public boolean continueProcess(Vector<ACLMessage> multipleMessages,String[] opti
     Vector<String> futureStates=new Vector<String>();
   
    
+   
+    if (sb.isState("waiting for InteractionUnit4")&& options.length>0 && mes!=null
+    && mes.getUserDefinedParameter("sequence")!=null &&
+    		mes.getUserDefinedParameter("sequence").equals("InteractionUnit4")){
+    	 boolean allexist=true;
+         
+         if (allexist && true){
+     	   sb.removeState("waiting for InteractionUnit4");           
+    	   //try {
+                    Vector toAdd=new Vector();
+					for (ACLMessage singleMessage:multipleMessages){
+						 String content=singleMessage.getContent();    	 				
+    	 				Vector realContent = (Vector) xstream.fromXML(content);
+						toAdd.addAll(realContent);						
+					}
+					sb.updateMentalState(toAdd);	
+		   /*} catch (UnreadableException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+ 		   }*/
+
+	              
+		   futureStates.add("endInteractionUnit4");
+          
+          processed = true;
+      	 }      	 
+    } 
    
  
    

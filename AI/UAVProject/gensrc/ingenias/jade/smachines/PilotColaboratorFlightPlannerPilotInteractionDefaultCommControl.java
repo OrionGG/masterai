@@ -49,12 +49,26 @@ import ingenias.exception.NotFound;
   };
   
   public static void addDefaultLocks(LocksWriter lw){
-   
+  
+       // Facts that cannot be removed because they are part of guards
+    
+    // Facts that cannot be removed because they must be sent
+     
+     lw.addDeletionLockExpectedType("PlanReceived");
+     
+     
     }
     
      public Vector<String> getDefaultLocks(){
       Vector<String> locks=new       Vector<String>();
-   
+  
+       // Facts that cannot be removed because they are part of guards
+    
+    // Facts that cannot be removed because they must be sent
+     
+     locks.add("PlanReceived");
+     
+     
     return locks;
     }
     
@@ -96,6 +110,37 @@ import ingenias.exception.NotFound;
     Vector<String> futureStates=new Vector<String>();
   
   
+   
+    if (stateToEvaluate.equals("InteractionUnit4") &&
+    	 sb.isState("InteractionUnit4")&& options.length>0) {         
+         boolean allexist=true;
+         Vector<MentalEntity> mfcontent=null;
+         
+		 
+		 allexist=allexist && !getMSR().obtainConversationalMentalEntityByType(sb.getConversation(),"PlanReceived").isEmpty();
+		   
+         if (allexist && true){
+           sb.clearContentNextMessage();
+           sb.removeState("InteractionUnit4");
+           
+           
+	   	   mfcontent=getMSR().obtainConversationalMentalEntityByType(sb.getConversation(),"PlanReceived");
+	   	   for (MentalEntity me:mfcontent)             
+             sb.addContentForNextMessage(me);    
+	       getLR().removeDeletionLockType("PlanReceived");
+	       lockProcessed("PlanReceived");
+           //MainInteractionManager.log("Removing lock PlanReceived",this.getAgent().getLocalName()+"-"+sb.getConversationID());
+            
+             
+           
+  		   //sb.clearState();         
+	              
+		   futureStates.add("endInteractionUnit4");
+          
+          processed = true;
+      	 }
+     
+    } 
    
    
   if (futureStates.size()>1){
@@ -148,7 +193,7 @@ public boolean continueProcess(Vector<ACLMessage> multipleMessages,String[] opti
  		   }*/
 
 	              
-		   futureStates.add("endInteractionUnit5");
+		   futureStates.add("InteractionUnit4");
           
           processed = true;
       	 }      	 
