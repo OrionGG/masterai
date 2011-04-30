@@ -81,13 +81,13 @@
 			public FlightPlannerInteractionLocks(){};
 			
 			        public void addInteractionLocks(String interaction, LocksWriter lw, String role){
-                                    
-                   if (interaction.equals("PilotFlightPlannerInteraction") && role.equals("FlightPlannerColaborator") ){
-                            FlightPlannerColaboratorPilotFlightPlannerInteractionDefaultCommControl.addDefaultLocks(lw);
-                   }
                   
 		           // Interactions in which this agent appears as initiator                  
                   
+                  if (interaction.equals("FlightPlannerPilotInteraction")&& role.equals("FlightPlannerInitiator")){
+                    FlightPlannerInitiatorFlightPlannerPilotInteractionDefaultCommControl.addDefaultLocks(lw);
+                  }
+				  
         }
 	}
 			

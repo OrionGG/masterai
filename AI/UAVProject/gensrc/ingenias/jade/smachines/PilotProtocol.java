@@ -92,27 +92,39 @@ public PilotProtocol(){};
         // Adds a protocol to the protocol queue
             StateBehavior   sb=null;
 		    // Interactions in which this agent appears as collaborator
-           
+                             
+		   if (conv.getInteraction().getId().equals("ControllerPilotInteracion") && conv.getPlayedRole().equals("PilotColaborator")){
+		   	DefaultCommControl dcc=new PilotColaboratorControllerPilotInteracionDefaultCommControl(
+                        		   conv.getConversationID(),msr,lr);
+			sb = new PilotColaboratorControllerPilotInteracionStateBehavior(agentName,
+				msr, msu,
+				conv,                           		
+				conv.getPlayedRole(),
+			   	actors,
+				dcc,conv.getInteraction().getId());
+                        ActiveConversation aconv=new ActiveConversation(sb,dcc,conv);
+			return aconv;
+                   }
+                                    
+		   if (conv.getInteraction().getId().equals("FlightPlannerPilotInteraction") && conv.getPlayedRole().equals("PilotColaborator")){
+		   	DefaultCommControl dcc=new PilotColaboratorFlightPlannerPilotInteractionDefaultCommControl(
+                        		   conv.getConversationID(),msr,lr);
+			sb = new PilotColaboratorFlightPlannerPilotInteractionStateBehavior(agentName,
+				msr, msu,
+				conv,                           		
+				conv.getPlayedRole(),
+			   	actors,
+				dcc,conv.getInteraction().getId());
+                        ActiveConversation aconv=new ActiveConversation(sb,dcc,conv);
+			return aconv;
+                   }
+                  
 		           // Interactions in which this agent appears as initiator                  
                   
 		   if (conv.getInteraction().getId().equals("StartPlaneInteraction") && conv.getPlayedRole().equals("PilotInitiator")){
 		   DefaultCommControl dcc=new PilotInitiatorStartPlaneInteractionDefaultCommControl(
                         		   conv.getConversationID(),msr,lr);
 			sb = new PilotInitiatorStartPlaneInteractionStateBehavior(
-			agentName,
-				msr,msu,
-					conv,                           		
-				   conv.getPlayedRole(),
-				   actors,
-				dcc,conv.getInteraction().getId());
-                           ActiveConversation aconv=new ActiveConversation(sb,dcc,conv);
-			   return aconv;
-                   }
-		
-		   if (conv.getInteraction().getId().equals("PilotFlightPlannerInteraction") && conv.getPlayedRole().equals("PilotInitiator")){
-		   DefaultCommControl dcc=new PilotInitiatorPilotFlightPlannerInteractionDefaultCommControl(
-                        		   conv.getConversationID(),msr,lr);
-			sb = new PilotInitiatorPilotFlightPlannerInteractionStateBehavior(
 			agentName,
 				msr,msu,
 					conv,                           		
@@ -173,29 +185,6 @@ public PilotProtocol(){};
                 cols.toArray(result);
                }
              
-               if (interaction.equals("PilotFlightPlannerInteraction")){
-                Vector<AgentExternalDescription> cols=new Vector<AgentExternalDescription>();
-                 
-                 try {
-                 String cardinality="";
-		 DFAgentDescription[] agents=yp.getAgents("FlightPlannerColaborator");
-                   if (agents==null || agents.length<=0)
-                      throw new ingenias.jade.exception.NoAgentsFound("Could not find an agent playing the role FlightPlannerColaborator");
-                   if (cardinality.equals("1") || cardinality.equals(""))
-                    cols.add(new AgentExternalDescription(agents[0].getName(),"FlightPlannerColaborator"));
-                    else
-                	   if (cardinality.equals("1__*"))
-						   for (int k=0;k<agents.length;k++)
-                			  cols.add(new AgentExternalDescription(agents[k].getName(),"FlightPlannerColaborator"));
-                 } catch (FIPAException fe){
-                   fe.printStackTrace();
-                   throw new NoAgentsFound();
-                 }
-                 
-                result=new AgentExternalDescription[cols.size()];
-                cols.toArray(result);
-               }
-             
                if (interaction.equals("PilotPlaneInteraction")){
                 Vector<AgentExternalDescription> cols=new Vector<AgentExternalDescription>();
                  
@@ -238,16 +227,6 @@ public PilotProtocol(){};
                  playedRoles.add(dfd);
                 }
                 
-                if (protocol.equals("PilotFlightPlannerInteraction")){
-		dfd.setName(agentID);
-		 ServiceDescription sd = new ServiceDescription();
-		 sd.setName(agentID.getLocalName()  + "-sub-df");
-		 sd.setType("PilotInitiator");
-		 sd.setOwnership("JADE");
-		 dfd.addServices(sd);
-                 playedRoles.add(dfd);
-                }
-                
                 if (protocol.equals("PilotPlaneInteraction")){
 		dfd.setName(agentID);
 		 ServiceDescription sd = new ServiceDescription();
@@ -258,6 +237,26 @@ public PilotProtocol(){};
                  playedRoles.add(dfd);
                 }
                 
+                                           
+                if (protocol.equals("ControllerPilotInteracion")){
+		dfd.setName(agentID);
+		 ServiceDescription sd = new ServiceDescription();
+		 sd.setName(agentID.getLocalName()  + "-sub-df");
+		 sd.setType("PilotColaborator");
+		 sd.setOwnership("JADE");
+		 dfd.addServices(sd);
+                 playedRoles.add(dfd);
+                }
+                                           
+                if (protocol.equals("FlightPlannerPilotInteraction")){
+		dfd.setName(agentID);
+		 ServiceDescription sd = new ServiceDescription();
+		 sd.setName(agentID.getLocalName()  + "-sub-df");
+		 sd.setType("PilotColaborator");
+		 sd.setOwnership("JADE");
+		 dfd.addServices(sd);
+                 playedRoles.add(dfd);
+                }
                 
                 result=new  DFAgentDescription[playedRoles.size()];
                 playedRoles.toArray(result);
@@ -275,23 +274,6 @@ public PilotProtocol(){};
             HashSet<String> rolesFound=new HashSet<String>();
             
          	toVerify.add("PlaneColaborator");
-         	
-        	if (actors.length<toVerify.size())
-        		return false;
-        	boolean found=false;
-        	for (int k=0;k<actors.length ;k++){
-        		if (toVerify.contains(actors[k].role)){
-    				rolesFound.add(actors[k].role);    			
-    			}
-        	}
-        	return toVerify.size()==rolesFound.size();
-        }
-        
-        if (protocol.equals("PilotFlightPlannerInteraction")){
-            Vector<String> toVerify=new Vector<String>();
-            HashSet<String> rolesFound=new HashSet<String>();
-            
-         	toVerify.add("FlightPlannerColaborator");
          	
         	if (actors.length<toVerify.size())
         		return false;

@@ -77,7 +77,7 @@
   
   <target name="emptyTarget"/>
    
-  <target name="alljunit" depends="emptyTarget"/>
+  <target name="alljunit" depends="junitTestingPackage0,emptyTarget"/>
  
    <target name="test" depends="compile">
         <mkdir dir="${test.results.dir}"/>
@@ -108,13 +108,37 @@
   
     <!--  Targets to run tests defined in the system -->
   
-  
-  
-  <!--   Runs a MAS created with the jade module and contained in the node Only_One_Plane -->
 
-<target name="runOnly_One_PlaneProdStandAlone" depends="compile">
+   
+   
+    <target name="junitTestingPackage0" depends="compile">
     <java fork="true" failonerror="true" maxmemory="128m"
-    classname="ingenias.jade.MainOnly_One_PlaneProdStandAlone">
+    classname="org.junit.runner.JUnitCore">
+    <arg line="ingenias.testing.TestingPackage0Launcher"/>    
+      <classpath>
+
+		<pathelement path="${temp}" />        
+        <fileset dir="${lib}">
+          <include name="**/*.jar" />
+        </fileset>
+
+      </classpath>
+
+    </java>
+  </target>
+
+   
+
+  	  
+
+  
+  
+  
+  <!--   Runs a MAS created with the jade module and contained in the node Deployment -->
+
+<target name="runDeploymentProdStandAlone" depends="compile">
+    <java fork="true" failonerror="true" maxmemory="128m"
+    classname="ingenias.jade.MainDeploymentProdStandAlone">
     <arg line="60000"/>
     
       <classpath>
@@ -131,9 +155,9 @@
     </java>
   </target>
 
-  <target name="runOnly_One_Plane" depends="compile">
+  <target name="runDeployment" depends="compile">
     <java fork="true" failonerror="true" maxmemory="128m"
-    classname="ingenias.jade.MainOnly_One_Plane">
+    classname="ingenias.jade.MainDeployment">
     <arg line="60000"/>
     
       <classpath>
@@ -150,7 +174,7 @@
     </java>
   </target>
   
-   <target name="runjadeOnly_One_Plane">
+   <target name="runjadeDeployment">
     <java fork="true" failonerror="true" maxmemory="128m"
     classname="jade.Boot">
 	<arg line="-gui -port 60000 -mtp 'jade.mtp.http.MessageTransportProtocol(http://127.0.0.1:60001/acc)' -file-dir jade/"/>
@@ -168,7 +192,7 @@
     </java>
   </target>
   
-   <target name="runfederatedjadeOnly_One_Plane">
+   <target name="runfederatedjadeDeployment">
     <java fork="true" failonerror="true" maxmemory="128m"
     classname="jade.Boot">
     <arg line="-gui -port 60000 -mtp 'jade.mtp.http.MessageTransportProtocol(http://127.0.0.1:60001/acc)' -file-dir jade/ subDF:jade.domain.df federator:jade.misc.DFFederatorAgent(resources/DFFederatorAgent.properties)"/>	
@@ -186,10 +210,10 @@
     </java>
   </target>
   
-  <target name="debugOnly_One_Plane" depends="compile">
+  <target name="debugDeployment" depends="compile">
 	  
 	  <java fork="true" failonerror="true" maxmemory="256m"
-		classname="ingenias.jade.MainOnly_One_Plane">
+		classname="ingenias.jade.MainDeployment">
 		  <jvmarg line="-Xdebug -Xrunjdwp:transport=dt_socket,address=60005,server=y,suspend=n"/>
 		 <arg line="60000"/>
 

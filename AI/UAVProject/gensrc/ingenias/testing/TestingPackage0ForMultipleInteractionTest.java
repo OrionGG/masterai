@@ -24,8 +24,23 @@
 */
 
 
-package ingenias.jade;
+package ingenias.testing;
 
+
+import java.util.Vector;
+
+import org.junit.Before;
+import org.junit.After;
+import org.junit.Test;
+
+import jade.core.*;
+import jade.wrapper.StaleProxyException;
+import jade.wrapper.State;
+import ingenias.exception.TimeOut;
+import ingenias.jade.mental.*;
+import ingenias.tests.*;
+import ingenias.jade.IAFProperties;
+import ingenias.jade.graphics.MainInteractionManager;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -34,19 +49,20 @@ import java.io.IOException;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
-import jade.core.*;
-import ingenias.jade.mental.*;
-
-import ingenias.jade.graphics.MainInteractionManager;
 
 
-public class MainOnly_One_PlaneProdStandAlone {
 
-
-  public static void main(String args[]) throws Exception{
-		IAFProperties.setGraphicsOn(false);
-
-		new Thread(){
+public class TestingPackage0ForMultipleInteractionTest extends MultipleInteractionTest{
+jade.wrapper.AgentContainer ac=null;
+ 
+  @Before
+  public void agentSetup() throws StaleProxyException, TimeOut{
+  
+  
+        IAFProperties.setGraphicsOn(false); // disable graphics
+         MainInteractionManager.goManual(); // Stop task execution
+         
+         new Thread(){
 			public void run(){
 				String[] args1=new String[4];
 				args1[0]="-port";
@@ -97,10 +113,14 @@ public class MainOnly_One_PlaneProdStandAlone {
 				}
 
 		}
-
+        
+     
+        // Exit the JVM when there are no more containers around
+        rt.setCloseVM(false);
+        
         // Create a new non-main container, connecting to the default
         // main container (i.e. on this host, port 1099)
-        final jade.wrapper.AgentContainer ac = rt.createAgentContainer(p);
+        ac = rt.createAgentContainer(p);
 
 {
         // Create a new agent
@@ -111,8 +131,14 @@ public class MainOnly_One_PlaneProdStandAlone {
         new Thread(){
           public void run(){
             try {
+                addStartedAgent("Simulation_Creator_0Deployment_Simulator");
+                
+                addAgentRole("Simulation_Creator_0Deployment_Simulator","");   
+    			             
+    			             
                System.out.println("Starting up Simulation_Creator_0Deployment_Simulator...");
               agcSimulation_Creator_0Deployment_Simulator.start();
+              
             } catch (Exception e){
               e.printStackTrace();
             }
@@ -120,15 +146,21 @@ public class MainOnly_One_PlaneProdStandAlone {
         }.start();
 
         // Create a new agent
-        final jade.wrapper.AgentController agcPlane_0Deployment_Plane = ac.createNewAgent("Plane_0Deployment_Plane",
+        final jade.wrapper.AgentController agcPlane_0DeploymentUnitByType1 = ac.createNewAgent("Plane_0DeploymentUnitByType1",
             "ingenias.jade.agents.PlaneJADEAgent", new Object[0]);	
 	
 	
         new Thread(){
           public void run(){
             try {
-               System.out.println("Starting up Plane_0Deployment_Plane...");
-              agcPlane_0Deployment_Plane.start();
+                addStartedAgent("Plane_0DeploymentUnitByType1");
+                
+                addAgentRole("Plane_0DeploymentUnitByType1","Colaborator");   
+    			             
+    			             
+               System.out.println("Starting up Plane_0DeploymentUnitByType1...");
+              agcPlane_0DeploymentUnitByType1.start();
+              
             } catch (Exception e){
               e.printStackTrace();
             }
@@ -136,15 +168,21 @@ public class MainOnly_One_PlaneProdStandAlone {
         }.start();
 
         // Create a new agent
-        final jade.wrapper.AgentController agcFlightPlanner_0Deployment_FlightPlan = ac.createNewAgent("FlightPlanner_0Deployment_FlightPlan",
-            "ingenias.jade.agents.FlightPlannerJADEAgent", new Object[0]);	
+        final jade.wrapper.AgentController agcPlane_1DeploymentUnitByType1 = ac.createNewAgent("Plane_1DeploymentUnitByType1",
+            "ingenias.jade.agents.PlaneJADEAgent", new Object[0]);	
 	
 	
         new Thread(){
           public void run(){
             try {
-               System.out.println("Starting up FlightPlanner_0Deployment_FlightPlan...");
-              agcFlightPlanner_0Deployment_FlightPlan.start();
+                addStartedAgent("Plane_1DeploymentUnitByType1");
+                
+                addAgentRole("Plane_1DeploymentUnitByType1","Colaborator");   
+    			             
+    			             
+               System.out.println("Starting up Plane_1DeploymentUnitByType1...");
+              agcPlane_1DeploymentUnitByType1.start();
+              
             } catch (Exception e){
               e.printStackTrace();
             }
@@ -159,8 +197,58 @@ public class MainOnly_One_PlaneProdStandAlone {
         new Thread(){
           public void run(){
             try {
+                addStartedAgent("Pilot_0DeploymentUnitByType0");
+                
+                addAgentRole("Pilot_0DeploymentUnitByType0","Initiator");   
+    			             
+    			             
                System.out.println("Starting up Pilot_0DeploymentUnitByType0...");
               agcPilot_0DeploymentUnitByType0.start();
+              
+            } catch (Exception e){
+              e.printStackTrace();
+            }
+          }
+        }.start();
+
+        // Create a new agent
+        final jade.wrapper.AgentController agcPilot_1DeploymentUnitByType0 = ac.createNewAgent("Pilot_1DeploymentUnitByType0",
+            "ingenias.jade.agents.PilotJADEAgent", new Object[0]);	
+	
+	
+        new Thread(){
+          public void run(){
+            try {
+                addStartedAgent("Pilot_1DeploymentUnitByType0");
+                
+                addAgentRole("Pilot_1DeploymentUnitByType0","Initiator");   
+    			             
+    			             
+               System.out.println("Starting up Pilot_1DeploymentUnitByType0...");
+              agcPilot_1DeploymentUnitByType0.start();
+              
+            } catch (Exception e){
+              e.printStackTrace();
+            }
+          }
+        }.start();
+
+        // Create a new agent
+        final jade.wrapper.AgentController agcFlightPlanner_0Deployment_FlightPlanner = ac.createNewAgent("FlightPlanner_0Deployment_FlightPlanner",
+            "ingenias.jade.agents.FlightPlannerJADEAgent", new Object[0]);	
+	
+	
+        new Thread(){
+          public void run(){
+            try {
+                addStartedAgent("FlightPlanner_0Deployment_FlightPlanner");
+                
+                addAgentRole("FlightPlanner_0Deployment_FlightPlanner","Colaborator");   
+    			             
+    			             
+               System.out.println("Starting up FlightPlanner_0Deployment_FlightPlanner...");
+              agcFlightPlanner_0Deployment_FlightPlanner.start();
+              
             } catch (Exception e){
               e.printStackTrace();
             }
@@ -168,8 +256,17 @@ public class MainOnly_One_PlaneProdStandAlone {
         }.start();
 
 }
-	      MainInteractionManager.getInstance().setTitle("node Only_One_Plane");
+	      MainInteractionManager.getInstance().setTitle("node Deployment");
+	    
      }
+     
+     
+     @After
+	public void endTest() throws StaleProxyException{
+	 ac.kill();	
+	};
+	
+
 }
 
  
