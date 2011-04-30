@@ -47,6 +47,8 @@ public class Execute_DecisionTask extends Task{
 
         Throw_Change  eiThrow_Change=(Throw_Change)this.getFirstInputOfType("Throw_Change");             
 
+        Pilot_Mind  eiPilot_Mind=(Pilot_Mind)this.getFirstInputOfType("Pilot_Mind");             
+
 
 
 
@@ -94,6 +96,7 @@ public class Execute_DecisionTask extends Task{
         outputsdefaultManoeuvre.setAltitudeChange(eiThrow_Change.getAltitudeChange());
         outputsdefaultManoeuvre.setHeadChange(eiThrow_Change.getHeadChange());
         outputsdefaultManoeuvre.setPriority(eiThrow_Change.getPriority());
+        outputsdefaultPilotPlaneInteraction.addCollaborators(eiPilot_Mind.getPilotFlightPlan().getPlaneID());
 //#end_node:INGENIASCodeComponent10 <--- DO NOT REMOVE THIS
 
  }

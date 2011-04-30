@@ -74,34 +74,39 @@ public class Make_DecisionsTask extends Task{
 
 
 //#start_node:INGENIASCodeComponent7 <--- DO NOT REMOVE THIS	
-        outputsdefaultThrow_Change.setSpeedChange(-1);
-    	outputsdefaultThrow_Change.setAltitudeChange(-1);
-    	outputsdefaultThrow_Change.setHeadChange(null);
-        Vector<Plane_Position_ServiceAppImp> oVector = Plane_Position_ServiceInit.getAppsInitialised();
-        if(oVector.size()> 0){
-        	Plane_Position_ServiceAppImp eaPlane_Position_ServiceAppImp = oVector.get(0);
-        	//eaPlane_Position_ServiceAppImp.getOwner();
-        	gov.nasa.worldwind.geom.Position oPosition = eaPlane_Position_ServiceAppImp.getCurrentPosition();
-        	
-        	gov.nasa.worldwind.geom.Position oEndPoint = eiFlight_Leg.getEndPoint();
-        	
-        	double lat1 = oPosition.getLatitude().radians;
-        	double lat2 = oEndPoint.getLatitude().radians;
-        	double lon1 = oPosition.getLongitude().radians;
-            double lon2 = oEndPoint.getLongitude().radians;
-            
-            gov.nasa.worldwind.geom.Angle oAngle = BasicFlightDynamics.BFD.getHead(lat1, lon1, lat2, lon2);
-            
-            if(oAngle.degrees < 0){
-            	oAngle = oAngle.addDegrees(360);
-            }
-            
-            if(eaPlane_Position_ServiceAppImp.getCurrentHead().degrees != oAngle.degrees){
-            	outputsdefaultThrow_Change.setHeadChange(oAngle);
-            	outputsdefaultThrow_Change.setPriority(0);
-            }
+		outputsdefaultThrow_Change.setSpeedChange(-1);
+		outputsdefaultThrow_Change.setAltitudeChange(-1);
+		outputsdefaultThrow_Change.setHeadChange(null);
+		Vector<Plane_Position_ServiceAppImp> oVector = Plane_Position_ServiceInit.getAppsInitialised();
+		
+		for (Plane_Position_ServiceAppImp plane_Position_ServiceAppImp : oVector) {
+			jade.core.AID oPlaneAID = eiFlight_Leg.getPlaneID().id;
+			if(oPlaneAID.equals(plane_Position_ServiceAppImp.getOwner().getAID())){
+				//eaPlane_Position_ServiceAppImp.getOwner();
+				gov.nasa.worldwind.geom.Position oPosition = plane_Position_ServiceAppImp.getCurrentPosition();
 
-        }
+				gov.nasa.worldwind.geom.Position oEndPoint = eiFlight_Leg.getEndPoint();
+
+				double lat1 = oPosition.getLatitude().radians;
+				double lat2 = oEndPoint.getLatitude().radians;
+				double lon1 = oPosition.getLongitude().radians;
+				double lon2 = oEndPoint.getLongitude().radians;
+
+				gov.nasa.worldwind.geom.Angle oAngle = BasicFlightDynamics.BFD.getHead(lat1, lon1, lat2, lon2);
+
+				if(oAngle.degrees < 0){
+					oAngle = oAngle.addDegrees(360);
+				}
+
+				if(plane_Position_ServiceAppImp.getCurrentHead().degrees != oAngle.degrees){
+					outputsdefaultThrow_Change.setHeadChange(oAngle);
+					outputsdefaultThrow_Change.setPriority(0);
+				}
+				break;
+			}
+
+		}
+	
 //#end_node:INGENIASCodeComponent7 <--- DO NOT REMOVE THIS
 
  }

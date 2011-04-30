@@ -78,7 +78,7 @@ public class Check_DestinationTask extends Task{
     	outputsdefaultThrow_Change.setHeadChange(null);	
     	//stop the plane
         outputsdefaultThrow_Change.setSpeedChange(0);
-        outputsdefaultThrow_Change.setPriority(0);
+        outputsdefaultThrow_Change.setPriority(10);
 //#end_node:INGENIASCodeComponent14 <--- DO NOT REMOVE THIS
 
  }

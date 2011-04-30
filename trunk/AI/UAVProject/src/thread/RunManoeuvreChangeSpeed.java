@@ -32,7 +32,7 @@ public class RunManoeuvreChangeSpeed   implements Runnable{
 	}
 
 
-	public static void runManoeuvreTurnHead(Manoeuvre eiManoeuvre,
+	public static void runManoeuvre(Manoeuvre eiManoeuvre,
 			Plane_Mind eiPlane_Mind, UpdatePlaneStatusApp eaUpdatePlaneStatus) {
 
 		global.GlobalVarsAndMethods.addManoeuvre(eiManoeuvre, eiPlane_Mind);
