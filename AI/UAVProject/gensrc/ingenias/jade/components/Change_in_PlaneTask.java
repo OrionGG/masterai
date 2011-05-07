@@ -59,6 +59,9 @@ public class Change_in_PlaneTask extends Task{
 
 
 
+        // This means that the task participates in the interaction PilotPlaneInteraction
+        RuntimeConversation  conversationContextPilotPlaneInteraction=this.getConversationContext();
+
 
   		Vector<TaskOutput> outputs = this.getOutputs();
   		TaskOutput defaultOutput= outputs.firstElement();
@@ -78,13 +81,18 @@ public class Change_in_PlaneTask extends Task{
 
 
 //#start_node:INGENIASCodeComponent11 <--- DO NOT REMOVE THIS	
+        boolean runManoeuvre = false;
         if(eiManoeuvre.getSpeedChange()!= -1){
-        	thread.RunManoeuvreChangeSpeed.runManoeuvre(eiManoeuvre, eiPlane_Mind,eaUpdatePlaneStatus);
+        	runManoeuvre = thread.RunManoeuvreChangeSpeed.runManoeuvre(eiManoeuvre, eiPlane_Mind,eaUpdatePlaneStatus);
         }if(eiManoeuvre.getAltitudeChange()!= -1){
         	//thread.RunManoeuvreChangeAltitude.runManoeuvreTurnHead(eiManoeuvre, eiPlane_Mind,eaUpdatePlaneStatus);
         }
         if(eiManoeuvre.getHeadChange()!= null){
-        	thread.RunManoeuvreTurnHead.runManoeuvreTurnHead(eiManoeuvre, eiPlane_Mind,eaUpdatePlaneStatus);
+        	runManoeuvre = thread.RunManoeuvreTurnHead.runManoeuvreTurnHead(eiManoeuvre, eiPlane_Mind,eaUpdatePlaneStatus);
+        }
+        
+        if(!runManoeuvre){
+        	conversationContextPilotPlaneInteraction.setState("FINISHED");
         }
 		
 	

@@ -262,9 +262,9 @@ public class PilotJADEAgent
  
 	     
 	     
-		    {Throw_Change expectedOutputThrow_Change=		    
-		     new Throw_Change(MentalStateManager.generateMentalEntityID());			
-             to.add(new OutputEntity(expectedOutputThrow_Change,TaskOperations.CreateWF));
+		    {Throw_Instruction expectedOutputThrow_Instruction=		    
+		     new Throw_Instruction(MentalStateManager.generateMentalEntityID());			
+             to.add(new OutputEntity(expectedOutputThrow_Instruction,TaskOperations.CreateWF));
             }
 	     
      
@@ -311,11 +311,11 @@ public class PilotJADEAgent
 	      
 		
 		
-             expectedInput=this.getMSM().getMentalEntityByType("Throw_Change");
+             expectedInput=this.getMSM().getMentalEntityByType("Throw_Instruction");
              if (expectedInput.size()==0 && !("1".equals("0..n"))){
-				nonExistingInputs.add("Throw_Change");
+				nonExistingInputs.add("Throw_Instruction");
 			 } else {
-			    addExpectedInputs(tobject, "Throw_Change","1",expectedInput);
+			    addExpectedInputs(tobject, "Throw_Instruction","1",expectedInput);
              	addConsumedInput(to,"1",expectedInput);
 			 }
              allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;
@@ -570,9 +570,9 @@ public class PilotJADEAgent
  
 	     
 	     
-		    {Throw_Change expectedOutputThrow_Change=		    
-		     new Throw_Change(MentalStateManager.generateMentalEntityID());			
-             to.add(new OutputEntity(expectedOutputThrow_Change,TaskOperations.CreateWF));
+		    {Throw_Instruction expectedOutputThrow_Instruction=		    
+		     new Throw_Instruction(MentalStateManager.generateMentalEntityID());			
+             to.add(new OutputEntity(expectedOutputThrow_Instruction,TaskOperations.CreateWF));
             }
 	     
      
@@ -1054,9 +1054,9 @@ public class PilotJADEAgent
 	 
 	     
 	     
-		    {Throw_Change expectedOutputThrow_Change=		    
-		     new Throw_Change(MentalStateManager.generateMentalEntityID());			
-             to.add(new OutputEntity(expectedOutputThrow_Change,TaskOperations.CreateWF));
+		    {Throw_Instruction expectedOutputThrow_Instruction=		    
+		     new Throw_Instruction(MentalStateManager.generateMentalEntityID());			
+             to.add(new OutputEntity(expectedOutputThrow_Instruction,TaskOperations.CreateWF));
             }
 	     
      

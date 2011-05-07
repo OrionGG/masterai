@@ -64,9 +64,9 @@ public class Make_DecisionsTask extends Task{
   																			outputs);
   		
 		
-		Throw_Change outputsdefaultThrow_Change=
-			(Throw_Change)
-				outputsdefault.getEntityByType("Throw_Change");
+		Throw_Instruction outputsdefaultThrow_Instruction=
+			(Throw_Instruction)
+				outputsdefault.getEntityByType("Throw_Instruction");
 		
 		
 		
@@ -74,10 +74,11 @@ public class Make_DecisionsTask extends Task{
 
 
 //#start_node:INGENIASCodeComponent7 <--- DO NOT REMOVE THIS	
-		outputsdefaultThrow_Change.setSpeedChange(-1);
-		outputsdefaultThrow_Change.setAltitudeChange(-1);
-		outputsdefaultThrow_Change.setHeadChange(null);
+        outputsdefaultThrow_Instruction.setSpeedChange(-1);
+        outputsdefaultThrow_Instruction.setAltitudeChange(-1);
+        outputsdefaultThrow_Instruction.setHeadChange(null);
 		Vector<Plane_Position_ServiceAppImp> oVector = Plane_Position_ServiceInit.getAppsInitialised();
+
 		
 		for (Plane_Position_ServiceAppImp plane_Position_ServiceAppImp : oVector) {
 			jade.core.AID oPlaneAID = eiFlight_Leg.getPlaneID().id;
@@ -99,8 +100,8 @@ public class Make_DecisionsTask extends Task{
 				}
 
 				if(plane_Position_ServiceAppImp.getCurrentHead().degrees != oAngle.degrees){
-					outputsdefaultThrow_Change.setHeadChange(oAngle);
-					outputsdefaultThrow_Change.setPriority(0);
+					outputsdefaultThrow_Instruction.setHeadChange(oAngle);
+					outputsdefaultThrow_Instruction.setPriority(0);
 				}
 				break;
 			}

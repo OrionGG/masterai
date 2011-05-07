@@ -19,23 +19,28 @@ public class GlobalVarsAndMethods {
 	
 	//public static Hashtable<PlaneJADEAgent, Thread> hUpdatePlanesThreads = new Hashtable<PlaneJADEAgent, Thread>();
 	
-	public static void addManoeuvre(Manoeuvre eiManoeuvre,
+	public static boolean addManoeuvre(Manoeuvre eiManoeuvre,
 			Plane_Mind eiPlane_Mind) {
+		boolean bResult = false;
 		if(eiPlane_Mind.getRunningManoeuvres().size()!=0){
 			if(!containsSimilarManoeuvres(eiPlane_Mind.getRunningManoeuvres(), eiManoeuvre)){
 				Manoeuvre  oRunningManoeuvre = eiPlane_Mind.getRunningManoeuvres().get(0);
 				if (oRunningManoeuvre.getPriority() == eiManoeuvre.getPriority()){
 					eiPlane_Mind.getRunningManoeuvres().add(eiManoeuvre);
+					bResult= true;
 				}
 				if (oRunningManoeuvre.getPriority() < eiManoeuvre.getPriority()){
 					eiPlane_Mind.getRunningManoeuvres().clear();
 					eiPlane_Mind.getRunningManoeuvres().add(eiManoeuvre);
+					bResult= true;
 				}
 			}
 		}
 		else{
 			eiPlane_Mind.getRunningManoeuvres().add(eiManoeuvre);
+			bResult= true;
 		}
+		return bResult;
 	}
 	
 	private static boolean containsSimilarManoeuvres(ArrayList<Manoeuvre> arrayList,

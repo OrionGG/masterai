@@ -64,9 +64,9 @@ public class Obey_OrderTask extends Task{
   																			outputs);
   		
 		
-		Throw_Change outputsdefaultThrow_Change=
-			(Throw_Change)
-				outputsdefault.getEntityByType("Throw_Change");
+		Throw_Instruction outputsdefaultThrow_Instruction=
+			(Throw_Instruction)
+				outputsdefault.getEntityByType("Throw_Instruction");
 		
 		
 		

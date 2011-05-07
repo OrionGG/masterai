@@ -26,6 +26,8 @@
 
 package ingenias.jade.components;
 
+
+
 import java.util.*;
 import ingenias.jade.exception.*;
 import ingenias.jade.comm.*;
@@ -55,6 +57,9 @@ public class FinishGivePlanTask extends Task{
 
 
 
+        // This means that the task participates in the interaction FlightPlannerPilotInteraction
+        RuntimeConversation  conversationContextFlightPlannerPilotInteraction=this.getConversationContext();
+
 
   		Vector<TaskOutput> outputs = this.getOutputs();
   		TaskOutput defaultOutput= outputs.firstElement();
@@ -69,9 +74,15 @@ public class FinishGivePlanTask extends Task{
         YellowPages yp=null; // only available for initiators of interactions
 
 
-//#start_node: <--- DO NOT REMOVE THIS	
+//#start_node:INGENIASCodeComponent17 <--- DO NOT REMOVE THIS	
 
-//#end_node: <--- DO NOT REMOVE THIS
+        yp=(YellowPages)this.getApplication("YellowPages");
+        
+        ConversationLocksManager clm = ((ingenias.jade.agents.FlightPlannerJADEAgent)yp.ja).getLM().getCLM(conversationContextFlightPlannerPilotInteraction);
+    	clm.generateNotification();
+
+        	
+//#end_node:INGENIASCodeComponent17 <--- DO NOT REMOVE THIS
 
  }
  
