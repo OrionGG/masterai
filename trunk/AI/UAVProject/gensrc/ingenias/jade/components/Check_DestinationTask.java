@@ -64,9 +64,9 @@ public class Check_DestinationTask extends Task{
   																			outputs);
   		
 		
-		Throw_Change outputsdefaultThrow_Change=
-			(Throw_Change)
-				outputsdefault.getEntityByType("Throw_Change");
+		Throw_Instruction outputsdefaultThrow_Instruction=
+			(Throw_Instruction)
+				outputsdefault.getEntityByType("Throw_Instruction");
 		
 		
 		
@@ -74,11 +74,11 @@ public class Check_DestinationTask extends Task{
 
 
 //#start_node:INGENIASCodeComponent14 <--- DO NOT REMOVE THIS	
-    	outputsdefaultThrow_Change.setAltitudeChange(-1);
-    	outputsdefaultThrow_Change.setHeadChange(null);	
+        outputsdefaultThrow_Instruction.setAltitudeChange(-1);
+        outputsdefaultThrow_Instruction.setHeadChange(null);	
     	//stop the plane
-        outputsdefaultThrow_Change.setSpeedChange(0);
-        outputsdefaultThrow_Change.setPriority(10);
+        outputsdefaultThrow_Instruction.setSpeedChange(0);
+        outputsdefaultThrow_Instruction.setPriority(10);
 //#end_node:INGENIASCodeComponent14 <--- DO NOT REMOVE THIS
 
  }

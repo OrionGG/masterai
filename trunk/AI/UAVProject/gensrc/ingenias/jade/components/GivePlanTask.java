@@ -92,8 +92,9 @@ public class GivePlanTask extends Task{
 //#start_node:CodeForCreatingRandomPlan <--- DO NOT REMOVE THIS	
                 outputsdefaultPlanAnswer.setFlightPlan(eiFlight_Plan);
 	outputsdefaultFlightPlannerPilotInteraction.addCollaborators(eiFlight_Plan.getPilotID());
-      
 
+	//ConversationLocksManager clm = ((ingenias.jade.agents.FlightPlannerJADEAgent)yp.ja).getLM().getCLM(outputsdefaultFlightPlannerPilotInteraction);
+	//clm.generateNotification();
 //#end_node:CodeForCreatingRandomPlan <--- DO NOT REMOVE THIS
 
  }

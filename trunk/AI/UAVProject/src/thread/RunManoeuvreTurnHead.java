@@ -74,11 +74,12 @@ public class RunManoeuvreTurnHead  implements Runnable{
 		}
 	}
 
-	public static void runManoeuvreTurnHead(Manoeuvre eiManoeuvre,
+	public static boolean runManoeuvreTurnHead(Manoeuvre eiManoeuvre,
 			Plane_Mind eiPlane_Mind, 
 			UpdatePlaneStatusApp oUpdatePlaneStatusAppImp) {
 		
-		global.GlobalVarsAndMethods.addManoeuvre(eiManoeuvre, eiPlane_Mind);
+		boolean bResult = false;
+		bResult = global.GlobalVarsAndMethods.addManoeuvre(eiManoeuvre, eiPlane_Mind);
 
 		
 
@@ -88,6 +89,7 @@ public class RunManoeuvreTurnHead  implements Runnable{
 			Thread thread = new Thread(oRunManoeuvreTurnHead);
 			thread.start();
 		}
+		return bResult;
 	}
 
 

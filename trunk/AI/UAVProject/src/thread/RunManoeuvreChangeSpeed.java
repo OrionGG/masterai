@@ -32,10 +32,11 @@ public class RunManoeuvreChangeSpeed   implements Runnable{
 	}
 
 
-	public static void runManoeuvre(Manoeuvre eiManoeuvre,
+	public static boolean runManoeuvre(Manoeuvre eiManoeuvre,
 			Plane_Mind eiPlane_Mind, UpdatePlaneStatusApp eaUpdatePlaneStatus) {
 
-		global.GlobalVarsAndMethods.addManoeuvre(eiManoeuvre, eiPlane_Mind);
+		boolean bResult = false;
+		bResult = global.GlobalVarsAndMethods.addManoeuvre(eiManoeuvre, eiPlane_Mind);
 
 		
 
@@ -45,6 +46,7 @@ public class RunManoeuvreChangeSpeed   implements Runnable{
 			Thread thread = new Thread(oRunManoeuvreChangeSpeed);
 			thread.start();
 		}
+		return bResult;
 		
 	}
 

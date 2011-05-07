@@ -45,7 +45,7 @@ public class Execute_DecisionTask extends Task{
  public void execute() throws TaskException{
 
 
-        Throw_Change  eiThrow_Change=(Throw_Change)this.getFirstInputOfType("Throw_Change");             
+        Throw_Instruction  eiThrow_Instruction=(Throw_Instruction)this.getFirstInputOfType("Throw_Instruction");             
 
         Pilot_Mind  eiPilot_Mind=(Pilot_Mind)this.getFirstInputOfType("Pilot_Mind");             
 
@@ -92,10 +92,10 @@ public class Execute_DecisionTask extends Task{
 
 
 //#start_node:INGENIASCodeComponent10 <--- DO NOT REMOVE THIS	
-        outputsdefaultManoeuvre.setSpeedChange(eiThrow_Change.getSpeedChange());
-        outputsdefaultManoeuvre.setAltitudeChange(eiThrow_Change.getAltitudeChange());
-        outputsdefaultManoeuvre.setHeadChange(eiThrow_Change.getHeadChange());
-        outputsdefaultManoeuvre.setPriority(eiThrow_Change.getPriority());
+        outputsdefaultManoeuvre.setSpeedChange(eiThrow_Instruction.getSpeedChange());
+        outputsdefaultManoeuvre.setAltitudeChange(eiThrow_Instruction.getAltitudeChange());
+        outputsdefaultManoeuvre.setHeadChange(eiThrow_Instruction.getHeadChange());
+        outputsdefaultManoeuvre.setPriority(eiThrow_Instruction.getPriority());
         outputsdefaultPilotPlaneInteraction.addCollaborators(eiPilot_Mind.getPilotFlightPlan().getPlaneID());
 //#end_node:INGENIASCodeComponent10 <--- DO NOT REMOVE THIS
 
