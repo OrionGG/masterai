@@ -84,6 +84,8 @@ public class CreatePilotMindTask extends Task{
         float fFatigue = generator.nextFloat();
         outputsdefaultPilot_Mind.setFatigue(fFatigue);
         
+        outputsdefaultPilot_Mind.setInstructionRunning(null);
+        
         outputsdefaultPilot_Mind.setPilotFlightPlan(eiFlight_Plan);
         
         outputsdefaultPilot_Mind.setLegsCompleted(0);

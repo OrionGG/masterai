@@ -26,8 +26,6 @@
 
 package ingenias.jade.components;
 
-
-
 import java.util.*;
 import ingenias.jade.exception.*;
 import ingenias.jade.comm.*;
@@ -76,12 +74,7 @@ public class FinishGivePlanTask extends Task{
 
 //#start_node:INGENIASCodeComponent17 <--- DO NOT REMOVE THIS	
 
-        yp=(YellowPages)this.getApplication("YellowPages");
-        
-        ConversationLocksManager clm = ((ingenias.jade.agents.FlightPlannerJADEAgent)yp.ja).getLM().getCLM(conversationContextFlightPlannerPilotInteraction);
-    	clm.generateNotification();
-
-        	
+     
 //#end_node:INGENIASCodeComponent17 <--- DO NOT REMOVE THIS
 
  }

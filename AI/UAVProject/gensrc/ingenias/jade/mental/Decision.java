@@ -31,7 +31,7 @@ import ingenias.jade.components.*;
 import ingenias.editor.entities.*;
 import ingenias.editor.entities.ViewPreferences.ViewType;
 
-public class Throw_Change extends ingenias.editor.entities.RuntimeFact{
+public class Decision extends ingenias.editor.entities.RuntimeFact{
    
     gov.nasa.worldwind.geom.Angle HeadChange;   
    
@@ -42,14 +42,14 @@ public class Throw_Change extends ingenias.editor.entities.RuntimeFact{
     int Priority;   
     
    
-  public Throw_Change (String id){
+  public Decision (String id){
    super(id);
    this.getPrefs().setView(ViewType.UML);
-   this.type="Throw_Change";
+   this.type="Decision";
   }
   
 
-  public Throw_Change (){
+  public Decision (){
    super(ingenias.jade.MentalStateManager.generateMentalEntityID());
    this.getPrefs().setView(ViewType.UML);
   }
@@ -59,7 +59,7 @@ public class Throw_Change extends ingenias.editor.entities.RuntimeFact{
   }
   
   public String getType(){
-   return "Throw_Change";
+   return "Decision";
   }
   
   public String getParentType(){

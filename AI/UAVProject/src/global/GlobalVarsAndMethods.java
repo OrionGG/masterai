@@ -3,9 +3,11 @@ package global;
 
 import gov.nasa.worldwind.geom.Angle;
 import ingenias.jade.agents.PlaneJADEAgent;
+import ingenias.jade.mental.Decision;
 import ingenias.jade.mental.Flight_Plan;
 import ingenias.jade.mental.Manoeuvre;
 import ingenias.jade.mental.Plane_Mind;
+import ingenias.jade.mental.Throw_Instruction;
 
 import jade.domain.FIPAAgentManagement.DFAgentDescription;
 
@@ -15,11 +17,12 @@ import java.util.List;
 import java.util.Random;
 
 public class GlobalVarsAndMethods {
+	public static int nDegress = 3;
 	public static int iMaxNumWaypoints = 2;
 	
 	//public static Hashtable<PlaneJADEAgent, Thread> hUpdatePlanesThreads = new Hashtable<PlaneJADEAgent, Thread>();
 	
-	public static boolean addManoeuvre(Manoeuvre eiManoeuvre,
+	/*public static boolean addManoeuvre(Manoeuvre eiManoeuvre,
 			Plane_Mind eiPlane_Mind) {
 		boolean bResult = false;
 		if(eiPlane_Mind.getRunningManoeuvres().size()!=0){
@@ -41,7 +44,7 @@ public class GlobalVarsAndMethods {
 			bResult= true;
 		}
 		return bResult;
-	}
+	}*/
 	
 	private static boolean containsSimilarManoeuvres(ArrayList<Manoeuvre> arrayList,
 			Manoeuvre eiManoeuvre) {
@@ -69,6 +72,35 @@ public class GlobalVarsAndMethods {
 				break;
 			}
 		}
+
+		return bResult;
+	}
+	
+	public static boolean containsSimilarInstrucctions(Throw_Instruction oThrow_InstructionRunning,
+			Decision  eiDecision) {
+		boolean bResult = false;
+		
+		//TODO check for instrucctions with same signum
+			double dAltitudeChangeRunning = oThrow_InstructionRunning.getAltitudeChange();
+			double dAltitudeChange = eiDecision.getAltitudeChange();
+			if((dAltitudeChangeRunning!=0)&& (dAltitudeChange!=0)){
+				bResult = true;
+				return bResult;
+			}
+
+			double dSpeedChangeRunning = oThrow_InstructionRunning.getSpeedChange();
+			double dSpeedChange = eiDecision.getSpeedChange();
+			if((dSpeedChangeRunning!=0)&& (dSpeedChange!=0)){
+				bResult = true;
+				return bResult;
+			}
+
+			Angle oHeadChangeRunning = oThrow_InstructionRunning.getHeadChange();
+			Angle oHeadChange = eiDecision.getHeadChange();
+			if((oHeadChangeRunning!=null) && (oHeadChange!=null)){
+				bResult = true;
+				return bResult;
+			}
 
 		return bResult;
 	}

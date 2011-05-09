@@ -63,10 +63,10 @@ public class Obey_OrderTask extends Task{
   		TaskOutput	outputsdefault=findOutputAlternative("default",
   																			outputs);
   		
+		Decision outputsdefaultDecision=
+			(Decision)
+				outputsdefault.getEntityByType("Decision");
 		
-		Throw_Instruction outputsdefaultThrow_Instruction=
-			(Throw_Instruction)
-				outputsdefault.getEntityByType("Throw_Instruction");
 		
 		
 		

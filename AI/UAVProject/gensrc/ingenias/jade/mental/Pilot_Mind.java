@@ -46,6 +46,8 @@ public class Pilot_Mind extends ingenias.editor.entities.RuntimeFact{
     float Stress;   
    
     int LegsCompleted;   
+   
+    Throw_Instruction InstructionRunning;   
     
    
   public Pilot_Mind (String id){
@@ -134,6 +136,15 @@ public class Pilot_Mind extends ingenias.editor.entities.RuntimeFact{
    
    public int getLegsCompleted(){
      return LegsCompleted;      
+   }
+   
+
+   public void setInstructionRunning(Throw_Instruction value){
+     InstructionRunning=value;   
+   };
+   
+   public Throw_Instruction getInstructionRunning(){
+     return InstructionRunning;      
    }
      
     

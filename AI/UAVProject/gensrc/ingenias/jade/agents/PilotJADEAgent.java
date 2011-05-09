@@ -95,17 +95,6 @@ public class PilotJADEAgent
 			to=new TaskOutput("default");
   
 		
-		expectedInput=this.getMSM().getMentalEntityByType("PlanReceived");
-		if (this.getLM().canBeDeleted(expectedInput)){             
-             if (expectedInput.size()==0){
-				nonExistingInputs.add("PlanReceived");
-			 } else {
-			    addExpectedInputs(tobject, "PlanReceived","1",expectedInput);
-             	addConsumedInput(to,"PlanReceived",expectedInput);
-			 }
-             allEntitiesExist=allEntitiesExist || expectedInput.size()!=0;
-		} 
-	      
 		expectedInput=this.getMSM().getMentalEntityByType("ObjectDetected");
 		if (this.getLM().canBeDeleted(expectedInput)){             
              if (expectedInput.size()==0){
@@ -113,6 +102,17 @@ public class PilotJADEAgent
 			 } else {
 			    addExpectedInputs(tobject, "ObjectDetected","1",expectedInput);
              	addConsumedInput(to,"ObjectDetected",expectedInput);
+			 }
+             allEntitiesExist=allEntitiesExist || expectedInput.size()!=0;
+		} 
+	      
+		expectedInput=this.getMSM().getMentalEntityByType("PlanReceived");
+		if (this.getLM().canBeDeleted(expectedInput)){             
+             if (expectedInput.size()==0){
+				nonExistingInputs.add("PlanReceived");
+			 } else {
+			    addExpectedInputs(tobject, "PlanReceived","1",expectedInput);
+             	addConsumedInput(to,"PlanReceived",expectedInput);
 			 }
              allEntitiesExist=allEntitiesExist || expectedInput.size()!=0;
 		} 
@@ -242,6 +242,80 @@ public class PilotJADEAgent
 				nonExistingInputs.add("AllLegsCompleted");
 			 } else {
 			    addExpectedInputs(tobject, "AllLegsCompleted","1",expectedInput);
+             	addConsumedInput(to,"1",expectedInput);
+			 }
+             allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;
+
+	      
+	      
+	     
+	      
+	     // Default application for all tasks executed within a conversation
+	     expectedApp=(ingenias.jade.components.Application)getAM().getApplication("YellowPages");
+             tobject.addApplication("YellowPages",expectedApp);
+	 /*    
+	     
+	      */	  
+	      
+	      /**/	      
+	      
+ 
+	     
+	     
+		    {Throw_Instruction expectedOutputThrow_Instruction=		    
+		     new Throw_Instruction(MentalStateManager.generateMentalEntityID());			
+             to.add(new OutputEntity(expectedOutputThrow_Instruction,TaskOperations.CreateWF));
+            }
+	     
+     
+     		      
+	      tobject.addOutput(to);
+	      initialised= allEntitiesExist;
+
+		if (!allEntitiesExist){
+		   String[] nonexisting=new String[nonExistingInputs.size()];
+		   for (int j=0;j<nonExistingInputs.size();j++){
+				nonexisting[j]=nonExistingInputs.elementAt(j).toString();
+			}
+			EventManager.getInstance().conversationalInitializationOfTaskFailed(getLocalName(), 
+												"Pilot", 
+												tobject, nonexisting);
+		}
+		return initialised;	       
+	      }
+                 
+                  
+                  
+         nonExistingInputs.clear();
+  		 repeatedOutputs.clear();
+         if (tobject.getType().equals("DescomposeDecision") ){
+            Vector<MentalEntity> expectedInput=null;
+            RuntimeFact expectedOutput=null;
+            RuntimeEvent expectedOutputEvent=null;
+			RuntimeConversation expectedInt=null;
+            ingenias.jade.components.Resource expectedResource=null;
+			ingenias.jade.components.Application expectedApp=null;        
+			boolean allEntitiesExist=true;		
+			TaskOutput to=null;
+			to=new TaskOutput("default");
+		
+             expectedInput=this.getMSM().getMentalEntityByType("Pilot_Mind");
+             if (expectedInput.size()==0 && !("1".equals("0..n"))){
+				nonExistingInputs.add("Pilot_Mind");
+			 } else {
+			  addExpectedInputs(tobject, "Pilot_Mind","1",expectedInput);
+			 }
+             allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;             
+             
+	      
+	      
+		
+		
+             expectedInput=this.getMSM().getMentalEntityByType("Decision");
+             if (expectedInput.size()==0 && !("1".equals("0..n"))){
+				nonExistingInputs.add("Decision");
+			 } else {
+			    addExpectedInputs(tobject, "Decision","1",expectedInput);
              	addConsumedInput(to,"1",expectedInput);
 			 }
              allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;
@@ -569,11 +643,34 @@ public class PilotJADEAgent
 	      
  
 	     
-	     
-		    {Throw_Instruction expectedOutputThrow_Instruction=		    
-		     new Throw_Instruction(MentalStateManager.generateMentalEntityID());			
-             to.add(new OutputEntity(expectedOutputThrow_Instruction,TaskOperations.CreateWF));
+ 			{
+ 			Decision expectedOutputDecision=
+ 				new Decision(MentalStateManager.generateMentalEntityID());
+ 			if (RuntimeConversation.class.isAssignableFrom(expectedOutputDecision.getClass())){
+ 			    java.lang.reflect.Method m;
+				try {
+					m = expectedOutputDecision.getClass().getMethod("setInteraction", new Class[]{Interaction.class});
+					m.invoke(expectedOutputDecision, new Interaction("")) ;	  
+				} catch (SecurityException e) {
+					
+					e.printStackTrace();
+				} catch (NoSuchMethodException e) {
+					
+					e.printStackTrace();
+				} catch (IllegalArgumentException e) {
+					
+					e.printStackTrace();
+				} catch (IllegalAccessException e) {
+					
+					e.printStackTrace();
+				} catch (InvocationTargetException e) {
+					
+					e.printStackTrace();
+				}
+ 			}	 			
+            to.add(new OutputEntity(expectedOutputDecision,TaskOperations.CreateMS));
             }
+	     
 	     
      
      		      
@@ -877,17 +974,6 @@ public class PilotJADEAgent
 			tobject.setConversationContext(conversation);
   
 		
-		expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"PlanReceived");
-		if (this.getLM().canBeDeleted(expectedInput)){                          
-             if (expectedInput.size()==0){
-				nonExistingInputs.add("PlanReceived");
-			 } else {
-			    addExpectedInputs(tobject, "PlanReceived","1",expectedInput);
-             	addConsumedInput(to,"PlanReceived",expectedInput);
-			 }
-             allEntitiesExist=allEntitiesExist|| expectedInput.size()!=0;
-		} 
-	      
 		expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"ObjectDetected");
 		if (this.getLM().canBeDeleted(expectedInput)){                          
              if (expectedInput.size()==0){
@@ -895,6 +981,17 @@ public class PilotJADEAgent
 			 } else {
 			    addExpectedInputs(tobject, "ObjectDetected","1",expectedInput);
              	addConsumedInput(to,"ObjectDetected",expectedInput);
+			 }
+             allEntitiesExist=allEntitiesExist|| expectedInput.size()!=0;
+		} 
+	      
+		expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"PlanReceived");
+		if (this.getLM().canBeDeleted(expectedInput)){                          
+             if (expectedInput.size()==0){
+				nonExistingInputs.add("PlanReceived");
+			 } else {
+			    addExpectedInputs(tobject, "PlanReceived","1",expectedInput);
+             	addConsumedInput(to,"PlanReceived",expectedInput);
 			 }
              allEntitiesExist=allEntitiesExist|| expectedInput.size()!=0;
 		} 
@@ -1053,11 +1150,34 @@ public class PilotJADEAgent
 	     boolean alreadyExists=true;
 	 
 	     
-	     
-		    {Throw_Instruction expectedOutputThrow_Instruction=		    
-		     new Throw_Instruction(MentalStateManager.generateMentalEntityID());			
-             to.add(new OutputEntity(expectedOutputThrow_Instruction,TaskOperations.CreateWF));
+ 			{
+ 			Decision expectedOutputDecision=
+ 				new Decision(MentalStateManager.generateMentalEntityID());
+ 			if (RuntimeConversation.class.isAssignableFrom(expectedOutputDecision.getClass())){
+ 			    java.lang.reflect.Method m;
+				try {
+					m = expectedOutputDecision.getClass().getMethod("setInteraction", new Class[]{Interaction.class});
+					m.invoke(expectedOutputDecision, new Interaction("")) ;	  
+				} catch (SecurityException e) {
+					
+					e.printStackTrace();
+				} catch (NoSuchMethodException e) {
+					
+					e.printStackTrace();
+				} catch (IllegalArgumentException e) {
+					
+					e.printStackTrace();
+				} catch (IllegalAccessException e) {
+					
+					e.printStackTrace();
+				} catch (InvocationTargetException e) {
+					
+					e.printStackTrace();
+				}
+ 			}	 			
+            to.add(new OutputEntity(expectedOutputDecision,TaskOperations.CreateMS));
             }
+	     
 	     
      
 	     tobject.addOutput(to);
@@ -1113,6 +1233,14 @@ public class PilotJADEAgent
 
 		tobject.setConversationContext(conversation);
 		boolean allEntitiesExist=true;
+	     
+	     	expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"Pilot_Mind");
+			if (expectedInput.size()==0 && !("1".equals("0..n")))
+				nonExistingInputs.add("Pilot_Mind");
+			else
+				addExpectedInputs(tobject, "", 
+				"1", expectedInput);
+		    allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;
 	     
             
 		
@@ -1553,6 +1681,23 @@ public class PilotJADEAgent
           }
                   
          
+         if (goalname.equals("DecisionDescomposed")){
+         
+         {
+         boolean canbescheduled=false;
+		 Task tobject=null;		 
+				// If a conversational initialization fails, a conventional one is tried
+				 tobject=new DescomposeDecisionTask(ingenias.jade.MentalStateManager.generateMentalEntityID());
+				 canbescheduled=initialiseNonConversationalTask(tobject);
+			 	 if (canbescheduled){
+					//MainInteractionManager.log("Scheduled task "+tobject.getType()+" to achieve goal DecisionDescomposed",getLocalName()+"-"+tobject.getType());
+					tasks.add(tobject);
+				 } 			
+	     }
+         
+          }
+                  
+         
          if (goalname.equals("Executed_Decision")){
          
          {
@@ -1718,6 +1863,10 @@ public class PilotJADEAgent
                 
          
          
+         ttypes.add("DescomposeDecision");		         
+                
+         
+         
          ttypes.add("Execute_Decision");		         
                 
          
@@ -1789,6 +1938,15 @@ public class PilotJADEAgent
    }
    
    sg= new ingenias.editor.entities.StateGoal("Collision_Avoided");
+   sg.setState("pending");
+      try {
+	   this.getMSM().addMentalEntity(sg);
+   } catch (InvalidEntity e1) {
+
+	   e1.printStackTrace();
+   }
+   
+   sg= new ingenias.editor.entities.StateGoal("DecisionDescomposed");
    sg.setState("pending");
       try {
 	   this.getMSM().addMentalEntity(sg);
