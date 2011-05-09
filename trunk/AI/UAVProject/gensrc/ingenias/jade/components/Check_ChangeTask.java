@@ -47,6 +47,8 @@ public class Check_ChangeTask extends Task{
 
         Plane_Change  eiPlane_Change=(Plane_Change)this.getFirstInputOfType("Plane_Change");             
 
+        Pilot_Mind  eiPilot_Mind=(Pilot_Mind)this.getFirstInputOfType("Pilot_Mind");             
+
 
 
 
@@ -69,9 +71,9 @@ public class Check_ChangeTask extends Task{
         YellowPages yp=null; // only available for initiators of interactions
 
 
-//#start_node: <--- DO NOT REMOVE THIS	
-
-//#end_node: <--- DO NOT REMOVE THIS
+//#start_node:INGENIASCodeComponent19 <--- DO NOT REMOVE THIS	
+        eiPilot_Mind.setInstructionRunning(null);
+//#end_node:INGENIASCodeComponent19 <--- DO NOT REMOVE THIS
 
  }
  

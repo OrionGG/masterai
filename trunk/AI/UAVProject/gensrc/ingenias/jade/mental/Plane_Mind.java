@@ -48,8 +48,6 @@ public class Plane_Mind extends ingenias.editor.entities.RuntimeFact{
     gov.nasa.worldwind.geom.Angle Head;   
    
     Date LastUpdatePosition;   
-   
-    ArrayList<Manoeuvre> RunningManoeuvres;   
     
    
   public Plane_Mind (String id){
@@ -147,15 +145,6 @@ public class Plane_Mind extends ingenias.editor.entities.RuntimeFact{
    
    public Date getLastUpdatePosition(){
      return LastUpdatePosition;      
-   }
-   
-
-   public void setRunningManoeuvres(ArrayList<Manoeuvre> value){
-     RunningManoeuvres=value;   
-   };
-   
-   public ArrayList<Manoeuvre> getRunningManoeuvres(){
-     return RunningManoeuvres;      
    }
      
     

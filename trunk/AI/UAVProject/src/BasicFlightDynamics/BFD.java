@@ -124,23 +124,18 @@ public class BFD {
 	
 	
 	
-
-	public static Angle TurnHead(Plane_Mind  eiPlane_Mind,
-			Manoeuvre  eiManoeuvre,
+	//turn to clock-side or the other depending the degrees to turn
+	public static Angle TurnHead(gov.nasa.worldwind.geom.Angle oInitialAngle,
+			gov.nasa.worldwind.geom.Angle oFinalAngle,
 			long lMiliseconds) {
-		gov.nasa.worldwind.geom.Angle oInitialAngle = eiPlane_Mind.getHead();
-		gov.nasa.worldwind.geom.Angle oFinalAngle = eiManoeuvre.getHeadChange();
-		gov.nasa.worldwind.geom.Angle oTotalAngleToTurn= oFinalAngle.subtract(oInitialAngle);
 
-		if(Math.abs(oTotalAngleToTurn.degrees) > 180){
-			double dTotalDegreesToTurn = (360 - Math.abs(oTotalAngleToTurn.degrees))*(oTotalAngleToTurn.degrees/Math.abs(oTotalAngleToTurn.degrees))*(-1);
-			oTotalAngleToTurn = gov.nasa.worldwind.geom.Angle.fromDegrees(dTotalDegreesToTurn);
-		}
+		gov.nasa.worldwind.geom.Angle oTotalAngleToTurn = AngleToTurn(
+				oInitialAngle, oFinalAngle);
 
 
 		//long lMiliseconds = getTimeExpended(oLastUpdateHead);
 		//degrees per milisecond (3 degrees per second)
-		double dDPS = ((double)3/1000)*lMiliseconds;
+		double dDPS = ((double)global.GlobalVarsAndMethods.nDegress/1000)*lMiliseconds;
 		if(Math.abs(oTotalAngleToTurn.degrees)< dDPS){
 			dDPS = Math.abs(oTotalAngleToTurn.degrees);
 		}
@@ -164,6 +159,18 @@ public class BFD {
 			return oResultAngle;
 		}
 
+	}
+
+	public static gov.nasa.worldwind.geom.Angle AngleToTurn(
+			gov.nasa.worldwind.geom.Angle oInitialAngle,
+			gov.nasa.worldwind.geom.Angle oFinalAngle) {
+		gov.nasa.worldwind.geom.Angle oTotalAngleToTurn= oFinalAngle.subtract(oInitialAngle);
+
+		if(Math.abs(oTotalAngleToTurn.degrees) > 180){
+			double dTotalDegreesToTurn = (360 - Math.abs(oTotalAngleToTurn.degrees))*(oTotalAngleToTurn.degrees/Math.abs(oTotalAngleToTurn.degrees))*(-1);
+			oTotalAngleToTurn = gov.nasa.worldwind.geom.Angle.fromDegrees(dTotalDegreesToTurn);
+		}
+		return oTotalAngleToTurn;
 	}
 
 

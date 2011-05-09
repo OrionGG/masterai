@@ -63,10 +63,10 @@ public class Make_DecisionsTask extends Task{
   		TaskOutput	outputsdefault=findOutputAlternative("default",
   																			outputs);
   		
+		Decision outputsdefaultDecision=
+			(Decision)
+				outputsdefault.getEntityByType("Decision");
 		
-		Throw_Instruction outputsdefaultThrow_Instruction=
-			(Throw_Instruction)
-				outputsdefault.getEntityByType("Throw_Instruction");
 		
 		
 		
@@ -74,9 +74,9 @@ public class Make_DecisionsTask extends Task{
 
 
 //#start_node:INGENIASCodeComponent7 <--- DO NOT REMOVE THIS	
-        outputsdefaultThrow_Instruction.setSpeedChange(-1);
-        outputsdefaultThrow_Instruction.setAltitudeChange(-1);
-        outputsdefaultThrow_Instruction.setHeadChange(null);
+        outputsdefaultDecision.setSpeedChange(-1);
+        outputsdefaultDecision.setAltitudeChange(-1);
+        outputsdefaultDecision.setHeadChange(null);
 		Vector<Plane_Position_ServiceAppImp> oVector = Plane_Position_ServiceInit.getAppsInitialised();
 
 		
@@ -98,10 +98,12 @@ public class Make_DecisionsTask extends Task{
 				if(oAngle.degrees < 0){
 					oAngle = oAngle.addDegrees(360);
 				}
-
-				if(plane_Position_ServiceAppImp.getCurrentHead().degrees != oAngle.degrees){
-					outputsdefaultThrow_Instruction.setHeadChange(oAngle);
-					outputsdefaultThrow_Instruction.setPriority(0);
+				
+				gov.nasa.worldwind.geom.Angle oCurrentHead = plane_Position_ServiceAppImp.getCurrentHead();
+				if(oCurrentHead.degrees != oAngle.degrees){
+					gov.nasa.worldwind.geom.Angle oNewAngle = BasicFlightDynamics.BFD.AngleToTurn(oCurrentHead, oAngle);
+					outputsdefaultDecision.setHeadChange(oNewAngle);
+					outputsdefaultDecision.setPriority(0);
 				}
 				break;
 			}

@@ -97,6 +97,8 @@ public class Execute_DecisionTask extends Task{
         outputsdefaultManoeuvre.setHeadChange(eiThrow_Instruction.getHeadChange());
         outputsdefaultManoeuvre.setPriority(eiThrow_Instruction.getPriority());
         outputsdefaultPilotPlaneInteraction.addCollaborators(eiPilot_Mind.getPilotFlightPlan().getPlaneID());
+
+        eiPilot_Mind.setInstructionRunning(eiThrow_Instruction);
 //#end_node:INGENIASCodeComponent10 <--- DO NOT REMOVE THIS
 
  }

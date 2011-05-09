@@ -97,7 +97,6 @@ public class CreatePlaneInitialStatusTask extends Task{
         Random generator = new Random();
 		int iHeadDegrees = generator.nextInt(360);
 		eiPlane_Mind.setHead(gov.nasa.worldwind.geom.Angle.fromDegrees(iHeadDegrees));
-		eiPlane_Mind.setRunningManoeuvres(new ArrayList<Manoeuvre>());
 //#end_node:INGENIASCodeComponent9 <--- DO NOT REMOVE THIS
 
  }

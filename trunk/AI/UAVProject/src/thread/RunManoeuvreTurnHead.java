@@ -33,7 +33,7 @@ public class RunManoeuvreTurnHead  implements Runnable{
 		sleep(SimulationVars.iSleepTime);
 		while(eiPlane_Mind.getRunningManoeuvres().contains(eiManoeuvre)){
 			//while Manoeuvre to run is that we are running
-			gov.nasa.worldwind.geom.Angle oNewAngle = BasicFlightDynamics.BFD.TurnHead( eiPlane_Mind, eiManoeuvre, lMiliseconds);
+			gov.nasa.worldwind.geom.Angle oNewAngle = BasicFlightDynamics.BFD.TurnHead( eiPlane_Mind.getHead(), eiManoeuvre.getHeadChange(), lMiliseconds);
 			if(oNewAngle.degrees == eiPlane_Mind.getHead().degrees){
 				break;
 			}
