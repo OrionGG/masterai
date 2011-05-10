@@ -27,8 +27,6 @@
 package ingenias.jade.components;
 
 import java.util.*;
-
-import Simulation.SimulationVars;
 import ingenias.jade.exception.*;
 import ingenias.jade.comm.*;
 import ingenias.jade.mental.*;
@@ -109,11 +107,11 @@ public class DescomposeDecisionTask extends Task{
         
         gov.nasa.worldwind.geom.Angle oHeadChange = eiDecision.getHeadChange();
         if(oHeadChange != null){
-        	long lMiliseconds = SimulationVars.iSleepTime * SimulationVars.x;
+        	long lMiliseconds = Simulation.SimulationVars.iSleepTime * Simulation.SimulationVars.x;
         	//degrees per milisecond (3 degrees per second)
     		double dDPS = ((double)global.GlobalVarsAndMethods.nDegress/1000)*lMiliseconds;
     		
-        	int dNDegreeAngle = (int) (oHeadChange.degrees/global.GlobalVarsAndMethods.nDegress);
+        	int dNDegreeAngle = (int) (oHeadChange.degrees/dDPS);
         	if(Math.abs(dNDegreeAngle)> 0){
         		
         		double dAngleTurn = dDPS * (dNDegreeAngle/ Math.abs(dNDegreeAngle));
