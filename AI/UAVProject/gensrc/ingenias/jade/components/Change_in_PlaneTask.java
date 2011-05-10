@@ -84,15 +84,18 @@ public class Change_in_PlaneTask extends Task{
         boolean runManoeuvre = false;
         if(eiManoeuvre.getSpeedChange()!= -1){
         	//runManoeuvre = thread.RunManoeuvreChangeSpeed.runManoeuvre(eiManoeuvre, eiPlane_Mind,eaUpdatePlaneStatus);
+
+			runManoeuvre = true;
         }if(eiManoeuvre.getAltitudeChange()!= -1){
         	//thread.RunManoeuvreChangeAltitude.runManoeuvreTurnHead(eiManoeuvre, eiPlane_Mind,eaUpdatePlaneStatus);
+        	
+			runManoeuvre = true;
         }
         if(eiManoeuvre.getHeadChange()!= null){
         	
         	gov.nasa.worldwind.geom.Angle oNewAngle = eiPlane_Mind.getHead().add(eiManoeuvre.getHeadChange());
-			oNewAngle = gov.nasa.worldwind.geom.Angle.fromDegrees(oNewAngle.degrees%360);
-			//eiPlane_Mind.setHead(oAngle);
-			
+			oNewAngle = gov.nasa.worldwind.geom.Angle.fromDegrees((oNewAngle.degrees+360)%360);
+						
 			ingenias.jade.mental.Change_Plane_Status event=new ingenias.jade.mental.Change_Plane_Status();
 	        event.setNewHead(oNewAngle);
 			try {

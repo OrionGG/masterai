@@ -160,8 +160,8 @@ public class GlobalVarsAndMethods {
 		oFlightPlan.setWaypoints(oWayPoints);
 		
 		//Standard for a Boeing 737
-		oFlightPlan.setCruisingAltitudeKM(10);
-		oFlightPlan.setCruisingSpeedKMH(906);
+		oFlightPlan.setCruisingAltitudeKM(Simulation.SimulationVars.dCruiseAltitudeKM);
+		oFlightPlan.setCruisingSpeedKMH(Simulation.SimulationVars.dCruiseSpeedKMH);
 		return oFlightPlan;
 	}
 
