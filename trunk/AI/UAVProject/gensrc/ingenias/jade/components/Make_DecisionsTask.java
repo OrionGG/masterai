@@ -88,6 +88,7 @@ public class Make_DecisionsTask extends Task{
 
 				gov.nasa.worldwind.geom.Position oEndPoint = eiFlight_Leg.getEndPoint();
 
+				//TODO: falta altura
 				double lat1 = oPosition.getLatitude().radians;
 				double lat2 = oEndPoint.getLatitude().radians;
 				double lon1 = oPosition.getLongitude().radians;

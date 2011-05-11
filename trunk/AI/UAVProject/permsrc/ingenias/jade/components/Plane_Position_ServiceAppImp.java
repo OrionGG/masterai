@@ -33,7 +33,8 @@ public  class Plane_Position_ServiceAppImp extends Plane_Position_ServiceApp{
 	 Plane_Mind oPlane_Mind = (Plane_Mind) oVector.get(0);
 	 
 	 return new gov.nasa.worldwind.geom.Position(
-			 oPlane_Mind.getLatitude(),oPlane_Mind.getLongitude(), oPlane_Mind.getAltitudeKM());
+			 oPlane_Mind.getLatLonPosition(),
+			 oPlane_Mind.getAltitudeKM());
 
 
 } 

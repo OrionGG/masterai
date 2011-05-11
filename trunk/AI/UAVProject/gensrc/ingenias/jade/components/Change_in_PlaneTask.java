@@ -81,51 +81,18 @@ public class Change_in_PlaneTask extends Task{
 
 
 //#start_node:INGENIASCodeComponent11 <--- DO NOT REMOVE THIS	
-        boolean runManoeuvre = false;
-        if(eiManoeuvre.getSpeedChange()!= -1){
-        	//runManoeuvre = thread.RunManoeuvreChangeSpeed.runManoeuvre(eiManoeuvre, eiPlane_Mind,eaUpdatePlaneStatus);
 
-			runManoeuvre = true;
-        }if(eiManoeuvre.getAltitudeChange()!= -1){
-        	//thread.RunManoeuvreChangeAltitude.runManoeuvreTurnHead(eiManoeuvre, eiPlane_Mind,eaUpdatePlaneStatus);
-        	
-			runManoeuvre = true;
-        }
-        if(eiManoeuvre.getHeadChange()!= null){
-        	
-        	gov.nasa.worldwind.geom.Angle oNewAngle = eiPlane_Mind.getHead().add(eiManoeuvre.getHeadChange());
-			oNewAngle = gov.nasa.worldwind.geom.Angle.fromDegrees((oNewAngle.degrees+360)%360);
-						
-			ingenias.jade.mental.Change_Plane_Status event=new ingenias.jade.mental.Change_Plane_Status();
-	        event.setNewHead(oNewAngle);
-			try {
-				Vector<MentalEntity> lChange_Plane_Status = eaUpdatePlaneStatus.getOwner().getMSM().getMentalEntityByType("Change_Plane_Status");
-				
-				if(lChange_Plane_Status.size()<=0){
-					eaUpdatePlaneStatus.getOwner().getMSM().addMentalEntity(event);
-				}
-				else{
-					ingenias.jade.mental.Change_Plane_Status oChange_Plane_Position = (ingenias.jade.mental.Change_Plane_Status)lChange_Plane_Status.get(0);
-					oChange_Plane_Position.setNewHead(event.getNewHead());
-				}
-				
-			} catch (ingenias.exception.InvalidEntity e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			runManoeuvre = true;
-        }
+        yp=(YellowPages)this.getApplication("YellowPages");
         
-        if(runManoeuvre){
-	        try {
-				Thread.sleep(Simulation.SimulationVars.iSleepTime);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}       
-        }
+        try {
+			Thread.sleep(Simulation.SimulationVars.iSleepTime);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}    
+        
+		thread.RunManoeuvre.runManoeuvre(eiManoeuvre, eiPlane_Mind, (ingenias.jade.agents.PlaneJADEAgent)yp.ja);
 		
-	
 //#end_node:INGENIASCodeComponent11 <--- DO NOT REMOVE THIS
 
  }

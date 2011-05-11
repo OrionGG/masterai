@@ -90,8 +90,7 @@ public class StartPlaneTask extends Task{
 		
 		enums.Airport oDeparture = oAirportvalues[iIndexDeparture];*/
         enums.Airport oDeparture = eiTurningOnPlane.getInitialAirport();
-		eiPlane_Mind.setLatitude(oDeparture.getPosition().latitude);
-		eiPlane_Mind.setLongitude(oDeparture.getPosition().longitude);
+		eiPlane_Mind.setLatLonPosition(oDeparture.getPosition().add(gov.nasa.worldwind.geom.LatLon.ZERO));
 		eiPlane_Mind.setLastUpdatePosition(new Date());
 
 		eiPlane_Mind.setAltitudeKM(Simulation.SimulationVars.dCruiseAltitudeKM);
