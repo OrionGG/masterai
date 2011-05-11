@@ -35,12 +35,6 @@ public class Plane_Mind extends ingenias.editor.entities.RuntimeFact{
    
     float FuelLiters_;   
    
-    double AltitudeKM;   
-   
-    gov.nasa.worldwind.geom.Angle Latitude;   
-   
-    gov.nasa.worldwind.geom.Angle Longitude;   
-   
     double SpeedKMH;   
    
     List<Manoeuvre> AchievableManeuvers;   
@@ -50,6 +44,10 @@ public class Plane_Mind extends ingenias.editor.entities.RuntimeFact{
     Date LastUpdatePosition;   
    
     ArrayList<Manoeuvre> RunningManoeuvres;   
+   
+    gov.nasa.worldwind.geom.LatLon LatLonPosition;   
+   
+    double AltitudeKM;   
     
    
   public Plane_Mind (String id){
@@ -84,33 +82,6 @@ public class Plane_Mind extends ingenias.editor.entities.RuntimeFact{
    
    public float getFuelLiters_(){
      return FuelLiters_;      
-   }
-   
-
-   public void setAltitudeKM(double value){
-     AltitudeKM=value;   
-   };
-   
-   public double getAltitudeKM(){
-     return AltitudeKM;      
-   }
-   
-
-   public void setLatitude(gov.nasa.worldwind.geom.Angle value){
-     Latitude=value;   
-   };
-   
-   public gov.nasa.worldwind.geom.Angle getLatitude(){
-     return Latitude;      
-   }
-   
-
-   public void setLongitude(gov.nasa.worldwind.geom.Angle value){
-     Longitude=value;   
-   };
-   
-   public gov.nasa.worldwind.geom.Angle getLongitude(){
-     return Longitude;      
    }
    
 
@@ -156,6 +127,24 @@ public class Plane_Mind extends ingenias.editor.entities.RuntimeFact{
    
    public ArrayList<Manoeuvre> getRunningManoeuvres(){
      return RunningManoeuvres;      
+   }
+   
+
+   public void setLatLonPosition(gov.nasa.worldwind.geom.LatLon value){
+     LatLonPosition=value;   
+   };
+   
+   public gov.nasa.worldwind.geom.LatLon getLatLonPosition(){
+     return LatLonPosition;      
+   }
+   
+
+   public void setAltitudeKM(double value){
+     AltitudeKM=value;   
+   };
+   
+   public double getAltitudeKM(){
+     return AltitudeKM;      
    }
      
     

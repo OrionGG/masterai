@@ -36,7 +36,7 @@ public class RunManoeuvreChangeSpeed   implements Runnable{
 			Plane_Mind eiPlane_Mind, UpdatePlaneStatusApp eaUpdatePlaneStatus) {
 
 		boolean bResult = false;
-		bResult = global.GlobalVarsAndMethods.addManoeuvre(eiManoeuvre, eiPlane_Mind);
+		//bResult = global.GlobalVarsAndMethods.addManoeuvre(eiManoeuvre, eiPlane_Mind);
 
 		
 

@@ -79,7 +79,7 @@ public class RunManoeuvreTurnHead  implements Runnable{
 			UpdatePlaneStatusApp oUpdatePlaneStatusAppImp) {
 		
 		boolean bResult = false;
-		bResult = global.GlobalVarsAndMethods.addManoeuvre(eiManoeuvre, eiPlane_Mind);
+		//bResult = global.GlobalVarsAndMethods.addManoeuvre(eiManoeuvre, eiPlane_Mind);
 
 		
 

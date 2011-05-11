@@ -827,14 +827,20 @@ public class PlaneJADEAgent
 	 event= new Change_Plane_Status();
 	 /*
 	 slot=new Slot("406");
-	 slot.setName("NewPosition");
-	 slot.setType("gov.nasa.worldwind.geom.Position ");
+	 slot.setName("NewLatLonPosition");
+	 slot.setType("gov.nasa.worldwind.geom.LatLon");
 	 slot.setValue("");
 	 event.addSlots(slot);
 	 
 	 slot=new Slot("420");
 	 slot.setName("NewHead");
 	 slot.setType("gov.nasa.worldwind.geom.Angle");
+	 slot.setValue("");
+	 event.addSlots(slot);
+	 
+	 slot=new Slot("475");
+	 slot.setName("NewAltitudeKM");
+	 slot.setType("double");
 	 slot.setValue("");
 	 event.addSlots(slot);
 	  

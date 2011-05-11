@@ -77,7 +77,7 @@
   
   <target name="emptyTarget"/>
    
-  <target name="alljunit" depends="junitTestingPackage0,emptyTarget"/>
+  <target name="alljunit" depends="emptyTarget"/>
  
    <target name="test" depends="compile">
         <mkdir dir="${test.results.dir}"/>
@@ -107,30 +107,6 @@
    
   
     <!--  Targets to run tests defined in the system -->
-  
-
-   
-   
-    <target name="junitTestingPackage0" depends="compile">
-    <java fork="true" failonerror="true" maxmemory="128m"
-    classname="org.junit.runner.JUnitCore">
-    <arg line="ingenias.testing.TestingPackage0Launcher"/>    
-      <classpath>
-
-		<pathelement path="${temp}" />        
-        <fileset dir="${lib}">
-          <include name="**/*.jar" />
-        </fileset>
-
-      </classpath>
-
-    </java>
-  </target>
-
-   
-
-  	  
-
   
   
   

@@ -16,7 +16,7 @@ public class BFD {
 	private static Thread oThread;
 	private static  int R = 6371; // km earth’s radius	
 
-	public static Position getNextPos(double lat1, double lon1, double brng, double speed, long lMiliseconds){
+	public static LatLon getNextPos(double lat1, double lon1, double brng, double speed, long lMiliseconds){
 
 		//long lMiliseconds = getTimeExpended(oLastUpdateDate);
 
@@ -31,7 +31,7 @@ public class BFD {
 		gov.nasa.worldwind.geom.Angle oAngleLon2 = gov.nasa.worldwind.geom.Angle.fromRadians(lon2);
 
 
-		return new Position(oAngleLat2, oAngleLon2, 0);
+		return new LatLon(oAngleLat2, oAngleLon2);
 
 
 	}
