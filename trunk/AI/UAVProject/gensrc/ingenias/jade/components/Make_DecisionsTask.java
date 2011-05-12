@@ -63,10 +63,10 @@ public class Make_DecisionsTask extends Task{
   		TaskOutput	outputsdefault=findOutputAlternative("default",
   																			outputs);
   		
+		
 		Decision outputsdefaultDecision=
 			(Decision)
 				outputsdefault.getEntityByType("Decision");
-		
 		
 		
 		
@@ -74,26 +74,57 @@ public class Make_DecisionsTask extends Task{
 
 
 //#start_node:INGENIASCodeComponent7 <--- DO NOT REMOVE THIS	
-        outputsdefaultDecision.setSpeedChange(-1);
-        outputsdefaultDecision.setAltitudeChange(-1);
-        outputsdefaultDecision.setHeadChange(null);
-		Vector<Plane_Position_ServiceAppImp> oVector = Plane_Position_ServiceInit.getAppsInitialised();
+        outputsdefault.remove(outputsdefaultDecision);
 
+		Vector<Plane_Position_ServiceAppImp> oVector = Plane_Position_ServiceInit.getAppsInitialised();
 		
 		for (Plane_Position_ServiceAppImp plane_Position_ServiceAppImp : oVector) {
 			jade.core.AID oPlaneAID = eiFlight_Leg.getPlaneID().id;
 			if(oPlaneAID.equals(plane_Position_ServiceAppImp.getOwner().getAID())){
-				//eaPlane_Position_ServiceAppImp.getOwner();
+				
 				gov.nasa.worldwind.geom.Position oPosition = plane_Position_ServiceAppImp.getCurrentPosition();
 
 				gov.nasa.worldwind.geom.Position oEndPoint = eiFlight_Leg.getEndPoint();
-
-				//TODO: falta altura
+				
+				//Calculating speed
+				Decision oDecisionSpeedChange =
+					new Decision();
+				oDecisionSpeedChange.setSpeedChange(-1);
+				oDecisionSpeedChange.setAltitudeChange(-1);
+				oDecisionSpeedChange.setHeadChange(null);
+				oDecisionSpeedChange.setPriority(0);
+				
+				double dCruisingSpeedKMH = eiFlight_Leg.getSpeedKMH();
+				
+				outputsdefault.add(new OutputEntity(oDecisionSpeedChange,TaskOperations.CreateWF));
+				
+				
+				//Calculating High to change
+				double alt1 = oPosition.getAltitude();
+				double alt2 = oEndPoint.getAltitude();
+				Decision oDecisionAltitudeChange =
+					new Decision();
+				oDecisionAltitudeChange.setSpeedChange(-1);
+				oDecisionAltitudeChange.setAltitudeChange(-1);
+				oDecisionAltitudeChange.setHeadChange(null);
+				oDecisionAltitudeChange.setPriority(0);
+				
+				oDecisionAltitudeChange.setAltitudeChange(alt2-alt1); 
+				outputsdefault.add(new OutputEntity(oDecisionAltitudeChange,TaskOperations.CreateWF));
+				
+				//Calculating Angle to turn
+				Decision oDecisionHeadChange =
+					new Decision();
+				oDecisionHeadChange.setSpeedChange(-1);
+				oDecisionHeadChange.setAltitudeChange(-1);
+				oDecisionHeadChange.setHeadChange(null);
+				oDecisionHeadChange.setPriority(0);
+				
 				double lat1 = oPosition.getLatitude().radians;
-				double lat2 = oEndPoint.getLatitude().radians;
 				double lon1 = oPosition.getLongitude().radians;
+				double lat2 = oEndPoint.getLatitude().radians;
 				double lon2 = oEndPoint.getLongitude().radians;
-
+				
 				gov.nasa.worldwind.geom.Angle oAngle = BasicFlightDynamics.BFD.getHead(lat1, lon1, lat2, lon2);
 
 				if(oAngle.degrees < 0){
@@ -102,10 +133,12 @@ public class Make_DecisionsTask extends Task{
 				
 				gov.nasa.worldwind.geom.Angle oCurrentHead = plane_Position_ServiceAppImp.getCurrentHead();
 				if(oCurrentHead.degrees != oAngle.degrees){
-					gov.nasa.worldwind.geom.Angle oNewAngle = BasicFlightDynamics.BFD.AngleToTurn(oCurrentHead, oAngle);
-					outputsdefaultDecision.setHeadChange(oNewAngle);
-					outputsdefaultDecision.setPriority(0);
+					gov.nasa.worldwind.geom.Angle oAngleToTurn = BasicFlightDynamics.BFD.AngleToTurn(oCurrentHead, oAngle);
+					oDecisionHeadChange.setHeadChange(oAngleToTurn); 
 				}
+				
+				outputsdefault.add(new OutputEntity(oDecisionHeadChange,TaskOperations.CreateWF));
+				
 				break;
 			}
 

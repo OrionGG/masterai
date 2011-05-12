@@ -83,15 +83,15 @@ public class Change_in_PlaneTask extends Task{
 //#start_node:INGENIASCodeComponent11 <--- DO NOT REMOVE THIS	
 
         yp=(YellowPages)this.getApplication("YellowPages");
-        
+
+		thread.RunManoeuvre.runManoeuvre(eiManoeuvre, eiPlane_Mind, (ingenias.jade.agents.PlaneJADEAgent)yp.ja);
+		
         try {
 			Thread.sleep(Simulation.SimulationVars.iSleepTime);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}    
-        
-		thread.RunManoeuvre.runManoeuvre(eiManoeuvre, eiPlane_Mind, (ingenias.jade.agents.PlaneJADEAgent)yp.ja);
+		} 
 		
 //#end_node:INGENIASCodeComponent11 <--- DO NOT REMOVE THIS
 

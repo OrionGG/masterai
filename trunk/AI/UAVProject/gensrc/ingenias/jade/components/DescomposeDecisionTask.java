@@ -101,31 +101,45 @@ public class DescomposeDecisionTask extends Task{
         	
         }
         
+        double dAltitudeChange = eiDecision.getAltitudeChange();
         if(eiDecision.getAltitudeChange()!= -1){
+        	double dMPS = ((double)global.GlobalVarsAndMethods.dMaxAltitudeMps)
+    		* global.GlobalVarsAndMethods.dSecondsFactor;
+        	
+        	int dNAltitude = (int) (dAltitudeChange/dMPS);
+        	if(Math.abs(dNAltitude)> 0){
+        		double dAltitudeToChange = dMPS * (dNAltitude/ Math.abs(dNAltitude));
+        		outputsdefaultThrow_Instruction.setAltitudeChange(dAltitudeToChange);
+        		
+			}
+        	else{
+        		double dRestAltitudeToChange = (dAltitudeChange%dMPS);
+        		outputsdefaultThrow_Instruction.setAltitudeChange(dRestAltitudeToChange);
+        	
+        	}
         	
         }
         
         gov.nasa.worldwind.geom.Angle oHeadChange = eiDecision.getHeadChange();
         if(oHeadChange != null){
-        	long lMiliseconds = Simulation.SimulationVars.iSleepTime * Simulation.SimulationVars.x;
         	//degrees per milisecond (3 degrees per second)
-    		double dDPS = ((double)global.GlobalVarsAndMethods.nDegress/1000)*lMiliseconds;
+    		double dDPS = ((double)global.GlobalVarsAndMethods.nDegressPerSecond)
+    		* global.GlobalVarsAndMethods.dSecondsFactor;
     		
         	int dNDegreeAngle = (int) (oHeadChange.degrees/dDPS);
         	if(Math.abs(dNDegreeAngle)> 0){
-        		
         		double dAngleTurn = dDPS * (dNDegreeAngle/ Math.abs(dNDegreeAngle));
         		outputsdefaultThrow_Instruction.setHeadChange(gov.nasa.worldwind.geom.Angle.fromDegrees(dAngleTurn));
         		
-
 			}
         	else{
         		double dRestDegreeAngle = (oHeadChange.degrees%dDPS);
 	        	outputsdefaultThrow_Instruction.setHeadChange(gov.nasa.worldwind.geom.Angle.fromDegrees(dRestDegreeAngle));
 	        }
-
-        	outputsdefaultThrow_Instruction.setPriority(eiDecision.getPriority());
         }
+
+
+    	outputsdefaultThrow_Instruction.setPriority(eiDecision.getPriority());
 //#end_node:INGENIASCodeComponent18 <--- DO NOT REMOVE THIS
 
  }

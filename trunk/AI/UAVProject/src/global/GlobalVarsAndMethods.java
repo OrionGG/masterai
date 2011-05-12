@@ -17,7 +17,13 @@ import java.util.List;
 import java.util.Random;
 
 public class GlobalVarsAndMethods {
-	public static int nDegress = 3;
+	public static int nDegressPerSecond = 3;
+	public static double dMaxAltitudeMps = 10;
+	public static double dMaxAccelerationKMHps = 6.53;
+	
+	public static double dSecondsFactor = ((double)(Simulation.SimulationVars.iSleepTime * Simulation.SimulationVars.x))/1000;
+	
+	
 	public static int iMaxNumWaypoints = 2;
 	
 	//public static Hashtable<PlaneJADEAgent, Thread> hUpdatePlanesThreads = new Hashtable<PlaneJADEAgent, Thread>();

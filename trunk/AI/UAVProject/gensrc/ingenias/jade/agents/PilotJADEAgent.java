@@ -643,34 +643,11 @@ public class PilotJADEAgent
 	      
  
 	     
- 			{
- 			Decision expectedOutputDecision=
- 				new Decision(MentalStateManager.generateMentalEntityID());
- 			if (RuntimeConversation.class.isAssignableFrom(expectedOutputDecision.getClass())){
- 			    java.lang.reflect.Method m;
-				try {
-					m = expectedOutputDecision.getClass().getMethod("setInteraction", new Class[]{Interaction.class});
-					m.invoke(expectedOutputDecision, new Interaction("")) ;	  
-				} catch (SecurityException e) {
-					
-					e.printStackTrace();
-				} catch (NoSuchMethodException e) {
-					
-					e.printStackTrace();
-				} catch (IllegalArgumentException e) {
-					
-					e.printStackTrace();
-				} catch (IllegalAccessException e) {
-					
-					e.printStackTrace();
-				} catch (InvocationTargetException e) {
-					
-					e.printStackTrace();
-				}
- 			}	 			
-            to.add(new OutputEntity(expectedOutputDecision,TaskOperations.CreateMS));
-            }
 	     
+		    {Decision expectedOutputDecision=		    
+		     new Decision(MentalStateManager.generateMentalEntityID());			
+             to.add(new OutputEntity(expectedOutputDecision,TaskOperations.CreateWF));
+            }
 	     
      
      		      

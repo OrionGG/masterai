@@ -54,7 +54,10 @@ public class UpdatePlaneStatusThread  implements Runnable{
 	        
 	        
 	        ingenias.jade.mental.Change_Plane_Status event=new ingenias.jade.mental.Change_Plane_Status();
+	        
 	        event.setNewLatLonPosition(oNewLatLonPosition);
+	        event.setNewHead(null);
+	        event.setNewAltitudeKM(-1);
 
 			try {
 				oUpdatePlaneStatusAppImp.getOwner().getMSM().addMentalEntity(event);
