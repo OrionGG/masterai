@@ -135,7 +135,7 @@ public class BFD {
 
 		//long lMiliseconds = getTimeExpended(oLastUpdateHead);
 		//degrees per milisecond (3 degrees per second)
-		double dDPS = ((double)global.GlobalVarsAndMethods.nDegress/1000)*lMiliseconds;
+		double dDPS = ((double)global.GlobalVarsAndMethods.nDegressPerSecond/1000)*lMiliseconds;
 		if(Math.abs(oTotalAngleToTurn.degrees)< dDPS){
 			dDPS = Math.abs(oTotalAngleToTurn.degrees);
 		}

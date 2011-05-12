@@ -93,7 +93,7 @@ public class StartPlaneTask extends Task{
 		eiPlane_Mind.setLatLonPosition(oDeparture.getPosition().add(gov.nasa.worldwind.geom.LatLon.ZERO));
 		eiPlane_Mind.setLastUpdatePosition(new Date());
 
-		eiPlane_Mind.setAltitudeKM(Simulation.SimulationVars.dCruiseAltitudeKM);
+		eiPlane_Mind.setAltitudeKM(0);
 		eiPlane_Mind.setSpeedKMH(Simulation.SimulationVars.dCruiseSpeedKMH);
 		//set head in departure point
         Random generator = new Random();
