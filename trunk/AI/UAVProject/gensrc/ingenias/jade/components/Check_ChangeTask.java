@@ -72,7 +72,9 @@ public class Check_ChangeTask extends Task{
 
 
 //#start_node:INGENIASCodeComponent19 <--- DO NOT REMOVE THIS	
-        eiPilot_Mind.setInstructionRunning(null);
+        List<Throw_Instruction> oInstructionsRunning = eiPilot_Mind.getInstructionRunning();
+        oInstructionsRunning.remove(eiPlane_Change.getThrowInstruction());
+        eiPilot_Mind.setInstructionRunning(oInstructionsRunning);
 //#end_node:INGENIASCodeComponent19 <--- DO NOT REMOVE THIS
 
  }

@@ -31,19 +31,17 @@ import ingenias.jade.components.*;
 import ingenias.editor.entities.*;
 import ingenias.editor.entities.ViewPreferences.ViewType;
 
-public class Order extends ingenias.editor.entities.RuntimeFact{
-   
-    Hashtable<jade.core.AID, gov.nasa.worldwind.geom.Position> PilotGoTo;   
+public class ControllerMind extends ingenias.editor.entities.RuntimeFact{
     
    
-  public Order (String id){
+  public ControllerMind (String id){
    super(id);
    this.getPrefs().setView(ViewType.UML);
-   this.type="Order";
+   this.type="ControllerMind";
   }
   
 
-  public Order (){
+  public ControllerMind (){
    super(ingenias.jade.MentalStateManager.generateMentalEntityID());
    this.getPrefs().setView(ViewType.UML);
   }
@@ -53,22 +51,13 @@ public class Order extends ingenias.editor.entities.RuntimeFact{
   }
   
   public String getType(){
-   return "Order";
+   return "ControllerMind";
   }
   
   public String getParentType(){
    return "RuntimeFact";
   }
   
-   
-
-   public void setPilotGoTo(Hashtable<jade.core.AID, gov.nasa.worldwind.geom.Position> value){
-     PilotGoTo=value;   
-   };
-   
-   public Hashtable<jade.core.AID, gov.nasa.worldwind.geom.Position> getPilotGoTo(){
-     return PilotGoTo;      
-   }
      
     
 }

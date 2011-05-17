@@ -94,7 +94,7 @@ public class StartPlaneTask extends Task{
 		eiPlane_Mind.setLastUpdatePosition(new Date());
 
 		eiPlane_Mind.setAltitudeKM(0);
-		eiPlane_Mind.setSpeedKMH(Simulation.SimulationVars.dCruiseSpeedKMH);
+		eiPlane_Mind.setSpeedKMH(1);
 		//set head in departure point
         Random generator = new Random();
 		int iHeadDegrees = generator.nextInt(360);

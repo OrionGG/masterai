@@ -81,61 +81,39 @@ public class DescomposeDecisionTask extends Task{
         outputsdefaultThrow_Instruction.setHeadChange(null);
         
         
-        Throw_Instruction oInstructionsRunning = eiPilot_Mind.getInstructionRunning();
+        List<Throw_Instruction> oInstructionsRunning = eiPilot_Mind.getInstructionRunning();
 
-        if(oInstructionsRunning != null){
-	        if(oInstructionsRunning.getPriority() < eiDecision.getPriority()){
-	        	oInstructionsRunning = outputsdefaultThrow_Instruction;
-	        }else if(oInstructionsRunning.getPriority() == eiDecision.getPriority()){
+        if(oInstructionsRunning.size() != 0){
+        	int iInstructionsRunningPriority = global.GlobalVarsAndMethods.getMaxPriority(oInstructionsRunning);
+	        if(iInstructionsRunningPriority < eiDecision.getPriority()){
+	        	
+	        }else if(iInstructionsRunningPriority == eiDecision.getPriority()){
 	        	if(global.GlobalVarsAndMethods.containsSimilarInstrucctions(oInstructionsRunning, eiDecision)){
 	        		outputsdefault.remove(outputsdefaultThrow_Instruction);
 	            	return;
 	        	}
-	        }else if(oInstructionsRunning.getPriority() > eiDecision.getPriority()){
+	        }else if(iInstructionsRunningPriority > eiDecision.getPriority()){
 	        	outputsdefault.remove(outputsdefaultThrow_Instruction);
 	        	return;
 	        } 
         }
        
-        if(eiDecision.getSpeedChange()!= -1){
-        	
+        double dSpeedChange = eiDecision.getSpeedChange();
+        if(dSpeedChange > 0){
+        	global.GlobalVarsAndMethods.CreateSpeedInstruction(outputsdefaultThrow_Instruction,
+					dSpeedChange);
         }
         
         double dAltitudeChange = eiDecision.getAltitudeChange();
-        if(eiDecision.getAltitudeChange()!= -1){
-        	double dMPS = ((double)global.GlobalVarsAndMethods.dMaxAltitudeMps)
-    		* global.GlobalVarsAndMethods.dSecondsFactor;
-        	
-        	int dNAltitude = (int) (dAltitudeChange/dMPS);
-        	if(Math.abs(dNAltitude)> 0){
-        		double dAltitudeToChange = dMPS * (dNAltitude/ Math.abs(dNAltitude));
-        		outputsdefaultThrow_Instruction.setAltitudeChange(dAltitudeToChange);
-        		
-			}
-        	else{
-        		double dRestAltitudeToChange = (dAltitudeChange%dMPS);
-        		outputsdefaultThrow_Instruction.setAltitudeChange(dRestAltitudeToChange);
-        	
-        	}
+        if(dAltitudeChange > 0){
+        	global.GlobalVarsAndMethods.CreateAltitudeInstruction(outputsdefaultThrow_Instruction,
+					dAltitudeChange);
         	
         }
         
         gov.nasa.worldwind.geom.Angle oHeadChange = eiDecision.getHeadChange();
-        if(oHeadChange != null){
-        	//degrees per milisecond (3 degrees per second)
-    		double dDPS = ((double)global.GlobalVarsAndMethods.nDegressPerSecond)
-    		* global.GlobalVarsAndMethods.dSecondsFactor;
-    		
-        	int dNDegreeAngle = (int) (oHeadChange.degrees/dDPS);
-        	if(Math.abs(dNDegreeAngle)> 0){
-        		double dAngleTurn = dDPS * (dNDegreeAngle/ Math.abs(dNDegreeAngle));
-        		outputsdefaultThrow_Instruction.setHeadChange(gov.nasa.worldwind.geom.Angle.fromDegrees(dAngleTurn));
-        		
-			}
-        	else{
-        		double dRestDegreeAngle = (oHeadChange.degrees%dDPS);
-	        	outputsdefaultThrow_Instruction.setHeadChange(gov.nasa.worldwind.geom.Angle.fromDegrees(dRestDegreeAngle));
-	        }
+        if(oHeadChange != null && oHeadChange.degrees != 0){
+        	global.GlobalVarsAndMethods.CreateHeadInstruction(outputsdefaultThrow_Instruction, oHeadChange);
         }
 
 

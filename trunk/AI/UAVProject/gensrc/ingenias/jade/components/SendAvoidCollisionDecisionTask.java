@@ -45,7 +45,7 @@ public class SendAvoidCollisionDecisionTask extends Task{
  public void execute() throws TaskException{
 
 
-        Conflict  eiConflict=(Conflict)this.getFirstInputOfType("Conflict");             
+        PlanesConflict  eiPlanesConflict=(PlanesConflict)this.getFirstInputOfType("PlanesConflict");             
 
 
 
@@ -89,9 +89,23 @@ public class SendAvoidCollisionDecisionTask extends Task{
        	
 
 
-//#start_node: <--- DO NOT REMOVE THIS	
-
-//#end_node: <--- DO NOT REMOVE THIS
+//#start_node:INGENIASCodeComponent21 <--- DO NOT REMOVE THIS	
+        String PilotRole = "PilotColaborator";
+        String PlaneRole = "PlaneColaborator";
+        ArrayList<ingenias.jade.agents.PlaneJADEAgent> aPlanesInConflict = eiPlanesConflict.getPlanesInConflict();
+        for (ingenias.jade.agents.PlaneJADEAgent planeJADEAgent : aPlanesInConflict) {
+        	jade.core.AID oPlaneAID = planeJADEAgent.getAID();
+        	ingenias.jade.AgentExternalDescription oPilotAgentExternalDescription = global.GlobalVarsAndMethods.PlaneIdToPilotId.get(oPlaneAID);
+        	
+        	Decision oDecision = new Decision();
+        	
+        	oDecision.setPriority(9);
+        	
+        	//outputsdefaultOrder.getPilotsDecisions().put(oPilotAgentExternalDescription.id, oDecision);
+        	
+        	outputsdefaultControllerPilotInteracion.addCollaborators(oPilotAgentExternalDescription);
+		}
+//#end_node:INGENIASCodeComponent21 <--- DO NOT REMOVE THIS
 
  }
  

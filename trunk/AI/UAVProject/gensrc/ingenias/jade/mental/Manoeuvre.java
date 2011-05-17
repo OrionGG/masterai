@@ -40,6 +40,8 @@ public class Manoeuvre extends ingenias.editor.entities.RuntimeFact{
     double AltitudeChange;   
    
     int Priority;   
+   
+    Throw_Instruction ThrowInstruction;   
     
    
   public Manoeuvre (String id){
@@ -101,6 +103,15 @@ public class Manoeuvre extends ingenias.editor.entities.RuntimeFact{
    
    public int getPriority(){
      return Priority;      
+   }
+   
+
+   public void setThrowInstruction(Throw_Instruction value){
+     ThrowInstruction=value;   
+   };
+   
+   public Throw_Instruction getThrowInstruction(){
+     return ThrowInstruction;      
    }
      
     

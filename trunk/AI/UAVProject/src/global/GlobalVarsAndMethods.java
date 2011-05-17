@@ -3,6 +3,7 @@ package global;
 
 import gov.nasa.worldwind.geom.Angle;
 import ingenias.jade.agents.PlaneJADEAgent;
+import ingenias.jade.components.Task;
 import ingenias.jade.mental.Decision;
 import ingenias.jade.mental.Flight_Plan;
 import ingenias.jade.mental.Manoeuvre;
@@ -18,8 +19,10 @@ import java.util.Random;
 
 public class GlobalVarsAndMethods {
 	public static int nDegressPerSecond = 3;
-	public static double dMaxAltitudeMps = 10;
+	public static double dMaxAltitudeMps = 12;
 	public static double dMaxAccelerationKMHps = 6.53;
+	public static Hashtable<jade.core.AID, ingenias.jade.AgentExternalDescription> PlaneIdToPilotId =
+		new Hashtable<jade.core.AID, ingenias.jade.AgentExternalDescription>();
 	
 	public static double dSecondsFactor = ((double)(Simulation.SimulationVars.iSleepTime * Simulation.SimulationVars.x))/1000;
 	
@@ -82,31 +85,34 @@ public class GlobalVarsAndMethods {
 		return bResult;
 	}
 	
-	public static boolean containsSimilarInstrucctions(Throw_Instruction oThrow_InstructionRunning,
+	public static boolean containsSimilarInstrucctions(List<Throw_Instruction> oInstructionsRunning,
 			Decision  eiDecision) {
 		boolean bResult = false;
 		
+		for (Throw_Instruction throw_Instruction : oInstructionsRunning) {
+			
 		//TODO check for instrucctions with same signum
-			double dAltitudeChangeRunning = oThrow_InstructionRunning.getAltitudeChange();
+			double dAltitudeChangeRunning = throw_Instruction.getAltitudeChange();
 			double dAltitudeChange = eiDecision.getAltitudeChange();
-			if((dAltitudeChangeRunning!=0)&& (dAltitudeChange!=0)){
+			if((dAltitudeChangeRunning!=-1)&& (dAltitudeChange!=-1)){
 				bResult = true;
 				return bResult;
 			}
 
-			double dSpeedChangeRunning = oThrow_InstructionRunning.getSpeedChange();
+			double dSpeedChangeRunning = throw_Instruction.getSpeedChange();
 			double dSpeedChange = eiDecision.getSpeedChange();
-			if((dSpeedChangeRunning!=0)&& (dSpeedChange!=0)){
+			if((dSpeedChangeRunning!=-1)&& (dSpeedChange!=-1)){
 				bResult = true;
 				return bResult;
 			}
 
-			Angle oHeadChangeRunning = oThrow_InstructionRunning.getHeadChange();
+			Angle oHeadChangeRunning = throw_Instruction.getHeadChange();
 			Angle oHeadChange = eiDecision.getHeadChange();
 			if((oHeadChangeRunning!=null) && (oHeadChange!=null)){
 				bResult = true;
 				return bResult;
 			}
+		}
 
 		return bResult;
 	}
@@ -185,4 +191,91 @@ public class GlobalVarsAndMethods {
 		return lResult;
 	}
 
+	public static int getMaxPriority(
+			List<Throw_Instruction> oInstructionsRunning) {
+		int iMaxPriority = 0;
+
+		for (Throw_Instruction throw_Instruction : oInstructionsRunning) {
+			if(iMaxPriority < throw_Instruction.getPriority()){
+				iMaxPriority = throw_Instruction.getPriority();
+			}
+		}
+		
+		return iMaxPriority;
+	}
+	
+	public static void CreateSpeedInstruction(
+			Throw_Instruction outputsdefaultThrow_Instruction, double dSpeedChange) {
+		double dKMPS = ((double)global.GlobalVarsAndMethods.dMaxAccelerationKMHps)
+		* global.GlobalVarsAndMethods.dSecondsFactor;
+		
+		int dNSpeed = (int) (dSpeedChange/dKMPS);
+		if(Math.abs(dNSpeed)> 0){
+			double dSpeedToChange = dKMPS * (dNSpeed/ Math.abs(dNSpeed));
+			outputsdefaultThrow_Instruction.setSpeedChange(dSpeedToChange);
+			
+		}
+		else{
+			double dRestSpeedToChange = (dSpeedChange%dKMPS);
+			outputsdefaultThrow_Instruction.setSpeedChange(dRestSpeedToChange);
+		
+		}
+	}
+	
+	public static void CreateAltitudeInstruction(
+			Throw_Instruction outputsdefaultThrow_Instruction,
+			double dAltitudeChange) {
+		double dMPS = ((double)global.GlobalVarsAndMethods.dMaxAltitudeMps)
+		* global.GlobalVarsAndMethods.dSecondsFactor;
+		
+		int dNAltitude = (int) (dAltitudeChange/dMPS);
+		if(Math.abs(dNAltitude)> 0){
+			double dAltitudeToChange = dMPS * (dNAltitude/ Math.abs(dNAltitude));
+			outputsdefaultThrow_Instruction.setAltitudeChange(dAltitudeToChange);
+			
+		}
+		else{
+			double dRestAltitudeToChange = (dAltitudeChange%dMPS);
+			outputsdefaultThrow_Instruction.setAltitudeChange(dRestAltitudeToChange);
+		
+		}
+	}
+	
+	public static void CreateHeadInstruction(
+			Throw_Instruction outputsdefaultThrow_Instruction,
+			gov.nasa.worldwind.geom.Angle oHeadChange) {
+		//degrees per milisecond (3 degrees per second)
+		double dDPS = ((double)global.GlobalVarsAndMethods.nDegressPerSecond)
+		* global.GlobalVarsAndMethods.dSecondsFactor;
+		
+		int dNDegreeAngle = (int) (oHeadChange.degrees/dDPS);
+		if(Math.abs(dNDegreeAngle)> 0){
+			double dAngleTurn = dDPS * (dNDegreeAngle/ Math.abs(dNDegreeAngle));
+			outputsdefaultThrow_Instruction.setHeadChange(gov.nasa.worldwind.geom.Angle.fromDegrees(dAngleTurn));
+			
+		}
+		else{
+			double dRestDegreeAngle = (oHeadChange.degrees%dDPS);
+			outputsdefaultThrow_Instruction.setHeadChange(gov.nasa.worldwind.geom.Angle.fromDegrees(dRestDegreeAngle));
+		}
+	}
+
+	public static void sleep(int iSleepTime) {
+		try {
+			Thread.sleep(iSleepTime);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+
+	public static void copyDecisions(Decision oDecision,
+			Decision outputsdefaultDecision) {
+		outputsdefaultDecision.setAltitudeChange(oDecision.getAltitudeChange());
+		outputsdefaultDecision.setHeadChange(oDecision.getHeadChange());
+		outputsdefaultDecision.setSpeedChange(oDecision.getSpeedChange());
+		outputsdefaultDecision.setPriority(oDecision.getPriority());
+		
+	}
 }

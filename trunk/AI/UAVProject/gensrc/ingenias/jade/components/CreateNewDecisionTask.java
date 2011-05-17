@@ -34,18 +34,16 @@ import ingenias.editor.entities.*;
 
 
 
-public class Flight_Plan_MonitoringTask extends Task{
+public class CreateNewDecisionTask extends Task{
 
- public Flight_Plan_MonitoringTask(String id){
-  super(id,"Flight_Plan_Monitoring");
+ public CreateNewDecisionTask(String id){
+  super(id,"CreateNewDecision");
  }
 
 
 
  public void execute() throws TaskException{
 
-
-        NotAllLegsCompleted  eiNotAllLegsCompleted=(NotAllLegsCompleted)this.getFirstInputOfType("NotAllLegsCompleted");             
 
         Pilot_Mind  eiPilot_Mind=(Pilot_Mind)this.getFirstInputOfType("Pilot_Mind");             
 
@@ -66,42 +64,36 @@ public class Flight_Plan_MonitoringTask extends Task{
   																			outputs);
   		
 		
-		Flight_Leg outputsdefaultFlight_Leg=
-			(Flight_Leg)
-				outputsdefault.getEntityByType("Flight_Leg");
+		CanCreateNewDecision outputsdefaultCanCreateNewDecision=
+			(CanCreateNewDecision)
+				outputsdefault.getEntityByType("CanCreateNewDecision");
 		
 		
 		
         YellowPages yp=null; // only available for initiators of interactions
 
 
-//#start_node:INGENIASCodeComponent5 <--- DO NOT REMOVE THIS	
-        int iLegsCompleted = eiPilot_Mind.getLegsCompleted();
-        Flight_Plan oFlightPlan = eiPilot_Mind.getPilotFlightPlan();
-        gov.nasa.worldwind.geom.Position oStartPoint = null;
-        gov.nasa.worldwind.geom.Position oEndPoint = null;
-        if(iLegsCompleted == 0 ){
-        	oStartPoint = oFlightPlan.getDepartureAirport().getPosition();
+//#start_node:INGENIASCodeComponent20 <--- DO NOT REMOVE THIS	
+        boolean bCanCreateNewDecisionDeleted = false;
+        yp=(YellowPages)this.getApplication("YellowPages");
+        if(((ingenias.jade.agents.PilotJADEAgent)yp.ja).
+        		getMSM().getMentalEntityByType("CanCreateNewDecision").size() > 0){
+        	outputsdefault.remove(outputsdefaultCanCreateNewDecision);
+        	bCanCreateNewDecisionDeleted = true;
         }
-        else{
-        	oStartPoint = oFlightPlan.getWaypoints().get(iLegsCompleted-1);
+        if(!bCanCreateNewDecisionDeleted){
+        	//id the last decision was fewer than a minute ago => sleep 
+	        Date oLastDecisionDate = eiPilot_Mind.getLastDecisionDate();
+	        Date oNow = new Date();
+	        long lDifferOfMiliseconds = oNow.getTime() - oLastDecisionDate.getTime();
+	        if(lDifferOfMiliseconds < Simulation.SimulationVars.iSleepTime){
+	        	/*global.GlobalVarsAndMethods.sleep(Simulation.SimulationVars.iSleepTime/4);
+	        	oNow = new Date();
+	            lDifferOfMiliseconds = oNow.getTime() - oLastDecisionDate.getTime();*/
+	        	outputsdefault.remove(outputsdefaultCanCreateNewDecision);
+	        }
         }
-        
-        if(oFlightPlan.getWaypoints().size() <= iLegsCompleted){
-        	oEndPoint = oFlightPlan.getDestinationAirport().getPosition();
-        }
-        else{
-        	oEndPoint = oFlightPlan.getWaypoints().get(iLegsCompleted);
-        }
-        
-        outputsdefaultFlight_Leg.setStartPoint(oStartPoint);
-        outputsdefaultFlight_Leg.setEndPoint(oEndPoint);
-        
-        outputsdefaultFlight_Leg.setAltitudeKM(oFlightPlan.getCruisingAltitudeKM());
-        outputsdefaultFlight_Leg.setSpeedKMH(oFlightPlan.getCruisingSpeedKMH());
-        outputsdefaultFlight_Leg.setPlaneID(oFlightPlan.getPlaneID());
-    	
-//#end_node:INGENIASCodeComponent5 <--- DO NOT REMOVE THIS
+//#end_node:INGENIASCodeComponent20 <--- DO NOT REMOVE THIS
 
  }
  

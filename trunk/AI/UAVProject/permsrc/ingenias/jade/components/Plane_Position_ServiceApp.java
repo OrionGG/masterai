@@ -46,6 +46,8 @@ public abstract class Plane_Position_ServiceApp extends Application{
 
  public abstract gov.nasa.worldwind.geom.Angle getCurrentHead();
 
+ public abstract double getCurrentSpeed();
+
  
 }
 

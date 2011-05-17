@@ -34,10 +34,10 @@ import ingenias.editor.entities.*;
 
 
 
-public class Flight_Plan_MonitoringTask extends Task{
+public class ObeyOrderCheckTask extends Task{
 
- public Flight_Plan_MonitoringTask(String id){
-  super(id,"Flight_Plan_Monitoring");
+ public ObeyOrderCheckTask(String id){
+  super(id,"ObeyOrderCheck");
  }
 
 
@@ -45,9 +45,7 @@ public class Flight_Plan_MonitoringTask extends Task{
  public void execute() throws TaskException{
 
 
-        NotAllLegsCompleted  eiNotAllLegsCompleted=(NotAllLegsCompleted)this.getFirstInputOfType("NotAllLegsCompleted");             
-
-        Pilot_Mind  eiPilot_Mind=(Pilot_Mind)this.getFirstInputOfType("Pilot_Mind");             
+        OrderPositionAndLeg  eiOrderPositionAndLeg=(OrderPositionAndLeg)this.getFirstInputOfType("OrderPositionAndLeg");             
 
 
 
@@ -65,43 +63,23 @@ public class Flight_Plan_MonitoringTask extends Task{
   		TaskOutput	outputsdefault=findOutputAlternative("default",
   																			outputs);
   		
-		
 		Flight_Leg outputsdefaultFlight_Leg=
 			(Flight_Leg)
 				outputsdefault.getEntityByType("Flight_Leg");
+		
+		
+		OrdenDone outputsdefaultOrdenDone=
+			(OrdenDone)
+				outputsdefault.getEntityByType("OrdenDone");
 		
 		
 		
         YellowPages yp=null; // only available for initiators of interactions
 
 
-//#start_node:INGENIASCodeComponent5 <--- DO NOT REMOVE THIS	
-        int iLegsCompleted = eiPilot_Mind.getLegsCompleted();
-        Flight_Plan oFlightPlan = eiPilot_Mind.getPilotFlightPlan();
-        gov.nasa.worldwind.geom.Position oStartPoint = null;
-        gov.nasa.worldwind.geom.Position oEndPoint = null;
-        if(iLegsCompleted == 0 ){
-        	oStartPoint = oFlightPlan.getDepartureAirport().getPosition();
-        }
-        else{
-        	oStartPoint = oFlightPlan.getWaypoints().get(iLegsCompleted-1);
-        }
-        
-        if(oFlightPlan.getWaypoints().size() <= iLegsCompleted){
-        	oEndPoint = oFlightPlan.getDestinationAirport().getPosition();
-        }
-        else{
-        	oEndPoint = oFlightPlan.getWaypoints().get(iLegsCompleted);
-        }
-        
-        outputsdefaultFlight_Leg.setStartPoint(oStartPoint);
-        outputsdefaultFlight_Leg.setEndPoint(oEndPoint);
-        
-        outputsdefaultFlight_Leg.setAltitudeKM(oFlightPlan.getCruisingAltitudeKM());
-        outputsdefaultFlight_Leg.setSpeedKMH(oFlightPlan.getCruisingSpeedKMH());
-        outputsdefaultFlight_Leg.setPlaneID(oFlightPlan.getPlaneID());
-    	
-//#end_node:INGENIASCodeComponent5 <--- DO NOT REMOVE THIS
+//#start_node:INGENIASCodeComponent23 <--- DO NOT REMOVE THIS	
+//REPLACE THIS COMMENT WITH YOUR CODE
+//#end_node:INGENIASCodeComponent23 <--- DO NOT REMOVE THIS
 
  }
  

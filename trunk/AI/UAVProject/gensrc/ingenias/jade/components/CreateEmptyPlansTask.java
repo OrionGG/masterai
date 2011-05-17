@@ -100,6 +100,7 @@ public class CreateEmptyPlansTask extends Task{
 			oFlightPlan.setPilotID(oPilotAgentExternalDescription);
 			ingenias.jade.AgentExternalDescription oPlaneAgentExternalDescription = new ingenias.jade.AgentExternalDescription(dfPlaneAgentDescription.getName(), PlaneRole);
 			oFlightPlan.setPlaneID(oPlaneAgentExternalDescription);
+			global.GlobalVarsAndMethods.PlaneIdToPilotId.put(dfPlaneAgentDescription.getName(), oPilotAgentExternalDescription);
 
 			outputsdefault.add(new OutputEntity(oFlightPlan,TaskOperations.CreateWF));
 			

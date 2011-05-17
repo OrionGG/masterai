@@ -45,7 +45,11 @@ public class Make_DecisionsTask extends Task{
  public void execute() throws TaskException{
 
 
+        CanCreateNewDecision  eiCanCreateNewDecision=(CanCreateNewDecision)this.getFirstInputOfType("CanCreateNewDecision");             
+
         Flight_Leg  eiFlight_Leg=(Flight_Leg)this.getFirstInputOfType("Flight_Leg");             
+
+        Pilot_Mind  eiPilot_Mind=(Pilot_Mind)this.getFirstInputOfType("Pilot_Mind");             
 
 
 
@@ -74,7 +78,11 @@ public class Make_DecisionsTask extends Task{
 
 
 //#start_node:INGENIASCodeComponent7 <--- DO NOT REMOVE THIS	
-        outputsdefault.remove(outputsdefaultDecision);
+        outputsdefaultDecision.setSpeedChange(-1);
+        outputsdefaultDecision.setAltitudeChange(-1);
+        outputsdefaultDecision.setHeadChange(null);
+        outputsdefaultDecision.setPriority(0);
+        //outputsdefault.remove(outputsdefaultDecision);
 
 		Vector<Plane_Position_ServiceAppImp> oVector = Plane_Position_ServiceInit.getAppsInitialised();
 		
@@ -95,13 +103,15 @@ public class Make_DecisionsTask extends Task{
 				oDecisionSpeedChange.setPriority(0);
 				
 				double dCruisingSpeedKMH = eiFlight_Leg.getSpeedKMH();
+				double dCurrentSpeed = plane_Position_ServiceAppImp.getCurrentSpeed();
 				
-				outputsdefault.add(new OutputEntity(oDecisionSpeedChange,TaskOperations.CreateWF));
-				
+				oDecisionSpeedChange.setSpeedChange(dCruisingSpeedKMH - dCurrentSpeed);
+				//outputsdefault.add(new OutputEntity(oDecisionSpeedChange,TaskOperations.CreateWF));
+				outputsdefaultDecision.setSpeedChange(dCruisingSpeedKMH - dCurrentSpeed);
 				
 				//Calculating High to change
 				double alt1 = oPosition.getAltitude();
-				double alt2 = oEndPoint.getAltitude();
+				double alt2 = eiFlight_Leg.getAltitudeKM()*1000;
 				Decision oDecisionAltitudeChange =
 					new Decision();
 				oDecisionAltitudeChange.setSpeedChange(-1);
@@ -110,7 +120,8 @@ public class Make_DecisionsTask extends Task{
 				oDecisionAltitudeChange.setPriority(0);
 				
 				oDecisionAltitudeChange.setAltitudeChange(alt2-alt1); 
-				outputsdefault.add(new OutputEntity(oDecisionAltitudeChange,TaskOperations.CreateWF));
+				//outputsdefault.add(new OutputEntity(oDecisionAltitudeChange,TaskOperations.CreateWF));
+				outputsdefaultDecision.setAltitudeChange(alt2-alt1);
 				
 				//Calculating Angle to turn
 				Decision oDecisionHeadChange =
@@ -135,10 +146,12 @@ public class Make_DecisionsTask extends Task{
 				if(oCurrentHead.degrees != oAngle.degrees){
 					gov.nasa.worldwind.geom.Angle oAngleToTurn = BasicFlightDynamics.BFD.AngleToTurn(oCurrentHead, oAngle);
 					oDecisionHeadChange.setHeadChange(oAngleToTurn); 
+					outputsdefaultDecision.setHeadChange(oAngleToTurn); 
 				}
 				
-				outputsdefault.add(new OutputEntity(oDecisionHeadChange,TaskOperations.CreateWF));
-				
+				//outputsdefault.add(new OutputEntity(oDecisionHeadChange,TaskOperations.CreateWF));
+
+		        
 				break;
 			}
 

@@ -168,6 +168,22 @@ public class MainDeploymentProdStandAlone {
         }.start();
 
         // Create a new agent
+        final jade.wrapper.AgentController agcPilot_1DeploymentUnitByType0 = ac.createNewAgent("Pilot_1DeploymentUnitByType0",
+            "ingenias.jade.agents.PilotJADEAgent", new Object[0]);	
+	
+	
+        new Thread(){
+          public void run(){
+            try {
+               System.out.println("Starting up Pilot_1DeploymentUnitByType0...");
+              agcPilot_1DeploymentUnitByType0.start();
+            } catch (Exception e){
+              e.printStackTrace();
+            }
+          }
+        }.start();
+
+        // Create a new agent
         final jade.wrapper.AgentController agcFlightPlanner_0Deployment_FlightPlanner = ac.createNewAgent("FlightPlanner_0Deployment_FlightPlanner",
             "ingenias.jade.agents.FlightPlannerJADEAgent", new Object[0]);	
 	

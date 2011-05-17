@@ -96,9 +96,14 @@ public class Execute_DecisionTask extends Task{
         outputsdefaultManoeuvre.setAltitudeChange(eiThrow_Instruction.getAltitudeChange());
         outputsdefaultManoeuvre.setHeadChange(eiThrow_Instruction.getHeadChange());
         outputsdefaultManoeuvre.setPriority(eiThrow_Instruction.getPriority());
+        outputsdefaultManoeuvre.setThrowInstruction(eiThrow_Instruction);
+        
+        List<Throw_Instruction> oInstructionsRunning = eiPilot_Mind.getInstructionRunning();
+        oInstructionsRunning.add(eiThrow_Instruction);
+        eiPilot_Mind.setInstructionRunning(oInstructionsRunning);
+        eiPilot_Mind.setLastDecisionDate(new Date());
+        
         outputsdefaultPilotPlaneInteraction.addCollaborators(eiPilot_Mind.getPilotFlightPlan().getPlaneID());
-
-        eiPilot_Mind.setInstructionRunning(eiThrow_Instruction);
 //#end_node:INGENIASCodeComponent10 <--- DO NOT REMOVE THIS
 
  }
