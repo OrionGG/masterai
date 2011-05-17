@@ -24,61 +24,55 @@
 */
 
 
-package ingenias.jade.components;
+package ingenias.jade.mental;
 
 import java.util.*;
-import ingenias.jade.exception.*;
-import ingenias.jade.comm.*;
-import ingenias.jade.mental.*;
+import ingenias.jade.components.*;
 import ingenias.editor.entities.*;
+import ingenias.editor.entities.ViewPreferences.ViewType;
 
+public class PlanesConflict extends ingenias.editor.entities.RuntimeEvent{
+   
+    ArrayList<ingenias.jade.agents.PlaneJADEAgent> PlanesInConflict;   
+    
+   
+   public PlanesConflict (String id){
+   super(id);
+   this.getPrefs().setView(ViewType.UML);
+   this.type="PlanesConflict";
+  }
+  
 
+  public PlanesConflict (){
+   super(ingenias.jade.MentalStateManager.generateMentalEntityID());
+   this.getPrefs().setView(ViewType.UML);
+   this.type="PlanesConflict";
+  }
+  
+  public String toString(){
+   return this.getId()+":"+this.getType();
+  }
+  
+  public String getType(){
+   return "PlanesConflict";
+  }
+  
+   public String getParentType(){
+   return "RuntimeEvent";
+  }
+  
+   
 
-public class Obey_OrderTask extends Task{
-
- public Obey_OrderTask(String id){
-  super(id,"Obey_Order");
- }
-
-
-
- public void execute() throws TaskException{
-
-
-        Order  eiOrder=(Order)this.getFirstInputOfType("Order");             
-
-
-
-
-
-
-
-
-
-
-  		Vector<TaskOutput> outputs = this.getOutputs();
-  		TaskOutput defaultOutput= outputs.firstElement();
-  		
-  		  	
-  		TaskOutput	outputsdefault=findOutputAlternative("default",
-  																			outputs);
-  		
-		Decision outputsdefaultDecision=
-			(Decision)
-				outputsdefault.getEntityByType("Decision");
-		
-		
-		
-		
-        YellowPages yp=null; // only available for initiators of interactions
-
-
-//#start_node: <--- DO NOT REMOVE THIS	
-
-//#end_node: <--- DO NOT REMOVE THIS
-
- }
- 
+   public void setPlanesInConflict(ArrayList<ingenias.jade.agents.PlaneJADEAgent> value){
+     PlanesInConflict=value;   
+   };
+   
+   public ArrayList<ingenias.jade.agents.PlaneJADEAgent> getPlanesInConflict(){
+     return PlanesInConflict;      
+   }
+    
+  
+  
 }
 
  

@@ -85,6 +85,9 @@ public class Take_Initial_PlanTask extends Task{
 
 
 //#start_node:INGENIASCodeComponent2 <--- DO NOT REMOVE THIS	
+        outputsdefaultFlight_Plan.setCruisingAltitudeKM(eiPlanAnswer.getFlightPlan().getCruisingAltitudeKM());
+        outputsdefaultFlight_Plan.setCruisingSpeedKMH(eiPlanAnswer.getFlightPlan().getCruisingSpeedKMH());
+        
         outputsdefaultFlight_Plan.setDepartureAirport(eiPlanAnswer.getFlightPlan().getDepartureAirport());
         outputsdefaultFlight_Plan.setDestinationAirport(eiPlanAnswer.getFlightPlan().getDestinationAirport());
         outputsdefaultFlight_Plan.setWaypoints(eiPlanAnswer.getFlightPlan().getWaypoints());

@@ -32,6 +32,8 @@ import ingenias.editor.entities.*;
 import ingenias.editor.entities.ViewPreferences.ViewType;
 
 public class Plane_Change extends ingenias.editor.entities.RuntimeFact{
+   
+    Throw_Instruction ThrowInstruction;   
     
    
   public Plane_Change (String id){
@@ -58,6 +60,15 @@ public class Plane_Change extends ingenias.editor.entities.RuntimeFact{
    return "RuntimeFact";
   }
   
+   
+
+   public void setThrowInstruction(Throw_Instruction value){
+     ThrowInstruction=value;   
+   };
+   
+   public Throw_Instruction getThrowInstruction(){
+     return ThrowInstruction;      
+   }
      
     
 }

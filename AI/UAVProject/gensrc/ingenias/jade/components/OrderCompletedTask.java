@@ -34,10 +34,10 @@ import ingenias.editor.entities.*;
 
 
 
-public class CreatePilotMindTask extends Task{
+public class OrderCompletedTask extends Task{
 
- public CreatePilotMindTask(String id){
-  super(id,"CreatePilotMind");
+ public OrderCompletedTask(String id){
+  super(id,"OrderCompleted");
  }
 
 
@@ -45,7 +45,7 @@ public class CreatePilotMindTask extends Task{
  public void execute() throws TaskException{
 
 
-        Flight_Plan  eiFlight_Plan=(Flight_Plan)this.getFirstInputOfType("Flight_Plan");             
+        OrdenDone  eiOrdenDone=(OrdenDone)this.getFirstInputOfType("OrdenDone");             
 
 
 
@@ -64,34 +64,14 @@ public class CreatePilotMindTask extends Task{
   																			outputs);
   		
 		
-		Pilot_Mind outputsdefaultPilot_Mind=
-			(Pilot_Mind)
-				outputsdefault.getEntityByType("Pilot_Mind");
-		
 		
 		
         YellowPages yp=null; // only available for initiators of interactions
 
 
-//#start_node:INGENIASCodeComponent3 <--- DO NOT REMOVE THIS	
-		Random generator = new Random();
-		float fStress = generator.nextFloat();
-        outputsdefaultPilot_Mind.setStress(fStress);
+//#start_node: <--- DO NOT REMOVE THIS	
 
-		float fExperience = generator.nextFloat();    
-        outputsdefaultPilot_Mind.setExperience(fExperience);
-        
-        float fFatigue = generator.nextFloat();
-        outputsdefaultPilot_Mind.setFatigue(fFatigue);
-        
-        outputsdefaultPilot_Mind.setInstructionRunning(new java.util.ArrayList<Throw_Instruction>());
-        
-        outputsdefaultPilot_Mind.setPilotFlightPlan(eiFlight_Plan);
-        
-        outputsdefaultPilot_Mind.setLegsCompleted(0);
-        
-        outputsdefaultPilot_Mind.setLastDecisionDate(new Date());
-//#end_node:INGENIASCodeComponent3 <--- DO NOT REMOVE THIS
+//#end_node: <--- DO NOT REMOVE THIS
 
  }
  

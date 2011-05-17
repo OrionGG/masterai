@@ -34,7 +34,7 @@ public  class Plane_Position_ServiceAppImp extends Plane_Position_ServiceApp{
 	 
 	 return new gov.nasa.worldwind.geom.Position(
 			 oPlane_Mind.getLatLonPosition(),
-			 oPlane_Mind.getAltitudeKM());
+			 oPlane_Mind.getAltitudeKM()*1000);
 
 
 } 
@@ -47,6 +47,18 @@ public  class Plane_Position_ServiceAppImp extends Plane_Position_ServiceApp{
 	 
 	 return oPlane_Mind.getHead();
 
+
+}
+
+
+@Override
+public double getCurrentSpeed() {
+	Vector<ingenias.editor.entities.MentalEntity> oVector =  
+		 this.getOwner().getMSM().getMentalEntityByType("Plane_Mind");
+	 
+	 Plane_Mind oPlane_Mind = (Plane_Mind) oVector.get(0);
+	 
+	 return oPlane_Mind.getSpeedKMH();
 
 } 
  

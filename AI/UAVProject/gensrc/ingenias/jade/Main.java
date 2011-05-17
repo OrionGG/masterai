@@ -78,6 +78,22 @@ public class Main {
         }.start();
 
         // Create a new agent
+        final jade.wrapper.AgentController agcFlightPlanner = ac.createNewAgent("FlightPlanner",
+            "ingenias.jade.agents.FlightPlannerJADEAgent", new Object[0]);	
+	
+	
+        new Thread(){
+          public void run(){
+            try {
+               System.out.println("Starting up FlightPlanner...");
+              agcFlightPlanner.start();
+            } catch (Exception e){
+              e.printStackTrace();
+            }
+          }
+        }.start();
+
+        // Create a new agent
         final jade.wrapper.AgentController agcPlane = ac.createNewAgent("Plane",
             "ingenias.jade.agents.PlaneJADEAgent", new Object[0]);	
 	
@@ -110,15 +126,15 @@ public class Main {
         }.start();
 
         // Create a new agent
-        final jade.wrapper.AgentController agcFlightPlanner = ac.createNewAgent("FlightPlanner",
-            "ingenias.jade.agents.FlightPlannerJADEAgent", new Object[0]);	
+        final jade.wrapper.AgentController agcController = ac.createNewAgent("Controller",
+            "ingenias.jade.agents.ControllerJADEAgent", new Object[0]);	
 	
 	
         new Thread(){
           public void run(){
             try {
-               System.out.println("Starting up FlightPlanner...");
-              agcFlightPlanner.start();
+               System.out.println("Starting up Controller...");
+              agcController.start();
             } catch (Exception e){
               e.printStackTrace();
             }

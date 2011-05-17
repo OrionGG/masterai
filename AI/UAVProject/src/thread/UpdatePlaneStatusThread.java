@@ -38,16 +38,29 @@ public class UpdatePlaneStatusThread  implements Runnable{
 	public void run() {
 
 		long lMiliseconds = SimulationVars.iSleepTime * SimulationVars.x;
-		sleep(SimulationVars.iSleepTime);
+		
     	double speed = eiPlane_Mind.getSpeedKMH();
 		while (speed != 0){
+
+			global.GlobalVarsAndMethods.sleep(SimulationVars.iSleepTime);
+
+			gov.nasa.worldwind.geom.Position oPosition = new gov.nasa.worldwind.geom.Position(
+					eiPlane_Mind.getLatLonPosition(),
+					eiPlane_Mind.getAltitudeKM()*1000);
+			
+			oPlaneView.setNewPosition(oPosition);
+
 			
 			double lat1 = eiPlane_Mind.getLatLonPosition().getLatitude().radians;
 	    	double lon1 = eiPlane_Mind.getLatLonPosition().getLongitude().radians;
 	    	double brng = eiPlane_Mind.getHead().radians;
 	    	speed = eiPlane_Mind.getSpeedKMH();
-	        //Date oLastUpdateDate = eiPlane_Mind.getLastUpdatePosition();
 	    	    	
+	    	Date oLastUpdateDate = eiPlane_Mind.getLastUpdatePosition();
+	        Date oNow = new Date();
+	        long lDifferOfMiliseconds = oNow.getTime() - oLastUpdateDate.getTime();
+	        
+	        lMiliseconds = lDifferOfMiliseconds * SimulationVars.x;
 	    	
 	        gov.nasa.worldwind.geom.LatLon oNewLatLonPosition = 
 	        	BasicFlightDynamics.BFD.getNextPos(lat1, lon1, brng, speed, lMiliseconds);
@@ -67,26 +80,11 @@ public class UpdatePlaneStatusThread  implements Runnable{
 				e1.printStackTrace();
 			}
 			
-			gov.nasa.worldwind.geom.Position oPosition = new gov.nasa.worldwind.geom.Position(
-					eiPlane_Mind.getLatLonPosition(),
-					eiPlane_Mind.getAltitudeKM()*1000);
 			
-			oPlaneView.setNewPosition(oPosition);
 			
-			//Date oLastUpdateDate = new Date();
-			sleep(SimulationVars.iSleepTime);
 		}
 		
 		
-	}
-	
-	public void sleep(int miliseconds) {
-		try {
-			Thread.sleep(miliseconds);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 
 }

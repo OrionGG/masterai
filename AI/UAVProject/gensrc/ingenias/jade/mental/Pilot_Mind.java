@@ -47,7 +47,9 @@ public class Pilot_Mind extends ingenias.editor.entities.RuntimeFact{
    
     int LegsCompleted;   
    
-    Throw_Instruction InstructionRunning;   
+    List<Throw_Instruction> InstructionRunning;   
+   
+    Date LastDecisionDate;   
     
    
   public Pilot_Mind (String id){
@@ -139,12 +141,21 @@ public class Pilot_Mind extends ingenias.editor.entities.RuntimeFact{
    }
    
 
-   public void setInstructionRunning(Throw_Instruction value){
+   public void setInstructionRunning(List<Throw_Instruction> value){
      InstructionRunning=value;   
    };
    
-   public Throw_Instruction getInstructionRunning(){
+   public List<Throw_Instruction> getInstructionRunning(){
      return InstructionRunning;      
+   }
+   
+
+   public void setLastDecisionDate(Date value){
+     LastDecisionDate=value;   
+   };
+   
+   public Date getLastDecisionDate(){
+     return LastDecisionDate;      
    }
      
     

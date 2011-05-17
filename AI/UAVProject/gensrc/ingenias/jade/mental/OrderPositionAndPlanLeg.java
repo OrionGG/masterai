@@ -31,19 +31,21 @@ import ingenias.jade.components.*;
 import ingenias.editor.entities.*;
 import ingenias.editor.entities.ViewPreferences.ViewType;
 
-public class Order extends ingenias.editor.entities.RuntimeFact{
+public class OrderPositionAndPlanLeg extends ingenias.editor.entities.RuntimeFact{
    
     Hashtable<jade.core.AID, gov.nasa.worldwind.geom.Position> PilotGoTo;   
+   
+    Flight_Leg FlightLeg;   
     
    
-  public Order (String id){
+  public OrderPositionAndPlanLeg (String id){
    super(id);
    this.getPrefs().setView(ViewType.UML);
-   this.type="Order";
+   this.type="OrderPositionAndPlanLeg";
   }
   
 
-  public Order (){
+  public OrderPositionAndPlanLeg (){
    super(ingenias.jade.MentalStateManager.generateMentalEntityID());
    this.getPrefs().setView(ViewType.UML);
   }
@@ -53,7 +55,7 @@ public class Order extends ingenias.editor.entities.RuntimeFact{
   }
   
   public String getType(){
-   return "Order";
+   return "OrderPositionAndPlanLeg";
   }
   
   public String getParentType(){
@@ -68,6 +70,15 @@ public class Order extends ingenias.editor.entities.RuntimeFact{
    
    public Hashtable<jade.core.AID, gov.nasa.worldwind.geom.Position> getPilotGoTo(){
      return PilotGoTo;      
+   }
+   
+
+   public void setFlightLeg(Flight_Leg value){
+     FlightLeg=value;   
+   };
+   
+   public Flight_Leg getFlightLeg(){
+     return FlightLeg;      
    }
      
     

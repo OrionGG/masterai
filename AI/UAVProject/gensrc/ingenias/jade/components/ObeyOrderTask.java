@@ -34,10 +34,10 @@ import ingenias.editor.entities.*;
 
 
 
-public class CreatePilotMindTask extends Task{
+public class ObeyOrderTask extends Task{
 
- public CreatePilotMindTask(String id){
-  super(id,"CreatePilotMind");
+ public ObeyOrderTask(String id){
+  super(id,"ObeyOrder");
  }
 
 
@@ -45,7 +45,9 @@ public class CreatePilotMindTask extends Task{
  public void execute() throws TaskException{
 
 
-        Flight_Plan  eiFlight_Plan=(Flight_Plan)this.getFirstInputOfType("Flight_Plan");             
+        Flight_Leg  eiFlight_Leg=(Flight_Leg)this.getFirstInputOfType("Flight_Leg");             
+
+        Order  eiOrder=(Order)this.getFirstInputOfType("Order");             
 
 
 
@@ -63,35 +65,25 @@ public class CreatePilotMindTask extends Task{
   		TaskOutput	outputsdefault=findOutputAlternative("default",
   																			outputs);
   		
+		OrderPositionAndLeg outputsdefaultOrderPositionAndLeg=
+			(OrderPositionAndLeg)
+				outputsdefault.getEntityByType("OrderPositionAndLeg");
 		
-		Pilot_Mind outputsdefaultPilot_Mind=
-			(Pilot_Mind)
-				outputsdefault.getEntityByType("Pilot_Mind");
 		
 		
 		
         YellowPages yp=null; // only available for initiators of interactions
 
 
-//#start_node:INGENIASCodeComponent3 <--- DO NOT REMOVE THIS	
-		Random generator = new Random();
-		float fStress = generator.nextFloat();
-        outputsdefaultPilot_Mind.setStress(fStress);
-
-		float fExperience = generator.nextFloat();    
-        outputsdefaultPilot_Mind.setExperience(fExperience);
+//#start_node:INGENIASCodeComponent22 <--- DO NOT REMOVE THIS	
+        yp=(YellowPages)this.getApplication("YellowPages");
+        gov.nasa.worldwind.geom.Position oPosition = eiOrder.getPilotGoTo().get(yp.ja.getAID());
         
-        float fFatigue = generator.nextFloat();
-        outputsdefaultPilot_Mind.setFatigue(fFatigue);
-        
-        outputsdefaultPilot_Mind.setInstructionRunning(new java.util.ArrayList<Throw_Instruction>());
-        
-        outputsdefaultPilot_Mind.setPilotFlightPlan(eiFlight_Plan);
-        
-        outputsdefaultPilot_Mind.setLegsCompleted(0);
-        
-        outputsdefaultPilot_Mind.setLastDecisionDate(new Date());
-//#end_node:INGENIASCodeComponent3 <--- DO NOT REMOVE THIS
+        //global.GlobalVarsAndMethods.copyDecisions(oDecision, outputsdefaultDecision);
+        //outputsdefaultDecision.setPriority(9);
+        outputsdefaultOrderPositionAndLeg.setOrderPosition(oPosition);
+        outputsdefaultOrderPositionAndLeg.setFlightLeg(eiFlight_Leg);
+//#end_node:INGENIASCodeComponent22 <--- DO NOT REMOVE THIS
 
  }
  
