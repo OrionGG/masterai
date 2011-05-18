@@ -3,11 +3,15 @@ package global;
 
 import gov.nasa.worldwind.geom.Angle;
 import ingenias.jade.agents.PlaneJADEAgent;
+import ingenias.jade.components.ConflictAttendedCheckerAppImp;
+import ingenias.jade.components.ConflictAttendedCheckerInit;
 import ingenias.jade.components.Task;
 import ingenias.jade.mental.Decision;
+import ingenias.jade.mental.Flight_Leg;
 import ingenias.jade.mental.Flight_Plan;
 import ingenias.jade.mental.Manoeuvre;
 import ingenias.jade.mental.Plane_Mind;
+import ingenias.jade.mental.PlanesInConflict;
 import ingenias.jade.mental.Throw_Instruction;
 
 import jade.domain.FIPAAgentManagement.DFAgentDescription;
@@ -16,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Random;
+import java.util.Vector;
 
 public class GlobalVarsAndMethods {
 	public static int nDegressPerSecond = 3;
@@ -277,5 +282,33 @@ public class GlobalVarsAndMethods {
 		outputsdefaultDecision.setSpeedChange(oDecision.getSpeedChange());
 		outputsdefaultDecision.setPriority(oDecision.getPriority());
 		
+	}
+
+	public static void copyFlightLeg(Flight_Leg oFlightLeg,
+			Flight_Leg outputsdefaultFlight_Leg) {
+		outputsdefaultFlight_Leg.setAltitudeKM(oFlightLeg.getAltitudeKM());
+		outputsdefaultFlight_Leg.setStartPoint(oFlightLeg.getStartPoint());
+		outputsdefaultFlight_Leg.setEndPoint(oFlightLeg.getEndPoint());
+		outputsdefaultFlight_Leg.setSpeedKMH(oFlightLeg.getSpeedKMH());
+		outputsdefaultFlight_Leg.setPlaneID(oFlightLeg.getPlaneID());
+
+		 
+		
+	}
+
+	public static boolean isConflictYetProcessed(
+			PlanesInConflict eiPlanesInConflict) {
+		boolean bProcessedYet = false;
+		ArrayList<ingenias.jade.agents.PlaneJADEAgent> aPlanesInConflict = eiPlanesInConflict.getPlanesInConflict();
+		
+		Vector<ConflictAttendedCheckerAppImp> oVector = ConflictAttendedCheckerInit.getAppsInitialised();
+		for (ConflictAttendedCheckerAppImp conflictAttendedCheckerAppImp : oVector) {
+			if(conflictAttendedCheckerAppImp.isConflictAttended(aPlanesInConflict)){
+				bProcessedYet = true;
+				break;
+			}
+			
+		}
+		return bProcessedYet;
 	}
 }

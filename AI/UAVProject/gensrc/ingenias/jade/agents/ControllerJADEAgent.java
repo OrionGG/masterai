@@ -135,14 +135,23 @@ public class ControllerJADEAgent
 			TaskOutput to=null;
 			to=new TaskOutput("default");
 		
+             expectedInput=this.getMSM().getMentalEntityByType("ControllerMind");
+             if (expectedInput.size()==0 && !("1".equals("0..n"))){
+				nonExistingInputs.add("ControllerMind");
+			 } else {
+			  addExpectedInputs(tobject, "ControllerMind","1",expectedInput);
+			 }
+             allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;             
+             
+	      
 	      
 		
 		
-             expectedInput=this.getMSM().getMentalEntityByType("PlanesConflict");
+             expectedInput=this.getMSM().getMentalEntityByType("PlanesInConflict");
              if (expectedInput.size()==0 && !("1".equals("0..n"))){
-				nonExistingInputs.add("PlanesConflict");
+				nonExistingInputs.add("PlanesInConflict");
 			 } else {
-			    addExpectedInputs(tobject, "PlanesConflict","1",expectedInput);
+			    addExpectedInputs(tobject, "PlanesInConflict","1",expectedInput);
              	addConsumedInput(to,"1",expectedInput);
 			 }
              allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;
@@ -199,6 +208,69 @@ public class ControllerJADEAgent
 		     new Order(MentalStateManager.generateMentalEntityID());			
              to.add(new OutputEntity(expectedOutputOrder,TaskOperations.CreateWF));
             }
+	     
+     
+     		      
+	      tobject.addOutput(to);
+	      initialised= allEntitiesExist;
+
+		if (!allEntitiesExist){
+		   String[] nonexisting=new String[nonExistingInputs.size()];
+		   for (int j=0;j<nonExistingInputs.size();j++){
+				nonexisting[j]=nonExistingInputs.elementAt(j).toString();
+			}
+			EventManager.getInstance().conversationalInitializationOfTaskFailed(getLocalName(), 
+												"Controller", 
+												tobject, nonexisting);
+		}
+		return initialised;	       
+	      }
+                 
+                  
+                  
+         nonExistingInputs.clear();
+  		 repeatedOutputs.clear();
+         if (tobject.getType().equals("StartMonitorizeFlights") ){
+            Vector<MentalEntity> expectedInput=null;
+            RuntimeFact expectedOutput=null;
+            RuntimeEvent expectedOutputEvent=null;
+			RuntimeConversation expectedInt=null;
+            ingenias.jade.components.Resource expectedResource=null;
+			ingenias.jade.components.Application expectedApp=null;        
+			boolean allEntitiesExist=true;		
+			TaskOutput to=null;
+			to=new TaskOutput("default");
+		
+	      
+		
+		
+             expectedInput=this.getMSM().getMentalEntityByType("AllowStartMonitorizeFlights");
+             if (expectedInput.size()==0 && !("1".equals("0..n"))){
+				nonExistingInputs.add("AllowStartMonitorizeFlights");
+			 } else {
+			    addExpectedInputs(tobject, "AllowStartMonitorizeFlights","1",expectedInput);
+             	addConsumedInput(to,"1",expectedInput);
+			 }
+             allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;
+
+	      
+	      
+	     
+	     expectedApp=(ingenias.jade.components.Application)getAM().getApplication("FlightsMonitor");
+             tobject.addApplication("FlightsMonitor",expectedApp);
+	      
+	      
+	     // Default application for all tasks executed within a conversation
+	     expectedApp=(ingenias.jade.components.Application)getAM().getApplication("YellowPages");
+             tobject.addApplication("YellowPages",expectedApp);
+	 /*    
+	     
+	      */	  
+	      
+	      /**/	      
+	      
+ 
+	     
 	     
      
      		      
@@ -405,6 +477,23 @@ public class ControllerJADEAgent
           }
                   
          
+         if (goalname.equals("FlightsMonitorized")){
+         
+         {
+         boolean canbescheduled=false;
+		 Task tobject=null;		 
+				// If a conversational initialization fails, a conventional one is tried
+				 tobject=new StartMonitorizeFlightsTask(ingenias.jade.MentalStateManager.generateMentalEntityID());
+				 canbescheduled=initialiseNonConversationalTask(tobject);
+			 	 if (canbescheduled){
+					//MainInteractionManager.log("Scheduled task "+tobject.getType()+" to achieve goal FlightsMonitorized",getLocalName()+"-"+tobject.getType());
+					tasks.add(tobject);
+				 } 			
+	     }
+         
+          }
+                  
+         
          Task tobject=new DeleteNonUsedEntitiesTask("DeleteNonUsedEntitiesTask","DeleteNonUsedEntitiesTask");
          boolean canbescheduled=initialiseNonConversationalTask(tobject);
 		 if (canbescheduled && IAFProperties.getGarbageCollectionEnabled()){			
@@ -430,6 +519,10 @@ public class ControllerJADEAgent
          
          
          ttypes.add("SendAvoidCollisionDecision");		         
+                
+         
+         
+         ttypes.add("StartMonitorizeFlights");		         
                 
          
          if (IAFProperties.getGraphicsOn())
@@ -460,7 +553,26 @@ public class ControllerJADEAgent
 	   e1.printStackTrace();
    }
    
+   sg= new ingenias.editor.entities.StateGoal("FlightsMonitorized");
+   sg.setState("pending");
+      try {
+	   this.getMSM().addMentalEntity(sg);
+   } catch (InvalidEntity e1) {
+
+	   e1.printStackTrace();
+   }
    
+   
+   
+   ff= new AllowStartMonitorizeFlights();      
+   
+   /* */
+   		try {
+			this.getMSM().addMentalEntity(ff);
+		} catch (InvalidEntity e) {
+
+			e.printStackTrace();
+		}
    
    ff= new ControllerMind();      
    
@@ -484,6 +596,19 @@ public class ControllerJADEAgent
 
      //Initial applications assigned to the agent	  
    
+     
+     app=ConflictAttendedCheckerInit.createInstance(this);
+	 //app.registerOwner(this);
+	 	    
+     this.getAM().addApplication("ConflictAttendedChecker",app);        
+	 events=new Vector();
+	 actions=new Vector();
+
+	 if (getGraphics()!=null)
+	  getGraphics().addApplication("ConflictAttendedChecker", events,actions);    
+
+     //Initial applications assigned to the agent	  
+   
      app=FlightsMonitorInit.getInstance(this);
      //app.registerOwner(this);
 	
@@ -492,7 +617,7 @@ public class ControllerJADEAgent
 	 events=new Vector();
 	 actions=new Vector();
 		
-	 event= new PlanesConflict();
+	 event= new PlanesInConflict();
 	 /*
 	 slot=new Slot("236");
 	 slot.setName("PlanesInConflict");
@@ -502,7 +627,7 @@ public class ControllerJADEAgent
 	  
 	 */ 
 	 events.add(event);
-	 actions.add(generateActionListener(PlanesConflict.class));		
+	 actions.add(generateActionListener(PlanesInConflict.class));		
 
 	 if (getGraphics()!=null)
 	  getGraphics().addApplication("FlightsMonitor", events,actions);    

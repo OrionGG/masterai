@@ -27,61 +27,24 @@
 package ingenias.jade.components;
 
 import java.util.*;
+
 import ingenias.jade.exception.*;
-import ingenias.jade.comm.*;
-import ingenias.jade.mental.*;
-import ingenias.editor.entities.*;
 
 
 
-public class CheckObeyOrderTask extends Task{
 
- public CheckObeyOrderTask(String id){
-  super(id,"CheckObeyOrder");
+
+
+public abstract class ConflictAttendedCheckerApp extends Application{
+
+
+ public ConflictAttendedCheckerApp(){
+  super();
  }
 
 
+ public abstract boolean isConflictAttended(ArrayList<ingenias.jade.agents.PlaneJADEAgent> aPlanesInConflict);
 
- public void execute() throws TaskException{
-
-
-        OrderPositionAndPlan  eiOrderPositionAndPlan=(OrderPositionAndPlan)this.getFirstInputOfType("OrderPositionAndPlan");             
-
-
-
-
-
-
-
-
-
-
-  		Vector<TaskOutput> outputs = this.getOutputs();
-  		TaskOutput defaultOutput= outputs.firstElement();
-  		
-  		  	
-  		TaskOutput	outputsdefault=findOutputAlternative("default",
-  																			outputs);
-  		
-		Flight_Leg outputsdefaultFlight_Leg=
-			(Flight_Leg)
-				outputsdefault.getEntityByType("Flight_Leg");
-		
-		
-		OrdenDone outputsdefaultOrdenDone=
-			(OrdenDone)
-				outputsdefault.getEntityByType("OrdenDone");
-		
-		
-		
-        YellowPages yp=null; // only available for initiators of interactions
-
-
-//#start_node: <--- DO NOT REMOVE THIS	
-
-//#end_node: <--- DO NOT REMOVE THIS
-
- }
  
 }
 

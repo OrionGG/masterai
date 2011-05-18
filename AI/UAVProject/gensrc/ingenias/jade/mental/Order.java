@@ -33,6 +33,8 @@ import ingenias.editor.entities.ViewPreferences.ViewType;
 
 public class Order extends ingenias.editor.entities.RuntimeFact{
    
+    double SpeedKMH;   
+   
     Hashtable<jade.core.AID, gov.nasa.worldwind.geom.Position> PilotGoTo;   
     
    
@@ -60,6 +62,15 @@ public class Order extends ingenias.editor.entities.RuntimeFact{
    return "RuntimeFact";
   }
   
+   
+
+   public void setSpeedKMH(double value){
+     SpeedKMH=value;   
+   };
+   
+   public double getSpeedKMH(){
+     return SpeedKMH;      
+   }
    
 
    public void setPilotGoTo(Hashtable<jade.core.AID, gov.nasa.worldwind.geom.Position> value){

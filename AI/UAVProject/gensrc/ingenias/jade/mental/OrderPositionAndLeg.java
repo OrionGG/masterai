@@ -36,6 +36,8 @@ public class OrderPositionAndLeg extends ingenias.editor.entities.RuntimeFact{
     Flight_Leg FlightLeg;   
    
     gov.nasa.worldwind.geom.Position OrderPosition;   
+   
+    double SpeedKMH;   
     
    
   public OrderPositionAndLeg (String id){
@@ -79,6 +81,15 @@ public class OrderPositionAndLeg extends ingenias.editor.entities.RuntimeFact{
    
    public gov.nasa.worldwind.geom.Position getOrderPosition(){
      return OrderPosition;      
+   }
+   
+
+   public void setSpeedKMH(double value){
+     SpeedKMH=value;   
+   };
+   
+   public double getSpeedKMH(){
+     return SpeedKMH;      
    }
      
     
