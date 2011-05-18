@@ -45,7 +45,7 @@ public class ObeyOrderCheckTask extends Task{
  public void execute() throws TaskException{
 
 
-        OrderPositionAndLeg  eiOrderPositionAndLeg=(OrderPositionAndLeg)this.getFirstInputOfType("OrderPositionAndLeg");             
+        OrderFinished  eiOrderFinished=(OrderFinished)this.getFirstInputOfType("OrderFinished");             
 
 
 
@@ -78,7 +78,18 @@ public class ObeyOrderCheckTask extends Task{
 
 
 //#start_node:INGENIASCodeComponent23 <--- DO NOT REMOVE THIS	
-//REPLACE THIS COMMENT WITH YOUR CODE
+        boolean finished = false;
+        
+        
+        if(finished){
+        	Flight_Leg oFlightLeg = eiOrderFinished.getFlightLeg();
+        	global.GlobalVarsAndMethods.copyFlightLeg(oFlightLeg, outputsdefaultFlight_Leg);
+        }
+        else{
+        	outputsdefault.remove(outputsdefaultFlight_Leg);
+        	outputsdefault.remove(outputsdefaultOrdenDone);
+        	outputsdefault.add(new OutputEntity(eiOrderFinished, TaskOperations.CreateWF));
+        }        
 //#end_node:INGENIASCodeComponent23 <--- DO NOT REMOVE THIS
 
  }

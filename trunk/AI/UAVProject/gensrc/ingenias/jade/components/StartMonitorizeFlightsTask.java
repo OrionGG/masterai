@@ -34,10 +34,10 @@ import ingenias.editor.entities.*;
 
 
 
-public class ObeyOrderTask extends Task{
+public class StartMonitorizeFlightsTask extends Task{
 
- public ObeyOrderTask(String id){
-  super(id,"ObeyOrder");
+ public StartMonitorizeFlightsTask(String id){
+  super(id,"StartMonitorizeFlights");
  }
 
 
@@ -45,12 +45,14 @@ public class ObeyOrderTask extends Task{
  public void execute() throws TaskException{
 
 
-        OrderPositionAndLeg  eiOrderPositionAndLeg=(OrderPositionAndLeg)this.getFirstInputOfType("OrderPositionAndLeg");             
+        AllowStartMonitorizeFlights  eiAllowStartMonitorizeFlights=(AllowStartMonitorizeFlights)this.getFirstInputOfType("AllowStartMonitorizeFlights");             
 
 
 
 
 
+			
+        FlightsMonitorApp eaFlightsMonitor=(FlightsMonitorApp)this.getApplication("FlightsMonitor");
 
 
 
@@ -63,10 +65,6 @@ public class ObeyOrderTask extends Task{
   		TaskOutput	outputsdefault=findOutputAlternative("default",
   																			outputs);
   		
-		
-		OrderFinished outputsdefaultOrderFinished=
-			(OrderFinished)
-				outputsdefault.getEntityByType("OrderFinished");
 		
 		
 		

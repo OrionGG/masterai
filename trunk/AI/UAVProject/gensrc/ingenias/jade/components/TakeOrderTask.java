@@ -34,10 +34,10 @@ import ingenias.editor.entities.*;
 
 
 
-public class ObeyOrderTask extends Task{
+public class TakeOrderTask extends Task{
 
- public ObeyOrderTask(String id){
-  super(id,"ObeyOrder");
+ public TakeOrderTask(String id){
+  super(id,"TakeOrder");
  }
 
 
@@ -45,7 +45,9 @@ public class ObeyOrderTask extends Task{
  public void execute() throws TaskException{
 
 
-        OrderPositionAndLeg  eiOrderPositionAndLeg=(OrderPositionAndLeg)this.getFirstInputOfType("OrderPositionAndLeg");             
+        Flight_Leg  eiFlight_Leg=(Flight_Leg)this.getFirstInputOfType("Flight_Leg");             
+
+        Order  eiOrder=(Order)this.getFirstInputOfType("Order");             
 
 
 
@@ -63,19 +65,23 @@ public class ObeyOrderTask extends Task{
   		TaskOutput	outputsdefault=findOutputAlternative("default",
   																			outputs);
   		
+		OrderPositionAndLeg outputsdefaultOrderPositionAndLeg=
+			(OrderPositionAndLeg)
+				outputsdefault.getEntityByType("OrderPositionAndLeg");
 		
-		OrderFinished outputsdefaultOrderFinished=
-			(OrderFinished)
-				outputsdefault.getEntityByType("OrderFinished");
 		
 		
 		
         YellowPages yp=null; // only available for initiators of interactions
 
 
-//#start_node: <--- DO NOT REMOVE THIS	
-
-//#end_node: <--- DO NOT REMOVE THIS
+//#start_node:INGENIASCodeComponent22 <--- DO NOT REMOVE THIS	
+        yp=(YellowPages)this.getApplication("YellowPages");
+        gov.nasa.worldwind.geom.Position oPosition = eiOrder.getPilotGoTo().get(yp.ja.getAID());
+        
+        outputsdefaultOrderPositionAndLeg.setOrderPosition(oPosition);
+        outputsdefaultOrderPositionAndLeg.setFlightLeg(eiFlight_Leg);
+//#end_node:INGENIASCodeComponent22 <--- DO NOT REMOVE THIS
 
  }
  

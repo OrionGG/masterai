@@ -31,21 +31,22 @@ import ingenias.jade.components.*;
 import ingenias.editor.entities.*;
 import ingenias.editor.entities.ViewPreferences.ViewType;
 
-public class ControllerMind extends ingenias.editor.entities.RuntimeFact{
+public class PlanesInConflict extends ingenias.editor.entities.RuntimeEvent{
    
-    ArrayList<ArrayList<ingenias.jade.agents.PlaneJADEAgent>> ConflictsAttended;   
+    ArrayList<ingenias.jade.agents.PlaneJADEAgent> PlanesInConflict;   
     
    
-  public ControllerMind (String id){
+   public PlanesInConflict (String id){
    super(id);
    this.getPrefs().setView(ViewType.UML);
-   this.type="ControllerMind";
+   this.type="PlanesInConflict";
   }
   
 
-  public ControllerMind (){
+  public PlanesInConflict (){
    super(ingenias.jade.MentalStateManager.generateMentalEntityID());
    this.getPrefs().setView(ViewType.UML);
+   this.type="PlanesInConflict";
   }
   
   public String toString(){
@@ -53,24 +54,25 @@ public class ControllerMind extends ingenias.editor.entities.RuntimeFact{
   }
   
   public String getType(){
-   return "ControllerMind";
+   return "PlanesInConflict";
   }
   
-  public String getParentType(){
-   return "RuntimeFact";
+   public String getParentType(){
+   return "RuntimeEvent";
   }
   
    
 
-   public void setConflictsAttended(ArrayList<ArrayList<ingenias.jade.agents.PlaneJADEAgent>> value){
-     ConflictsAttended=value;   
+   public void setPlanesInConflict(ArrayList<ingenias.jade.agents.PlaneJADEAgent> value){
+     PlanesInConflict=value;   
    };
    
-   public ArrayList<ArrayList<ingenias.jade.agents.PlaneJADEAgent>> getConflictsAttended(){
-     return ConflictsAttended;      
+   public ArrayList<ingenias.jade.agents.PlaneJADEAgent> getPlanesInConflict(){
+     return PlanesInConflict;      
    }
-     
     
+  
+  
 }
 
  

@@ -24,61 +24,42 @@
 */
 
 
-package ingenias.jade.components;
+package ingenias.jade.mental;
 
 import java.util.*;
-import ingenias.jade.exception.*;
-import ingenias.jade.comm.*;
-import ingenias.jade.mental.*;
+import ingenias.jade.components.*;
 import ingenias.editor.entities.*;
+import ingenias.editor.entities.ViewPreferences.ViewType;
 
+public class AllowStartMonitorizeFlights extends ingenias.editor.entities.RuntimeFact{
+    
+   
+  public AllowStartMonitorizeFlights (String id){
+   super(id);
+   this.getPrefs().setView(ViewType.UML);
+   this.type="AllowStartMonitorizeFlights";
+  }
+  
 
-
-public class ObeyOrderTask extends Task{
-
- public ObeyOrderTask(String id){
-  super(id,"ObeyOrder");
- }
-
-
-
- public void execute() throws TaskException{
-
-
-        OrderPositionAndLeg  eiOrderPositionAndLeg=(OrderPositionAndLeg)this.getFirstInputOfType("OrderPositionAndLeg");             
-
-
-
-
-
-
-
-
-
-
-  		Vector<TaskOutput> outputs = this.getOutputs();
-  		TaskOutput defaultOutput= outputs.firstElement();
-  		
-  		  	
-  		TaskOutput	outputsdefault=findOutputAlternative("default",
-  																			outputs);
-  		
-		
-		OrderFinished outputsdefaultOrderFinished=
-			(OrderFinished)
-				outputsdefault.getEntityByType("OrderFinished");
-		
-		
-		
-        YellowPages yp=null; // only available for initiators of interactions
-
-
-//#start_node: <--- DO NOT REMOVE THIS	
-
-//#end_node: <--- DO NOT REMOVE THIS
-
- }
- 
+  public AllowStartMonitorizeFlights (){
+   super(ingenias.jade.MentalStateManager.generateMentalEntityID());
+   this.getPrefs().setView(ViewType.UML);
+  }
+  
+  public String toString(){
+   return this.getId()+":"+this.getType();
+  }
+  
+  public String getType(){
+   return "AllowStartMonitorizeFlights";
+  }
+  
+  public String getParentType(){
+   return "RuntimeFact";
+  }
+  
+     
+    
 }
 
  

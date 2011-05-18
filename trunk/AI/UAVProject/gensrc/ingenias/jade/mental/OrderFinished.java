@@ -31,22 +31,25 @@ import ingenias.jade.components.*;
 import ingenias.editor.entities.*;
 import ingenias.editor.entities.ViewPreferences.ViewType;
 
-public class PlanesConflict extends ingenias.editor.entities.RuntimeEvent{
+public class OrderFinished extends ingenias.editor.entities.RuntimeFact{
    
-    ArrayList<ingenias.jade.agents.PlaneJADEAgent> PlanesInConflict;   
+    Flight_Leg FlightLeg;   
+   
+    gov.nasa.worldwind.geom.Position OrderPosition;   
+   
+    double SpeedKMH;   
     
    
-   public PlanesConflict (String id){
+  public OrderFinished (String id){
    super(id);
    this.getPrefs().setView(ViewType.UML);
-   this.type="PlanesConflict";
+   this.type="OrderFinished";
   }
   
 
-  public PlanesConflict (){
+  public OrderFinished (){
    super(ingenias.jade.MentalStateManager.generateMentalEntityID());
    this.getPrefs().setView(ViewType.UML);
-   this.type="PlanesConflict";
   }
   
   public String toString(){
@@ -54,25 +57,42 @@ public class PlanesConflict extends ingenias.editor.entities.RuntimeEvent{
   }
   
   public String getType(){
-   return "PlanesConflict";
+   return "OrderFinished";
   }
   
-   public String getParentType(){
-   return "RuntimeEvent";
+  public String getParentType(){
+   return "RuntimeFact";
   }
   
    
 
-   public void setPlanesInConflict(ArrayList<ingenias.jade.agents.PlaneJADEAgent> value){
-     PlanesInConflict=value;   
+   public void setFlightLeg(Flight_Leg value){
+     FlightLeg=value;   
    };
    
-   public ArrayList<ingenias.jade.agents.PlaneJADEAgent> getPlanesInConflict(){
-     return PlanesInConflict;      
+   public Flight_Leg getFlightLeg(){
+     return FlightLeg;      
    }
+   
+
+   public void setOrderPosition(gov.nasa.worldwind.geom.Position value){
+     OrderPosition=value;   
+   };
+   
+   public gov.nasa.worldwind.geom.Position getOrderPosition(){
+     return OrderPosition;      
+   }
+   
+
+   public void setSpeedKMH(double value){
+     SpeedKMH=value;   
+   };
+   
+   public double getSpeedKMH(){
+     return SpeedKMH;      
+   }
+     
     
-  
-  
 }
 
  

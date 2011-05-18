@@ -28,56 +28,22 @@ package ingenias.jade.components;
 
 import java.util.*;
 import ingenias.jade.exception.*;
-import ingenias.jade.comm.*;
-import ingenias.jade.mental.*;
-import ingenias.editor.entities.*;
 
 
 
-public class ObeyOrderTask extends Task{
 
- public ObeyOrderTask(String id){
-  super(id,"ObeyOrder");
+public abstract class FlightsMonitorApp extends MultipleOwnersApplication{
+
+
+
+
+ public FlightsMonitorApp(){
+  super();
  }
 
 
+ public abstract void start();
 
- public void execute() throws TaskException{
-
-
-        OrderPositionAndLeg  eiOrderPositionAndLeg=(OrderPositionAndLeg)this.getFirstInputOfType("OrderPositionAndLeg");             
-
-
-
-
-
-
-
-
-
-
-  		Vector<TaskOutput> outputs = this.getOutputs();
-  		TaskOutput defaultOutput= outputs.firstElement();
-  		
-  		  	
-  		TaskOutput	outputsdefault=findOutputAlternative("default",
-  																			outputs);
-  		
-		
-		OrderFinished outputsdefaultOrderFinished=
-			(OrderFinished)
-				outputsdefault.getEntityByType("OrderFinished");
-		
-		
-		
-        YellowPages yp=null; // only available for initiators of interactions
-
-
-//#start_node: <--- DO NOT REMOVE THIS	
-
-//#end_node: <--- DO NOT REMOVE THIS
-
- }
  
 }
 
