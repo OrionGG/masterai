@@ -71,9 +71,9 @@ public class StartMonitorizeFlightsTask extends Task{
         YellowPages yp=null; // only available for initiators of interactions
 
 
-//#start_node: <--- DO NOT REMOVE THIS	
-
-//#end_node: <--- DO NOT REMOVE THIS
+//#start_node:INGENIASCodeComponent25 <--- DO NOT REMOVE THIS	
+        eaFlightsMonitor.start();
+//#end_node:INGENIASCodeComponent25 <--- DO NOT REMOVE THIS
 
  }
  
