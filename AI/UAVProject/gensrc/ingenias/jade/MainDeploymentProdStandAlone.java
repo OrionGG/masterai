@@ -104,6 +104,22 @@ public class MainDeploymentProdStandAlone {
 
 {
         // Create a new agent
+        final jade.wrapper.AgentController agcController_0DeploymentUnitByType2 = ac.createNewAgent("Controller_0DeploymentUnitByType2",
+            "ingenias.jade.agents.ControllerJADEAgent", new Object[0]);	
+	
+	
+        new Thread(){
+          public void run(){
+            try {
+               System.out.println("Starting up Controller_0DeploymentUnitByType2...");
+              agcController_0DeploymentUnitByType2.start();
+            } catch (Exception e){
+              e.printStackTrace();
+            }
+          }
+        }.start();
+
+        // Create a new agent
         final jade.wrapper.AgentController agcSimulation_Creator_0Deployment_Simulator = ac.createNewAgent("Simulation_Creator_0Deployment_Simulator",
             "ingenias.jade.agents.Simulation_CreatorJADEAgent", new Object[0]);	
 	

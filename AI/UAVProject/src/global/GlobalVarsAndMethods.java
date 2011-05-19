@@ -32,7 +32,7 @@ public class GlobalVarsAndMethods {
 	public static double dSecondsFactor = ((double)(Simulation.SimulationVars.iSleepTime * Simulation.SimulationVars.x))/1000;
 	
 	
-	public static int iMaxNumWaypoints = 2;
+	public static int iMaxNumWaypoints = 0;
 	
 	//public static Hashtable<PlaneJADEAgent, Thread> hUpdatePlanesThreads = new Hashtable<PlaneJADEAgent, Thread>();
 	
