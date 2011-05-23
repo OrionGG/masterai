@@ -34,10 +34,10 @@ import ingenias.editor.entities.*;
 
 
 
-public class ObeyOrderCheckTask extends Task{
+public class IsTimeToStartPlaneTask extends Task{
 
- public ObeyOrderCheckTask(String id){
-  super(id,"ObeyOrderCheck");
+ public IsTimeToStartPlaneTask(String id){
+  super(id,"IsTimeToStartPlane");
  }
 
 
@@ -45,9 +45,9 @@ public class ObeyOrderCheckTask extends Task{
  public void execute() throws TaskException{
 
 
-        OrderNewParametersAndLeg  eiOrderNewParametersAndLeg=(OrderNewParametersAndLeg)this.getFirstInputOfType("OrderNewParametersAndLeg");             
+        CanInitiateStartPlane  eiCanInitiateStartPlane=(CanInitiateStartPlane)this.getFirstInputOfType("CanInitiateStartPlane");             
 
-        OrderFinished  eiOrderFinished=(OrderFinished)this.getFirstInputOfType("OrderFinished");             
+        Pilot_Mind  eiPilot_Mind=(Pilot_Mind)this.getFirstInputOfType("Pilot_Mind");             
 
 
 
@@ -65,32 +65,40 @@ public class ObeyOrderCheckTask extends Task{
   		TaskOutput	outputsdefault=findOutputAlternative("default",
   																			outputs);
   		
-		Flight_Leg outputsdefaultFlight_Leg=
-			(Flight_Leg)
-				outputsdefault.getEntityByType("Flight_Leg");
 		
-		
-		OrdenDone outputsdefaultOrdenDone=
-			(OrdenDone)
-				outputsdefault.getEntityByType("OrdenDone");
+		InitiateStartPlane outputsdefaultInitiateStartPlane=
+			(InitiateStartPlane)
+				outputsdefault.getEntityByType("InitiateStartPlane");
 		
 		
 		
         YellowPages yp=null; // only available for initiators of interactions
 
 
-//#start_node:INGENIASCodeComponent23 <--- DO NOT REMOVE THIS	
+//#start_node:INGENIASCodeComponent29 <--- DO NOT REMOVE THIS	
+        Date oDate = eiPilot_Mind.getPilotFlightPlan().getDepartureTime();
+        /*while(oDate.after(new Date())){
+        	try {
+				Thread.sleep(10000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+        }*/
+        if(oDate.after(new Date())){
+        	outputsdefault.remove(outputsdefaultInitiateStartPlane);
+            /*yp=(YellowPages)this.getApplication("YellowPages");
+            ((ingenias.jade.agents.PilotJADEAgent)yp.ja).getMSM().addMentalEntity(eiCanInitiateStartPlane);*/
+        	outputsdefault.add(new OutputEntity(eiCanInitiateStartPlane, TaskOperations.CreateWF));
+        	try {
+				Thread.sleep((long)(1000 * Math.random()));
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+        }
 
-        Flight_Leg oFlightLeg = eiOrderFinished.getFlightLeg();
-        global.GlobalVarsAndMethods.copyFlightLeg(oFlightLeg, outputsdefaultFlight_Leg);
-
-        ingenias.jade.AgentExternalDescription oControllerAgentExternalDescription = 
-        	new ingenias.jade.AgentExternalDescription(eiOrderNewParametersAndLeg.getControllerID(), "ControllerInitiator");
-        
-        //outputsdefaultControllerPilotInteracion.addCollaborators(oControllerAgentExternalDescription);
-        
-        outputsdefaultOrdenDone.setPlaneID(oFlightLeg.getPlaneID());
-//#end_node:INGENIASCodeComponent23 <--- DO NOT REMOVE THIS
+//#end_node:INGENIASCodeComponent29 <--- DO NOT REMOVE THIS
 
  }
  

@@ -18,12 +18,12 @@ import ingenias.jade.JADEAgent;
 
 public  class FlightsMonitorInit {
 
- private static FlightsMonitorAppImp instance = null;
-
 
 private static java.lang.String semaphore="FlightsMonitor";
  
 
+
+ private static Vector<FlightsMonitorAppImp> appsinitialised=new Vector<FlightsMonitorAppImp>();
  
 
 
@@ -38,38 +38,39 @@ private static java.lang.String semaphore="FlightsMonitor";
 public static void shutdown(){
 	synchronized (semaphore) {
 
-   if (instance!=null){
-	shutdown(instance);
-   }
 
+  for (int k=0;k<appsinitialised.size();k++){
+   shutdown(appsinitialised.elementAt(k));
+  }
 
   }
 }
 
 
 
-
-  public static FlightsMonitorApp getInstance(){
+ public static Vector<FlightsMonitorAppImp>  getAppsInitialised(){
+		return appsinitialised;
+ }
+  public static FlightsMonitorApp createInstance(){
   	synchronized (semaphore) {
-   if (instance==null){
-	instance=new FlightsMonitorAppImp();
-    initialize(instance);
-   }
-   
-   return instance;
-   }
-  }
-    public static FlightsMonitorApp getInstance(JADEAgent owner){
-    	synchronized (semaphore) {
-   if (instance==null){
-	instance=new FlightsMonitorAppImp();	
-    initialize(instance);
-   } 
-	instance.registerMultipleOwners(owner);
+	FlightsMonitorAppImp app=new FlightsMonitorAppImp();
+    initialize(app);
+	appsinitialised.add(app);
 	
-   return instance;
+   return app;
    }
   }
+  public static FlightsMonitorApp createInstance(JADEAgent owner){
+  	synchronized (semaphore) {
+	FlightsMonitorAppImp app=new FlightsMonitorAppImp();
+	app.registerOwner(owner);
+    initialize(app);
+	appsinitialised.add(app);
+	
+   return app;
+   }
+  }
+
 
 }
 

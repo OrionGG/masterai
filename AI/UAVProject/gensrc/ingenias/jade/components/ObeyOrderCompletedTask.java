@@ -47,6 +47,8 @@ public class ObeyOrderCompletedTask extends Task{
 
         OrdenDone  eiOrdenDone=(OrdenDone)this.getFirstInputOfType("OrdenDone");             
 
+        ControllerMind  eiControllerMind=(ControllerMind)this.getFirstInputOfType("ControllerMind");             
+
 
 
 
@@ -70,7 +72,24 @@ public class ObeyOrderCompletedTask extends Task{
 
 
 //#start_node:INGENIASCodeComponent24 <--- DO NOT REMOVE THIS	
-//REPLACE THIS COMMENT WITH YOUR CODE
+        ArrayList<jade.core.AID> aPlanesConflictFinished = 
+        	eiControllerMind.getPlanesConflictFinished();
+        
+        aPlanesConflictFinished.add(eiOrdenDone.getPlaneID().id);
+        
+        ArrayList<ArrayList<jade.core.AID>> aConflictsAttended =
+        	eiControllerMind.getConflictsAttended();
+        
+        int iWhereIsConflictAttended = global.GlobalVarsAndMethods.whereIsConflictAttended(
+        		aPlanesConflictFinished, aConflictsAttended);
+        
+        if(iWhereIsConflictAttended != -1){
+        	eiControllerMind.setPlanesConflictFinished(
+        			new java.util.ArrayList<jade.core.AID>());
+        			
+        	aConflictsAttended.remove(iWhereIsConflictAttended);	
+        }
+        
 //#end_node:INGENIASCodeComponent24 <--- DO NOT REMOVE THIS
 
  }

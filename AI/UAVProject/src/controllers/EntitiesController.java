@@ -46,9 +46,9 @@ public class EntitiesController {
 			oAirportsView.render(layer);
 		}
 		
-		for (WayPointView oWayPointViewEntry : lWayPoints) {
+		/*for (WayPointView oWayPointViewEntry : lWayPoints) {
 			oWayPointViewEntry.render(layer);
-		}
+		}*/
 		
 	}
 	

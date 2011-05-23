@@ -76,8 +76,8 @@ public class DescomposeDecisionTask extends Task{
 
 
 //#start_node:INGENIASCodeComponent18 <--- DO NOT REMOVE THIS	
-        outputsdefaultThrow_Instruction.setSpeedChange(-1);
-        outputsdefaultThrow_Instruction.setAltitudeChange(-1);
+        outputsdefaultThrow_Instruction.setSpeedChange(0);
+        outputsdefaultThrow_Instruction.setAltitudeChange(0);
         outputsdefaultThrow_Instruction.setHeadChange(null);
         
         
@@ -99,13 +99,13 @@ public class DescomposeDecisionTask extends Task{
         }
        
         double dSpeedChange = eiDecision.getSpeedChange();
-        if(dSpeedChange > 0){
+        if(dSpeedChange != 0){
         	global.GlobalVarsAndMethods.CreateSpeedInstruction(outputsdefaultThrow_Instruction,
 					dSpeedChange);
         }
         
         double dAltitudeChange = eiDecision.getAltitudeChange();
-        if(dAltitudeChange > 0){
+        if(dAltitudeChange != 0){
         	global.GlobalVarsAndMethods.CreateAltitudeInstruction(outputsdefaultThrow_Instruction,
 					dAltitudeChange);
         	

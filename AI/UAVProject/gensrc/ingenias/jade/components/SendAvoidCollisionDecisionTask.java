@@ -45,7 +45,7 @@ public class SendAvoidCollisionDecisionTask extends Task{
  public void execute() throws TaskException{
 
 
-        PlanesInConflict  eiPlanesInConflict=(PlanesInConflict)this.getFirstInputOfType("PlanesInConflict");             
+        StartAvoidCollision  eiStartAvoidCollision=(StartAvoidCollision)this.getFirstInputOfType("StartAvoidCollision");             
 
         ControllerMind  eiControllerMind=(ControllerMind)this.getFirstInputOfType("ControllerMind");             
 
@@ -97,30 +97,39 @@ public class SendAvoidCollisionDecisionTask extends Task{
         String PilotRole = "PilotColaborator";
         String PlaneRole = "PlaneColaborator";
         
-        boolean bProcessedYet = global.GlobalVarsAndMethods.isConflictYetProcessed(eiPlanesInConflict);
-
-        if(bProcessedYet){
-        	outputsdefault.remove(outputsdefaultOrder);
-        	outputsdefaultControllerPilotInteracion.setState("FINISH");
-        }
-        else{
-        	eiControllerMind.getConflictsAttended();
-        	
-	        Hashtable<jade.core.AID, gov.nasa.worldwind.geom.Position> hPilotGoTo = 
-	        	new Hashtable<jade.core.AID, gov.nasa.worldwind.geom.Position>();
+        
+        	ArrayList<jade.core.AID> aPlanesInConflict = eiStartAvoidCollision.getPlanesInConflict();
 	        
-
-	        ArrayList<ingenias.jade.agents.PlaneJADEAgent> aPlanesInConflict = eiPlanesInConflict.getPlanesInConflict();
-	        for (ingenias.jade.agents.PlaneJADEAgent planeJADEAgent : aPlanesInConflict) {
-	        	jade.core.AID oPlaneAID = planeJADEAgent.getAID();
-	        	ingenias.jade.AgentExternalDescription oPilotAgentExternalDescription = global.GlobalVarsAndMethods.PlaneIdToPilotId.get(oPlaneAID);
+        	ArrayList<ArrayList<jade.core.AID>> aConflictsAttended =
+        	eiControllerMind.getConflictsAttended();
+        	aConflictsAttended.add(aPlanesInConflict);
+        	eiControllerMind.setConflictsAttended(aConflictsAttended);
+        	
+	        Hashtable<jade.core.AID, NewParameters> hPilotNewParameters = 
+	        	new Hashtable<jade.core.AID, NewParameters>();
+	        
+	        for (int i = 0; i < aPlanesInConflict.size(); i++) {
+	        	jade.core.AID planeAID =
+	        		aPlanesInConflict.get(i);
+	        
+	        	jade.core.AID oPlaneAID = planeAID;
+	        	NewParameters oNewParameters = new NewParameters();
 	        	
+	        	oNewParameters.setHead(null);
+	        	oNewParameters.setSpeedKMH(global.GlobalVarsAndMethods.dCruiseSpeedKMH/2);
+	        	oNewParameters.setAltitudeKM(global.GlobalVarsAndMethods.dCruiseAltitudeKM 
+	        			+ (1 * Math.pow(-1, i)));
 	        	
-	        	//hPilotGoTo.put(oPilotAgentExternalDescription, value);
+	        	ingenias.jade.AgentExternalDescription oPilotAgentExternalDescription = 
+	        		global.GlobalVarsAndMethods.PlaneIdToPilotId.get(oPlaneAID);
+	        	
+	        	hPilotNewParameters.put(oPilotAgentExternalDescription.id, oNewParameters);
+	        	outputsdefaultOrder.setPilotNewParameters(hPilotNewParameters);
+	        	outputsdefaultOrder.setControllerID(yp.ja.getAID());
 	        	
 	        	outputsdefaultControllerPilotInteracion.addCollaborators(oPilotAgentExternalDescription);
 			}
-        }
+        
 //#end_node:INGENIASCodeComponent21 <--- DO NOT REMOVE THIS
 
  }

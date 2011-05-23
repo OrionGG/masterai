@@ -73,7 +73,7 @@ public class FinishGivePlanTask extends Task{
 
 
 //#start_node:INGENIASCodeComponent17 <--- DO NOT REMOVE THIS	
-
+        //conversationContextFlightPlannerPilotInteraction.setState("FINISHED");
      
 //#end_node:INGENIASCodeComponent17 <--- DO NOT REMOVE THIS
 

@@ -64,24 +64,30 @@ public class UpdatePlaneStatusThread  implements Runnable{
 	    	
 	        gov.nasa.worldwind.geom.LatLon oNewLatLonPosition = 
 	        	BasicFlightDynamics.BFD.getNextPos(lat1, lon1, brng, speed, lMiliseconds);
-	        
-	        
+	        	        
 	        ingenias.jade.mental.Change_Plane_Status event=new ingenias.jade.mental.Change_Plane_Status();
 	        
 	        event.setNewLatLonPosition(oNewLatLonPosition);
 	        event.setNewHead(null);
 	        event.setNewAltitudeKM(-1);
-
-			try {
-				oUpdatePlaneStatusAppImp.getOwner().getMSM().addMentalEntity(event);
+	        
+	        try {
+				Vector<MentalEntity> lChange_Plane_Status = oUpdatePlaneStatusAppImp.getOwner().getMSM().getMentalEntityByType("Change_Plane_Status");
+				
+				if(lChange_Plane_Status.size()<=0){
+					oUpdatePlaneStatusAppImp.getOwner().getMSM().addMentalEntity(event);
+				}
+				else{
+					ingenias.jade.mental.Change_Plane_Status oChange_Plane_Status = (ingenias.jade.mental.Change_Plane_Status)lChange_Plane_Status.get(0);
+					oChange_Plane_Status.setNewLatLonPosition(event.getNewLatLonPosition());
+					oChange_Plane_Status.setNewHead(event.getNewHead());
+					oChange_Plane_Status.setNewAltitudeKM(event.getNewAltitudeKM());
+				}
 				
 			} catch (ingenias.exception.InvalidEntity e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
-			}
-			
-			
-			
+			}			
 		}
 		
 		

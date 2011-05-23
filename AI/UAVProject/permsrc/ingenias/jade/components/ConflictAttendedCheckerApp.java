@@ -43,7 +43,7 @@ public abstract class ConflictAttendedCheckerApp extends Application{
  }
 
 
- public abstract boolean isConflictAttended(ArrayList<ingenias.jade.agents.PlaneJADEAgent> aPlanesInConflict);
+ public abstract boolean isConflictAttended(ArrayList<jade.core.AID> aPlanesInConflict);
 
  
 }

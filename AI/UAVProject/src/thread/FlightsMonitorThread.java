@@ -34,17 +34,15 @@ public class FlightsMonitorThread  implements Runnable{
 					catch(Exception ex){
 						
 					}
-					if(dDistance < 10){
+					if(dDistance < global.GlobalVarsAndMethods.dAwarenessDistance){//40 miles
 						ingenias.jade.mental.PlanesInConflict oPlanesInConflict = 
 							new ingenias.jade.mental.PlanesInConflict();
 
-						ArrayList<ingenias.jade.agents.PlaneJADEAgent> listPlanesInConflict = 
-							new java.util.ArrayList<ingenias.jade.agents.PlaneJADEAgent>();
+						ArrayList<jade.core.AID> listPlanesInConflict = 
+							new java.util.ArrayList<jade.core.AID>();
 
-						listPlanesInConflict.add(
-								(ingenias.jade.agents.PlaneJADEAgent)oFirstService.getOwner());
-						listPlanesInConflict.add(
-								(ingenias.jade.agents.PlaneJADEAgent)oSecondService.getOwner());
+						listPlanesInConflict.add(oFirstService.getOwner().getAID());
+						listPlanesInConflict.add(oSecondService.getOwner().getAID());
 						oPlanesInConflict.setPlanesInConflict(listPlanesInConflict);
 
 						try {

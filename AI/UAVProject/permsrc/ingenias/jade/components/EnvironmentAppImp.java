@@ -45,44 +45,13 @@ public  class EnvironmentAppImp extends EnvironmentApp{
 		return null;
 	} 
 	
-	public static class ATemplate extends ApplicationTemplate
-	{
-		public static class AppFrame extends ApplicationTemplate.AppFrame
-		{
-			public AppFrame()
-			{
-				super(true, true, false);
-
-				RenderableLayer layer = new RenderableLayer();
-				
-				Simulation.SimulationVars.layer = layer;
-				
-				controllers.EntitiesController oEntitiesController = new controllers.EntitiesController();
-				oEntitiesController.render(layer);
-				
-				
-
-				
-				// Add the layer to the model.
-				
-				insertBeforeCompass(getWwd(), layer);
-
-				// Update layer panel
-				this.getLayerPanel().update(this.getWwd());
-
-					
-			}
-		}
-	}
+	
 	
 	public void start(){
-		System.setProperty("javax.xml.parsers.DocumentBuilderFactory", "com.sun.org.apache.xerces.internal.jaxp.DocumentBuilderFactoryImpl");
-		DocumentBuilderFactory domFactory = DocumentBuilderFactory.newInstance();
-		//gov.nasa.worldwind.examples.ApplicationTemplate.main(new String[]{});
-		Configuration.setValue(AVKey.GLOBE_CLASS_NAME, EarthFlat.class.getName());
-		//Configuration.setValue(AVKey.VIEW_CLASS_NAME, FlatOrbitView.class.getName());
-
-		ApplicationTemplate.start("World Wind Paths", ATemplate.AppFrame.class);
+		thread.EnvironmentThread oEnvironmentThread = 
+			new thread.EnvironmentThread();
+		Thread thread = new Thread(oEnvironmentThread);
+		thread.start();
 		
 	} 
 

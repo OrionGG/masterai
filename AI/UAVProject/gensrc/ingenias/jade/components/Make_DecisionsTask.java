@@ -78,8 +78,8 @@ public class Make_DecisionsTask extends Task{
 
 
 //#start_node:INGENIASCodeComponent7 <--- DO NOT REMOVE THIS	
-        outputsdefaultDecision.setSpeedChange(-1);
-        outputsdefaultDecision.setAltitudeChange(-1);
+        outputsdefaultDecision.setSpeedChange(0);
+        outputsdefaultDecision.setAltitudeChange(0);
         outputsdefaultDecision.setHeadChange(null);
         outputsdefaultDecision.setPriority(0);
         //outputsdefault.remove(outputsdefaultDecision);
@@ -97,8 +97,8 @@ public class Make_DecisionsTask extends Task{
 				//Calculating speed
 				Decision oDecisionSpeedChange =
 					new Decision();
-				oDecisionSpeedChange.setSpeedChange(-1);
-				oDecisionSpeedChange.setAltitudeChange(-1);
+				oDecisionSpeedChange.setSpeedChange(0);
+				oDecisionSpeedChange.setAltitudeChange(0);
 				oDecisionSpeedChange.setHeadChange(null);
 				oDecisionSpeedChange.setPriority(0);
 				
