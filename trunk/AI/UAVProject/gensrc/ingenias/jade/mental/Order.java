@@ -33,9 +33,9 @@ import ingenias.editor.entities.ViewPreferences.ViewType;
 
 public class Order extends ingenias.editor.entities.RuntimeFact{
    
-    double SpeedKMH;   
+    Hashtable<jade.core.AID, NewParameters> PilotNewParameters;   
    
-    Hashtable<jade.core.AID, gov.nasa.worldwind.geom.Position> PilotGoTo;   
+    jade.core.AID ControllerID;   
     
    
   public Order (String id){
@@ -64,21 +64,21 @@ public class Order extends ingenias.editor.entities.RuntimeFact{
   
    
 
-   public void setSpeedKMH(double value){
-     SpeedKMH=value;   
+   public void setPilotNewParameters(Hashtable<jade.core.AID, NewParameters> value){
+     PilotNewParameters=value;   
    };
    
-   public double getSpeedKMH(){
-     return SpeedKMH;      
+   public Hashtable<jade.core.AID, NewParameters> getPilotNewParameters(){
+     return PilotNewParameters;      
    }
    
 
-   public void setPilotGoTo(Hashtable<jade.core.AID, gov.nasa.worldwind.geom.Position> value){
-     PilotGoTo=value;   
+   public void setControllerID(jade.core.AID value){
+     ControllerID=value;   
    };
    
-   public Hashtable<jade.core.AID, gov.nasa.worldwind.geom.Position> getPilotGoTo(){
-     return PilotGoTo;      
+   public jade.core.AID getControllerID(){
+     return ControllerID;      
    }
      
     

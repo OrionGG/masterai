@@ -66,13 +66,13 @@ public class Take_Initial_PlanTask extends Task{
   		TaskOutput	outputsdefault=findOutputAlternative("default",
   																			outputs);
   		
-		InitiateStartPlane outputsdefaultInitiateStartPlane=
-			(InitiateStartPlane)
-				outputsdefault.getEntityByType("InitiateStartPlane");
-		
 		Flight_Plan outputsdefaultFlight_Plan=
 			(Flight_Plan)
 				outputsdefault.getEntityByType("Flight_Plan");
+		
+		CanInitiateStartPlane outputsdefaultCanInitiateStartPlane=
+			(CanInitiateStartPlane)
+				outputsdefault.getEntityByType("CanInitiateStartPlane");
 		
 		
 		PlanReceived outputsdefaultPlanReceived=
@@ -84,19 +84,15 @@ public class Take_Initial_PlanTask extends Task{
         YellowPages yp=null; // only available for initiators of interactions
 
 
-//#start_node:INGENIASCodeComponent2 <--- DO NOT REMOVE THIS	
-        outputsdefaultFlight_Plan.setCruisingAltitudeKM(eiPlanAnswer.getFlightPlan().getCruisingAltitudeKM());
-        outputsdefaultFlight_Plan.setCruisingSpeedKMH(eiPlanAnswer.getFlightPlan().getCruisingSpeedKMH());
-        
-        outputsdefaultFlight_Plan.setDepartureAirport(eiPlanAnswer.getFlightPlan().getDepartureAirport());
-        outputsdefaultFlight_Plan.setDestinationAirport(eiPlanAnswer.getFlightPlan().getDestinationAirport());
-        outputsdefaultFlight_Plan.setWaypoints(eiPlanAnswer.getFlightPlan().getWaypoints());
-        outputsdefaultFlight_Plan.setPilotID(eiPlanAnswer.getFlightPlan().getPilotID());
-        outputsdefaultFlight_Plan.setPlaneID(eiPlanAnswer.getFlightPlan().getPlaneID());
+//#start_node:INGENIASCodeComponent2 <--- DO NOT REMOVE THIS     
+        global.GlobalVarsAndMethods.copyFlightPlan(eiPlanAnswer, outputsdefaultFlight_Plan);
 //#end_node:INGENIASCodeComponent2 <--- DO NOT REMOVE THIS
 
  }
- 
+
+
+
+
 }
 
  

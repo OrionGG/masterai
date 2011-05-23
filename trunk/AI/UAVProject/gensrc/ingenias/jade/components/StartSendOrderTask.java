@@ -34,10 +34,10 @@ import ingenias.editor.entities.*;
 
 
 
-public class ObeyOrderCheckTask extends Task{
+public class StartSendOrderTask extends Task{
 
- public ObeyOrderCheckTask(String id){
-  super(id,"ObeyOrderCheck");
+ public StartSendOrderTask(String id){
+  super(id,"StartSendOrder");
  }
 
 
@@ -45,9 +45,7 @@ public class ObeyOrderCheckTask extends Task{
  public void execute() throws TaskException{
 
 
-        OrderNewParametersAndLeg  eiOrderNewParametersAndLeg=(OrderNewParametersAndLeg)this.getFirstInputOfType("OrderNewParametersAndLeg");             
-
-        OrderFinished  eiOrderFinished=(OrderFinished)this.getFirstInputOfType("OrderFinished");             
+        PlanesInConflict  eiPlanesInConflict=(PlanesInConflict)this.getFirstInputOfType("PlanesInConflict");             
 
 
 
@@ -65,32 +63,26 @@ public class ObeyOrderCheckTask extends Task{
   		TaskOutput	outputsdefault=findOutputAlternative("default",
   																			outputs);
   		
-		Flight_Leg outputsdefaultFlight_Leg=
-			(Flight_Leg)
-				outputsdefault.getEntityByType("Flight_Leg");
 		
-		
-		OrdenDone outputsdefaultOrdenDone=
-			(OrdenDone)
-				outputsdefault.getEntityByType("OrdenDone");
+		StartAvoidCollision outputsdefaultStartAvoidCollision=
+			(StartAvoidCollision)
+				outputsdefault.getEntityByType("StartAvoidCollision");
 		
 		
 		
         YellowPages yp=null; // only available for initiators of interactions
 
 
-//#start_node:INGENIASCodeComponent23 <--- DO NOT REMOVE THIS	
+//#start_node:INGENIASCodeComponent28 <--- DO NOT REMOVE THIS	
+        boolean bAlreadyProcessed = global.GlobalVarsAndMethods.isAlreadyConflictProcessed(eiPlanesInConflict);
 
-        Flight_Leg oFlightLeg = eiOrderFinished.getFlightLeg();
-        global.GlobalVarsAndMethods.copyFlightLeg(oFlightLeg, outputsdefaultFlight_Leg);
-
-        ingenias.jade.AgentExternalDescription oControllerAgentExternalDescription = 
-        	new ingenias.jade.AgentExternalDescription(eiOrderNewParametersAndLeg.getControllerID(), "ControllerInitiator");
-        
-        //outputsdefaultControllerPilotInteracion.addCollaborators(oControllerAgentExternalDescription);
-        
-        outputsdefaultOrdenDone.setPlaneID(oFlightLeg.getPlaneID());
-//#end_node:INGENIASCodeComponent23 <--- DO NOT REMOVE THIS
+        if(bAlreadyProcessed){
+        	outputsdefault.remove(outputsdefaultStartAvoidCollision);
+        }
+        else{
+        	outputsdefaultStartAvoidCollision.setPlanesInConflict(eiPlanesInConflict.getPlanesInConflict());
+        }
+//#end_node:INGENIASCodeComponent28 <--- DO NOT REMOVE THIS
 
  }
  

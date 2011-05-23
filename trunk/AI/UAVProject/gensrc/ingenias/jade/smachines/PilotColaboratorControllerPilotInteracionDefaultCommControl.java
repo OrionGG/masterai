@@ -54,7 +54,7 @@ import ingenias.exception.NotFound;
     
     // Facts that cannot be removed because they must be sent
      
-     lw.addDeletionLockExpectedType("Throw_Instruction");
+     lw.addDeletionLockExpectedType("OrdenDone");
      
      
     }
@@ -66,7 +66,7 @@ import ingenias.exception.NotFound;
     
     // Facts that cannot be removed because they must be sent
      
-     locks.add("Throw_Instruction");
+     locks.add("OrdenDone");
      
      
     return locks;
@@ -117,19 +117,19 @@ import ingenias.exception.NotFound;
          Vector<MentalEntity> mfcontent=null;
          
 		 
-		 allexist=allexist && !getMSR().obtainConversationalMentalEntityByType(sb.getConversation(),"Throw_Instruction").isEmpty();
+		 allexist=allexist && !getMSR().obtainConversationalMentalEntityByType(sb.getConversation(),"OrdenDone").isEmpty();
 		   
          if (allexist && true){
            sb.clearContentNextMessage();
            sb.removeState("InteractionUnit1");
            
            
-	   	   mfcontent=getMSR().obtainConversationalMentalEntityByType(sb.getConversation(),"Throw_Instruction");
+	   	   mfcontent=getMSR().obtainConversationalMentalEntityByType(sb.getConversation(),"OrdenDone");
 	   	   for (MentalEntity me:mfcontent)             
              sb.addContentForNextMessage(me);    
-	       getLR().removeDeletionLockType("Throw_Instruction");
-	       lockProcessed("Throw_Instruction");
-           //MainInteractionManager.log("Removing lock Throw_Instruction",this.getAgent().getLocalName()+"-"+sb.getConversationID());
+	       getLR().removeDeletionLockType("OrdenDone");
+	       lockProcessed("OrdenDone");
+           //MainInteractionManager.log("Removing lock OrdenDone",this.getAgent().getLocalName()+"-"+sb.getConversationID());
             
              
            

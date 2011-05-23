@@ -14,7 +14,10 @@ package ingenias.jade.components;
 
 import java.util.*;
 
+import ingenias.editor.entities.MentalEntity;
+import ingenias.jade.agents.PlaneJADEAgent;
 import ingenias.jade.exception.*;
+import ingenias.jade.mental.ControllerMind;
 
 
 
@@ -25,10 +28,31 @@ public  class ConflictAttendedCheckerAppImp extends ConflictAttendedCheckerApp{
  }
 
 
- public boolean isConflictAttended(ArrayList<ingenias.jade.agents.PlaneJADEAgent> aPlanesInConflict){
-//TODO: INSERT HERE YOUR CODE
-return false;
-} 
+ public boolean isConflictAttended(ArrayList<jade.core.AID> aPlanesInConflict){
+
+	 int iWhereIsConflictAttended = -1;
+	 boolean bIsConflictAttended = false;
+	 
+	 Vector<MentalEntity> vMentalEntities =this.getOwner().getMSM().getMentalEntityByType("ControllerMind");
+	 for (MentalEntity mentalEntity : vMentalEntities) {
+		 ControllerMind oControllerMind = (ControllerMind) mentalEntity;
+		 ArrayList<ArrayList<jade.core.AID>> aConflictsAttended =
+		 oControllerMind.getConflictsAttended();
+		 
+		 iWhereIsConflictAttended = global.GlobalVarsAndMethods.whereIsConflictAttended(
+				 aPlanesInConflict, aConflictsAttended);
+		 if(iWhereIsConflictAttended != -1){
+			 bIsConflictAttended = true;
+			 break;
+		 }
+		 
+	}
+	
+	 return bIsConflictAttended;
+}
+
+
+
  
 }
 

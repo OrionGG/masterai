@@ -31,19 +31,23 @@ import ingenias.jade.components.*;
 import ingenias.editor.entities.*;
 import ingenias.editor.entities.ViewPreferences.ViewType;
 
-public class Conflict extends ingenias.editor.entities.RuntimeFact{
+public class NewParameters extends ingenias.editor.entities.RuntimeFact{
    
-    ArrayList<jade.core.AID> PlanesInConflict;   
+    double AltitudeKM;   
+   
+    gov.nasa.worldwind.geom.Angle Head;   
+   
+    double SpeedKMH;   
     
    
-  public Conflict (String id){
+  public NewParameters (String id){
    super(id);
    this.getPrefs().setView(ViewType.UML);
-   this.type="Conflict";
+   this.type="NewParameters";
   }
   
 
-  public Conflict (){
+  public NewParameters (){
    super(ingenias.jade.MentalStateManager.generateMentalEntityID());
    this.getPrefs().setView(ViewType.UML);
   }
@@ -53,7 +57,7 @@ public class Conflict extends ingenias.editor.entities.RuntimeFact{
   }
   
   public String getType(){
-   return "Conflict";
+   return "NewParameters";
   }
   
   public String getParentType(){
@@ -62,12 +66,30 @@ public class Conflict extends ingenias.editor.entities.RuntimeFact{
   
    
 
-   public void setPlanesInConflict(ArrayList<jade.core.AID> value){
-     PlanesInConflict=value;   
+   public void setAltitudeKM(double value){
+     AltitudeKM=value;   
    };
    
-   public ArrayList<jade.core.AID> getPlanesInConflict(){
-     return PlanesInConflict;      
+   public double getAltitudeKM(){
+     return AltitudeKM;      
+   }
+   
+
+   public void setHead(gov.nasa.worldwind.geom.Angle value){
+     Head=value;   
+   };
+   
+   public gov.nasa.worldwind.geom.Angle getHead(){
+     return Head;      
+   }
+   
+
+   public void setSpeedKMH(double value){
+     SpeedKMH=value;   
+   };
+   
+   public double getSpeedKMH(){
+     return SpeedKMH;      
    }
      
     

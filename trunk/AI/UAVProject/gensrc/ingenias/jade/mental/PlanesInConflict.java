@@ -33,7 +33,7 @@ import ingenias.editor.entities.ViewPreferences.ViewType;
 
 public class PlanesInConflict extends ingenias.editor.entities.RuntimeEvent{
    
-    ArrayList<ingenias.jade.agents.PlaneJADEAgent> PlanesInConflict;   
+    ArrayList<jade.core.AID> PlanesInConflict;   
     
    
    public PlanesInConflict (String id){
@@ -63,11 +63,11 @@ public class PlanesInConflict extends ingenias.editor.entities.RuntimeEvent{
   
    
 
-   public void setPlanesInConflict(ArrayList<ingenias.jade.agents.PlaneJADEAgent> value){
+   public void setPlanesInConflict(ArrayList<jade.core.AID> value){
      PlanesInConflict=value;   
    };
    
-   public ArrayList<ingenias.jade.agents.PlaneJADEAgent> getPlanesInConflict(){
+   public ArrayList<jade.core.AID> getPlanesInConflict(){
      return PlanesInConflict;      
    }
     

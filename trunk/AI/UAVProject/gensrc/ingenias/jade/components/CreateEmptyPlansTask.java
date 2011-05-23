@@ -86,9 +86,6 @@ public class CreateEmptyPlansTask extends Task{
 			e.printStackTrace();
 		}
 		
-		//lDFPilotsAgentDescription = global.GlobalVarsAndMethods.deleteRepeated(lDFPilotsAgentDescription);
-		//lDFPlanesAgentDescription = global.GlobalVarsAndMethods.deleteRepeated(lDFPlanesAgentDescription);
-		
 		for (int i = 0; i < lDFPilotsAgentDescription.size(); i++) {
 			jade.domain.FIPAAgentManagement.DFAgentDescription dfPilotAgentDescription = lDFPilotsAgentDescription.get(i); 
 			if(i >= lDFPlanesAgentDescription.size()){
@@ -102,7 +99,7 @@ public class CreateEmptyPlansTask extends Task{
 			oFlightPlan.setPlaneID(oPlaneAgentExternalDescription);
 			global.GlobalVarsAndMethods.PlaneIdToPilotId.put(dfPlaneAgentDescription.getName(), oPilotAgentExternalDescription);
 
-			outputsdefault.add(new OutputEntity(oFlightPlan,TaskOperations.CreateWF));
+			outputsdefault.add( new OutputEntity(oFlightPlan, TaskOperations.CreateWF));
 			
 		}
 //#end_node:INGENIASCodeComponent16 <--- DO NOT REMOVE THIS

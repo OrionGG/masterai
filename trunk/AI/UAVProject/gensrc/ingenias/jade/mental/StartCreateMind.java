@@ -31,19 +31,17 @@ import ingenias.jade.components.*;
 import ingenias.editor.entities.*;
 import ingenias.editor.entities.ViewPreferences.ViewType;
 
-public class Conflict extends ingenias.editor.entities.RuntimeFact{
-   
-    ArrayList<jade.core.AID> PlanesInConflict;   
+public class StartCreateMind extends ingenias.editor.entities.RuntimeFact{
     
    
-  public Conflict (String id){
+  public StartCreateMind (String id){
    super(id);
    this.getPrefs().setView(ViewType.UML);
-   this.type="Conflict";
+   this.type="StartCreateMind";
   }
   
 
-  public Conflict (){
+  public StartCreateMind (){
    super(ingenias.jade.MentalStateManager.generateMentalEntityID());
    this.getPrefs().setView(ViewType.UML);
   }
@@ -53,22 +51,13 @@ public class Conflict extends ingenias.editor.entities.RuntimeFact{
   }
   
   public String getType(){
-   return "Conflict";
+   return "StartCreateMind";
   }
   
   public String getParentType(){
    return "RuntimeFact";
   }
   
-   
-
-   public void setPlanesInConflict(ArrayList<jade.core.AID> value){
-     PlanesInConflict=value;   
-   };
-   
-   public ArrayList<jade.core.AID> getPlanesInConflict(){
-     return PlanesInConflict;      
-   }
      
     
 }

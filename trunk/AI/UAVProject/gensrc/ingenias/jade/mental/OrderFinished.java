@@ -35,9 +35,7 @@ public class OrderFinished extends ingenias.editor.entities.RuntimeFact{
    
     Flight_Leg FlightLeg;   
    
-    gov.nasa.worldwind.geom.Position OrderPosition;   
-   
-    double SpeedKMH;   
+    NewParameters OrderNewParameters;   
     
    
   public OrderFinished (String id){
@@ -75,21 +73,12 @@ public class OrderFinished extends ingenias.editor.entities.RuntimeFact{
    }
    
 
-   public void setOrderPosition(gov.nasa.worldwind.geom.Position value){
-     OrderPosition=value;   
+   public void setOrderNewParameters(NewParameters value){
+     OrderNewParameters=value;   
    };
    
-   public gov.nasa.worldwind.geom.Position getOrderPosition(){
-     return OrderPosition;      
-   }
-   
-
-   public void setSpeedKMH(double value){
-     SpeedKMH=value;   
-   };
-   
-   public double getSpeedKMH(){
-     return SpeedKMH;      
+   public NewParameters getOrderNewParameters(){
+     return OrderNewParameters;      
    }
      
     

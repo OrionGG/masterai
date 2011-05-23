@@ -83,12 +83,6 @@ public class StartPlaneTask extends Task{
 
 
 //#start_node:INGENIASCodeComponent9 <--- DO NOT REMOVE THIS	
-		/*enums.Airport[] oAirportvalues = enums.Airport.values();
-		
-		//set departure point
-		int iIndexDeparture = generator.nextInt(oAirportvalues.length);
-		
-		enums.Airport oDeparture = oAirportvalues[iIndexDeparture];*/
         enums.Airport oDeparture = eiTurningOnPlane.getInitialAirport();
 		eiPlane_Mind.setLatLonPosition(oDeparture.getPosition().add(gov.nasa.worldwind.geom.LatLon.ZERO));
 		eiPlane_Mind.setLastUpdatePosition(new Date());

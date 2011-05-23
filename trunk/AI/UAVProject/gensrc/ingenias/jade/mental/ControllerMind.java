@@ -33,7 +33,9 @@ import ingenias.editor.entities.ViewPreferences.ViewType;
 
 public class ControllerMind extends ingenias.editor.entities.RuntimeFact{
    
-    ArrayList<ArrayList<ingenias.jade.agents.PlaneJADEAgent>> ConflictsAttended;   
+    ArrayList<ArrayList<jade.core.AID>> ConflictsAttended;   
+   
+    ArrayList<jade.core.AID> PlanesConflictFinished;   
     
    
   public ControllerMind (String id){
@@ -62,12 +64,21 @@ public class ControllerMind extends ingenias.editor.entities.RuntimeFact{
   
    
 
-   public void setConflictsAttended(ArrayList<ArrayList<ingenias.jade.agents.PlaneJADEAgent>> value){
+   public void setConflictsAttended(ArrayList<ArrayList<jade.core.AID>> value){
      ConflictsAttended=value;   
    };
    
-   public ArrayList<ArrayList<ingenias.jade.agents.PlaneJADEAgent>> getConflictsAttended(){
+   public ArrayList<ArrayList<jade.core.AID>> getConflictsAttended(){
      return ConflictsAttended;      
+   }
+   
+
+   public void setPlanesConflictFinished(ArrayList<jade.core.AID> value){
+     PlanesConflictFinished=value;   
+   };
+   
+   public ArrayList<jade.core.AID> getPlanesConflictFinished(){
+     return PlanesConflictFinished;      
    }
      
     

@@ -45,9 +45,9 @@ public class TakeOrderTask extends Task{
  public void execute() throws TaskException{
 
 
-        Flight_Leg  eiFlight_Leg=(Flight_Leg)this.getFirstInputOfType("Flight_Leg");             
-
         Order  eiOrder=(Order)this.getFirstInputOfType("Order");             
+
+        Flight_Leg  eiFlight_Leg=(Flight_Leg)this.getFirstInputOfType("Flight_Leg");             
 
 
 
@@ -65,9 +65,9 @@ public class TakeOrderTask extends Task{
   		TaskOutput	outputsdefault=findOutputAlternative("default",
   																			outputs);
   		
-		OrderPositionAndLeg outputsdefaultOrderPositionAndLeg=
-			(OrderPositionAndLeg)
-				outputsdefault.getEntityByType("OrderPositionAndLeg");
+		OrderNewParametersAndLeg outputsdefaultOrderNewParametersAndLeg=
+			(OrderNewParametersAndLeg)
+				outputsdefault.getEntityByType("OrderNewParametersAndLeg");
 		
 		
 		
@@ -77,10 +77,12 @@ public class TakeOrderTask extends Task{
 
 //#start_node:INGENIASCodeComponent22 <--- DO NOT REMOVE THIS	
         yp=(YellowPages)this.getApplication("YellowPages");
-        gov.nasa.worldwind.geom.Position oPosition = eiOrder.getPilotGoTo().get(yp.ja.getAID());
+        NewParameters oNewParameters = eiOrder.getPilotNewParameters().get(yp.ja.getAID());
         
-        outputsdefaultOrderPositionAndLeg.setOrderPosition(oPosition);
-        outputsdefaultOrderPositionAndLeg.setFlightLeg(eiFlight_Leg);
+        outputsdefaultOrderNewParametersAndLeg.setOrderNewParameters(oNewParameters);
+        outputsdefaultOrderNewParametersAndLeg.setFlightLeg(eiFlight_Leg);
+        outputsdefaultOrderNewParametersAndLeg.setControllerID(eiOrder.getControllerID());
+        
 //#end_node:INGENIASCodeComponent22 <--- DO NOT REMOVE THIS
 
  }

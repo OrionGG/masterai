@@ -10,6 +10,7 @@ import ingenias.jade.mental.Decision;
 import ingenias.jade.mental.Flight_Leg;
 import ingenias.jade.mental.Flight_Plan;
 import ingenias.jade.mental.Manoeuvre;
+import ingenias.jade.mental.PlanAnswer;
 import ingenias.jade.mental.Plane_Mind;
 import ingenias.jade.mental.PlanesInConflict;
 import ingenias.jade.mental.Throw_Instruction;
@@ -24,13 +25,18 @@ import java.util.Vector;
 
 public class GlobalVarsAndMethods {
 	public static int nDegressPerSecond = 3;
-	public static double dMaxAltitudeMps = 12;
+	public static double dMaxAltitudeMps = 40;
 	public static double dMaxAccelerationKMHps = 6.53;
+
+	public static double dCruiseSpeedKMH = 930;
+	public static double dCruiseAltitudeKM = 11;
+	
 	public static Hashtable<jade.core.AID, ingenias.jade.AgentExternalDescription> PlaneIdToPilotId =
 		new Hashtable<jade.core.AID, ingenias.jade.AgentExternalDescription>();
 	
 	public static double dSecondsFactor = ((double)(Simulation.SimulationVars.iSleepTime * Simulation.SimulationVars.x))/1000;
 	
+	public static double dAwarenessDistance = 64.37376;//40 miles
 	
 	public static int iMaxNumWaypoints = 0;
 	
@@ -177,8 +183,12 @@ public class GlobalVarsAndMethods {
 		oFlightPlan.setWaypoints(oWayPoints);
 		
 		//Standard for a Boeing 737
-		oFlightPlan.setCruisingAltitudeKM(Simulation.SimulationVars.dCruiseAltitudeKM);
-		oFlightPlan.setCruisingSpeedKMH(Simulation.SimulationVars.dCruiseSpeedKMH);
+		oFlightPlan.setCruisingAltitudeKM(dCruiseAltitudeKM);
+		oFlightPlan.setCruisingSpeedKMH(dCruiseSpeedKMH);
+		java.util.Date oDate = new java.util.Date();
+		
+		oDate.setMinutes(oDate.getMinutes()+3);
+		oFlightPlan.setDepartureTime(oDate);
 		return oFlightPlan;
 	}
 
@@ -295,20 +305,71 @@ public class GlobalVarsAndMethods {
 		 
 		
 	}
+	
+	public static void copyFlightPlan(PlanAnswer eiPlanAnswer,
+			Flight_Plan outputsdefaultFlight_Plan) {
+		outputsdefaultFlight_Plan.setCruisingAltitudeKM(eiPlanAnswer.getFlightPlan().getCruisingAltitudeKM());
+		outputsdefaultFlight_Plan.setCruisingSpeedKMH(eiPlanAnswer.getFlightPlan().getCruisingSpeedKMH());
+		
+		outputsdefaultFlight_Plan.setDepartureAirport(eiPlanAnswer.getFlightPlan().getDepartureAirport());
+		outputsdefaultFlight_Plan.setDestinationAirport(eiPlanAnswer.getFlightPlan().getDestinationAirport());
+		outputsdefaultFlight_Plan.setWaypoints(eiPlanAnswer.getFlightPlan().getWaypoints());
+		outputsdefaultFlight_Plan.setPilotID(eiPlanAnswer.getFlightPlan().getPilotID());
+		outputsdefaultFlight_Plan.setPlaneID(eiPlanAnswer.getFlightPlan().getPlaneID());
+		outputsdefaultFlight_Plan.setDepartureTime(eiPlanAnswer.getFlightPlan().getDepartureTime());
+	}
+	 
 
-	public static boolean isConflictYetProcessed(
+	public static boolean isAlreadyConflictProcessed(
 			PlanesInConflict eiPlanesInConflict) {
-		boolean bProcessedYet = false;
-		ArrayList<ingenias.jade.agents.PlaneJADEAgent> aPlanesInConflict = eiPlanesInConflict.getPlanesInConflict();
+		boolean bAlreadyProcessed = false;
+		ArrayList<jade.core.AID> aPlanesInConflict = eiPlanesInConflict.getPlanesInConflict();
 		
 		Vector<ConflictAttendedCheckerAppImp> oVector = ConflictAttendedCheckerInit.getAppsInitialised();
 		for (ConflictAttendedCheckerAppImp conflictAttendedCheckerAppImp : oVector) {
 			if(conflictAttendedCheckerAppImp.isConflictAttended(aPlanesInConflict)){
-				bProcessedYet = true;
+				bAlreadyProcessed = true;
 				break;
 			}
 			
 		}
-		return bProcessedYet;
+		return bAlreadyProcessed;
 	}
+	public static int whereIsConflictAttended(
+
+			ArrayList<jade.core.AID> aPlanesInConflict,
+			ArrayList<ArrayList<jade.core.AID>> aConflictsAttended) {
+		
+		int iWhereIsConflictAttended = -1;
+		 
+		for (int i = 0; i < aConflictsAttended.size(); i++) {
+	    	ArrayList<jade.core.AID> arrayList = aConflictsAttended.get(i);
+	    	
+			 boolean bAreAllPlanesAttended = true;
+			 
+			 for (jade.core.AID newPlaneInConflict : aPlanesInConflict) {
+				boolean bIsPlaneInConflict = false;	
+				
+				for (jade.core.AID mindPlanesInConflict : arrayList) {
+					if(newPlaneInConflict.equals(mindPlanesInConflict))
+					{
+						bIsPlaneInConflict = true;
+						break;
+					}
+				}
+				
+				if(!bIsPlaneInConflict){
+					bAreAllPlanesAttended = false;
+					break;
+				}
+				
+			 }
+			 
+			 if(bAreAllPlanesAttended){
+				 iWhereIsConflictAttended = i;
+				 break;
+			 }
+		}
+		return iWhereIsConflictAttended;
+	} 
 }

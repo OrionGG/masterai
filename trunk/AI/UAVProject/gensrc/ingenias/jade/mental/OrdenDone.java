@@ -32,6 +32,8 @@ import ingenias.editor.entities.*;
 import ingenias.editor.entities.ViewPreferences.ViewType;
 
 public class OrdenDone extends ingenias.editor.entities.RuntimeFact{
+   
+    ingenias.jade.AgentExternalDescription PlaneID;   
     
    
   public OrdenDone (String id){
@@ -58,6 +60,15 @@ public class OrdenDone extends ingenias.editor.entities.RuntimeFact{
    return "RuntimeFact";
   }
   
+   
+
+   public void setPlaneID(ingenias.jade.AgentExternalDescription value){
+     PlaneID=value;   
+   };
+   
+   public ingenias.jade.AgentExternalDescription getPlaneID(){
+     return PlaneID;      
+   }
      
     
 }

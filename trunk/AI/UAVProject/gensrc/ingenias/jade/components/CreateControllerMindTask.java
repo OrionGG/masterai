@@ -34,10 +34,10 @@ import ingenias.editor.entities.*;
 
 
 
-public class ObeyOrderCheckTask extends Task{
+public class CreateControllerMindTask extends Task{
 
- public ObeyOrderCheckTask(String id){
-  super(id,"ObeyOrderCheck");
+ public CreateControllerMindTask(String id){
+  super(id,"CreateControllerMind");
  }
 
 
@@ -45,9 +45,9 @@ public class ObeyOrderCheckTask extends Task{
  public void execute() throws TaskException{
 
 
-        OrderNewParametersAndLeg  eiOrderNewParametersAndLeg=(OrderNewParametersAndLeg)this.getFirstInputOfType("OrderNewParametersAndLeg");             
+        StartCreateMind  eiStartCreateMind=(StartCreateMind)this.getFirstInputOfType("StartCreateMind");             
 
-        OrderFinished  eiOrderFinished=(OrderFinished)this.getFirstInputOfType("OrderFinished");             
+        ControllerMind  eiControllerMind=(ControllerMind)this.getFirstInputOfType("ControllerMind");             
 
 
 
@@ -65,32 +65,20 @@ public class ObeyOrderCheckTask extends Task{
   		TaskOutput	outputsdefault=findOutputAlternative("default",
   																			outputs);
   		
-		Flight_Leg outputsdefaultFlight_Leg=
-			(Flight_Leg)
-				outputsdefault.getEntityByType("Flight_Leg");
-		
-		
-		OrdenDone outputsdefaultOrdenDone=
-			(OrdenDone)
-				outputsdefault.getEntityByType("OrdenDone");
 		
 		
 		
         YellowPages yp=null; // only available for initiators of interactions
 
 
-//#start_node:INGENIASCodeComponent23 <--- DO NOT REMOVE THIS	
-
-        Flight_Leg oFlightLeg = eiOrderFinished.getFlightLeg();
-        global.GlobalVarsAndMethods.copyFlightLeg(oFlightLeg, outputsdefaultFlight_Leg);
-
-        ingenias.jade.AgentExternalDescription oControllerAgentExternalDescription = 
-        	new ingenias.jade.AgentExternalDescription(eiOrderNewParametersAndLeg.getControllerID(), "ControllerInitiator");
+//#start_node:INGENIASCodeComponent26 <--- DO NOT REMOVE THIS	
+        ArrayList<ArrayList<jade.core.AID>> oConflictsAttended =
+        	new java.util.ArrayList<ArrayList<jade.core.AID>>();
+        eiControllerMind.setConflictsAttended(oConflictsAttended);
         
-        //outputsdefaultControllerPilotInteracion.addCollaborators(oControllerAgentExternalDescription);
-        
-        outputsdefaultOrdenDone.setPlaneID(oFlightLeg.getPlaneID());
-//#end_node:INGENIASCodeComponent23 <--- DO NOT REMOVE THIS
+        eiControllerMind.setPlanesConflictFinished(
+        		new java.util.ArrayList<jade.core.AID>());
+//#end_node:INGENIASCodeComponent26 <--- DO NOT REMOVE THIS
 
  }
  

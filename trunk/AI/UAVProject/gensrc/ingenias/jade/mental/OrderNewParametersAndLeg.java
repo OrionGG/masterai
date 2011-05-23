@@ -31,19 +31,23 @@ import ingenias.jade.components.*;
 import ingenias.editor.entities.*;
 import ingenias.editor.entities.ViewPreferences.ViewType;
 
-public class Conflict extends ingenias.editor.entities.RuntimeFact{
+public class OrderNewParametersAndLeg extends ingenias.editor.entities.RuntimeFact{
    
-    ArrayList<jade.core.AID> PlanesInConflict;   
+    Flight_Leg FlightLeg;   
+   
+    NewParameters OrderNewParameters;   
+   
+    jade.core.AID ControllerID;   
     
    
-  public Conflict (String id){
+  public OrderNewParametersAndLeg (String id){
    super(id);
    this.getPrefs().setView(ViewType.UML);
-   this.type="Conflict";
+   this.type="OrderNewParametersAndLeg";
   }
   
 
-  public Conflict (){
+  public OrderNewParametersAndLeg (){
    super(ingenias.jade.MentalStateManager.generateMentalEntityID());
    this.getPrefs().setView(ViewType.UML);
   }
@@ -53,7 +57,7 @@ public class Conflict extends ingenias.editor.entities.RuntimeFact{
   }
   
   public String getType(){
-   return "Conflict";
+   return "OrderNewParametersAndLeg";
   }
   
   public String getParentType(){
@@ -62,12 +66,30 @@ public class Conflict extends ingenias.editor.entities.RuntimeFact{
   
    
 
-   public void setPlanesInConflict(ArrayList<jade.core.AID> value){
-     PlanesInConflict=value;   
+   public void setFlightLeg(Flight_Leg value){
+     FlightLeg=value;   
    };
    
-   public ArrayList<jade.core.AID> getPlanesInConflict(){
-     return PlanesInConflict;      
+   public Flight_Leg getFlightLeg(){
+     return FlightLeg;      
+   }
+   
+
+   public void setOrderNewParameters(NewParameters value){
+     OrderNewParameters=value;   
+   };
+   
+   public NewParameters getOrderNewParameters(){
+     return OrderNewParameters;      
+   }
+   
+
+   public void setControllerID(jade.core.AID value){
+     ControllerID=value;   
+   };
+   
+   public jade.core.AID getControllerID(){
+     return ControllerID;      
    }
      
     

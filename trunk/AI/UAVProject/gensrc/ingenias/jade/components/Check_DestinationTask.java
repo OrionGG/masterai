@@ -74,7 +74,7 @@ public class Check_DestinationTask extends Task{
 
 
 //#start_node:INGENIASCodeComponent14 <--- DO NOT REMOVE THIS	
-        outputsdefaultThrow_Instruction.setAltitudeChange(-1);
+        outputsdefaultThrow_Instruction.setAltitudeChange(0);
         outputsdefaultThrow_Instruction.setHeadChange(null);	
     	//stop the plane
         outputsdefaultThrow_Instruction.setSpeedChange(0);
