@@ -78,22 +78,6 @@ public class MainDeploymentPackage0 {
         }.start();
 
         // Create a new agent
-        final jade.wrapper.AgentController agcController_1DeploymentUnitByType5 = ac.createNewAgent("Controller_1DeploymentUnitByType5",
-            "ingenias.jade.agents.ControllerJADEAgent", new Object[0]);	
-	
-	
-        new Thread(){
-          public void run(){
-            try {
-               System.out.println("Starting up Controller_1DeploymentUnitByType5...");
-              agcController_1DeploymentUnitByType5.start();
-            } catch (Exception e){
-              e.printStackTrace();
-            }
-          }
-        }.start();
-
-        // Create a new agent
         final jade.wrapper.AgentController agcPilot_0DeploymentUnitByType4 = ac.createNewAgent("Pilot_0DeploymentUnitByType4",
             "ingenias.jade.agents.PilotJADEAgent", new Object[0]);	
 	

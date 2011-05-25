@@ -611,6 +611,11 @@ public class PilotJADEAgent
              to.add(new OutputEntity(expectedOutputFlight_Leg,TaskOperations.CreateWF));
             }
 	     
+		    {StartLegChecker expectedOutputStartLegChecker=		    
+		     new StartLegChecker(MentalStateManager.generateMentalEntityID());			
+             to.add(new OutputEntity(expectedOutputStartLegChecker,TaskOperations.CreateWF));
+            }
+	     
      
      		      
 	      tobject.addOutput(to);
@@ -1029,6 +1034,17 @@ public class PilotJADEAgent
 	      
 	      
 		
+		
+             expectedInput=this.getMSM().getMentalEntityByType("StartLegChecker");
+             if (expectedInput.size()==0 && !("1".equals("0..n"))){
+				nonExistingInputs.add("StartLegChecker");
+			 } else {
+			    addExpectedInputs(tobject, "StartLegChecker","1",expectedInput);
+             	addConsumedInput(to,"1",expectedInput);
+			 }
+             allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;
+
+	      
 	      
 	     
 	     expectedApp=(ingenias.jade.components.Application)getAM().getApplication("Leg_Checker");
@@ -1046,11 +1062,6 @@ public class PilotJADEAgent
 	      
  
 	     
-	     
-		    {LegCompleted expectedOutputLegCompleted=		    
-		     new LegCompleted(MentalStateManager.generateMentalEntityID());			
-             to.add(new OutputEntity(expectedOutputLegCompleted,TaskOperations.CreateWF));
-            }
 	     
      
      		      
@@ -1485,20 +1496,20 @@ public class PilotJADEAgent
 	     
             
 		
-            expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"Order");
-			if (expectedInput.size()==0 && !("1".equals("0..n")))
-				nonExistingInputs.add("Order");
-			else {
-			    addExpectedInputs(tobject, "Order","1",expectedInput);
-			    addConsumedInput(to, "1", expectedInput);
-			}
-	      allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;
-	      
             expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"Flight_Leg");
 			if (expectedInput.size()==0 && !("1".equals("0..n")))
 				nonExistingInputs.add("Flight_Leg");
 			else {
 			    addExpectedInputs(tobject, "Flight_Leg","1",expectedInput);
+			    addConsumedInput(to, "1", expectedInput);
+			}
+	      allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;
+	      
+            expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"Order");
+			if (expectedInput.size()==0 && !("1".equals("0..n")))
+				nonExistingInputs.add("Order");
+			else {
+			    addExpectedInputs(tobject, "Order","1",expectedInput);
 			    addConsumedInput(to, "1", expectedInput);
 			}
 	      allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;
@@ -2564,6 +2575,12 @@ public class PilotJADEAgent
      this.getAM().addApplication("Leg_Checker",app);        
 	 events=new Vector();
 	 actions=new Vector();
+		
+	 event= new LegCompleted();
+	 /* 
+	 */ 
+	 events.add(event);
+	 actions.add(generateActionListener(LegCompleted.class));		
 
 	 if (getGraphics()!=null)
 	  getGraphics().addApplication("Leg_Checker", events,actions);    

@@ -45,9 +45,9 @@ public class ObeyOrderCheckTask extends Task{
  public void execute() throws TaskException{
 
 
-        OrderFinished  eiOrderFinished=(OrderFinished)this.getFirstInputOfType("OrderFinished");             
-
         OrderNewParametersAndLeg  eiOrderNewParametersAndLeg=(OrderNewParametersAndLeg)this.getFirstInputOfType("OrderNewParametersAndLeg");             
+
+        OrderFinished  eiOrderFinished=(OrderFinished)this.getFirstInputOfType("OrderFinished");             
 
 
 

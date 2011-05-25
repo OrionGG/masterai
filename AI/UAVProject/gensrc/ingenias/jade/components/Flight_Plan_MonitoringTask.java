@@ -70,6 +70,10 @@ public class Flight_Plan_MonitoringTask extends Task{
 			(Flight_Leg)
 				outputsdefault.getEntityByType("Flight_Leg");
 		
+		StartLegChecker outputsdefaultStartLegChecker=
+			(StartLegChecker)
+				outputsdefault.getEntityByType("StartLegChecker");
+		
 		
 		
         YellowPages yp=null; // only available for initiators of interactions

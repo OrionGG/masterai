@@ -31,12 +31,10 @@ import ingenias.jade.components.*;
 import ingenias.editor.entities.*;
 import ingenias.editor.entities.ViewPreferences.ViewType;
 
-public class LegCompleted extends ingenias.editor.entities.RuntimeFact{
-   
-    Flight_Leg FlightLeg;   
+public class LegCompleted extends ingenias.editor.entities.RuntimeEvent{
     
    
-  public LegCompleted (String id){
+   public LegCompleted (String id){
    super(id);
    this.getPrefs().setView(ViewType.UML);
    this.type="LegCompleted";
@@ -46,6 +44,7 @@ public class LegCompleted extends ingenias.editor.entities.RuntimeFact{
   public LegCompleted (){
    super(ingenias.jade.MentalStateManager.generateMentalEntityID());
    this.getPrefs().setView(ViewType.UML);
+   this.type="LegCompleted";
   }
   
   public String toString(){
@@ -56,21 +55,13 @@ public class LegCompleted extends ingenias.editor.entities.RuntimeFact{
    return "LegCompleted";
   }
   
-  public String getParentType(){
-   return "RuntimeFact";
+   public String getParentType(){
+   return "RuntimeEvent";
   }
   
-   
-
-   public void setFlightLeg(Flight_Leg value){
-     FlightLeg=value;   
-   };
-   
-   public Flight_Leg getFlightLeg(){
-     return FlightLeg;      
-   }
-     
     
+  
+  
 }
 
  

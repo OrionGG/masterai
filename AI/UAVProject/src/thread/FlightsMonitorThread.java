@@ -63,7 +63,9 @@ public class FlightsMonitorThread  implements Runnable{
 
 				}
 			}
-			global.GlobalVarsAndMethods.sleepRandom(Simulation.SimulationVars.iSleepTime * 10);
+			long iRangeTime =(long) (Simulation.SimulationVars.iSleepTime * Math.pow(global.GlobalVarsAndMethods.PlaneIdToPilotId.size(),2));
+	        
+			global.GlobalVarsAndMethods.sleepRandom(iRangeTime);
 		}
 		
 	}

@@ -24,29 +24,42 @@
 */
 
 
-package ingenias.jade.components;
+package ingenias.jade.mental;
 
 import java.util.*;
-import ingenias.jade.exception.*;
+import ingenias.jade.components.*;
+import ingenias.editor.entities.*;
+import ingenias.editor.entities.ViewPreferences.ViewType;
 
+public class StartLegChecker extends ingenias.editor.entities.RuntimeFact{
+    
+   
+  public StartLegChecker (String id){
+   super(id);
+   this.getPrefs().setView(ViewType.UML);
+   this.type="StartLegChecker";
+  }
+  
 
-
-
-
-
-public abstract class Leg_CheckerApp extends Application{
-
-
- public Leg_CheckerApp(){
-  super();
- }
-
-
- public abstract boolean isLegCompleted(ingenias.jade.mental.Flight_Leg eiFlight_Leg);
-
- public abstract void start(ingenias.jade.mental.Flight_Leg eiFlight_Leg);
-
- 
+  public StartLegChecker (){
+   super(ingenias.jade.MentalStateManager.generateMentalEntityID());
+   this.getPrefs().setView(ViewType.UML);
+  }
+  
+  public String toString(){
+   return this.getId()+":"+this.getType();
+  }
+  
+  public String getType(){
+   return "StartLegChecker";
+  }
+  
+  public String getParentType(){
+   return "RuntimeFact";
+  }
+  
+     
+    
 }
 
  

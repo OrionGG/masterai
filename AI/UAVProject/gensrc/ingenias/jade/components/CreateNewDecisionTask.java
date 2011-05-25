@@ -86,9 +86,10 @@ public class CreateNewDecisionTask extends Task{
 	        Date oLastDecisionDate = eiPilot_Mind.getLastDecisionDate();
 	        Date oNow = new Date();
 	        long lDifferOfMiliseconds = oNow.getTime() - oLastDecisionDate.getTime();
-	        if(lDifferOfMiliseconds < Simulation.SimulationVars.iSleepTime * 2){
-	        	/*global.GlobalVarsAndMethods.sleep(Simulation.SimulationVars.iSleepTime/4);
-	        	oNow = new Date();
+	        long iRangeTime =(long) (Simulation.SimulationVars.iSleepTime * Math.pow(global.GlobalVarsAndMethods.PlaneIdToPilotId.size(),2));
+	        if(lDifferOfMiliseconds < iRangeTime){
+	        	global.GlobalVarsAndMethods.sleepRandom(iRangeTime /2);
+	        	/*oNow = new Date();
 	            lDifferOfMiliseconds = oNow.getTime() - oLastDecisionDate.getTime();*/
 	        	outputsdefault.remove(outputsdefaultCanCreateNewDecision);
 	        }

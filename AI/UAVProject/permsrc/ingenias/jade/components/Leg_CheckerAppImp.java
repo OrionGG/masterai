@@ -13,41 +13,46 @@
 package ingenias.jade.components;
 
 import java.util.*;
-
 import ingenias.jade.exception.*;
-import ingenias.jade.mental.Flight_Leg;
 
 
 
 public  class Leg_CheckerAppImp extends Leg_CheckerApp{
 
-	public Leg_CheckerAppImp(){
-		super();
-	}
+ public Leg_CheckerAppImp(){
+  super();
+ }
 
 
+ public boolean isLegCompleted(ingenias.jade.mental.Flight_Leg eiFlight_Leg){
+			boolean bResutl = false;
 
+			Vector<Plane_Position_ServiceAppImp> oVector = Plane_Position_ServiceInit.getAppsInitialised();
 
-	public boolean isLegCompleted(Flight_Leg eiFlight_Leg){
-		boolean bResutl = false;
+			for (Plane_Position_ServiceAppImp plane_Position_ServiceAppImp : oVector) {
+				jade.core.AID oPlaneAID = eiFlight_Leg.getPlaneID().id;
+				if(oPlaneAID.equals(plane_Position_ServiceAppImp.getOwner().getAID())){
 
-		Vector<Plane_Position_ServiceAppImp> oVector = Plane_Position_ServiceInit.getAppsInitialised();
-
-		for (Plane_Position_ServiceAppImp plane_Position_ServiceAppImp : oVector) {
-			jade.core.AID oPlaneAID = eiFlight_Leg.getPlaneID().id;
-			if(oPlaneAID.equals(plane_Position_ServiceAppImp.getOwner().getAID())){
-
-				gov.nasa.worldwind.geom.Position oPosition = plane_Position_ServiceAppImp.getCurrentPosition();
-				double dDistance = BasicFlightDynamics.BFD.getDistance(eiFlight_Leg.getEndPoint(), oPosition);
-				if(dDistance < 10){
-					bResutl =  true;
+					gov.nasa.worldwind.geom.Position oPosition = plane_Position_ServiceAppImp.getCurrentPosition();
+					double dDistance = BasicFlightDynamics.BFD.getDistance(eiFlight_Leg.getEndPoint(), oPosition);
+					if(dDistance < 10){
+						bResutl =  true;
+					}
+					break;
 				}
-				break;
+
 			}
+			return bResutl;
+} 
+ 
+ public void start(ingenias.jade.mental.Flight_Leg eiFlight_Leg){
+	 thread.LegCheckerThread oLegCheckerThread = 
+			new thread.LegCheckerThread(this, eiFlight_Leg);
+		Thread thread = new Thread(oLegCheckerThread);
+		thread.start();
 
-		}
-		return bResutl;
-	}
-
+} 
+ 
 }
 
+ 
