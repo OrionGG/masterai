@@ -22,14 +22,21 @@ public class FlightsMonitorThread  implements Runnable{
 			for (int i = 0; i < oVector.size()-1; i++) {
 
 				Plane_Position_ServiceAppImp oFirstService = oVector.get(i);
-
+				
+				gov.nasa.worldwind.geom.Position oPositionFirstService = null;
+				try{
+					oPositionFirstService = oFirstService.getCurrentPosition();
+				}
+				catch(Exception ex){
+					continue;
+				}
 
 				for (int j = i+1; j < oVector.size(); j++) {
 					Plane_Position_ServiceAppImp oSecondService = oVector.get(j);
 					double dDistance = Double.MAX_VALUE;
 					try{
 						dDistance = BasicFlightDynamics.BFD.getDistance(
-							oFirstService.getCurrentPosition(), oSecondService.getCurrentPosition());
+								oPositionFirstService, oSecondService.getCurrentPosition());
 					}
 					catch(Exception ex){
 						
@@ -56,7 +63,7 @@ public class FlightsMonitorThread  implements Runnable{
 
 				}
 			}
-			global.GlobalVarsAndMethods.sleep(Simulation.SimulationVars.iSleepTime);
+			global.GlobalVarsAndMethods.sleepRandom(Simulation.SimulationVars.iSleepTime * 10);
 		}
 		
 	}

@@ -187,7 +187,7 @@ public class GlobalVarsAndMethods {
 		oFlightPlan.setCruisingSpeedKMH(dCruiseSpeedKMH);
 		java.util.Date oDate = new java.util.Date();
 		
-		oDate.setMinutes(oDate.getMinutes()+3);
+		oDate.setMinutes(oDate.getMinutes()+1);
 		oFlightPlan.setDepartureTime(oDate);
 		return oFlightPlan;
 	}
@@ -275,9 +275,9 @@ public class GlobalVarsAndMethods {
 		}
 	}
 
-	public static void sleep(int iSleepTime) {
+	public static void sleepRandom(long iSleepTime) {
 		try {
-			Thread.sleep(iSleepTime);
+			Thread.sleep((long)(iSleepTime * Math.random()));
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

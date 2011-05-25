@@ -84,15 +84,12 @@ public class Take_Initial_PlanTask extends Task{
         YellowPages yp=null; // only available for initiators of interactions
 
 
-//#start_node:INGENIASCodeComponent2 <--- DO NOT REMOVE THIS     
+//#start_node:INGENIASCodeComponent2 <--- DO NOT REMOVE THIS	
         global.GlobalVarsAndMethods.copyFlightPlan(eiPlanAnswer, outputsdefaultFlight_Plan);
 //#end_node:INGENIASCodeComponent2 <--- DO NOT REMOVE THIS
 
  }
-
-
-
-
+ 
 }
 
  

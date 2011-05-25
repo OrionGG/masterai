@@ -42,7 +42,7 @@ public class UpdatePlaneStatusThread  implements Runnable{
     	double speed = eiPlane_Mind.getSpeedKMH();
 		while (speed != 0){
 
-			global.GlobalVarsAndMethods.sleep(SimulationVars.iSleepTime);
+			global.GlobalVarsAndMethods.sleepRandom(SimulationVars.iSleepTime);
 
 			gov.nasa.worldwind.geom.Position oPosition = new gov.nasa.worldwind.geom.Position(
 					eiPlane_Mind.getLatLonPosition(),

@@ -65,13 +65,9 @@ public class RunManoeuvreTurnHead  implements Runnable{
 		}
 	}
 
-	public void sleep(int miliseconds) {
-		try {
-			Thread.sleep(miliseconds);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	public void sleep(long miliseconds) {
+		global.GlobalVarsAndMethods.sleepRandom(miliseconds);
+        
 	}
 
 	public static boolean runManoeuvreTurnHead(Manoeuvre eiManoeuvre,
