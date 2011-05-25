@@ -93,11 +93,6 @@ public class SendAvoidCollisionDecisionTask extends Task{
 
 //#start_node:INGENIASCodeComponent21 <--- DO NOT REMOVE THIS	
         
-        String ControllerRole = "ControllerInitiator";
-        String PilotRole = "PilotColaborator";
-        String PlaneRole = "PlaneColaborator";
-        
-        
         	ArrayList<jade.core.AID> aPlanesInConflict = eiStartAvoidCollision.getPlanesInConflict();
 	        
         	ArrayList<ArrayList<jade.core.AID>> aConflictsAttended =

@@ -45,6 +45,8 @@ public class Check_Leg_CompletedTask extends Task{
  public void execute() throws TaskException{
 
 
+        StartLegChecker  eiStartLegChecker=(StartLegChecker)this.getFirstInputOfType("StartLegChecker");             
+
         Flight_Leg  eiFlight_Leg=(Flight_Leg)this.getFirstInputOfType("Flight_Leg");             
 
 
@@ -66,25 +68,13 @@ public class Check_Leg_CompletedTask extends Task{
   																			outputs);
   		
 		
-		LegCompleted outputsdefaultLegCompleted=
-			(LegCompleted)
-				outputsdefault.getEntityByType("LegCompleted");
-		
 		
 		
         YellowPages yp=null; // only available for initiators of interactions
 
 
 //#start_node:INGENIASCodeComponent6 <--- DO NOT REMOVE THIS	
-        boolean bIsLegCompleted = ((Leg_CheckerAppImp)eaLeg_Checker).isLegCompleted(eiFlight_Leg);
-
-        if(bIsLegCompleted){
-
-        }
-        else{
-        	
-        	outputsdefault.removeEntity(outputsdefaultLegCompleted);
-        }
+        eaLeg_Checker.start(eiFlight_Leg);
 //#end_node:INGENIASCodeComponent6 <--- DO NOT REMOVE THIS
 
  }
