@@ -77,27 +77,12 @@ public class IsTimeToStartPlaneTask extends Task{
 
 //#start_node:INGENIASCodeComponent29 <--- DO NOT REMOVE THIS	
         Date oDate = eiPilot_Mind.getPilotFlightPlan().getDepartureTime();
-        /*while(oDate.after(new Date())){
-        	try {
-				Thread.sleep(10000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-        }*/
+
         if(oDate.after(new Date())){
         	outputsdefault.remove(outputsdefaultInitiateStartPlane);
-            /*yp=(YellowPages)this.getApplication("YellowPages");
-            ((ingenias.jade.agents.PilotJADEAgent)yp.ja).getMSM().addMentalEntity(eiCanInitiateStartPlane);*/
-        	outputsdefault.add(new OutputEntity(eiCanInitiateStartPlane, TaskOperations.CreateWF));
-        	try {
-				Thread.sleep((long)(1000 * Math.random()));
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+            outputsdefault.add(new OutputEntity(eiCanInitiateStartPlane, TaskOperations.CreateWF));
+        	global.GlobalVarsAndMethods.sleepRandom(Simulation.SimulationVars.iSleepTime);
         }
-
 //#end_node:INGENIASCodeComponent29 <--- DO NOT REMOVE THIS
 
  }

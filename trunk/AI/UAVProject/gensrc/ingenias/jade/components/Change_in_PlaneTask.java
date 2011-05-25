@@ -90,12 +90,8 @@ public class Change_in_PlaneTask extends Task{
 
         	runManoeuvre = thread.RunManoeuvre.runManoeuvre(eiManoeuvre, eiPlane_Mind, (ingenias.jade.agents.PlaneJADEAgent)yp.ja);
 			
-	        try {
-				Thread.sleep(Simulation.SimulationVars.iSleepTime);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} 
+        	global.GlobalVarsAndMethods.sleepRandom(Simulation.SimulationVars.iSleepTime);
+            
 			
 			outputsdefaultPlane_Change.setThrowInstruction(eiManoeuvre.getThrowInstruction());
         }

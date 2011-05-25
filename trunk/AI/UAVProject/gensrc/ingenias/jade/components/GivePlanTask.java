@@ -92,12 +92,6 @@ public class GivePlanTask extends Task{
 //#start_node:CodeForCreatingRandomPlan <--- DO NOT REMOVE THIS	
         outputsdefaultPlanAnswer.setFlightPlan(eiFlight_Plan);
         outputsdefaultFlightPlannerPilotInteraction.addCollaborators(eiFlight_Plan.getPilotID());
-        /*try {
-			Thread.sleep(1000 * global.GlobalVarsAndMethods.PlaneIdToPilotId.size());
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
 //#end_node:CodeForCreatingRandomPlan <--- DO NOT REMOVE THIS
 
  }
