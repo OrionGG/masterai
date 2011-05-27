@@ -34,10 +34,10 @@ import ingenias.editor.entities.*;
 
 
 
-public class GivePlanTask extends Task{
+public class Execute_InstructionTask extends Task{
 
- public GivePlanTask(String id){
-  super(id,"GivePlan");
+ public Execute_InstructionTask(String id){
+  super(id,"Execute_Instruction");
  }
 
 
@@ -45,7 +45,9 @@ public class GivePlanTask extends Task{
  public void execute() throws TaskException{
 
 
-        Flight_Plan  eiFlight_Plan=(Flight_Plan)this.getFirstInputOfType("Flight_Plan");             
+        Throw_Instruction  eiThrow_Instruction=(Throw_Instruction)this.getFirstInputOfType("Throw_Instruction");             
+
+        Pilot_Mind  eiPilot_Mind=(Pilot_Mind)this.getFirstInputOfType("Pilot_Mind");             
 
 
 
@@ -63,20 +65,20 @@ public class GivePlanTask extends Task{
   		TaskOutput	outputsdefault=findOutputAlternative("default",
   																			outputs);
   		
-		RuntimeConversation outputsdefaultFlightPlannerPilotInteraction=
+		RuntimeConversation outputsdefaultPilotPlaneInteraction=
 			(RuntimeConversation)
-				outputsdefault.getEntityByType("FlightPlannerPilotInteraction");
+				outputsdefault.getEntityByType("PilotPlaneInteraction");
 		
 		
-		PlanAnswer outputsdefaultPlanAnswer=
-			(PlanAnswer)
-				outputsdefault.getEntityByType("PlanAnswer");
+		Manoeuvre outputsdefaultManoeuvre=
+			(Manoeuvre)
+				outputsdefault.getEntityByType("Manoeuvre");
 		
 		
 		
         YellowPages yp=null; // only available for initiators of interactions
 
-		// This task can produce an interaction of type FlightPlannerPilotInteraction by working with its conversation object
+		// This task can produce an interaction of type PilotPlaneInteraction by working with its conversation object
         
         // To define manually who are the collaborator involved. Your selection will be verified
         // in runtime. Pay attention to log messages to detect errors. You can use the yello pages
@@ -84,24 +86,25 @@ public class GivePlanTask extends Task{
         yp=(YellowPages)this.getApplication("YellowPages");
 
         //  Uncomment the following and write down a proper local id of the agent
-        // Find an agent playing the role "PilotColaborator"
-      	//eoFlightPlannerPilotInteraction.addCollaborators("Local ID of the collaborator");
+        // Find an agent playing the role "PlaneColaborator"
+      	//eoPilotPlaneInteraction.addCollaborators("Local ID of the collaborator");
        	
 
 
-//#start_node:CodeForCreatingRandomPlan <--- DO NOT REMOVE THIS	
-        if(global.GlobalVarsAndMethods.inomore > 0){
-	        global.GlobalVarsAndMethods.inomore --;
-	        outputsdefaultPlanAnswer.setFlightPlan(eiFlight_Plan);
-	        outputsdefaultFlightPlannerPilotInteraction.addCollaborators(eiFlight_Plan.getPilotID());
-        }else{
-        	outputsdefaultFlightPlannerPilotInteraction.setAbortCode(-1);
-        	outputsdefaultFlightPlannerPilotInteraction.setState("FINISHED");
-        	outputsdefault.removeAllElements();
-        }
+//#start_node:INGENIASCodeComponent10 <--- DO NOT REMOVE THIS	
+        outputsdefaultManoeuvre.setSpeedChange(eiThrow_Instruction.getSpeedChange());
+        outputsdefaultManoeuvre.setAltitudeChange(eiThrow_Instruction.getAltitudeChange());
+        outputsdefaultManoeuvre.setHeadChange(eiThrow_Instruction.getHeadChange());
+        outputsdefaultManoeuvre.setPriority(eiThrow_Instruction.getPriority());
+        outputsdefaultManoeuvre.setThrowInstruction(eiThrow_Instruction);
         
+        List<Throw_Instruction> oInstructionsRunning = eiPilot_Mind.getInstructionRunning();
+        oInstructionsRunning.add(eiThrow_Instruction);
+        eiPilot_Mind.setInstructionRunning(oInstructionsRunning);
+        eiPilot_Mind.setLastDecisionDate(new Date());
         
-//#end_node:CodeForCreatingRandomPlan <--- DO NOT REMOVE THIS
+        outputsdefaultPilotPlaneInteraction.addCollaborators(eiPilot_Mind.getPilotFlightPlan().getPlaneID());
+//#end_node:INGENIASCodeComponent10 <--- DO NOT REMOVE THIS
 
  }
  

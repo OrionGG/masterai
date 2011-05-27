@@ -34,10 +34,10 @@ import ingenias.editor.entities.*;
 
 
 
-public class SendAvoidCollisionDecisionTask extends Task{
+public class SendAvoidCollisionTask extends Task{
 
- public SendAvoidCollisionDecisionTask(String id){
-  super(id,"SendAvoidCollisionDecision");
+ public SendAvoidCollisionTask(String id){
+  super(id,"SendAvoidCollision");
  }
 
 
@@ -100,27 +100,26 @@ public class SendAvoidCollisionDecisionTask extends Task{
         	aConflictsAttended.add(aPlanesInConflict);
         	eiControllerMind.setConflictsAttended(aConflictsAttended);
         	
-	        Hashtable<jade.core.AID, NewParameters> hPilotNewParameters = 
-	        	new Hashtable<jade.core.AID, NewParameters>();
+	        Hashtable<jade.core.AID, Flight_Leg> hPilotNewFlightLeg = 
+	        	new Hashtable<jade.core.AID, Flight_Leg>();
 	        
 	        for (int i = 0; i < aPlanesInConflict.size(); i++) {
 	        	jade.core.AID planeAID =
 	        		aPlanesInConflict.get(i);
 	        
 	        	jade.core.AID oPlaneAID = planeAID;
-	        	NewParameters oNewParameters = new NewParameters();
+	        	Flight_Leg oFlightLeg = new Flight_Leg();
 	        	
-	        	oNewParameters.setHead(null);
-	        	oNewParameters.setSpeedKMH(global.GlobalVarsAndMethods.dCruiseSpeedKMH/2);
-	        	oNewParameters.setAltitudeKM(global.GlobalVarsAndMethods.dCruiseAltitudeKM 
+	        	oFlightLeg.setHead(null);
+	        	oFlightLeg.setSpeedKMH(global.GlobalVarsAndMethods.dCruiseSpeedKMH/2);
+	        	oFlightLeg.setAltitudeKM(global.GlobalVarsAndMethods.dCruiseAltitudeKM 
 	        			+ (1 * Math.pow(-1, i)));
 	        	
 	        	ingenias.jade.AgentExternalDescription oPilotAgentExternalDescription = 
 	        		global.GlobalVarsAndMethods.PlaneIdToPilotId.get(oPlaneAID);
 	        	
-	        	hPilotNewParameters.put(oPilotAgentExternalDescription.id, oNewParameters);
-	        	outputsdefaultOrder.setPilotNewParameters(hPilotNewParameters);
-	        	outputsdefaultOrder.setControllerID(yp.ja.getAID());
+	        	hPilotNewFlightLeg.put(oPilotAgentExternalDescription.id, oFlightLeg);
+	        	outputsdefaultOrder.setPilotNewFlightLeg(hPilotNewFlightLeg);
 	        	
 	        	outputsdefaultControllerPilotInteracion.addCollaborators(oPilotAgentExternalDescription);
 			}

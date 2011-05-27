@@ -33,9 +33,7 @@ import ingenias.editor.entities.ViewPreferences.ViewType;
 
 public class Order extends ingenias.editor.entities.RuntimeFact{
    
-    Hashtable<jade.core.AID, NewParameters> PilotNewParameters;   
-   
-    jade.core.AID ControllerID;   
+    Hashtable<jade.core.AID, Flight_Leg> PilotNewFlightLeg;   
     
    
   public Order (String id){
@@ -64,21 +62,12 @@ public class Order extends ingenias.editor.entities.RuntimeFact{
   
    
 
-   public void setPilotNewParameters(Hashtable<jade.core.AID, NewParameters> value){
-     PilotNewParameters=value;   
+   public void setPilotNewFlightLeg(Hashtable<jade.core.AID, Flight_Leg> value){
+     PilotNewFlightLeg=value;   
    };
    
-   public Hashtable<jade.core.AID, NewParameters> getPilotNewParameters(){
-     return PilotNewParameters;      
-   }
-   
-
-   public void setControllerID(jade.core.AID value){
-     ControllerID=value;   
-   };
-   
-   public jade.core.AID getControllerID(){
-     return ControllerID;      
+   public Hashtable<jade.core.AID, Flight_Leg> getPilotNewFlightLeg(){
+     return PilotNewFlightLeg;      
    }
      
     

@@ -31,23 +31,17 @@ import ingenias.jade.components.*;
 import ingenias.editor.entities.*;
 import ingenias.editor.entities.ViewPreferences.ViewType;
 
-public class OrderNewParametersAndLeg extends ingenias.editor.entities.RuntimeFact{
-   
-    Flight_Leg FlightLeg;   
-   
-    NewParameters OrderNewParameters;   
-   
-    jade.core.AID ControllerID;   
+public class CreateNewLeg extends ingenias.editor.entities.RuntimeFact{
     
    
-  public OrderNewParametersAndLeg (String id){
+  public CreateNewLeg (String id){
    super(id);
    this.getPrefs().setView(ViewType.UML);
-   this.type="OrderNewParametersAndLeg";
+   this.type="CreateNewLeg";
   }
   
 
-  public OrderNewParametersAndLeg (){
+  public CreateNewLeg (){
    super(ingenias.jade.MentalStateManager.generateMentalEntityID());
    this.getPrefs().setView(ViewType.UML);
   }
@@ -57,40 +51,13 @@ public class OrderNewParametersAndLeg extends ingenias.editor.entities.RuntimeFa
   }
   
   public String getType(){
-   return "OrderNewParametersAndLeg";
+   return "CreateNewLeg";
   }
   
   public String getParentType(){
    return "RuntimeFact";
   }
   
-   
-
-   public void setFlightLeg(Flight_Leg value){
-     FlightLeg=value;   
-   };
-   
-   public Flight_Leg getFlightLeg(){
-     return FlightLeg;      
-   }
-   
-
-   public void setOrderNewParameters(NewParameters value){
-     OrderNewParameters=value;   
-   };
-   
-   public NewParameters getOrderNewParameters(){
-     return OrderNewParameters;      
-   }
-   
-
-   public void setControllerID(jade.core.AID value){
-     ControllerID=value;   
-   };
-   
-   public jade.core.AID getControllerID(){
-     return ControllerID;      
-   }
      
     
 }

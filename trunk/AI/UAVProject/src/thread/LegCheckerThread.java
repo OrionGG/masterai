@@ -36,7 +36,7 @@ public class LegCheckerThread implements Runnable{
 	
 					gov.nasa.worldwind.geom.Position oPosition = plane_Position_ServiceAppImp.getCurrentPosition();
 					double dDistance = BasicFlightDynamics.BFD.getDistance(eiFlight_Leg.getEndPoint(), oPosition);
-					if(dDistance < 20){
+					if(dDistance < 10){
 						bLegCompleted = true;
 						try {
 							oLeg_CheckerAppImp.getOwner().getMSM().addMentalEntity(new ingenias.jade.mental.LegCompleted());
@@ -49,7 +49,7 @@ public class LegCheckerThread implements Runnable{
 				}
 			}
 			
-			 long iRangeTime =(long) (Simulation.SimulationVars.iSleepTime * Math.pow(global.GlobalVarsAndMethods.PlaneIdToPilotId.size(),2));
+			 long iRangeTime =(long) (Simulation.SimulationVars.iSleepTime);
 		     global.GlobalVarsAndMethods.sleepRandom(iRangeTime);
 		        	
 

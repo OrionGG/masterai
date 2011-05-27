@@ -34,10 +34,10 @@ import ingenias.editor.entities.*;
 
 
 
-public class Execute_DecisionTask extends Task{
+public class Stop_PlaneTask extends Task{
 
- public Execute_DecisionTask(String id){
-  super(id,"Execute_Decision");
+ public Stop_PlaneTask(String id){
+  super(id,"Stop_Plane");
  }
 
 
@@ -45,7 +45,7 @@ public class Execute_DecisionTask extends Task{
  public void execute() throws TaskException{
 
 
-        Throw_Instruction  eiThrow_Instruction=(Throw_Instruction)this.getFirstInputOfType("Throw_Instruction");             
+        AllLegsCompleted  eiAllLegsCompleted=(AllLegsCompleted)this.getFirstInputOfType("AllLegsCompleted");             
 
         Pilot_Mind  eiPilot_Mind=(Pilot_Mind)this.getFirstInputOfType("Pilot_Mind");             
 
@@ -65,46 +65,28 @@ public class Execute_DecisionTask extends Task{
   		TaskOutput	outputsdefault=findOutputAlternative("default",
   																			outputs);
   		
-		RuntimeConversation outputsdefaultPilotPlaneInteraction=
-			(RuntimeConversation)
-				outputsdefault.getEntityByType("PilotPlaneInteraction");
 		
-		
-		Manoeuvre outputsdefaultManoeuvre=
-			(Manoeuvre)
-				outputsdefault.getEntityByType("Manoeuvre");
+		Throw_Instruction outputsdefaultThrow_Instruction=
+			(Throw_Instruction)
+				outputsdefault.getEntityByType("Throw_Instruction");
 		
 		
 		
         YellowPages yp=null; // only available for initiators of interactions
 
-		// This task can produce an interaction of type PilotPlaneInteraction by working with its conversation object
-        
-        // To define manually who are the collaborator involved. Your selection will be verified
-        // in runtime. Pay attention to log messages to detect errors. You can use the yello pages
-        // service to locate other agents
-        yp=(YellowPages)this.getApplication("YellowPages");
 
-        //  Uncomment the following and write down a proper local id of the agent
-        // Find an agent playing the role "PlaneColaborator"
-      	//eoPilotPlaneInteraction.addCollaborators("Local ID of the collaborator");
-       	
-
-
-//#start_node:INGENIASCodeComponent10 <--- DO NOT REMOVE THIS	
-        outputsdefaultManoeuvre.setSpeedChange(eiThrow_Instruction.getSpeedChange());
-        outputsdefaultManoeuvre.setAltitudeChange(eiThrow_Instruction.getAltitudeChange());
-        outputsdefaultManoeuvre.setHeadChange(eiThrow_Instruction.getHeadChange());
-        outputsdefaultManoeuvre.setPriority(eiThrow_Instruction.getPriority());
-        outputsdefaultManoeuvre.setThrowInstruction(eiThrow_Instruction);
+//#start_node:INGENIASCodeComponent14 <--- DO NOT REMOVE THIS	
+        //outputsdefaultThrow_Instruction.setAltitudeChange((-1) * Double.MAX_VALUE);
+        outputsdefaultThrow_Instruction.setHeadChange(null);	
+    	//stop the plane
+        outputsdefaultThrow_Instruction.setSpeedChange((-1) * Double.MAX_VALUE);
+        outputsdefaultThrow_Instruction.setPriority(10);
         
         List<Throw_Instruction> oInstructionsRunning = eiPilot_Mind.getInstructionRunning();
-        oInstructionsRunning.add(eiThrow_Instruction);
+        oInstructionsRunning.add(outputsdefaultThrow_Instruction);
         eiPilot_Mind.setInstructionRunning(oInstructionsRunning);
         eiPilot_Mind.setLastDecisionDate(new Date());
-        
-        outputsdefaultPilotPlaneInteraction.addCollaborators(eiPilot_Mind.getPilotFlightPlan().getPlaneID());
-//#end_node:INGENIASCodeComponent10 <--- DO NOT REMOVE THIS
+//#end_node:INGENIASCodeComponent14 <--- DO NOT REMOVE THIS
 
  }
  
