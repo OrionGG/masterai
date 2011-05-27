@@ -83,6 +83,10 @@ public class IsTimeToStartPlaneTask extends Task{
             outputsdefault.add(new OutputEntity(eiCanInitiateStartPlane, TaskOperations.CreateWF));
         	global.GlobalVarsAndMethods.sleepRandom(Simulation.SimulationVars.iSleepTime);
         }
+        else{
+        int a = 0;
+        a++;
+        }
 //#end_node:INGENIASCodeComponent29 <--- DO NOT REMOVE THIS
 
  }

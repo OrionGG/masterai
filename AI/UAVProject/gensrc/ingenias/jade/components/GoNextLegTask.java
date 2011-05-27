@@ -45,9 +45,9 @@ public class GoNextLegTask extends Task{
  public void execute() throws TaskException{
 
 
-        LegCompleted  eiLegCompleted=(LegCompleted)this.getFirstInputOfType("LegCompleted");             
-
         Flight_Leg  eiFlight_Leg=(Flight_Leg)this.getFirstInputOfType("Flight_Leg");             
+
+        LegCompleted  eiLegCompleted=(LegCompleted)this.getFirstInputOfType("LegCompleted");             
 
         Pilot_Mind  eiPilot_Mind=(Pilot_Mind)this.getFirstInputOfType("Pilot_Mind");             
 
@@ -68,6 +68,10 @@ public class GoNextLegTask extends Task{
   																			outputs);
   		
 		
+		OrderFinished outputsdefaultOrderFinished=
+			(OrderFinished)
+				outputsdefault.getEntityByType("OrderFinished");
+		
 		AllLegsCompleted outputsdefaultAllLegsCompleted=
 			(AllLegsCompleted)
 				outputsdefault.getEntityByType("AllLegsCompleted");
@@ -84,11 +88,17 @@ public class GoNextLegTask extends Task{
 //#start_node:INGENIASCodeComponent4 <--- DO NOT REMOVE THIS	
         int iLegsCompleted =eiPilot_Mind.getLegsCompleted();
         eiPilot_Mind.setLegsCompleted(iLegsCompleted+1);
-        if(eiPilot_Mind.getPilotFlightPlan().getWaypoints().size() + 1 == eiPilot_Mind.getLegsCompleted()){
-        	outputsdefault.removeEntity(outputsdefaultNotAllLegsCompleted);
+        if(eiFlight_Leg.getIsFromControllerOrder()){
+        	outputsdefault.removeEntity(outputsdefaultAllLegsCompleted);
         }
         else{
-        	outputsdefault.removeEntity(outputsdefaultAllLegsCompleted);
+        	outputsdefault.remove(outputsdefaultOrderFinished);
+	        if(eiPilot_Mind.getPilotFlightPlan().getLegsNumber() == eiPilot_Mind.getLegsCompleted()){
+	        	outputsdefault.removeEntity(outputsdefaultNotAllLegsCompleted);
+	        }
+	        else{
+	        	outputsdefault.removeEntity(outputsdefaultAllLegsCompleted);
+	        }
         }
 //#end_node:INGENIASCodeComponent4 <--- DO NOT REMOVE THIS
 

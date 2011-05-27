@@ -45,9 +45,9 @@ public class TakeOrderTask extends Task{
  public void execute() throws TaskException{
 
 
-        Flight_Leg  eiFlight_Leg=(Flight_Leg)this.getFirstInputOfType("Flight_Leg");             
-
         Order  eiOrder=(Order)this.getFirstInputOfType("Order");             
+
+        Flight_Leg  eiFlight_Leg=(Flight_Leg)this.getFirstInputOfType("Flight_Leg");             
 
 
 
@@ -65,9 +65,13 @@ public class TakeOrderTask extends Task{
   		TaskOutput	outputsdefault=findOutputAlternative("default",
   																			outputs);
   		
-		OrderNewParametersAndLeg outputsdefaultOrderNewParametersAndLeg=
-			(OrderNewParametersAndLeg)
-				outputsdefault.getEntityByType("OrderNewParametersAndLeg");
+		CreateNewLeg outputsdefaultCreateNewLeg=
+			(CreateNewLeg)
+				outputsdefault.getEntityByType("CreateNewLeg");
+		
+		OrderNewLegAndOldLeg outputsdefaultOrderNewLegAndOldLeg=
+			(OrderNewLegAndOldLeg)
+				outputsdefault.getEntityByType("OrderNewLegAndOldLeg");
 		
 		
 		
@@ -77,12 +81,11 @@ public class TakeOrderTask extends Task{
 
 //#start_node:INGENIASCodeComponent22 <--- DO NOT REMOVE THIS	
         yp=(YellowPages)this.getApplication("YellowPages");
-        NewParameters oNewParameters = eiOrder.getPilotNewParameters().get(yp.ja.getAID());
+        Flight_Leg oFlightLeg = eiOrder.getPilotNewFlightLeg().get(yp.ja.getAID());
         
-        outputsdefaultOrderNewParametersAndLeg.setOrderNewParameters(oNewParameters);
-        outputsdefaultOrderNewParametersAndLeg.setFlightLeg(eiFlight_Leg);
-        outputsdefaultOrderNewParametersAndLeg.setControllerID(eiOrder.getControllerID());
-        
+        outputsdefaultOrderNewLegAndOldLeg.setNewFlightLeg(oFlightLeg);
+        outputsdefaultOrderNewLegAndOldLeg.setOldFlightLeg(eiFlight_Leg);
+       
 //#end_node:INGENIASCodeComponent22 <--- DO NOT REMOVE THIS
 
  }

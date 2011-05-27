@@ -32,10 +32,6 @@ import ingenias.editor.entities.*;
 import ingenias.editor.entities.ViewPreferences.ViewType;
 
 public class OrderFinished extends ingenias.editor.entities.RuntimeFact{
-   
-    Flight_Leg FlightLeg;   
-   
-    NewParameters OrderNewParameters;   
     
    
   public OrderFinished (String id){
@@ -62,24 +58,6 @@ public class OrderFinished extends ingenias.editor.entities.RuntimeFact{
    return "RuntimeFact";
   }
   
-   
-
-   public void setFlightLeg(Flight_Leg value){
-     FlightLeg=value;   
-   };
-   
-   public Flight_Leg getFlightLeg(){
-     return FlightLeg;      
-   }
-   
-
-   public void setOrderNewParameters(NewParameters value){
-     OrderNewParameters=value;   
-   };
-   
-   public NewParameters getOrderNewParameters(){
-     return OrderNewParameters;      
-   }
      
     
 }

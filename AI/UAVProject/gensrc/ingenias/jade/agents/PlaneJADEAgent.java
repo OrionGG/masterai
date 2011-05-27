@@ -605,7 +605,7 @@ public class PlaneJADEAgent
 	     typesOfConversation.add("PilotPlaneInteraction");
 		 
          
-         if (goalname.equals("Executed_Decision")){
+         if (goalname.equals("Executed_Instruction")){
          
           {
 		    Task tobject=null;
@@ -615,7 +615,7 @@ public class PlaneJADEAgent
 					tobject=new Change_in_PlaneTask(ingenias.jade.MentalStateManager.generateMentalEntityID());
 					canbescheduled=initialiseConversationalTask(conversations.elementAt(k),tobject);
 					if (canbescheduled){
-					//	MainInteractionManager.log("Scheduled task "+tobject.getType()+" to achieve goal Executed_Decision",getLocalName()+"-"+tobject.getType());
+					//	MainInteractionManager.log("Scheduled task "+tobject.getType()+" to achieve goal Executed_Instruction",getLocalName()+"-"+tobject.getType());
 						tasks.add(tobject);
 					}
 					tobject=new DeleteNonUsedEntitiesTask("DeleteNonUsedEntitiesTask","DeleteNonUsedEntitiesTask");
@@ -756,7 +756,7 @@ public class PlaneJADEAgent
    ObjectSlot oslot=null;
    ingenias.jade.components.Application app=null;	  
    
-   sg= new ingenias.editor.entities.StateGoal("Executed_Decision");
+   sg= new ingenias.editor.entities.StateGoal("Executed_Instruction");
    sg.setState("pending");
       try {
 	   this.getMSM().addMentalEntity(sg);

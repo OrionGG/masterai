@@ -34,10 +34,10 @@ import ingenias.editor.entities.*;
 
 
 
-public class Check_DestinationTask extends Task{
+public class CreateNewLegForOrderTask extends Task{
 
- public Check_DestinationTask(String id){
-  super(id,"Check_Destination");
+ public CreateNewLegForOrderTask(String id){
+  super(id,"CreateNewLegForOrder");
  }
 
 
@@ -45,7 +45,11 @@ public class Check_DestinationTask extends Task{
  public void execute() throws TaskException{
 
 
-        AllLegsCompleted  eiAllLegsCompleted=(AllLegsCompleted)this.getFirstInputOfType("AllLegsCompleted");             
+        CreateNewLeg  eiCreateNewLeg=(CreateNewLeg)this.getFirstInputOfType("CreateNewLeg");             
+
+        Pilot_Mind  eiPilot_Mind=(Pilot_Mind)this.getFirstInputOfType("Pilot_Mind");             
+
+        OrderNewLegAndOldLeg  eiOrderNewLegAndOldLeg=(OrderNewLegAndOldLeg)this.getFirstInputOfType("OrderNewLegAndOldLeg");             
 
 
 
@@ -64,22 +68,22 @@ public class Check_DestinationTask extends Task{
   																			outputs);
   		
 		
-		Throw_Instruction outputsdefaultThrow_Instruction=
-			(Throw_Instruction)
-				outputsdefault.getEntityByType("Throw_Instruction");
+		Flight_Leg outputsdefaultFlight_Leg=
+			(Flight_Leg)
+				outputsdefault.getEntityByType("Flight_Leg");
 		
 		
 		
         YellowPages yp=null; // only available for initiators of interactions
 
 
-//#start_node:INGENIASCodeComponent14 <--- DO NOT REMOVE THIS	
-        outputsdefaultThrow_Instruction.setAltitudeChange(0);
-        outputsdefaultThrow_Instruction.setHeadChange(null);	
-    	//stop the plane
-        outputsdefaultThrow_Instruction.setSpeedChange(0);
-        outputsdefaultThrow_Instruction.setPriority(10);
-//#end_node:INGENIASCodeComponent14 <--- DO NOT REMOVE THIS
+//#start_node:INGENIASCodeComponent27 <--- DO NOT REMOVE THIS	
+        eiPilot_Mind.getPilotFlightPlan().setLegsNumber(
+        		eiPilot_Mind.getPilotFlightPlan().getLegsNumber() + 1);		
+        
+        global.GlobalVarsAndMethods.copyFlightLeg(eiOrderNewLegAndOldLeg.getNewFlightLeg(), 
+        		outputsdefaultFlight_Leg);
+//#end_node:INGENIASCodeComponent27 <--- DO NOT REMOVE THIS
 
  }
  

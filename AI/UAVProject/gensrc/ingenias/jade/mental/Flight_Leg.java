@@ -42,6 +42,8 @@ public class Flight_Leg extends ingenias.editor.entities.RuntimeFact{
     double SpeedKMH;   
    
     ingenias.jade.AgentExternalDescription PlaneID;   
+   
+    boolean IsFromControllerOrder;   
     
    
   public Flight_Leg (String id){
@@ -112,6 +114,15 @@ public class Flight_Leg extends ingenias.editor.entities.RuntimeFact{
    
    public ingenias.jade.AgentExternalDescription getPlaneID(){
      return PlaneID;      
+   }
+   
+
+   public void setIsFromControllerOrder(boolean value){
+     IsFromControllerOrder=value;   
+   };
+   
+   public boolean getIsFromControllerOrder(){
+     return IsFromControllerOrder;      
    }
      
     

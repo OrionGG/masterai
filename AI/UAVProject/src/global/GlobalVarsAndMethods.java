@@ -24,6 +24,7 @@ import java.util.Random;
 import java.util.Vector;
 
 public class GlobalVarsAndMethods {
+	public static  int inomore = 3;
 	public static int nDegressPerSecond = 3;
 	public static double dMaxAltitudeMps = 40;
 	public static double dMaxAccelerationKMHps = 6.53;
@@ -182,6 +183,7 @@ public class GlobalVarsAndMethods {
 		}
 		oFlightPlan.setWaypoints(oWayPoints);
 		
+		oFlightPlan.setLegsNumber(oFlightPlan.getWaypoints().size() + 1);
 		//Standard for a Boeing 737
 		oFlightPlan.setCruisingAltitudeKM(dCruiseAltitudeKM);
 		oFlightPlan.setCruisingSpeedKMH(dCruiseSpeedKMH);

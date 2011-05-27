@@ -45,9 +45,9 @@ public class ObeyOrderCheckTask extends Task{
  public void execute() throws TaskException{
 
 
-        OrderNewParametersAndLeg  eiOrderNewParametersAndLeg=(OrderNewParametersAndLeg)this.getFirstInputOfType("OrderNewParametersAndLeg");             
-
         OrderFinished  eiOrderFinished=(OrderFinished)this.getFirstInputOfType("OrderFinished");             
+
+        OrderNewLegAndOldLeg  eiOrderNewLegAndOldLeg=(OrderNewLegAndOldLeg)this.getFirstInputOfType("OrderNewLegAndOldLeg");             
 
 
 
@@ -81,13 +81,9 @@ public class ObeyOrderCheckTask extends Task{
 
 //#start_node:INGENIASCodeComponent23 <--- DO NOT REMOVE THIS	
 
-        Flight_Leg oFlightLeg = eiOrderFinished.getFlightLeg();
+        Flight_Leg oFlightLeg = eiOrderNewLegAndOldLeg.getOldFlightLeg();
         global.GlobalVarsAndMethods.copyFlightLeg(oFlightLeg, outputsdefaultFlight_Leg);
 
-        ingenias.jade.AgentExternalDescription oControllerAgentExternalDescription = 
-        	new ingenias.jade.AgentExternalDescription(eiOrderNewParametersAndLeg.getControllerID(), "ControllerInitiator");
-        
-        //outputsdefaultControllerPilotInteracion.addCollaborators(oControllerAgentExternalDescription);
         
         outputsdefaultOrdenDone.setPlaneID(oFlightLeg.getPlaneID());
 //#end_node:INGENIASCodeComponent23 <--- DO NOT REMOVE THIS

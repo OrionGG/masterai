@@ -124,7 +124,7 @@ public class ControllerJADEAgent
                   
          nonExistingInputs.clear();
   		 repeatedOutputs.clear();
-         if (tobject.getType().equals("SendAvoidCollisionDecision") ){
+         if (tobject.getType().equals("SendAvoidCollision") ){
             Vector<MentalEntity> expectedInput=null;
             RuntimeFact expectedOutput=null;
             RuntimeEvent expectedOutputEvent=null;
@@ -608,7 +608,7 @@ public class ControllerJADEAgent
          boolean canbescheduled=false;
 		 Task tobject=null;		 
 				// If a conversational initialization fails, a conventional one is tried
-				 tobject=new SendAvoidCollisionDecisionTask(ingenias.jade.MentalStateManager.generateMentalEntityID());
+				 tobject=new SendAvoidCollisionTask(ingenias.jade.MentalStateManager.generateMentalEntityID());
 				 canbescheduled=initialiseNonConversationalTask(tobject);
 			 	 if (canbescheduled){
 					//MainInteractionManager.log("Scheduled task "+tobject.getType()+" to achieve goal Collision_Avoided",getLocalName()+"-"+tobject.getType());
@@ -694,7 +694,7 @@ public class ControllerJADEAgent
          
          
          
-         ttypes.add("SendAvoidCollisionDecision");		         
+         ttypes.add("SendAvoidCollision");		         
                 
          
          

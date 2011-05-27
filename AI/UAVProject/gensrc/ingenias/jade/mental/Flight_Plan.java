@@ -54,6 +54,8 @@ public class Flight_Plan extends ingenias.editor.entities.RuntimeFact{
     ingenias.jade.AgentExternalDescription PlaneID;   
    
     ingenias.jade.AgentExternalDescription PilotID;   
+   
+    int LegsNumber;   
     
    
   public Flight_Plan (String id){
@@ -178,6 +180,15 @@ public class Flight_Plan extends ingenias.editor.entities.RuntimeFact{
    
    public ingenias.jade.AgentExternalDescription getPilotID(){
      return PilotID;      
+   }
+   
+
+   public void setLegsNumber(int value){
+     LegsNumber=value;   
+   };
+   
+   public int getLegsNumber(){
+     return LegsNumber;      
    }
      
     

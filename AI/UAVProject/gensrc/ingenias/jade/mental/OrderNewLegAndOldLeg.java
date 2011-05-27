@@ -31,23 +31,21 @@ import ingenias.jade.components.*;
 import ingenias.editor.entities.*;
 import ingenias.editor.entities.ViewPreferences.ViewType;
 
-public class NewParameters extends ingenias.editor.entities.RuntimeFact{
+public class OrderNewLegAndOldLeg extends ingenias.editor.entities.RuntimeFact{
    
-    double AltitudeKM;   
+    Flight_Leg NewFlightLeg;   
    
-    gov.nasa.worldwind.geom.Angle Head;   
-   
-    double SpeedKMH;   
+    Flight_Leg OldFlightLeg;   
     
    
-  public NewParameters (String id){
+  public OrderNewLegAndOldLeg (String id){
    super(id);
    this.getPrefs().setView(ViewType.UML);
-   this.type="NewParameters";
+   this.type="OrderNewLegAndOldLeg";
   }
   
 
-  public NewParameters (){
+  public OrderNewLegAndOldLeg (){
    super(ingenias.jade.MentalStateManager.generateMentalEntityID());
    this.getPrefs().setView(ViewType.UML);
   }
@@ -57,7 +55,7 @@ public class NewParameters extends ingenias.editor.entities.RuntimeFact{
   }
   
   public String getType(){
-   return "NewParameters";
+   return "OrderNewLegAndOldLeg";
   }
   
   public String getParentType(){
@@ -66,30 +64,21 @@ public class NewParameters extends ingenias.editor.entities.RuntimeFact{
   
    
 
-   public void setAltitudeKM(double value){
-     AltitudeKM=value;   
+   public void setNewFlightLeg(Flight_Leg value){
+     NewFlightLeg=value;   
    };
    
-   public double getAltitudeKM(){
-     return AltitudeKM;      
+   public Flight_Leg getNewFlightLeg(){
+     return NewFlightLeg;      
    }
    
 
-   public void setHead(gov.nasa.worldwind.geom.Angle value){
-     Head=value;   
+   public void setOldFlightLeg(Flight_Leg value){
+     OldFlightLeg=value;   
    };
    
-   public gov.nasa.worldwind.geom.Angle getHead(){
-     return Head;      
-   }
-   
-
-   public void setSpeedKMH(double value){
-     SpeedKMH=value;   
-   };
-   
-   public double getSpeedKMH(){
-     return SpeedKMH;      
+   public Flight_Leg getOldFlightLeg(){
+     return OldFlightLeg;      
    }
      
     

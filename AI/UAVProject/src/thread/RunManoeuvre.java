@@ -33,13 +33,23 @@ public class RunManoeuvre{
 		event.setNewLatLonPosition(null);
 		
 		if(eiManoeuvre.getSpeedChange()!= -1){
-			eiPlane_Mind.setSpeedKMH(eiPlane_Mind.getSpeedKMH() + eiManoeuvre.getSpeedChange());
+			double dFinalSpeedKMH = eiPlane_Mind.getSpeedKMH() + eiManoeuvre.getSpeedChange();
+			if(dFinalSpeedKMH < 0){
+				eiPlane_Mind.setSpeedKMH(0);
+			}
+			else{
+				eiPlane_Mind.setSpeedKMH(eiPlane_Mind.getSpeedKMH() + eiManoeuvre.getSpeedChange());
+			}
 			
         }if(eiManoeuvre.getAltitudeChange()!= -1){
         	double dNewAltitudeKM = eiPlane_Mind.getAltitudeKM() + ((double) eiManoeuvre.getAltitudeChange()/1000);
         	//event.setNewAltitudeKM(dNewAltitudeKM);
-        	eiPlane_Mind.setAltitudeKM(dNewAltitudeKM);
-        	
+        	if(dNewAltitudeKM < 0){
+        		eiPlane_Mind.setAltitudeKM(0);
+        	}
+        	else{
+        		eiPlane_Mind.setAltitudeKM(dNewAltitudeKM);
+        	}
         }
         if(eiManoeuvre.getHeadChange()!= null){
         	gov.nasa.worldwind.geom.Angle oNewAngle = eiPlane_Mind.getHead().add(eiManoeuvre.getHeadChange());
