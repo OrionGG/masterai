@@ -31,17 +31,17 @@ import ingenias.jade.components.*;
 import ingenias.editor.entities.*;
 import ingenias.editor.entities.ViewPreferences.ViewType;
 
-public class CreatingEmptyPlans extends ingenias.editor.entities.RuntimeFact{
+public class CreatingPlans extends ingenias.editor.entities.RuntimeFact{
     
    
-  public CreatingEmptyPlans (String id){
+  public CreatingPlans (String id){
    super(id);
    this.getPrefs().setView(ViewType.UML);
-   this.type="CreatingEmptyPlans";
+   this.type="CreatingPlans";
   }
   
 
-  public CreatingEmptyPlans (){
+  public CreatingPlans (){
    super(ingenias.jade.MentalStateManager.generateMentalEntityID());
    this.getPrefs().setView(ViewType.UML);
   }
@@ -51,7 +51,7 @@ public class CreatingEmptyPlans extends ingenias.editor.entities.RuntimeFact{
   }
   
   public String getType(){
-   return "CreatingEmptyPlans";
+   return "CreatingPlans";
   }
   
   public String getParentType(){

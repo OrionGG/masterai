@@ -221,7 +221,7 @@ public class FlightPlannerJADEAgent
                   
          nonExistingInputs.clear();
   		 repeatedOutputs.clear();
-         if (tobject.getType().equals("CreateEmptyPlans") ){
+         if (tobject.getType().equals("CreatePlans") ){
             Vector<MentalEntity> expectedInput=null;
             RuntimeFact expectedOutput=null;
             RuntimeEvent expectedOutputEvent=null;
@@ -235,11 +235,11 @@ public class FlightPlannerJADEAgent
 	      
 		
 		
-             expectedInput=this.getMSM().getMentalEntityByType("CreatingEmptyPlans");
+             expectedInput=this.getMSM().getMentalEntityByType("CreatingPlans");
              if (expectedInput.size()==0 && !("1".equals("0..n"))){
-				nonExistingInputs.add("CreatingEmptyPlans");
+				nonExistingInputs.add("CreatingPlans");
 			 } else {
-			    addExpectedInputs(tobject, "CreatingEmptyPlans","1",expectedInput);
+			    addExpectedInputs(tobject, "CreatingPlans","1",expectedInput);
              	addConsumedInput(to,"1",expectedInput);
 			 }
              allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;
@@ -259,6 +259,11 @@ public class FlightPlannerJADEAgent
 	      
  
 	     
+	     
+		    {Flight_Plan expectedOutputFlight_Plan=		    
+		     new Flight_Plan(MentalStateManager.generateMentalEntityID());			
+             to.add(new OutputEntity(expectedOutputFlight_Plan,TaskOperations.CreateWF));
+            }
 	     
      
      		      
@@ -465,16 +470,16 @@ public class FlightPlannerJADEAgent
           }
                   
          
-         if (goalname.equals("EmptyPlansCreated")){
+         if (goalname.equals("PlansCreated")){
          
          {
          boolean canbescheduled=false;
 		 Task tobject=null;		 
 				// If a conversational initialization fails, a conventional one is tried
-				 tobject=new CreateEmptyPlansTask(ingenias.jade.MentalStateManager.generateMentalEntityID());
+				 tobject=new CreatePlansTask(ingenias.jade.MentalStateManager.generateMentalEntityID());
 				 canbescheduled=initialiseNonConversationalTask(tobject);
 			 	 if (canbescheduled){
-					//MainInteractionManager.log("Scheduled task "+tobject.getType()+" to achieve goal EmptyPlansCreated",getLocalName()+"-"+tobject.getType());
+					//MainInteractionManager.log("Scheduled task "+tobject.getType()+" to achieve goal PlansCreated",getLocalName()+"-"+tobject.getType());
 					tasks.add(tobject);
 				 } 			
 	     }
@@ -510,7 +515,7 @@ public class FlightPlannerJADEAgent
                 
          
          
-         ttypes.add("CreateEmptyPlans");		         
+         ttypes.add("CreatePlans");		         
                 
          
          if (IAFProperties.getGraphicsOn())
@@ -541,7 +546,7 @@ public class FlightPlannerJADEAgent
 	   e1.printStackTrace();
    }
    
-   sg= new ingenias.editor.entities.StateGoal("EmptyPlansCreated");
+   sg= new ingenias.editor.entities.StateGoal("PlansCreated");
    sg.setState("pending");
       try {
 	   this.getMSM().addMentalEntity(sg);
@@ -552,7 +557,7 @@ public class FlightPlannerJADEAgent
    
    
    
-   ff= new CreatingEmptyPlans();      
+   ff= new CreatingPlans();      
    
    /* */
    		try {
