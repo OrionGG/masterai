@@ -34,10 +34,10 @@ import ingenias.editor.entities.*;
 
 
 
-public class CreateEmptyPlansTask extends Task{
+public class CreatePlansTask extends Task{
 
- public CreateEmptyPlansTask(String id){
-  super(id,"CreateEmptyPlans");
+ public CreatePlansTask(String id){
+  super(id,"CreatePlans");
  }
 
 
@@ -45,7 +45,7 @@ public class CreateEmptyPlansTask extends Task{
  public void execute() throws TaskException{
 
 
-        CreatingEmptyPlans  eiCreatingEmptyPlans=(CreatingEmptyPlans)this.getFirstInputOfType("CreatingEmptyPlans");             
+        CreatingPlans  eiCreatingPlans=(CreatingPlans)this.getFirstInputOfType("CreatingPlans");             
 
 
 
@@ -63,6 +63,10 @@ public class CreateEmptyPlansTask extends Task{
   		TaskOutput	outputsdefault=findOutputAlternative("default",
   																			outputs);
   		
+		
+		Flight_Plan outputsdefaultFlight_Plan=
+			(Flight_Plan)
+				outputsdefault.getEntityByType("Flight_Plan");
 		
 		
 		
@@ -102,6 +106,7 @@ public class CreateEmptyPlansTask extends Task{
 			outputsdefault.add( new OutputEntity(oFlightPlan, TaskOperations.CreateWF));
 			
 		}
+		outputsdefault.remove(outputsdefaultFlight_Plan);
 //#end_node:INGENIASCodeComponent16 <--- DO NOT REMOVE THIS
 
  }
