@@ -45,7 +45,7 @@ public class Flight_Plan_MonitoringTask extends Task{
  public void execute() throws TaskException{
 
 
-        NotAllLegsCompleted  eiNotAllLegsCompleted=(NotAllLegsCompleted)this.getFirstInputOfType("NotAllLegsCompleted");             
+        GetNextLeg  eiGetNextLeg=(GetNextLeg)this.getFirstInputOfType("GetNextLeg");             
 
         Pilot_Mind  eiPilot_Mind=(Pilot_Mind)this.getFirstInputOfType("Pilot_Mind");             
 

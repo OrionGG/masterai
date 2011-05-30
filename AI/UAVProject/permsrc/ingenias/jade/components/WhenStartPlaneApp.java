@@ -27,57 +27,24 @@
 package ingenias.jade.components;
 
 import java.util.*;
+
 import ingenias.jade.exception.*;
-import ingenias.jade.comm.*;
-import ingenias.jade.mental.*;
-import ingenias.editor.entities.*;
 
 
 
-public class StartDescomposingPlanTask extends Task{
 
- public StartDescomposingPlanTask(String id){
-  super(id,"StartDescomposingPlan");
+
+
+public abstract class WhenStartPlaneApp extends Application{
+
+
+ public WhenStartPlaneApp(){
+  super();
  }
 
 
+ public abstract void startApp(Date oDepartureTime);
 
- public void execute() throws TaskException{
-
-
-        PlaneOn  eiPlaneOn=(PlaneOn)this.getFirstInputOfType("PlaneOn");             
-
-
-
-
-
-
-
-
-
-
-  		Vector<TaskOutput> outputs = this.getOutputs();
-  		TaskOutput defaultOutput= outputs.firstElement();
-  		
-  		  	
-  		TaskOutput	outputsdefault=findOutputAlternative("default",
-  																			outputs);
-  		
-		GetNextLeg outputsdefaultGetNextLeg=
-			(GetNextLeg)
-				outputsdefault.getEntityByType("GetNextLeg");
-		
-		
-		
-		
-        YellowPages yp=null; // only available for initiators of interactions
-
-
-//#start_node: <--- DO NOT REMOVE THIS	
-
-//#end_node: <--- DO NOT REMOVE THIS
-
- }
  
 }
 

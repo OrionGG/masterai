@@ -53,6 +53,8 @@ public class IsTimeToStartPlaneTask extends Task{
 
 
 
+			
+        WhenStartPlaneApp eaWhenStartPlane=(WhenStartPlaneApp)this.getApplication("WhenStartPlane");
 
 
 
@@ -66,26 +68,22 @@ public class IsTimeToStartPlaneTask extends Task{
   																			outputs);
   		
 		
-		InitiateStartPlane outputsdefaultInitiateStartPlane=
-			(InitiateStartPlane)
-				outputsdefault.getEntityByType("InitiateStartPlane");
-		
 		
 		
         YellowPages yp=null; // only available for initiators of interactions
 
 
 //#start_node:INGENIASCodeComponent29 <--- DO NOT REMOVE THIS	
-        Date oDate = eiPilot_Mind.getPilotFlightPlan().getDepartureTime();
+        Date oDepartureTime = eiPilot_Mind.getPilotFlightPlan().getDepartureTime();
 
-        if(oDate.after(new Date())){
-        	outputsdefault.remove(outputsdefaultInitiateStartPlane);
-            outputsdefault.add(new OutputEntity(eiCanInitiateStartPlane, TaskOperations.CreateWF));
-        	global.GlobalVarsAndMethods.sleepRandom(Simulation.SimulationVars.iSleepTime);
+        if(oDepartureTime.after(new Date())){
+
+        	eaWhenStartPlane.startApp(oDepartureTime);
+        	
         }
         else{
-        int a = 0;
-        a++;
+        	InitiateStartPlane oInitiateStartPlane = new InitiateStartPlane();
+    		outputsdefault.add(new OutputEntity(oInitiateStartPlane, TaskOperations.CreateWF));
         }
 //#end_node:INGENIASCodeComponent29 <--- DO NOT REMOVE THIS
 
