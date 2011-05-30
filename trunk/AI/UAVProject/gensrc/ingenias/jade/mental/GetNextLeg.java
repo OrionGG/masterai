@@ -31,17 +31,17 @@ import ingenias.jade.components.*;
 import ingenias.editor.entities.*;
 import ingenias.editor.entities.ViewPreferences.ViewType;
 
-public class NotAllLegsCompleted extends ingenias.editor.entities.RuntimeFact{
+public class GetNextLeg extends ingenias.editor.entities.RuntimeFact{
     
    
-  public NotAllLegsCompleted (String id){
+  public GetNextLeg (String id){
    super(id);
    this.getPrefs().setView(ViewType.UML);
-   this.type="NotAllLegsCompleted";
+   this.type="GetNextLeg";
   }
   
 
-  public NotAllLegsCompleted (){
+  public GetNextLeg (){
    super(ingenias.jade.MentalStateManager.generateMentalEntityID());
    this.getPrefs().setView(ViewType.UML);
   }
@@ -51,7 +51,7 @@ public class NotAllLegsCompleted extends ingenias.editor.entities.RuntimeFact{
   }
   
   public String getType(){
-   return "NotAllLegsCompleted";
+   return "GetNextLeg";
   }
   
   public String getParentType(){

@@ -405,11 +405,11 @@ public class PilotJADEAgent
 	      
 		
 		
-             expectedInput=this.getMSM().getMentalEntityByType("NotAllLegsCompleted");
+             expectedInput=this.getMSM().getMentalEntityByType("GetNextLeg");
              if (expectedInput.size()==0 && !("1".equals("0..n"))){
-				nonExistingInputs.add("NotAllLegsCompleted");
+				nonExistingInputs.add("GetNextLeg");
 			 } else {
-			    addExpectedInputs(tobject, "NotAllLegsCompleted","1",expectedInput);
+			    addExpectedInputs(tobject, "GetNextLeg","1",expectedInput);
              	addConsumedInput(to,"1",expectedInput);
 			 }
              allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;
@@ -496,6 +496,9 @@ public class PilotJADEAgent
 	      
 	      
 	     
+	     expectedApp=(ingenias.jade.components.Application)getAM().getApplication("WhenStartPlane");
+             tobject.addApplication("WhenStartPlane",expectedApp);
+	      
 	      
 	     // Default application for all tasks executed within a conversation
 	     expectedApp=(ingenias.jade.components.Application)getAM().getApplication("YellowPages");
@@ -508,11 +511,6 @@ public class PilotJADEAgent
 	      
  
 	     
-	     
-		    {InitiateStartPlane expectedOutputInitiateStartPlane=		    
-		     new InitiateStartPlane(MentalStateManager.generateMentalEntityID());			
-             to.add(new OutputEntity(expectedOutputInitiateStartPlane,TaskOperations.CreateWF));
-            }
 	     
      
      		      
@@ -752,9 +750,9 @@ public class PilotJADEAgent
              to.add(new OutputEntity(expectedOutputAllLegsCompleted,TaskOperations.CreateWF));
             }
 	     
-		    {NotAllLegsCompleted expectedOutputNotAllLegsCompleted=		    
-		     new NotAllLegsCompleted(MentalStateManager.generateMentalEntityID());			
-             to.add(new OutputEntity(expectedOutputNotAllLegsCompleted,TaskOperations.CreateWF));
+		    {GetNextLeg expectedOutputGetNextLeg=		    
+		     new GetNextLeg(MentalStateManager.generateMentalEntityID());			
+             to.add(new OutputEntity(expectedOutputGetNextLeg,TaskOperations.CreateWF));
             }
 	     
      
@@ -1396,20 +1394,20 @@ public class PilotJADEAgent
 	     
             
 		
-            expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"OrderFinished");
-			if (expectedInput.size()==0 && !("1".equals("0..n")))
-				nonExistingInputs.add("OrderFinished");
-			else {
-			    addExpectedInputs(tobject, "OrderFinished","1",expectedInput);
-			    addConsumedInput(to, "1", expectedInput);
-			}
-	      allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;
-	      
             expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"OrderNewLegAndOldLeg");
 			if (expectedInput.size()==0 && !("1".equals("0..n")))
 				nonExistingInputs.add("OrderNewLegAndOldLeg");
 			else {
 			    addExpectedInputs(tobject, "OrderNewLegAndOldLeg","1",expectedInput);
+			    addConsumedInput(to, "1", expectedInput);
+			}
+	      allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;
+	      
+            expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"OrderFinished");
+			if (expectedInput.size()==0 && !("1".equals("0..n")))
+				nonExistingInputs.add("OrderFinished");
+			else {
+			    addExpectedInputs(tobject, "OrderFinished","1",expectedInput);
 			    addConsumedInput(to, "1", expectedInput);
 			}
 	      allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;
@@ -1895,13 +1893,13 @@ public class PilotJADEAgent
 	 
 	     
  			{
- 			NotAllLegsCompleted expectedOutputNotAllLegsCompleted=
- 				new NotAllLegsCompleted(MentalStateManager.generateMentalEntityID());
- 			if (RuntimeConversation.class.isAssignableFrom(expectedOutputNotAllLegsCompleted.getClass())){
+ 			GetNextLeg expectedOutputGetNextLeg=
+ 				new GetNextLeg(MentalStateManager.generateMentalEntityID());
+ 			if (RuntimeConversation.class.isAssignableFrom(expectedOutputGetNextLeg.getClass())){
  			    java.lang.reflect.Method m;
 				try {
-					m = expectedOutputNotAllLegsCompleted.getClass().getMethod("setInteraction", new Class[]{Interaction.class});
-					m.invoke(expectedOutputNotAllLegsCompleted, new Interaction("")) ;	  
+					m = expectedOutputGetNextLeg.getClass().getMethod("setInteraction", new Class[]{Interaction.class});
+					m.invoke(expectedOutputGetNextLeg, new Interaction("")) ;	  
 				} catch (SecurityException e) {
 					
 					e.printStackTrace();
@@ -1919,7 +1917,7 @@ public class PilotJADEAgent
 					e.printStackTrace();
 				}
  			}	 			
-            to.add(new OutputEntity(expectedOutputNotAllLegsCompleted,TaskOperations.CreateMS));
+            to.add(new OutputEntity(expectedOutputGetNextLeg,TaskOperations.CreateMS));
             }
 	     
 	     
@@ -2437,7 +2435,7 @@ public class PilotJADEAgent
    ObjectSlot oslot=null;
    ingenias.jade.components.Application app=null;	  
    
-   sg= new ingenias.editor.entities.StateGoal("Arrived_To_Destination");
+   sg= new ingenias.editor.entities.StateGoal("Flight_Plan_Completed");
    sg.setState("pending");
       try {
 	   this.getMSM().addMentalEntity(sg);
@@ -2446,7 +2444,7 @@ public class PilotJADEAgent
 	   e1.printStackTrace();
    }
    
-   sg= new ingenias.editor.entities.StateGoal("Flight_Plan_Completed");
+   sg= new ingenias.editor.entities.StateGoal("Arrived_To_Destination");
    sg.setState("pending");
       try {
 	   this.getMSM().addMentalEntity(sg);
@@ -2563,7 +2561,7 @@ public class PilotJADEAgent
 	   e1.printStackTrace();
    }
    
-   sg= new ingenias.editor.entities.StateGoal("PlaneStarted");
+   sg= new ingenias.editor.entities.StateGoal("Arrive_Safe_And_Sound");
    sg.setState("pending");
       try {
 	   this.getMSM().addMentalEntity(sg);
@@ -2572,7 +2570,7 @@ public class PilotJADEAgent
 	   e1.printStackTrace();
    }
    
-   sg= new ingenias.editor.entities.StateGoal("Arrive_Safe_And_Sound");
+   sg= new ingenias.editor.entities.StateGoal("PlaneStarted");
    sg.setState("pending");
       try {
 	   this.getMSM().addMentalEntity(sg);
@@ -2592,6 +2590,25 @@ public class PilotJADEAgent
 	//Initial applications assigned to the agent	  
 	Vector actions=null;
 	Vector evetns=null;
+
+     //Initial applications assigned to the agent	  
+   
+     
+     app=WhenStartPlaneInit.createInstance(this);
+	 //app.registerOwner(this);
+	 	    
+     this.getAM().addApplication("WhenStartPlane",app);        
+	 events=new Vector();
+	 actions=new Vector();
+		
+	 event= new InitiateStartPlane();
+	 /* 
+	 */ 
+	 events.add(event);
+	 actions.add(generateActionListener(InitiateStartPlane.class));		
+
+	 if (getGraphics()!=null)
+	  getGraphics().addApplication("WhenStartPlane", events,actions);    
 
      //Initial applications assigned to the agent	  
    

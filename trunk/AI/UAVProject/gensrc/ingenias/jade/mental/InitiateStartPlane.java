@@ -31,10 +31,10 @@ import ingenias.jade.components.*;
 import ingenias.editor.entities.*;
 import ingenias.editor.entities.ViewPreferences.ViewType;
 
-public class InitiateStartPlane extends ingenias.editor.entities.RuntimeFact{
+public class InitiateStartPlane extends ingenias.editor.entities.RuntimeEvent{
     
    
-  public InitiateStartPlane (String id){
+   public InitiateStartPlane (String id){
    super(id);
    this.getPrefs().setView(ViewType.UML);
    this.type="InitiateStartPlane";
@@ -44,6 +44,7 @@ public class InitiateStartPlane extends ingenias.editor.entities.RuntimeFact{
   public InitiateStartPlane (){
    super(ingenias.jade.MentalStateManager.generateMentalEntityID());
    this.getPrefs().setView(ViewType.UML);
+   this.type="InitiateStartPlane";
   }
   
   public String toString(){
@@ -54,12 +55,13 @@ public class InitiateStartPlane extends ingenias.editor.entities.RuntimeFact{
    return "InitiateStartPlane";
   }
   
-  public String getParentType(){
-   return "RuntimeFact";
+   public String getParentType(){
+   return "RuntimeEvent";
   }
   
-     
     
+  
+  
 }
 
  
