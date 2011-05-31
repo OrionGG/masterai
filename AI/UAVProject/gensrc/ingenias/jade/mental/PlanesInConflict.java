@@ -33,7 +33,7 @@ import ingenias.editor.entities.ViewPreferences.ViewType;
 
 public class PlanesInConflict extends ingenias.editor.entities.RuntimeEvent{
    
-    ArrayList<jade.core.AID> PlanesInConflict;   
+    Hashtable<jade.core.AID, gov.nasa.worldwind.geom.Position> PlanesInConflict;   
     
    
    public PlanesInConflict (String id){
@@ -63,11 +63,11 @@ public class PlanesInConflict extends ingenias.editor.entities.RuntimeEvent{
   
    
 
-   public void setPlanesInConflict(ArrayList<jade.core.AID> value){
+   public void setPlanesInConflict(Hashtable<jade.core.AID, gov.nasa.worldwind.geom.Position> value){
      PlanesInConflict=value;   
    };
    
-   public ArrayList<jade.core.AID> getPlanesInConflict(){
+   public Hashtable<jade.core.AID, gov.nasa.worldwind.geom.Position> getPlanesInConflict(){
      return PlanesInConflict;      
    }
     

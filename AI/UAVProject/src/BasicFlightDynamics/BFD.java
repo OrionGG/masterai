@@ -122,6 +122,32 @@ public class BFD {
 		return bResult;
 	}
 	
+	public static LatLon getMidpoint(LatLon oStartLatLon, LatLon oEndLatLon){
+		double lat1 = oStartLatLon.getLatitude().radians;
+		double lon1 = oStartLatLon.getLongitude().radians;
+		double lat2 = oEndLatLon.getLatitude().radians;
+		double lon2 = oEndLatLon.getLongitude().radians;
+
+		double dLat = (lat2-lat1);
+		double dLon = (lon2-lon1); 
+		
+		double Bx = Math.cos(lat2) * Math.cos(dLon);
+		double By = Math.cos(lat2) * Math.sin(dLon);
+
+		
+		double lat3 = Math.atan2(Math.sin(lat1)+Math.sin(lat2),
+		                      Math.sqrt( (Math.cos(lat1)+Bx)*(Math.cos(lat1)+Bx) + By*By) ); 
+		double lon3 = lon1 + Math.atan2(By, Math.cos(lat1) + Bx);
+		
+		/*double lon3 = Math.atan(Math.cos(lat2)*Math.sin(dLon)/
+                (Math.cos(lat1)+Math.cos(lat2)*Math.cos(dLon)));
+        double lat3 = Math.atan((Math.sin(lat1)+Math.sin(lat2))/
+        		Math.sqrt(Math.pow((Math.cos(lat1)+Math.cos(lat2)*Math.cos(dLon)),2)+
+            		   Math.pow((Math.cos(lat2)*Math.sin(dLon)), 2)));*/
+		
+		return new LatLon(Angle.fromRadians(lat3), Angle.fromRadians(lon3));
+	}
+	
 	
 	
 	//turn to clock-side or the other depending the degrees to turn
@@ -172,7 +198,21 @@ public class BFD {
 		}
 		return oTotalAngleToTurn;
 	}
+	
+	
 
+	public static void main(String args[]) throws Exception{
+		
+		LatLon oStartLatLon = new LatLon(Angle.fromDMS("53 08 50 N"), Angle.fromDMS("001 50 58 W"));
+		
+		LatLon oEndLatLon= new LatLon(Angle.fromDMS("52 12 16 N"), Angle.fromDMS("000 08 26 E"));
+		
+		double dDistance = BasicFlightDynamics.BFD.getDistance(new Position(oStartLatLon, 0), new Position(oEndLatLon, 0));
+		gov.nasa.worldwind.geom.Angle oAngle =  BFD.getHead(oStartLatLon.latitude.degrees,oStartLatLon.longitude.degrees,
+															oEndLatLon.latitude.degrees,oEndLatLon.longitude.degrees);
+		gov.nasa.worldwind.geom.LatLon oMidLatLon = 
+			BFD.getMidpoint(oStartLatLon, oEndLatLon);
+	}
 
 
 

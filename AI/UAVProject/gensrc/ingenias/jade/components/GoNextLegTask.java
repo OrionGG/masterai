@@ -86,15 +86,16 @@ public class GoNextLegTask extends Task{
 
 
 //#start_node:INGENIASCodeComponent4 <--- DO NOT REMOVE THIS	
-        int iLegsCompleted =eiPilot_Mind.getLegsCompleted();
-        eiPilot_Mind.setLegsCompleted(iLegsCompleted+1);
         if(eiFlight_Leg.getIsFromControllerOrder()){
+        	outputsdefault.removeEntity(outputsdefaultGetNextLeg);
         	outputsdefault.removeEntity(outputsdefaultAllLegsCompleted);
         }
         else{
+            int iLegsCompleted =eiPilot_Mind.getLegsCompleted();
+            eiPilot_Mind.setLegsCompleted(iLegsCompleted+1);
         	outputsdefault.remove(outputsdefaultOrderFinished);
 	        if(eiPilot_Mind.getPilotFlightPlan().getLegsNumber() == eiPilot_Mind.getLegsCompleted()){
-	        	outputsdefault.removeEntity(outputsdefaultNotAllLegsCompleted);
+	        	outputsdefault.removeEntity(outputsdefaultGetNextLeg);
 	        }
 	        else{
 	        	outputsdefault.removeEntity(outputsdefaultAllLegsCompleted);

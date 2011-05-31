@@ -4,8 +4,7 @@ import ingenias.jade.components.FlightsMonitorAppImp;
 import ingenias.jade.components.Plane_Position_ServiceAppImp;
 import ingenias.jade.components.Plane_Position_ServiceInit;
 
-import java.util.ArrayList;
-import java.util.Vector;
+import java.util.*;
 
 public class FlightsMonitorThread  implements Runnable{
 	FlightsMonitorAppImp flightsMonitorAppImp;
@@ -24,8 +23,11 @@ public class FlightsMonitorThread  implements Runnable{
 				Plane_Position_ServiceAppImp oFirstService = oVector.get(i);
 				
 				gov.nasa.worldwind.geom.Position oPositionFirstService = null;
+				gov.nasa.worldwind.geom.Angle oHeadFirstService = null;
 				try{
 					oPositionFirstService = oFirstService.getCurrentPosition();
+					oHeadFirstService = oFirstService.getCurrentHead();
+					
 				}
 				catch(Exception ex){
 					continue;
@@ -34,22 +36,26 @@ public class FlightsMonitorThread  implements Runnable{
 				for (int j = i+1; j < oVector.size(); j++) {
 					Plane_Position_ServiceAppImp oSecondService = oVector.get(j);
 					double dDistance = Double.MAX_VALUE;
+					gov.nasa.worldwind.geom.Position oPositionSecondService = null;
+					gov.nasa.worldwind.geom.Angle oHeadSecondService = null;
 					try{
+						oPositionSecondService = oSecondService.getCurrentPosition();
+						oHeadSecondService = oSecondService.getCurrentHead();
 						dDistance = BasicFlightDynamics.BFD.getDistance(
-								oPositionFirstService, oSecondService.getCurrentPosition());
+								oPositionFirstService, oPositionSecondService);
 					}
 					catch(Exception ex){
 						
 					}
-					if(dDistance < global.GlobalVarsAndMethods.dAwarenessDistance){//40 miles
+					if(dDistance < global.GlobalVarsAndMethods.dAwarenessDistance * Simulation.SimulationVars.x){//6 miles
 						ingenias.jade.mental.PlanesInConflict oPlanesInConflict = 
 							new ingenias.jade.mental.PlanesInConflict();
+						//Map.Entry<gov.nasa.worldwind.geom.Position, gov.nasa.worldwind.geom.Angle> oEntry;
+						Hashtable<jade.core.AID, gov.nasa.worldwind.geom.Position> listPlanesInConflict = 
+							new Hashtable<jade.core.AID, gov.nasa.worldwind.geom.Position>();
 
-						ArrayList<jade.core.AID> listPlanesInConflict = 
-							new java.util.ArrayList<jade.core.AID>();
-
-						listPlanesInConflict.add(oFirstService.getOwner().getAID());
-						listPlanesInConflict.add(oSecondService.getOwner().getAID());
+						listPlanesInConflict.put(oFirstService.getOwner().getAID(), oPositionFirstService);
+						listPlanesInConflict.put(oSecondService.getOwner().getAID(), oPositionSecondService);
 						oPlanesInConflict.setPlanesInConflict(listPlanesInConflict);
 
 						try {
