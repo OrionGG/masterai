@@ -28,7 +28,7 @@ public  class ConflictAttendedCheckerAppImp extends ConflictAttendedCheckerApp{
  }
 
 
- public boolean isConflictAttended(ArrayList<jade.core.AID> aPlanesInConflict){
+ public boolean isConflictAttended(Hashtable<jade.core.AID, gov.nasa.worldwind.geom.Position>  aPlanesInConflict){
 
 	 int iWhereIsConflictAttended = -1;
 	 boolean bIsConflictAttended = false;
@@ -36,7 +36,7 @@ public  class ConflictAttendedCheckerAppImp extends ConflictAttendedCheckerApp{
 	 Vector<MentalEntity> vMentalEntities =this.getOwner().getMSM().getMentalEntityByType("ControllerMind");
 	 for (MentalEntity mentalEntity : vMentalEntities) {
 		 ControllerMind oControllerMind = (ControllerMind) mentalEntity;
-		 ArrayList<ArrayList<jade.core.AID>> aConflictsAttended =
+		 ArrayList<Hashtable<jade.core.AID, gov.nasa.worldwind.geom.Position>> aConflictsAttended =
 		 oControllerMind.getConflictsAttended();
 		 
 		 iWhereIsConflictAttended = global.GlobalVarsAndMethods.whereIsConflictAttended(

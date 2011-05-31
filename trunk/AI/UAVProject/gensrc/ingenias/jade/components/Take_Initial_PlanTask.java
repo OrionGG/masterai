@@ -85,7 +85,7 @@ public class Take_Initial_PlanTask extends Task{
 
 
 //#start_node:INGENIASCodeComponent2 <--- DO NOT REMOVE THIS	
-        global.GlobalVarsAndMethods.copyFlightPlan(eiPlanAnswer, outputsdefaultFlight_Plan);
+        global.GlobalVarsAndMethods.copyFlightPlan(eiPlanAnswer.getFlightPlan(), outputsdefaultFlight_Plan);
 //#end_node:INGENIASCodeComponent2 <--- DO NOT REMOVE THIS
 
  }

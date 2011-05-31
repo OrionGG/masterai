@@ -72,15 +72,16 @@ public class CreateNewLegForOrderTask extends Task{
 			(Flight_Leg)
 				outputsdefault.getEntityByType("Flight_Leg");
 		
+		StartLegChecker outputsdefaultStartLegChecker=
+			(StartLegChecker)
+				outputsdefault.getEntityByType("StartLegChecker");
+		
 		
 		
         YellowPages yp=null; // only available for initiators of interactions
 
 
-//#start_node:INGENIASCodeComponent27 <--- DO NOT REMOVE THIS	
-        eiPilot_Mind.getPilotFlightPlan().setLegsNumber(
-        		eiPilot_Mind.getPilotFlightPlan().getLegsNumber() + 1);		
-        
+//#start_node:INGENIASCodeComponent27 <--- DO NOT REMOVE THIS	        
         global.GlobalVarsAndMethods.copyFlightLeg(eiOrderNewLegAndOldLeg.getNewFlightLeg(), 
         		outputsdefaultFlight_Leg);
 //#end_node:INGENIASCodeComponent27 <--- DO NOT REMOVE THIS

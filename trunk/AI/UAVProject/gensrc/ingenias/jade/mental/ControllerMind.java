@@ -33,9 +33,9 @@ import ingenias.editor.entities.ViewPreferences.ViewType;
 
 public class ControllerMind extends ingenias.editor.entities.RuntimeFact{
    
-    ArrayList<ArrayList<jade.core.AID>> ConflictsAttended;   
+    ArrayList<Hashtable<jade.core.AID, gov.nasa.worldwind.geom.Position>> ConflictsAttended;   
    
-    ArrayList<jade.core.AID> PlanesConflictFinished;   
+    Hashtable<jade.core.AID, gov.nasa.worldwind.geom.Position> PlanesConflictFinished;   
     
    
   public ControllerMind (String id){
@@ -64,20 +64,20 @@ public class ControllerMind extends ingenias.editor.entities.RuntimeFact{
   
    
 
-   public void setConflictsAttended(ArrayList<ArrayList<jade.core.AID>> value){
+   public void setConflictsAttended(ArrayList<Hashtable<jade.core.AID, gov.nasa.worldwind.geom.Position>> value){
      ConflictsAttended=value;   
    };
    
-   public ArrayList<ArrayList<jade.core.AID>> getConflictsAttended(){
+   public ArrayList<Hashtable<jade.core.AID, gov.nasa.worldwind.geom.Position>> getConflictsAttended(){
      return ConflictsAttended;      
    }
    
 
-   public void setPlanesConflictFinished(ArrayList<jade.core.AID> value){
+   public void setPlanesConflictFinished(Hashtable<jade.core.AID, gov.nasa.worldwind.geom.Position> value){
      PlanesConflictFinished=value;   
    };
    
-   public ArrayList<jade.core.AID> getPlanesConflictFinished(){
+   public Hashtable<jade.core.AID, gov.nasa.worldwind.geom.Position> getPlanesConflictFinished(){
      return PlanesConflictFinished;      
    }
      

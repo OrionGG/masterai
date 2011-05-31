@@ -93,27 +93,61 @@ public class SendAvoidCollisionTask extends Task{
 
 //#start_node:INGENIASCodeComponent21 <--- DO NOT REMOVE THIS	
         
-        	ArrayList<jade.core.AID> aPlanesInConflict = eiStartAvoidCollision.getPlanesInConflict();
+        	Hashtable<jade.core.AID, gov.nasa.worldwind.geom.Position> hPlanesPositionInConflict = eiStartAvoidCollision.getPlanesInConflict();
 	        
-        	ArrayList<ArrayList<jade.core.AID>> aConflictsAttended =
+        	ArrayList<Hashtable<jade.core.AID, gov.nasa.worldwind.geom.Position>> aConflictsAttended =
         	eiControllerMind.getConflictsAttended();
-        	aConflictsAttended.add(aPlanesInConflict);
+        	aConflictsAttended.add(hPlanesPositionInConflict);
         	eiControllerMind.setConflictsAttended(aConflictsAttended);
         	
 	        Hashtable<jade.core.AID, Flight_Leg> hPilotNewFlightLeg = 
 	        	new Hashtable<jade.core.AID, Flight_Leg>();
+	        	
+	        gov.nasa.worldwind.geom.Position[] aPlanesPositions = 
+	        	hPlanesPositionInConflict.values().toArray(new gov.nasa.worldwind.geom.Position[hPlanesPositionInConflict.size()]);
+	        	
+	        jade.core.AID[] aPlanesAIDs = 
+		        	hPlanesPositionInConflict.keySet().toArray(new jade.core.AID[hPlanesPositionInConflict.size()]);
+		        	
+	        	
+
+	        for (int i = 0; i < hPlanesPositionInConflict.size(); i++) {
+		        	
+	        //for (Map.Entry<jade.core.AID, gov.nasa.worldwind.geom.Position> oPlanePositionInConflict: 
+	        	//	hPlanesPositionInConflict.entrySet()) {
+	        	
+	        	jade.core.AID oPlaneAID = aPlanesAIDs[i];
 	        
-	        for (int i = 0; i < aPlanesInConflict.size(); i++) {
-	        	jade.core.AID planeAID =
-	        		aPlanesInConflict.get(i);
-	        
-	        	jade.core.AID oPlaneAID = planeAID;
 	        	Flight_Leg oFlightLeg = new Flight_Leg();
 	        	
-	        	oFlightLeg.setHead(null);
 	        	oFlightLeg.setSpeedKMH(global.GlobalVarsAndMethods.dCruiseSpeedKMH/2);
-	        	oFlightLeg.setAltitudeKM(global.GlobalVarsAndMethods.dCruiseAltitudeKM 
-	        			+ (1 * Math.pow(-1, i)));
+	        	double dNewAltitude = global.GlobalVarsAndMethods.dCruiseAltitudeKM 
+    									+ (0.610 * ((i/2)+1) * Math.pow(-1, i));
+	        	oFlightLeg.setAltitudeKM(dNewAltitude);
+	        	
+	        	//oFlightLeg.setHead(null);
+	        	int j = i+1;
+	        	if(j >= hPlanesPositionInConflict.size()){
+	        		j =0;
+	        	}
+	        	
+	        	gov.nasa.worldwind.geom.Position oStartPosition = aPlanesPositions[i];
+	        	gov.nasa.worldwind.geom.Position oEndPosition = aPlanesPositions[j];
+	        	
+	        	/*gov.nasa.worldwind.geom.LatLon oMidLatLon = 
+	        		BasicFlightDynamics.BFD.getMidpoint(oStartPosition, oEndPosition);
+	        	*/
+	        	oFlightLeg.setStartPoint(oStartPosition);
+	        	/*gov.nasa.worldwind.geom.Position  oMidPosition = 
+	        		new gov.nasa.worldwind.geom.Position(oMidLatLon, dNewAltitude);*/
+	        	oFlightLeg.setEndPoint(oEndPosition);
+	        	
+	        	ingenias.jade.AgentExternalDescription oPlaneAgentExternalDescription = 
+	        		new ingenias.jade.AgentExternalDescription(oPlaneAID, "PlaneColaborator");
+	        	
+	        	oFlightLeg.setPlaneID(oPlaneAgentExternalDescription);
+	        	oFlightLeg.setIsFromControllerOrder(true);
+	        	
 	        	
 	        	ingenias.jade.AgentExternalDescription oPilotAgentExternalDescription = 
 	        		global.GlobalVarsAndMethods.PlaneIdToPilotId.get(oPlaneAID);

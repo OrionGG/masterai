@@ -20,6 +20,7 @@ import jade.domain.FIPAAgentManagement.DFAgentDescription;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
+import java.util.Map.Entry;
 import java.util.Random;
 import java.util.Vector;
 
@@ -37,7 +38,7 @@ public class GlobalVarsAndMethods {
 	
 	public static double dSecondsFactor = ((double)(Simulation.SimulationVars.iSleepTime * Simulation.SimulationVars.x))/1000;
 	
-	public static double dAwarenessDistance = 64.37376;//40 miles
+	public static double dAwarenessDistance = 10.8;//6 miles
 	
 	public static int iMaxNumWaypoints = 0;
 	
@@ -303,29 +304,30 @@ public class GlobalVarsAndMethods {
 		outputsdefaultFlight_Leg.setEndPoint(oFlightLeg.getEndPoint());
 		outputsdefaultFlight_Leg.setSpeedKMH(oFlightLeg.getSpeedKMH());
 		outputsdefaultFlight_Leg.setPlaneID(oFlightLeg.getPlaneID());
-
+		outputsdefaultFlight_Leg.setIsFromControllerOrder(oFlightLeg.getIsFromControllerOrder());
 		 
 		
 	}
 	
-	public static void copyFlightPlan(PlanAnswer eiPlanAnswer,
+	public static void copyFlightPlan(Flight_Plan eiFlight_Plan,
 			Flight_Plan outputsdefaultFlight_Plan) {
-		outputsdefaultFlight_Plan.setCruisingAltitudeKM(eiPlanAnswer.getFlightPlan().getCruisingAltitudeKM());
-		outputsdefaultFlight_Plan.setCruisingSpeedKMH(eiPlanAnswer.getFlightPlan().getCruisingSpeedKMH());
+		outputsdefaultFlight_Plan.setCruisingAltitudeKM(eiFlight_Plan.getCruisingAltitudeKM());
+		outputsdefaultFlight_Plan.setCruisingSpeedKMH(eiFlight_Plan.getCruisingSpeedKMH());
 		
-		outputsdefaultFlight_Plan.setDepartureAirport(eiPlanAnswer.getFlightPlan().getDepartureAirport());
-		outputsdefaultFlight_Plan.setDestinationAirport(eiPlanAnswer.getFlightPlan().getDestinationAirport());
-		outputsdefaultFlight_Plan.setWaypoints(eiPlanAnswer.getFlightPlan().getWaypoints());
-		outputsdefaultFlight_Plan.setPilotID(eiPlanAnswer.getFlightPlan().getPilotID());
-		outputsdefaultFlight_Plan.setPlaneID(eiPlanAnswer.getFlightPlan().getPlaneID());
-		outputsdefaultFlight_Plan.setDepartureTime(eiPlanAnswer.getFlightPlan().getDepartureTime());
+		outputsdefaultFlight_Plan.setDepartureAirport(eiFlight_Plan.getDepartureAirport());
+		outputsdefaultFlight_Plan.setDestinationAirport(eiFlight_Plan.getDestinationAirport());
+		outputsdefaultFlight_Plan.setWaypoints(eiFlight_Plan.getWaypoints());
+		outputsdefaultFlight_Plan.setPilotID(eiFlight_Plan.getPilotID());
+		outputsdefaultFlight_Plan.setPlaneID(eiFlight_Plan.getPlaneID());
+		outputsdefaultFlight_Plan.setDepartureTime(eiFlight_Plan.getDepartureTime());
+		outputsdefaultFlight_Plan.setLegsNumber(eiFlight_Plan.getLegsNumber());
 	}
 	 
 
 	public static boolean isAlreadyConflictProcessed(
 			PlanesInConflict eiPlanesInConflict) {
 		boolean bAlreadyProcessed = false;
-		ArrayList<jade.core.AID> aPlanesInConflict = eiPlanesInConflict.getPlanesInConflict();
+		Hashtable<jade.core.AID, gov.nasa.worldwind.geom.Position> aPlanesInConflict = eiPlanesInConflict.getPlanesInConflict();
 		
 		Vector<ConflictAttendedCheckerAppImp> oVector = ConflictAttendedCheckerInit.getAppsInitialised();
 		for (ConflictAttendedCheckerAppImp conflictAttendedCheckerAppImp : oVector) {
@@ -339,20 +341,22 @@ public class GlobalVarsAndMethods {
 	}
 	public static int whereIsConflictAttended(
 
-			ArrayList<jade.core.AID> aPlanesInConflict,
-			ArrayList<ArrayList<jade.core.AID>> aConflictsAttended) {
+			Hashtable<jade.core.AID, gov.nasa.worldwind.geom.Position>  aPlanesInConflict,
+			ArrayList<Hashtable<jade.core.AID, gov.nasa.worldwind.geom.Position>> aConflictsAttended) {
 		
 		int iWhereIsConflictAttended = -1;
 		 
 		for (int i = 0; i < aConflictsAttended.size(); i++) {
-	    	ArrayList<jade.core.AID> arrayList = aConflictsAttended.get(i);
+			Hashtable<jade.core.AID, gov.nasa.worldwind.geom.Position> hashConflictsList = aConflictsAttended.get(i);
 	    	
 			 boolean bAreAllPlanesAttended = true;
 			 
-			 for (jade.core.AID newPlaneInConflict : aPlanesInConflict) {
+			 for (Entry<jade.core.AID, gov.nasa.worldwind.geom.Position> newPlanePositionInConflict : aPlanesInConflict.entrySet()) {
+				 jade.core.AID newPlaneInConflict = newPlanePositionInConflict.getKey();
 				boolean bIsPlaneInConflict = false;	
 				
-				for (jade.core.AID mindPlanesInConflict : arrayList) {
+				for (Entry<jade.core.AID, gov.nasa.worldwind.geom.Position> mindPlanesPositionInConflict : hashConflictsList.entrySet()) {
+					jade.core.AID mindPlanesInConflict = mindPlanesPositionInConflict.getKey();
 					if(newPlaneInConflict.equals(mindPlanesInConflict))
 					{
 						bIsPlaneInConflict = true;

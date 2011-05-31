@@ -72,12 +72,12 @@ public class CreateControllerMindTask extends Task{
 
 
 //#start_node:INGENIASCodeComponent26 <--- DO NOT REMOVE THIS	
-        ArrayList<ArrayList<jade.core.AID>> oConflictsAttended =
-        	new java.util.ArrayList<ArrayList<jade.core.AID>>();
+        ArrayList<Hashtable<jade.core.AID, gov.nasa.worldwind.geom.Position>> oConflictsAttended =
+        	new java.util.ArrayList<Hashtable<jade.core.AID, gov.nasa.worldwind.geom.Position>>();
         eiControllerMind.setConflictsAttended(oConflictsAttended);
         
         eiControllerMind.setPlanesConflictFinished(
-        		new java.util.ArrayList<jade.core.AID>());
+        		new java.util.Hashtable<jade.core.AID, gov.nasa.worldwind.geom.Position>());
 //#end_node:INGENIASCodeComponent26 <--- DO NOT REMOVE THIS
 
  }
