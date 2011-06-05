@@ -67,6 +67,10 @@ public class StartDescomposingPlanTask extends Task{
 			(GetNextLeg)
 				outputsdefault.getEntityByType("GetNextLeg");
 		
+		StartThinkNewDecision outputsdefaultStartThinkNewDecision=
+			(StartThinkNewDecision)
+				outputsdefault.getEntityByType("StartThinkNewDecision");
+		
 		
 		
 		

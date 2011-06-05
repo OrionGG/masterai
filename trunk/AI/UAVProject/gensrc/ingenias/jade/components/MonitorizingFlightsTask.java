@@ -23,22 +23,56 @@
 
 */
 
-package ingenias.testing;
 
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
-import ingenias.tests.*;
+package ingenias.jade.components;
 
-@RunWith(Suite.class)
-@Suite.SuiteClasses({
+import java.util.*;
+import ingenias.jade.exception.*;
+import ingenias.jade.comm.*;
+import ingenias.jade.mental.*;
+import ingenias.editor.entities.*;
+
+
+
+public class MonitorizingFlightsTask extends Task{
+
+ public MonitorizingFlightsTask(String id){
+  super(id,"MonitorizingFlights");
+ }
+
+
+
+ public void execute() throws TaskException{
+
+
+
+
+
+
+
+
+
+
+
+  		Vector<TaskOutput> outputs = this.getOutputs();
+  		TaskOutput defaultOutput= outputs.firstElement();
+  		
+  		  	
+  		TaskOutput	outputsdefault=findOutputAlternative("default",
+  																			outputs);
+  		
+		
+		
+		
+        YellowPages yp=null; // only available for initiators of interactions
+
+
+//#start_node: <--- DO NOT REMOVE THIS	
+
+//#end_node: <--- DO NOT REMOVE THIS
+
+ }
  
- 
-       TestingPackage0ForMultipleInteractionTest.class,
-
-                
-        EmptyTest.class
-        })
-public class TestingPackage0Launcher {
 }
 
  

@@ -34,18 +34,16 @@ import ingenias.editor.entities.*;
 
 
 
-public class StartSendOrderTask extends Task{
+public class End_Interaction_Controller_PilotTask extends Task{
 
- public StartSendOrderTask(String id){
-  super(id,"StartSendOrder");
+ public End_Interaction_Controller_PilotTask(String id){
+  super(id,"End_Interaction_Controller_Pilot");
  }
 
 
 
  public void execute() throws TaskException{
 
-
-        PlanesInConflict  eiPlanesInConflict=(PlanesInConflict)this.getFirstInputOfType("PlanesInConflict");             
 
 
 
@@ -64,25 +62,14 @@ public class StartSendOrderTask extends Task{
   																			outputs);
   		
 		
-		StartAvoidCollision outputsdefaultStartAvoidCollision=
-			(StartAvoidCollision)
-				outputsdefault.getEntityByType("StartAvoidCollision");
-		
 		
 		
         YellowPages yp=null; // only available for initiators of interactions
 
 
-//#start_node:INGENIASCodeComponent28 <--- DO NOT REMOVE THIS	
-        boolean bAlreadyProcessed = global.GlobalVarsAndMethods.isAlreadyConflictProcessed(eiPlanesInConflict);
+//#start_node: <--- DO NOT REMOVE THIS	
 
-        if(bAlreadyProcessed){
-        	outputsdefault.remove(outputsdefaultStartAvoidCollision);
-        }
-        else{
-        	outputsdefaultStartAvoidCollision.setPlanesInConflict(eiPlanesInConflict.getPlanesInConflict());
-        }
-//#end_node:INGENIASCodeComponent28 <--- DO NOT REMOVE THIS
+//#end_node: <--- DO NOT REMOVE THIS
 
  }
  

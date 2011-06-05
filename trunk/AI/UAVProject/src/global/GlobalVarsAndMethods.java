@@ -351,24 +351,23 @@ public class GlobalVarsAndMethods {
 	    	
 			 boolean bAreAllPlanesAttended = true;
 			 
-			 for (Entry<jade.core.AID, gov.nasa.worldwind.geom.Position> newPlanePositionInConflict : aPlanesInConflict.entrySet()) {
-				 jade.core.AID newPlaneInConflict = newPlanePositionInConflict.getKey();
-				boolean bIsPlaneInConflict = false;	
-				
-				for (Entry<jade.core.AID, gov.nasa.worldwind.geom.Position> mindPlanesPositionInConflict : hashConflictsList.entrySet()) {
+			 for (Entry<jade.core.AID, gov.nasa.worldwind.geom.Position> mindPlanesPositionInConflict : hashConflictsList.entrySet()) {
 					jade.core.AID mindPlanesInConflict = mindPlanesPositionInConflict.getKey();
-					if(newPlaneInConflict.equals(mindPlanesInConflict))
-					{
-						bIsPlaneInConflict = true;
+					boolean bIsPlaneInConflict = false;
+					for (Entry<jade.core.AID, gov.nasa.worldwind.geom.Position> newPlanePositionInConflict : aPlanesInConflict.entrySet()) {
+						jade.core.AID newPlaneInConflict = newPlanePositionInConflict.getKey();
+						 
+						if(newPlaneInConflict.equals(mindPlanesInConflict))
+						{
+							bIsPlaneInConflict = true;
+							break;
+						}
+					}
+					 
+					if(!bIsPlaneInConflict){
+						bAreAllPlanesAttended = false;
 						break;
 					}
-				}
-				
-				if(!bIsPlaneInConflict){
-					bAreAllPlanesAttended = false;
-					break;
-				}
-				
 			 }
 			 
 			 if(bAreAllPlanesAttended){

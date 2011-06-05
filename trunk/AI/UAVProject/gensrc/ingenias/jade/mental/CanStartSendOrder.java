@@ -31,21 +31,19 @@ import ingenias.jade.components.*;
 import ingenias.editor.entities.*;
 import ingenias.editor.entities.ViewPreferences.ViewType;
 
-public class StartAvoidCollision extends ingenias.editor.entities.RuntimeFact{
+public class CanStartSendOrder extends ingenias.editor.entities.RuntimeFact{
    
-    ingenias.jade.AgentExternalDescription PilotID;   
-   
-    Flight_Leg NewFlightLeg;   
+    Hashtable<jade.core.AID, gov.nasa.worldwind.geom.Position> PlanesInConflict;   
     
    
-  public StartAvoidCollision (String id){
+  public CanStartSendOrder (String id){
    super(id);
    this.getPrefs().setView(ViewType.UML);
-   this.type="StartAvoidCollision";
+   this.type="CanStartSendOrder";
   }
   
 
-  public StartAvoidCollision (){
+  public CanStartSendOrder (){
    super(ingenias.jade.MentalStateManager.generateMentalEntityID());
    this.getPrefs().setView(ViewType.UML);
   }
@@ -55,7 +53,7 @@ public class StartAvoidCollision extends ingenias.editor.entities.RuntimeFact{
   }
   
   public String getType(){
-   return "StartAvoidCollision";
+   return "CanStartSendOrder";
   }
   
   public String getParentType(){
@@ -64,21 +62,12 @@ public class StartAvoidCollision extends ingenias.editor.entities.RuntimeFact{
   
    
 
-   public void setPilotID(ingenias.jade.AgentExternalDescription value){
-     PilotID=value;   
+   public void setPlanesInConflict(Hashtable<jade.core.AID, gov.nasa.worldwind.geom.Position> value){
+     PlanesInConflict=value;   
    };
    
-   public ingenias.jade.AgentExternalDescription getPilotID(){
-     return PilotID;      
-   }
-   
-
-   public void setNewFlightLeg(Flight_Leg value){
-     NewFlightLeg=value;   
-   };
-   
-   public Flight_Leg getNewFlightLeg(){
-     return NewFlightLeg;      
+   public Hashtable<jade.core.AID, gov.nasa.worldwind.geom.Position> getPlanesInConflict(){
+     return PlanesInConflict;      
    }
      
     

@@ -34,10 +34,10 @@ import ingenias.editor.entities.*;
 
 
 
-public class CreateNewDecisionTask extends Task{
+public class IsANewConflictDetectedTask extends Task{
 
- public CreateNewDecisionTask(String id){
-  super(id,"CreateNewDecision");
+ public IsANewConflictDetectedTask(String id){
+  super(id,"IsANewConflictDetected");
  }
 
 
@@ -45,7 +45,7 @@ public class CreateNewDecisionTask extends Task{
  public void execute() throws TaskException{
 
 
-        Pilot_Mind  eiPilot_Mind=(Pilot_Mind)this.getFirstInputOfType("Pilot_Mind");             
+        PlanesInConflict  eiPlanesInConflict=(PlanesInConflict)this.getFirstInputOfType("PlanesInConflict");             
 
 
 
@@ -64,37 +64,26 @@ public class CreateNewDecisionTask extends Task{
   																			outputs);
   		
 		
-		CanCreateNewDecision outputsdefaultCanCreateNewDecision=
-			(CanCreateNewDecision)
-				outputsdefault.getEntityByType("CanCreateNewDecision");
+		CanStartSendOrder outputsdefaultCanStartSendOrder=
+			(CanStartSendOrder)
+				outputsdefault.getEntityByType("CanStartSendOrder");
 		
 		
 		
         YellowPages yp=null; // only available for initiators of interactions
 
 
-//#start_node:INGENIASCodeComponent20 <--- DO NOT REMOVE THIS	
-        boolean bCanCreateNewDecisionDeleted = false;
-        yp=(YellowPages)this.getApplication("YellowPages");
-        if(((ingenias.jade.agents.PilotJADEAgent)yp.ja).
-        		getMSM().getMentalEntityByType("CanCreateNewDecision").size() > 0){
-        	outputsdefault.remove(outputsdefaultCanCreateNewDecision);
-        	bCanCreateNewDecisionDeleted = true;
+//#start_node:INGENIASCodeComponent30 <--- DO NOT REMOVE THIS	
+        boolean bAlreadyProcessed = global.GlobalVarsAndMethods.isAlreadyConflictProcessed(eiPlanesInConflict);
+
+        if(bAlreadyProcessed){
+        	outputsdefault.remove(outputsdefaultCanStartSendOrder);
         }
-        if(!bCanCreateNewDecisionDeleted){
-        	//id the last decision was fewer than a minute ago => sleep 
-	        Date oLastDecisionDate = eiPilot_Mind.getLastDecisionDate();
-	        Date oNow = new Date();
-	        long lDifferOfMiliseconds = oNow.getTime() - oLastDecisionDate.getTime();
-	        long iRangeTime =(long) (Simulation.SimulationVars.iSleepTime * Math.pow(global.GlobalVarsAndMethods.PlaneIdToPilotId.size(),2));
-	        if(lDifferOfMiliseconds < iRangeTime){
-	        	//global.GlobalVarsAndMethods.sleepRandom(iRangeTime /2);
-	        	/*oNow = new Date();
-	            lDifferOfMiliseconds = oNow.getTime() - oLastDecisionDate.getTime();*/
-	        	outputsdefault.remove(outputsdefaultCanCreateNewDecision);
-	        }
+        else{
+        	outputsdefaultCanStartSendOrder.setPlanesInConflict(eiPlanesInConflict.getPlanesInConflict());
+        	
         }
-//#end_node:INGENIASCodeComponent20 <--- DO NOT REMOVE THIS
+//#end_node:INGENIASCodeComponent30 <--- DO NOT REMOVE THIS
 
  }
  

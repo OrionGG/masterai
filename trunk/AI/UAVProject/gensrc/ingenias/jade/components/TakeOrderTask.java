@@ -45,9 +45,9 @@ public class TakeOrderTask extends Task{
  public void execute() throws TaskException{
 
 
-        Order  eiOrder=(Order)this.getFirstInputOfType("Order");             
-
         Flight_Leg  eiFlight_Leg=(Flight_Leg)this.getFirstInputOfType("Flight_Leg");             
+
+        Order  eiOrder=(Order)this.getFirstInputOfType("Order");             
 
 
 
@@ -80,8 +80,7 @@ public class TakeOrderTask extends Task{
 
 
 //#start_node:INGENIASCodeComponent22 <--- DO NOT REMOVE THIS	
-        yp=(YellowPages)this.getApplication("YellowPages");
-        Flight_Leg oFlightLeg = eiOrder.getPilotNewFlightLeg().get(yp.ja.getAID());
+        Flight_Leg oFlightLeg = eiOrder.getNewFlightLeg();
         
         outputsdefaultOrderNewLegAndOldLeg.setNewFlightLeg(oFlightLeg);
         outputsdefaultOrderNewLegAndOldLeg.setOldFlightLeg(eiFlight_Leg);

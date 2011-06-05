@@ -33,7 +33,7 @@ import ingenias.editor.entities.ViewPreferences.ViewType;
 
 public class Order extends ingenias.editor.entities.RuntimeFact{
    
-    Hashtable<jade.core.AID, Flight_Leg> PilotNewFlightLeg;   
+    Flight_Leg NewFlightLeg;   
     
    
   public Order (String id){
@@ -62,12 +62,12 @@ public class Order extends ingenias.editor.entities.RuntimeFact{
   
    
 
-   public void setPilotNewFlightLeg(Hashtable<jade.core.AID, Flight_Leg> value){
-     PilotNewFlightLeg=value;   
+   public void setNewFlightLeg(Flight_Leg value){
+     NewFlightLeg=value;   
    };
    
-   public Hashtable<jade.core.AID, Flight_Leg> getPilotNewFlightLeg(){
-     return PilotNewFlightLeg;      
+   public Flight_Leg getNewFlightLeg(){
+     return NewFlightLeg;      
    }
      
     
