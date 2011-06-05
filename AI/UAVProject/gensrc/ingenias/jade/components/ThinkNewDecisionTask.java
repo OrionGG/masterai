@@ -34,10 +34,10 @@ import ingenias.editor.entities.*;
 
 
 
-public class ObeyOrderCheckTask extends Task{
+public class ThinkNewDecisionTask extends Task{
 
- public ObeyOrderCheckTask(String id){
-  super(id,"ObeyOrderCheck");
+ public ThinkNewDecisionTask(String id){
+  super(id,"ThinkNewDecision");
  }
 
 
@@ -45,9 +45,11 @@ public class ObeyOrderCheckTask extends Task{
  public void execute() throws TaskException{
 
 
-        OrderNewLegAndOldLeg  eiOrderNewLegAndOldLeg=(OrderNewLegAndOldLeg)this.getFirstInputOfType("OrderNewLegAndOldLeg");             
+        StartThinkNewDecision  eiStartThinkNewDecision=(StartThinkNewDecision)this.getFirstInputOfType("StartThinkNewDecision");             
 
-        OrderFinished  eiOrderFinished=(OrderFinished)this.getFirstInputOfType("OrderFinished");             
+        Pilot_Mind  eiPilot_Mind=(Pilot_Mind)this.getFirstInputOfType("Pilot_Mind");             
+
+        Flight_Leg  eiFlight_Leg=(Flight_Leg)this.getFirstInputOfType("Flight_Leg");             
 
 
 
@@ -65,28 +67,25 @@ public class ObeyOrderCheckTask extends Task{
   		TaskOutput	outputsdefault=findOutputAlternative("default",
   																			outputs);
   		
-		Flight_Leg outputsdefaultFlight_Leg=
-			(Flight_Leg)
-				outputsdefault.getEntityByType("Flight_Leg");
 		
-		
-		OrdenDone outputsdefaultOrdenDone=
-			(OrdenDone)
-				outputsdefault.getEntityByType("OrdenDone");
+		CanCreateNewDecision outputsdefaultCanCreateNewDecision=
+			(CanCreateNewDecision)
+				outputsdefault.getEntityByType("CanCreateNewDecision");
 		
 		
 		
         YellowPages yp=null; // only available for initiators of interactions
 
 
-//#start_node:INGENIASCodeComponent23 <--- DO NOT REMOVE THIS	
-
-        Flight_Leg oFlightLeg = eiOrderNewLegAndOldLeg.getOldFlightLeg();
-        global.GlobalVarsAndMethods.copyFlightLeg(oFlightLeg, outputsdefaultFlight_Leg);
-
+//#start_node:INGENIASCodeComponent20 <--- DO NOT REMOVE THIS	
+        outputsdefault.remove(outputsdefaultCanCreateNewDecision);
+        yp=(YellowPages)this.getApplication("YellowPages");
         
-        outputsdefaultOrdenDone.setPlaneID(oFlightLeg.getPlaneID());
-//#end_node:INGENIASCodeComponent23 <--- DO NOT REMOVE THIS
+        thread.CreateNewDecisionThread oCreateNewDecisionThread = 
+        	new thread.CreateNewDecisionThread(((ingenias.jade.agents.PilotJADEAgent)yp.ja), eiPilot_Mind);
+        Thread thread = new Thread(oCreateNewDecisionThread);
+		thread.start();
+//#end_node:INGENIASCodeComponent20 <--- DO NOT REMOVE THIS
 
  }
  

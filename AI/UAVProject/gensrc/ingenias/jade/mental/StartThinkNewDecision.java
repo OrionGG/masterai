@@ -31,21 +31,17 @@ import ingenias.jade.components.*;
 import ingenias.editor.entities.*;
 import ingenias.editor.entities.ViewPreferences.ViewType;
 
-public class StartAvoidCollision extends ingenias.editor.entities.RuntimeFact{
-   
-    ingenias.jade.AgentExternalDescription PilotID;   
-   
-    Flight_Leg NewFlightLeg;   
+public class StartThinkNewDecision extends ingenias.editor.entities.RuntimeFact{
     
    
-  public StartAvoidCollision (String id){
+  public StartThinkNewDecision (String id){
    super(id);
    this.getPrefs().setView(ViewType.UML);
-   this.type="StartAvoidCollision";
+   this.type="StartThinkNewDecision";
   }
   
 
-  public StartAvoidCollision (){
+  public StartThinkNewDecision (){
    super(ingenias.jade.MentalStateManager.generateMentalEntityID());
    this.getPrefs().setView(ViewType.UML);
   }
@@ -55,31 +51,13 @@ public class StartAvoidCollision extends ingenias.editor.entities.RuntimeFact{
   }
   
   public String getType(){
-   return "StartAvoidCollision";
+   return "StartThinkNewDecision";
   }
   
   public String getParentType(){
    return "RuntimeFact";
   }
   
-   
-
-   public void setPilotID(ingenias.jade.AgentExternalDescription value){
-     PilotID=value;   
-   };
-   
-   public ingenias.jade.AgentExternalDescription getPilotID(){
-     return PilotID;      
-   }
-   
-
-   public void setNewFlightLeg(Flight_Leg value){
-     NewFlightLeg=value;   
-   };
-   
-   public Flight_Leg getNewFlightLeg(){
-     return NewFlightLeg;      
-   }
      
     
 }

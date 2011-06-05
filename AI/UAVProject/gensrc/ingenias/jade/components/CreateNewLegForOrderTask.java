@@ -81,7 +81,7 @@ public class CreateNewLegForOrderTask extends Task{
         YellowPages yp=null; // only available for initiators of interactions
 
 
-//#start_node:INGENIASCodeComponent27 <--- DO NOT REMOVE THIS	        
+//#start_node:INGENIASCodeComponent27 <--- DO NOT REMOVE THIS	
         global.GlobalVarsAndMethods.copyFlightLeg(eiOrderNewLegAndOldLeg.getNewFlightLeg(), 
         		outputsdefaultFlight_Leg);
 //#end_node:INGENIASCodeComponent27 <--- DO NOT REMOVE THIS

@@ -34,20 +34,16 @@ import ingenias.editor.entities.*;
 
 
 
-public class ObeyOrderCheckTask extends Task{
+public class Start_Interaction_Controller_PilotTask extends Task{
 
- public ObeyOrderCheckTask(String id){
-  super(id,"ObeyOrderCheck");
+ public Start_Interaction_Controller_PilotTask(String id){
+  super(id,"Start_Interaction_Controller_Pilot");
  }
 
 
 
  public void execute() throws TaskException{
 
-
-        OrderNewLegAndOldLeg  eiOrderNewLegAndOldLeg=(OrderNewLegAndOldLeg)this.getFirstInputOfType("OrderNewLegAndOldLeg");             
-
-        OrderFinished  eiOrderFinished=(OrderFinished)this.getFirstInputOfType("OrderFinished");             
 
 
 
@@ -65,28 +61,15 @@ public class ObeyOrderCheckTask extends Task{
   		TaskOutput	outputsdefault=findOutputAlternative("default",
   																			outputs);
   		
-		Flight_Leg outputsdefaultFlight_Leg=
-			(Flight_Leg)
-				outputsdefault.getEntityByType("Flight_Leg");
-		
-		
-		OrdenDone outputsdefaultOrdenDone=
-			(OrdenDone)
-				outputsdefault.getEntityByType("OrdenDone");
 		
 		
 		
         YellowPages yp=null; // only available for initiators of interactions
 
 
-//#start_node:INGENIASCodeComponent23 <--- DO NOT REMOVE THIS	
+//#start_node: <--- DO NOT REMOVE THIS	
 
-        Flight_Leg oFlightLeg = eiOrderNewLegAndOldLeg.getOldFlightLeg();
-        global.GlobalVarsAndMethods.copyFlightLeg(oFlightLeg, outputsdefaultFlight_Leg);
-
-        
-        outputsdefaultOrdenDone.setPlaneID(oFlightLeg.getPlaneID());
-//#end_node:INGENIASCodeComponent23 <--- DO NOT REMOVE THIS
+//#end_node: <--- DO NOT REMOVE THIS
 
  }
  

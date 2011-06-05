@@ -70,6 +70,10 @@ public class DescomposeDecisionTask extends Task{
 			(Throw_Instruction)
 				outputsdefault.getEntityByType("Throw_Instruction");
 		
+		StartThinkNewDecision outputsdefaultStartThinkNewDecision=
+			(StartThinkNewDecision)
+				outputsdefault.getEntityByType("StartThinkNewDecision");
+		
 		
 		
         YellowPages yp=null; // only available for initiators of interactions
