@@ -26,22 +26,15 @@ public  class Leg_CheckerAppImp extends Leg_CheckerApp{
 
  public boolean isLegCompleted(ingenias.jade.mental.Flight_Leg eiFlight_Leg){
 			boolean bResutl = false;
-
-			Vector<Plane_Position_ServiceAppImp> oVector = Plane_Position_ServiceInit.getAppsInitialised();
-
-			for (Plane_Position_ServiceAppImp plane_Position_ServiceAppImp : oVector) {
-				jade.core.AID oPlaneAID = eiFlight_Leg.getPlaneID().id;
-				if(oPlaneAID.equals(plane_Position_ServiceAppImp.getOwner().getAID())){
-
-					gov.nasa.worldwind.geom.Position oPosition = plane_Position_ServiceAppImp.getCurrentPosition();
-					double dDistance = BasicFlightDynamics.BFD.getDistance(eiFlight_Leg.getEndPoint(), oPosition);
-					if(dDistance < 10){
-						bResutl =  true;
-					}
-					break;
-				}
-
+			jade.core.AID oPlaneAID = eiFlight_Leg.getPlaneID().id;
+	        Plane_Position_ServiceAppImp plane_Position_ServiceAppImp = global.GlobalVarsAndMethods.PlanesPositionApps.get(oPlaneAID);
+				
+	        gov.nasa.worldwind.geom.Position oPosition = plane_Position_ServiceAppImp.getCurrentPosition();
+	        double dDistance = BasicFlightDynamics.BFD.getDistance(eiFlight_Leg.getEndPoint(), oPosition);
+			if(dDistance < 10){
+				bResutl =  true;
 			}
+			
 			return bResutl;
 } 
  
