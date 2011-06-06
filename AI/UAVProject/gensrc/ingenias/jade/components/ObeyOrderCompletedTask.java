@@ -77,7 +77,7 @@ public class ObeyOrderCompletedTask extends Task{
         
         aPlanesConflictFinished.put(eiOrdenDone.getPlaneID().id, 
         		gov.nasa.worldwind.geom.Position.ZERO);
-        
+
         ArrayList<Hashtable<jade.core.AID, gov.nasa.worldwind.geom.Position>> aConflictsAttended =
         	eiControllerMind.getConflictsAttended();
         
@@ -85,10 +85,11 @@ public class ObeyOrderCompletedTask extends Task{
         		aPlanesConflictFinished, aConflictsAttended);
         
         if(iWhereIsConflictAttended != -1){
-        	eiControllerMind.setPlanesConflictFinished(
-        			new java.util.Hashtable<jade.core.AID, gov.nasa.worldwind.geom.Position>());
-        			
-        	aConflictsAttended.remove(iWhereIsConflictAttended);	
+        	thread.CheckDistanceBetweenPlanes oCheckDistantceBetweenPlanes
+         		= new thread.CheckDistanceBetweenPlanes(aPlanesConflictFinished, aConflictsAttended, iWhereIsConflictAttended);
+
+         	Thread oThread = new Thread(oCheckDistantceBetweenPlanes);
+         	oThread.start();	
         }
         
 //#end_node:INGENIASCodeComponent24 <--- DO NOT REMOVE THIS

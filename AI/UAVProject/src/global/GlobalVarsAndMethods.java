@@ -5,6 +5,7 @@ import gov.nasa.worldwind.geom.Angle;
 import ingenias.jade.agents.PlaneJADEAgent;
 import ingenias.jade.components.ConflictAttendedCheckerAppImp;
 import ingenias.jade.components.ConflictAttendedCheckerInit;
+import ingenias.jade.components.Plane_Position_ServiceAppImp;
 import ingenias.jade.components.Task;
 import ingenias.jade.mental.Decision;
 import ingenias.jade.mental.Flight_Leg;
@@ -41,6 +42,9 @@ public class GlobalVarsAndMethods {
 	public static double dAwarenessDistance = 10.8;//6 miles
 	
 	public static int iMaxNumWaypoints = 0;
+	
+	public static Hashtable<jade.core.AID, Plane_Position_ServiceAppImp> PlanesPositionApps =
+		new Hashtable<jade.core.AID, Plane_Position_ServiceAppImp>();
 	
 	//public static Hashtable<PlaneJADEAgent, Thread> hUpdatePlanesThreads = new Hashtable<PlaneJADEAgent, Thread>();
 	

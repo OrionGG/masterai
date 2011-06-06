@@ -41,7 +41,13 @@ public class BFD {
 		return lMiliseconds * Simulation.SimulationVars.x;
 	}
 
-	public static Angle getHead(double lat1, double lon1,double lat2, double lon2){
+	public static Angle getHead(LatLon oStartPosition, LatLon oEndPoint){
+
+		double lat1 = oStartPosition.getLatitude().radians;
+		double lon1 = oStartPosition.getLongitude().radians;
+		double lat2 = oEndPoint.getLatitude().radians;
+		double lon2 = oEndPoint.getLongitude().radians;
+		
 		double dLat = lat2-lat1;
 		double dLon = lon2-lon1; 
 		double y = Math.sin(dLon) * Math.cos(lat2);
@@ -208,8 +214,7 @@ public class BFD {
 		LatLon oEndLatLon= new LatLon(Angle.fromDMS("52 12 16 N"), Angle.fromDMS("000 08 26 E"));
 		
 		double dDistance = BasicFlightDynamics.BFD.getDistance(new Position(oStartLatLon, 0), new Position(oEndLatLon, 0));
-		gov.nasa.worldwind.geom.Angle oAngle =  BFD.getHead(oStartLatLon.latitude.degrees,oStartLatLon.longitude.degrees,
-															oEndLatLon.latitude.degrees,oEndLatLon.longitude.degrees);
+		gov.nasa.worldwind.geom.Angle oAngle =  BFD.getHead(oStartLatLon, oEndLatLon);
 		gov.nasa.worldwind.geom.LatLon oMidLatLon = 
 			BFD.getMidpoint(oStartLatLon, oEndLatLon);
 	}
