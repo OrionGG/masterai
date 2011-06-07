@@ -12,13 +12,28 @@ public class LegCheckerThread implements Runnable{
 	Leg_CheckerAppImp oLeg_CheckerAppImp;
 	Flight_Leg eiFlight_Leg;
 
-	
-	
+	boolean bLegCompleted = false;
+
+
+
+	public boolean isbLegCompleted() {
+		return bLegCompleted;
+	}
+
+
+
+	public void setbLegCompleted(boolean bLegCompleted) {
+		this.bLegCompleted = bLegCompleted;
+	}
+
+
+
 	public LegCheckerThread(Leg_CheckerAppImp oLeg_CheckerAppImp,
 			Flight_Leg eiFlight_Leg) {
 		super();
 		this.oLeg_CheckerAppImp = oLeg_CheckerAppImp;
 		this.eiFlight_Leg = eiFlight_Leg;
+		bLegCompleted = false;
 	}
 
 
@@ -26,29 +41,29 @@ public class LegCheckerThread implements Runnable{
 	@Override
 	public void run() {
 
-		boolean bLegCompleted = false;
 		while(!bLegCompleted){
+
+			long iRangeTime =(long) (Simulation.SimulationVars.iSleepTime);
+			global.GlobalVarsAndMethods.sleepRandom(iRangeTime);
+
 			jade.core.AID oPlaneAID = eiFlight_Leg.getPlaneID().id;
-	        Plane_Position_ServiceAppImp plane_Position_ServiceAppImp = global.GlobalVarsAndMethods.PlanesPositionApps.get(oPlaneAID);
-			
-					gov.nasa.worldwind.geom.Position oPosition = plane_Position_ServiceAppImp.getCurrentPosition();
-					double dDistance = BasicFlightDynamics.BFD.getDistance(eiFlight_Leg.getEndPoint(), oPosition);
-					if(dDistance < 10){
-						bLegCompleted = true;
-						try {
-							oLeg_CheckerAppImp.getOwner().getMSM().addMentalEntity(new ingenias.jade.mental.LegCompleted());
-						} catch (InvalidEntity e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-					}
-			
-			 long iRangeTime =(long) (Simulation.SimulationVars.iSleepTime);
-		     global.GlobalVarsAndMethods.sleepRandom(iRangeTime);
-		        	
+			Plane_Position_ServiceAppImp plane_Position_ServiceAppImp = global.GlobalVarsAndMethods.PlanesPositionApps.get(oPlaneAID);
+
+			gov.nasa.worldwind.geom.Position oPosition = plane_Position_ServiceAppImp.getCurrentPosition();
+			double dDistance = BasicFlightDynamics.BFD.getDistance(eiFlight_Leg.getEndPoint(), oPosition);
+			if(dDistance < 10){
+				bLegCompleted = true;
+				try {
+					oLeg_CheckerAppImp.getOwner().getMSM().addMentalEntity(new ingenias.jade.mental.LegCompleted());
+				} catch (InvalidEntity e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+
 
 		}
-		
+
 	}
 
 }

@@ -28,7 +28,7 @@ private static java.lang.String semaphore="Plane_Position_Service";
 
 
  public static void initialize(Plane_Position_ServiceAppImp app){
-	 global.GlobalVarsAndMethods.PlanesPositionApps.put(app.getOwner().getAID(), app);
+  	 global.GlobalVarsAndMethods.PlanesPositionApps.put(app.getOwner().getAID(), app);
  }
 
  public static void shutdown(Plane_Position_ServiceAppImp app){

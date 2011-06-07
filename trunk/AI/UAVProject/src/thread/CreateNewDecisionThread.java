@@ -24,9 +24,10 @@ public class CreateNewDecisionThread implements Runnable{
 	        Date oNow = new Date();
 	        long lDifferOfMiliseconds = oNow.getTime() - oLastDecisionDate.getTime();
 	        long iRangeTime =(long) (Simulation.SimulationVars.iSleepTime * Math.pow(global.GlobalVarsAndMethods.PlaneIdToPilotId.size(),2));
-	        if(lDifferOfMiliseconds < iRangeTime){
+	        while(lDifferOfMiliseconds < iRangeTime){
 	        	try {
-					Thread.sleep(1000);
+	        		Thread.sleep(iRangeTime - lDifferOfMiliseconds);
+					Thread.sleep((long) (Math.random()*1000));
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

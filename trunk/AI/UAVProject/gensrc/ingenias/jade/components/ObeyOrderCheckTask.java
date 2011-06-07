@@ -47,7 +47,7 @@ public class ObeyOrderCheckTask extends Task{
 
         OrderFinished  eiOrderFinished=(OrderFinished)this.getFirstInputOfType("OrderFinished");             
 
-        OrderNewLegAndOldLeg  eiOrderNewLegAndOldLeg=(OrderNewLegAndOldLeg)this.getFirstInputOfType("OrderNewLegAndOldLeg");             
+        OrderOldLeg  eiOrderOldLeg=(OrderOldLeg)this.getFirstInputOfType("OrderOldLeg");             
 
 
 
@@ -69,6 +69,10 @@ public class ObeyOrderCheckTask extends Task{
 			(Flight_Leg)
 				outputsdefault.getEntityByType("Flight_Leg");
 		
+		StartLegChecker outputsdefaultStartLegChecker=
+			(StartLegChecker)
+				outputsdefault.getEntityByType("StartLegChecker");
+		
 		
 		OrdenDone outputsdefaultOrdenDone=
 			(OrdenDone)
@@ -81,9 +85,16 @@ public class ObeyOrderCheckTask extends Task{
 
 //#start_node:INGENIASCodeComponent23 <--- DO NOT REMOVE THIS	
 
-        Flight_Leg oFlightLeg = eiOrderNewLegAndOldLeg.getOldFlightLeg();
-        global.GlobalVarsAndMethods.copyFlightLeg(oFlightLeg, outputsdefaultFlight_Leg);
-
+    	Flight_Leg oFlightLeg = eiOrderOldLeg.getOldFlightLeg();
+    	
+        if(eiOrderFinished.getIsBecauseOtherConflict()){
+        	outputsdefault.remove(outputsdefaultFlight_Leg);
+        	outputsdefault.remove(outputsdefaultStartLegChecker);
+        }
+        else{
+            global.GlobalVarsAndMethods.copyFlightLeg(oFlightLeg, outputsdefaultFlight_Leg);
+            
+        }        
         
         outputsdefaultOrdenDone.setPlaneID(oFlightLeg.getPlaneID());
 //#end_node:INGENIASCodeComponent23 <--- DO NOT REMOVE THIS

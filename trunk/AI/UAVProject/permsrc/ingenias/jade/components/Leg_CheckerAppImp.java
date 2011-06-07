@@ -18,6 +18,8 @@ import ingenias.jade.exception.*;
 
 
 public  class Leg_CheckerAppImp extends Leg_CheckerApp{
+	thread.LegCheckerThread oLegCheckerThread;
+	
 
  public Leg_CheckerAppImp(){
   super();
@@ -39,12 +41,15 @@ public  class Leg_CheckerAppImp extends Leg_CheckerApp{
 } 
  
  public void start(ingenias.jade.mental.Flight_Leg eiFlight_Leg){
-	 thread.LegCheckerThread oLegCheckerThread = 
-			new thread.LegCheckerThread(this, eiFlight_Leg);
-		Thread thread = new Thread(oLegCheckerThread);
-		thread.start();
 
-} 
+	 if(oLegCheckerThread != null){
+		 oLegCheckerThread.setbLegCompleted(true);
+	 }
+	oLegCheckerThread = new thread.LegCheckerThread(this, eiFlight_Leg);
+	Thread thread = new Thread(oLegCheckerThread);
+	thread.start();
+
+}
  
 }
 

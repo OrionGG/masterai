@@ -32,6 +32,8 @@ import ingenias.editor.entities.*;
 import ingenias.editor.entities.ViewPreferences.ViewType;
 
 public class OrderFinished extends ingenias.editor.entities.RuntimeFact{
+   
+    boolean IsBecauseOtherConflict;   
     
    
   public OrderFinished (String id){
@@ -58,6 +60,15 @@ public class OrderFinished extends ingenias.editor.entities.RuntimeFact{
    return "RuntimeFact";
   }
   
+   
+
+   public void setIsBecauseOtherConflict(boolean value){
+     IsBecauseOtherConflict=value;   
+   };
+   
+   public boolean getIsBecauseOtherConflict(){
+     return IsBecauseOtherConflict;      
+   }
      
     
 }

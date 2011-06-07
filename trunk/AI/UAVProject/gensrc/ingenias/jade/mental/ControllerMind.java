@@ -33,9 +33,11 @@ import ingenias.editor.entities.ViewPreferences.ViewType;
 
 public class ControllerMind extends ingenias.editor.entities.RuntimeFact{
    
-    ArrayList<Hashtable<jade.core.AID, gov.nasa.worldwind.geom.Position>> ConflictsAttended;   
+    Hashtable<Integer, ArrayList<jade.core.AID>> ConflictsAttended;   
    
-    Hashtable<jade.core.AID, gov.nasa.worldwind.geom.Position> PlanesConflictFinished;   
+    ArrayList<jade.core.AID> PlanesConflictFinished;   
+   
+    int TotalConflictNumber;   
     
    
   public ControllerMind (String id){
@@ -64,21 +66,30 @@ public class ControllerMind extends ingenias.editor.entities.RuntimeFact{
   
    
 
-   public void setConflictsAttended(ArrayList<Hashtable<jade.core.AID, gov.nasa.worldwind.geom.Position>> value){
+   public void setConflictsAttended(Hashtable<Integer, ArrayList<jade.core.AID>> value){
      ConflictsAttended=value;   
    };
    
-   public ArrayList<Hashtable<jade.core.AID, gov.nasa.worldwind.geom.Position>> getConflictsAttended(){
+   public Hashtable<Integer, ArrayList<jade.core.AID>> getConflictsAttended(){
      return ConflictsAttended;      
    }
    
 
-   public void setPlanesConflictFinished(Hashtable<jade.core.AID, gov.nasa.worldwind.geom.Position> value){
+   public void setPlanesConflictFinished(ArrayList<jade.core.AID> value){
      PlanesConflictFinished=value;   
    };
    
-   public Hashtable<jade.core.AID, gov.nasa.worldwind.geom.Position> getPlanesConflictFinished(){
+   public ArrayList<jade.core.AID> getPlanesConflictFinished(){
      return PlanesConflictFinished;      
+   }
+   
+
+   public void setTotalConflictNumber(int value){
+     TotalConflictNumber=value;   
+   };
+   
+   public int getTotalConflictNumber(){
+     return TotalConflictNumber;      
    }
      
     

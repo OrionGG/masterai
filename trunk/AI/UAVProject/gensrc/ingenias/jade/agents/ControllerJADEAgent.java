@@ -928,7 +928,7 @@ public class ControllerJADEAgent
 	 /*
 	 slot=new Slot("236");
 	 slot.setName("PlanesInConflict");
-	 slot.setType("Hashtable<jade.core.AID, gov.nasa.worldwind.geom.Position>");
+	 slot.setType("ArrayList<jade.core.AID>");
 	 slot.setValue("");
 	 event.addSlots(slot);
 	  

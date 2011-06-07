@@ -90,17 +90,8 @@ public class GivePlanTask extends Task{
 
 
 //#start_node:CodeForCreatingRandomPlan <--- DO NOT REMOVE THIS	
-        if(global.GlobalVarsAndMethods.inomore > 0){
-	        global.GlobalVarsAndMethods.inomore --;
 	        outputsdefaultPlanAnswer.setFlightPlan(eiFlight_Plan);
 	        outputsdefaultFlightPlannerPilotInteraction.addCollaborators(eiFlight_Plan.getPilotID());
-        }else{
-        	outputsdefaultFlightPlannerPilotInteraction.setAbortCode(-1);
-        	outputsdefaultFlightPlannerPilotInteraction.setState("FINISHED");
-        	outputsdefault.removeAllElements();
-        }
-        
-        
 //#end_node:CodeForCreatingRandomPlan <--- DO NOT REMOVE THIS
 
  }

@@ -29,7 +29,7 @@ public class UpdatePlaneStatusThread  implements Runnable{
 		gov.nasa.worldwind.geom.Position oPosition = new gov.nasa.worldwind.geom.Position(
 				eiPlane_Mind.getLatLonPosition(),
 				eiPlane_Mind.getAltitudeKM());
-		oPlaneView = new PlaneView((PlaneJADEAgent)oUpdatePlaneStatusAppImp.getOwner(), "Plane", oPosition);
+		oPlaneView = new PlaneView((PlaneJADEAgent)oUpdatePlaneStatusAppImp.getOwner(), oUpdatePlaneStatusAppImp.getOwner().getLocalName(), oPosition);
 		Simulation.SimulationVars.lPlanesFlying.add(oPlaneView);
 		oPlaneView.render(Simulation.SimulationVars.layer);
 	}

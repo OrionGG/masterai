@@ -45,9 +45,9 @@ public class Change_Plane_SpeedTask extends Task{
  public void execute() throws TaskException{
 
 
-        Decrease_Speed  eiDecrease_Speed=(Decrease_Speed)this.getFirstInputOfType("Decrease_Speed");             
-
         Increase_Speed  eiIncrease_Speed=(Increase_Speed)this.getFirstInputOfType("Increase_Speed");             
+
+        Decrease_Speed  eiDecrease_Speed=(Decrease_Speed)this.getFirstInputOfType("Decrease_Speed");             
 
         Plane_Mind  eiPlane_Mind=(Plane_Mind)this.getFirstInputOfType("Plane_Mind");             
 
