@@ -45,11 +45,9 @@ public class CreateNewLegForOrderTask extends Task{
  public void execute() throws TaskException{
 
 
-        CreateNewLeg  eiCreateNewLeg=(CreateNewLeg)this.getFirstInputOfType("CreateNewLeg");             
+        OrderNewLeg  eiOrderNewLeg=(OrderNewLeg)this.getFirstInputOfType("OrderNewLeg");             
 
         Pilot_Mind  eiPilot_Mind=(Pilot_Mind)this.getFirstInputOfType("Pilot_Mind");             
-
-        OrderNewLegAndOldLeg  eiOrderNewLegAndOldLeg=(OrderNewLegAndOldLeg)this.getFirstInputOfType("OrderNewLegAndOldLeg");             
 
 
 
@@ -82,7 +80,7 @@ public class CreateNewLegForOrderTask extends Task{
 
 
 //#start_node:INGENIASCodeComponent27 <--- DO NOT REMOVE THIS	
-        global.GlobalVarsAndMethods.copyFlightLeg(eiOrderNewLegAndOldLeg.getNewFlightLeg(), 
+        global.GlobalVarsAndMethods.copyFlightLeg(eiOrderNewLeg.getNewFlightLeg(), 
         		outputsdefaultFlight_Leg);
 //#end_node:INGENIASCodeComponent27 <--- DO NOT REMOVE THIS
 

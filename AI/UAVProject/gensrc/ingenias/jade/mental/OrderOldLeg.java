@@ -31,17 +31,19 @@ import ingenias.jade.components.*;
 import ingenias.editor.entities.*;
 import ingenias.editor.entities.ViewPreferences.ViewType;
 
-public class CreateNewLeg extends ingenias.editor.entities.RuntimeFact{
+public class OrderOldLeg extends ingenias.editor.entities.RuntimeFact{
+   
+    Flight_Leg OldFlightLeg;   
     
    
-  public CreateNewLeg (String id){
+  public OrderOldLeg (String id){
    super(id);
    this.getPrefs().setView(ViewType.UML);
-   this.type="CreateNewLeg";
+   this.type="OrderOldLeg";
   }
   
 
-  public CreateNewLeg (){
+  public OrderOldLeg (){
    super(ingenias.jade.MentalStateManager.generateMentalEntityID());
    this.getPrefs().setView(ViewType.UML);
   }
@@ -51,13 +53,22 @@ public class CreateNewLeg extends ingenias.editor.entities.RuntimeFact{
   }
   
   public String getType(){
-   return "CreateNewLeg";
+   return "OrderOldLeg";
   }
   
   public String getParentType(){
    return "RuntimeFact";
   }
   
+   
+
+   public void setOldFlightLeg(Flight_Leg value){
+     OldFlightLeg=value;   
+   };
+   
+   public Flight_Leg getOldFlightLeg(){
+     return OldFlightLeg;      
+   }
      
     
 }

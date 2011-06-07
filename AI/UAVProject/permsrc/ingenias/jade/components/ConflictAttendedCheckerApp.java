@@ -43,7 +43,7 @@ public abstract class ConflictAttendedCheckerApp extends Application{
  }
 
 
- public abstract boolean isConflictAttended(Hashtable<jade.core.AID, gov.nasa.worldwind.geom.Position> aPlanesInConflict);
+ public abstract boolean isConflictAttended(ArrayList<jade.core.AID>  aPlanesInConflict);
 
  
 }

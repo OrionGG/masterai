@@ -9,34 +9,34 @@ import java.util.Hashtable;
 import java.util.Map;
 
 public class CheckDistanceBetweenPlanes implements Runnable{
-	Hashtable<AID, Position> aPlanesConflictFinished;
-	ArrayList<Hashtable<AID, Position>> aConflictsAttended;
+	ArrayList<AID> aPlanesConflictFinished;
+	Hashtable<Integer, ArrayList<AID>> aConflictsAttended;
 	int iWhereIsConflictAttended;
 
 	public CheckDistanceBetweenPlanes(
-			Hashtable<AID, Position> aPlanesConflictFinished,
-			ArrayList<Hashtable<AID, Position>> aConflictsAttended, int iWhereIsConflictAttended) {
-		this.aPlanesConflictFinished = aPlanesConflictFinished;
-		this.aConflictsAttended = aConflictsAttended;
+			ArrayList<AID> aPlanesConflictFinished2,
+			Hashtable<Integer, ArrayList<AID>> aConflictsAttended2, int iWhereIsConflictAttended) {
+		this.aPlanesConflictFinished = aPlanesConflictFinished2;
+		this.aConflictsAttended = aConflictsAttended2;
 		this.iWhereIsConflictAttended = iWhereIsConflictAttended;
 	}
 
 	@Override
 	public void run() {
-		boolean bFinish= false;
-		jade.core.AID[] aPlanesAIDs = 
-			aConflictsAttended.get(iWhereIsConflictAttended).keySet().toArray(new jade.core.AID[aConflictsAttended.size()]);
+		boolean bFinish = false;
+		ArrayList<jade.core.AID> aPlanesAIDs = 
+			aConflictsAttended.get(iWhereIsConflictAttended);
 		
 		while(!bFinish){
 			bFinish = true;
-			for (int i = 0; i < aPlanesAIDs.length; i++) {
-				jade.core.AID oPlaneAIDi = aPlanesAIDs[i];
+			for (int i = 0; i < aPlanesAIDs.size(); i++) {
+				jade.core.AID oPlaneAIDi = aPlanesAIDs.get(i);
 				Plane_Position_ServiceAppImp plane_Position_ServiceAppImpi = 
 					global.GlobalVarsAndMethods.PlanesPositionApps.get(oPlaneAIDi);
 				Position oPositioni = plane_Position_ServiceAppImpi.getCurrentPosition();
 
-				for (int j = i+1; j < aPlanesAIDs.length; j++) {
-					jade.core.AID oPlaneAIDj = aPlanesAIDs[j];
+				for (int j = i+1; j < aPlanesAIDs.size(); j++) {
+					jade.core.AID oPlaneAIDj =aPlanesAIDs.get(j);
 					Plane_Position_ServiceAppImp plane_Position_ServiceAppImpj = 
 						global.GlobalVarsAndMethods.PlanesPositionApps.get(oPlaneAIDj);
 					Position oPositionj = plane_Position_ServiceAppImpj.getCurrentPosition();
@@ -59,9 +59,8 @@ public class CheckDistanceBetweenPlanes implements Runnable{
 			}
 		}
 
-		for (int i = 0; i < aPlanesAIDs.length; i++) {
-			jade.core.AID oPlaneAIDi = aPlanesAIDs[i];
-			aPlanesConflictFinished.remove(oPlaneAIDi);
+		for (AID aid : aPlanesAIDs) {
+			aPlanesConflictFinished.remove(aid);
 		}
 
 		aConflictsAttended.remove(iWhereIsConflictAttended);

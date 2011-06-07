@@ -614,15 +614,6 @@ public class PilotJADEAgent
 			TaskOutput to=null;
 			to=new TaskOutput("default");
 		
-             expectedInput=this.getMSM().getMentalEntityByType("OrderNewLegAndOldLeg");
-             if (expectedInput.size()==0 && !("1".equals("0..n"))){
-				nonExistingInputs.add("OrderNewLegAndOldLeg");
-			 } else {
-			  addExpectedInputs(tobject, "OrderNewLegAndOldLeg","1",expectedInput);
-			 }
-             allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;             
-             
-	      
              expectedInput=this.getMSM().getMentalEntityByType("Pilot_Mind");
              if (expectedInput.size()==0 && !("1".equals("0..n"))){
 				nonExistingInputs.add("Pilot_Mind");
@@ -635,11 +626,11 @@ public class PilotJADEAgent
 	      
 		
 		
-             expectedInput=this.getMSM().getMentalEntityByType("CreateNewLeg");
+             expectedInput=this.getMSM().getMentalEntityByType("OrderNewLeg");
              if (expectedInput.size()==0 && !("1".equals("0..n"))){
-				nonExistingInputs.add("CreateNewLeg");
+				nonExistingInputs.add("OrderNewLeg");
 			 } else {
-			    addExpectedInputs(tobject, "CreateNewLeg","1",expectedInput);
+			    addExpectedInputs(tobject, "OrderNewLeg","1",expectedInput);
              	addConsumedInput(to,"1",expectedInput);
 			 }
              allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;
@@ -702,20 +693,20 @@ public class PilotJADEAgent
 			TaskOutput to=null;
 			to=new TaskOutput("default");
 		
-             expectedInput=this.getMSM().getMentalEntityByType("Flight_Leg");
-             if (expectedInput.size()==0 && !("1".equals("0..n"))){
-				nonExistingInputs.add("Flight_Leg");
-			 } else {
-			  addExpectedInputs(tobject, "Flight_Leg","1",expectedInput);
-			 }
-             allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;             
-             
-	      
              expectedInput=this.getMSM().getMentalEntityByType("Pilot_Mind");
              if (expectedInput.size()==0 && !("1".equals("0..n"))){
 				nonExistingInputs.add("Pilot_Mind");
 			 } else {
 			  addExpectedInputs(tobject, "Pilot_Mind","1",expectedInput);
+			 }
+             allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;             
+             
+	      
+             expectedInput=this.getMSM().getMentalEntityByType("Flight_Leg");
+             if (expectedInput.size()==0 && !("1".equals("0..n"))){
+				nonExistingInputs.add("Flight_Leg");
+			 } else {
+			  addExpectedInputs(tobject, "Flight_Leg","1",expectedInput);
 			 }
              allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;             
              
@@ -797,22 +788,22 @@ public class PilotJADEAgent
 	      
 		
 		
-             expectedInput=this.getMSM().getMentalEntityByType("Flight_Leg");
+             expectedInput=this.getMSM().getMentalEntityByType("LegCompleted");
              if (expectedInput.size()==0 && !("1".equals("0..n"))){
-				nonExistingInputs.add("Flight_Leg");
+				nonExistingInputs.add("LegCompleted");
 			 } else {
-			    addExpectedInputs(tobject, "Flight_Leg","1",expectedInput);
+			    addExpectedInputs(tobject, "LegCompleted","1",expectedInput);
              	addConsumedInput(to,"1",expectedInput);
 			 }
              allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;
 
 	      
 		
-             expectedInput=this.getMSM().getMentalEntityByType("LegCompleted");
+             expectedInput=this.getMSM().getMentalEntityByType("Flight_Leg");
              if (expectedInput.size()==0 && !("1".equals("0..n"))){
-				nonExistingInputs.add("LegCompleted");
+				nonExistingInputs.add("Flight_Leg");
 			 } else {
-			    addExpectedInputs(tobject, "LegCompleted","1",expectedInput);
+			    addExpectedInputs(tobject, "Flight_Leg","1",expectedInput);
              	addConsumedInput(to,"1",expectedInput);
 			 }
              allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;
@@ -1415,20 +1406,20 @@ public class PilotJADEAgent
 	     
             
 		
-            expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"OrderNewLegAndOldLeg");
-			if (expectedInput.size()==0 && !("1".equals("0..n")))
-				nonExistingInputs.add("OrderNewLegAndOldLeg");
-			else {
-			    addExpectedInputs(tobject, "OrderNewLegAndOldLeg","1",expectedInput);
-			    addConsumedInput(to, "1", expectedInput);
-			}
-	      allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;
-	      
             expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"OrderFinished");
 			if (expectedInput.size()==0 && !("1".equals("0..n")))
 				nonExistingInputs.add("OrderFinished");
 			else {
 			    addExpectedInputs(tobject, "OrderFinished","1",expectedInput);
+			    addConsumedInput(to, "1", expectedInput);
+			}
+	      allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;
+	      
+            expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"OrderOldLeg");
+			if (expectedInput.size()==0 && !("1".equals("0..n")))
+				nonExistingInputs.add("OrderOldLeg");
+			else {
+			    addExpectedInputs(tobject, "OrderOldLeg","1",expectedInput);
 			    addConsumedInput(to, "1", expectedInput);
 			}
 	      allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;
@@ -1468,6 +1459,34 @@ public class PilotJADEAgent
 				}
  			}	 			
             to.add(new OutputEntity(expectedOutputFlight_Leg,TaskOperations.CreateMS));
+            }
+	     
+ 			{
+ 			StartLegChecker expectedOutputStartLegChecker=
+ 				new StartLegChecker(MentalStateManager.generateMentalEntityID());
+ 			if (RuntimeConversation.class.isAssignableFrom(expectedOutputStartLegChecker.getClass())){
+ 			    java.lang.reflect.Method m;
+				try {
+					m = expectedOutputStartLegChecker.getClass().getMethod("setInteraction", new Class[]{Interaction.class});
+					m.invoke(expectedOutputStartLegChecker, new Interaction("")) ;	  
+				} catch (SecurityException e) {
+					
+					e.printStackTrace();
+				} catch (NoSuchMethodException e) {
+					
+					e.printStackTrace();
+				} catch (IllegalArgumentException e) {
+					
+					e.printStackTrace();
+				} catch (IllegalAccessException e) {
+					
+					e.printStackTrace();
+				} catch (InvocationTargetException e) {
+					
+					e.printStackTrace();
+				}
+ 			}	 			
+            to.add(new OutputEntity(expectedOutputStartLegChecker,TaskOperations.CreateMS));
             }
 	     
 	     
@@ -1561,13 +1580,13 @@ public class PilotJADEAgent
 	 
 	     
  			{
- 			CreateNewLeg expectedOutputCreateNewLeg=
- 				new CreateNewLeg(MentalStateManager.generateMentalEntityID());
- 			if (RuntimeConversation.class.isAssignableFrom(expectedOutputCreateNewLeg.getClass())){
+ 			OrderNewLeg expectedOutputOrderNewLeg=
+ 				new OrderNewLeg(MentalStateManager.generateMentalEntityID());
+ 			if (RuntimeConversation.class.isAssignableFrom(expectedOutputOrderNewLeg.getClass())){
  			    java.lang.reflect.Method m;
 				try {
-					m = expectedOutputCreateNewLeg.getClass().getMethod("setInteraction", new Class[]{Interaction.class});
-					m.invoke(expectedOutputCreateNewLeg, new Interaction("")) ;	  
+					m = expectedOutputOrderNewLeg.getClass().getMethod("setInteraction", new Class[]{Interaction.class});
+					m.invoke(expectedOutputOrderNewLeg, new Interaction("")) ;	  
 				} catch (SecurityException e) {
 					
 					e.printStackTrace();
@@ -1585,37 +1604,14 @@ public class PilotJADEAgent
 					e.printStackTrace();
 				}
  			}	 			
-            to.add(new OutputEntity(expectedOutputCreateNewLeg,TaskOperations.CreateMS));
+            to.add(new OutputEntity(expectedOutputOrderNewLeg,TaskOperations.CreateMS));
             }
 	     
- 			{
- 			OrderNewLegAndOldLeg expectedOutputOrderNewLegAndOldLeg=
- 				new OrderNewLegAndOldLeg(MentalStateManager.generateMentalEntityID());
- 			if (RuntimeConversation.class.isAssignableFrom(expectedOutputOrderNewLegAndOldLeg.getClass())){
- 			    java.lang.reflect.Method m;
-				try {
-					m = expectedOutputOrderNewLegAndOldLeg.getClass().getMethod("setInteraction", new Class[]{Interaction.class});
-					m.invoke(expectedOutputOrderNewLegAndOldLeg, new Interaction("")) ;	  
-				} catch (SecurityException e) {
-					
-					e.printStackTrace();
-				} catch (NoSuchMethodException e) {
-					
-					e.printStackTrace();
-				} catch (IllegalArgumentException e) {
-					
-					e.printStackTrace();
-				} catch (IllegalAccessException e) {
-					
-					e.printStackTrace();
-				} catch (InvocationTargetException e) {
-					
-					e.printStackTrace();
-				}
- 			}	 			
-            to.add(new OutputEntity(expectedOutputOrderNewLegAndOldLeg,TaskOperations.CreateMS));
-            }
 	     
+		    {OrderOldLeg expectedOutputOrderOldLeg=		    
+		     new OrderOldLeg(MentalStateManager.generateMentalEntityID());			
+             to.add(new OutputEntity(expectedOutputOrderOldLeg,TaskOperations.CreateWF));
+            }
 	     
      
 	     tobject.addOutput(to);

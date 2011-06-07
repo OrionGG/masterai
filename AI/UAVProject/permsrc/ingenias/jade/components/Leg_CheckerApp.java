@@ -46,6 +46,7 @@ public abstract class Leg_CheckerApp extends Application{
 
  public abstract void start(ingenias.jade.mental.Flight_Leg eiFlight_Leg);
 
+
  
 }
 

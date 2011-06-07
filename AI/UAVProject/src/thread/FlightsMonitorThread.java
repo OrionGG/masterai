@@ -20,42 +20,59 @@ public class FlightsMonitorThread  implements Runnable{
 			Vector<Plane_Position_ServiceAppImp> oVector = Plane_Position_ServiceInit.getAppsInitialised();
 			for (int i = 0; i < oVector.size()-1; i++) {
 
+				ArrayList<jade.core.AID> listPlanesInConflict = 
+					new ArrayList<jade.core.AID>();
+
 				Plane_Position_ServiceAppImp oFirstService = oVector.get(i);
-				
+
 				gov.nasa.worldwind.geom.Position oPositionFirstService = null;
 				gov.nasa.worldwind.geom.Angle oHeadFirstService = null;
+				double dSpeedFirstService = 0;
 				try{
 					oPositionFirstService = oFirstService.getCurrentPosition();
 					oHeadFirstService = oFirstService.getCurrentHead();
-					
+					dSpeedFirstService = oFirstService.getCurrentSpeed();
+
 				}
 				catch(Exception ex){
 					continue;
 				}
 
-				for (int j = i+1; j < oVector.size(); j++) {
-					Plane_Position_ServiceAppImp oSecondService = oVector.get(j);
-					double dDistance = Double.MAX_VALUE;
-					gov.nasa.worldwind.geom.Position oPositionSecondService = null;
-					gov.nasa.worldwind.geom.Angle oHeadSecondService = null;
-					try{
-						oPositionSecondService = oSecondService.getCurrentPosition();
-						oHeadSecondService = oSecondService.getCurrentHead();
-						dDistance = BasicFlightDynamics.BFD.getDistance(
-								oPositionFirstService, oPositionSecondService);
-					}
-					catch(Exception ex){
+				if(dSpeedFirstService > 0){
+
+					for (int j = i+1; j < oVector.size(); j++) {
+						Plane_Position_ServiceAppImp oSecondService = oVector.get(j);
+						double dDistance = Double.MAX_VALUE;
+						gov.nasa.worldwind.geom.Position oPositionSecondService = null;
+						gov.nasa.worldwind.geom.Angle oHeadSecondService = null;
+						double dSpeedSecondService = 0;
 						
+						try{
+							oPositionSecondService = oSecondService.getCurrentPosition();
+							oHeadSecondService = oSecondService.getCurrentHead();
+							dSpeedSecondService = oSecondService.getCurrentSpeed();
+							dDistance = BasicFlightDynamics.BFD.getDistance(
+									oPositionFirstService, oPositionSecondService);
+						}
+						catch(Exception ex){
+
+						}
+						
+						if(dSpeedSecondService <= 0){
+							continue;
+						}
+						
+						if(dDistance < global.GlobalVarsAndMethods.dAwarenessDistance * Simulation.SimulationVars.x){//6 miles
+							listPlanesInConflict.add(oSecondService.getOwner().getAID());
+						}
+
 					}
-					if(dDistance < global.GlobalVarsAndMethods.dAwarenessDistance * Simulation.SimulationVars.x){//6 miles
+
+					if(listPlanesInConflict.size() != 0){
+						listPlanesInConflict.add(oFirstService.getOwner().getAID());
 						ingenias.jade.mental.PlanesInConflict oPlanesInConflict = 
 							new ingenias.jade.mental.PlanesInConflict();
-						//Map.Entry<gov.nasa.worldwind.geom.Position, gov.nasa.worldwind.geom.Angle> oEntry;
-						Hashtable<jade.core.AID, gov.nasa.worldwind.geom.Position> listPlanesInConflict = 
-							new Hashtable<jade.core.AID, gov.nasa.worldwind.geom.Position>();
 
-						listPlanesInConflict.put(oFirstService.getOwner().getAID(), oPositionFirstService);
-						listPlanesInConflict.put(oSecondService.getOwner().getAID(), oPositionSecondService);
 						oPlanesInConflict.setPlanesInConflict(listPlanesInConflict);
 
 						try {
@@ -66,14 +83,13 @@ public class FlightsMonitorThread  implements Runnable{
 							e1.printStackTrace();
 						}
 					}
-
 				}
 			}
 			long iRangeTime =(long) (Simulation.SimulationVars.iSleepTime * Math.pow(global.GlobalVarsAndMethods.PlaneIdToPilotId.size(),2));
-	        
+
 			global.GlobalVarsAndMethods.sleepRandom(iRangeTime);
 		}
-		
+
 	}
 
 }

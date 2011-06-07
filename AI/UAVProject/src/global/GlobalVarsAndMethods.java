@@ -26,7 +26,6 @@ import java.util.Random;
 import java.util.Vector;
 
 public class GlobalVarsAndMethods {
-	public static  int inomore = 3;
 	public static int nDegressPerSecond = 3;
 	public static double dMaxAltitudeMps = 40;
 	public static double dMaxAccelerationKMHps = 6.53;
@@ -331,7 +330,7 @@ public class GlobalVarsAndMethods {
 	public static boolean isAlreadyConflictProcessed(
 			PlanesInConflict eiPlanesInConflict) {
 		boolean bAlreadyProcessed = false;
-		Hashtable<jade.core.AID, gov.nasa.worldwind.geom.Position> aPlanesInConflict = eiPlanesInConflict.getPlanesInConflict();
+		ArrayList<jade.core.AID> aPlanesInConflict = eiPlanesInConflict.getPlanesInConflict();
 		
 		Vector<ConflictAttendedCheckerAppImp> oVector = ConflictAttendedCheckerInit.getAppsInitialised();
 		for (ConflictAttendedCheckerAppImp conflictAttendedCheckerAppImp : oVector) {
@@ -345,21 +344,19 @@ public class GlobalVarsAndMethods {
 	}
 	public static int whereIsConflictAttended(
 
-			Hashtable<jade.core.AID, gov.nasa.worldwind.geom.Position>  aPlanesInConflict,
-			ArrayList<Hashtable<jade.core.AID, gov.nasa.worldwind.geom.Position>> aConflictsAttended) {
+		ArrayList<jade.core.AID>  aPlanesInConflict,
+		Hashtable<Integer, ArrayList<jade.core.AID>>  aConflictsAttended) {
 		
 		int iWhereIsConflictAttended = -1;
 		 
-		for (int i = 0; i < aConflictsAttended.size(); i++) {
-			Hashtable<jade.core.AID, gov.nasa.worldwind.geom.Position> hashConflictsList = aConflictsAttended.get(i);
+		for (Entry<Integer, ArrayList<jade.core.AID>> oConflict : aConflictsAttended.entrySet()) {
+			ArrayList<jade.core.AID> hashConflictsList = oConflict.getValue();
 	    	
 			 boolean bAreAllPlanesAttended = true;
 			 
-			 for (Entry<jade.core.AID, gov.nasa.worldwind.geom.Position> mindPlanesPositionInConflict : hashConflictsList.entrySet()) {
-					jade.core.AID mindPlanesInConflict = mindPlanesPositionInConflict.getKey();
+			 for (jade.core.AID mindPlanesInConflict : hashConflictsList) {
 					boolean bIsPlaneInConflict = false;
-					for (Entry<jade.core.AID, gov.nasa.worldwind.geom.Position> newPlanePositionInConflict : aPlanesInConflict.entrySet()) {
-						jade.core.AID newPlaneInConflict = newPlanePositionInConflict.getKey();
+					for (jade.core.AID newPlaneInConflict : aPlanesInConflict) {
 						 
 						if(newPlaneInConflict.equals(mindPlanesInConflict))
 						{
@@ -375,7 +372,7 @@ public class GlobalVarsAndMethods {
 			 }
 			 
 			 if(bAreAllPlanesAttended){
-				 iWhereIsConflictAttended = i;
+				 iWhereIsConflictAttended = oConflict.getKey();
 				 break;
 			 }
 		}

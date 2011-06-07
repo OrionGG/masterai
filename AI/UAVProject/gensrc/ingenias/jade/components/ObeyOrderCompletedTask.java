@@ -72,13 +72,12 @@ public class ObeyOrderCompletedTask extends Task{
 
 
 //#start_node:INGENIASCodeComponent24 <--- DO NOT REMOVE THIS	
-        Hashtable<jade.core.AID, gov.nasa.worldwind.geom.Position> aPlanesConflictFinished = 
+        ArrayList<jade.core.AID> aPlanesConflictFinished = 
         	eiControllerMind.getPlanesConflictFinished();
         
-        aPlanesConflictFinished.put(eiOrdenDone.getPlaneID().id, 
-        		gov.nasa.worldwind.geom.Position.ZERO);
+        aPlanesConflictFinished.add(eiOrdenDone.getPlaneID().id);
 
-        ArrayList<Hashtable<jade.core.AID, gov.nasa.worldwind.geom.Position>> aConflictsAttended =
+        Hashtable<Integer, ArrayList<jade.core.AID>> aConflictsAttended =
         	eiControllerMind.getConflictsAttended();
         
         int iWhereIsConflictAttended = global.GlobalVarsAndMethods.whereIsConflictAttended(

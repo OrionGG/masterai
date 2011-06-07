@@ -33,7 +33,7 @@ import ingenias.editor.entities.ViewPreferences.ViewType;
 
 public class CanStartSendOrder extends ingenias.editor.entities.RuntimeFact{
    
-    Hashtable<jade.core.AID, gov.nasa.worldwind.geom.Position> PlanesInConflict;   
+    ArrayList<jade.core.AID> PlanesInConflict;   
     
    
   public CanStartSendOrder (String id){
@@ -62,11 +62,11 @@ public class CanStartSendOrder extends ingenias.editor.entities.RuntimeFact{
   
    
 
-   public void setPlanesInConflict(Hashtable<jade.core.AID, gov.nasa.worldwind.geom.Position> value){
+   public void setPlanesInConflict(ArrayList<jade.core.AID> value){
      PlanesInConflict=value;   
    };
    
-   public Hashtable<jade.core.AID, gov.nasa.worldwind.geom.Position> getPlanesInConflict(){
+   public ArrayList<jade.core.AID> getPlanesInConflict(){
      return PlanesInConflict;      
    }
      
