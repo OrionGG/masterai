@@ -157,7 +157,7 @@ public class ControllerJADEAgent
 	 /*    
 	     
 			 expectedInt=new RuntimeConversation(MentalStateManager.generateMentalEntityID());
-			 expectedInt.setInteraction(new Interaction("ControllerPilotInteracion"));
+			 expectedInt.setInteraction(new Interaction("ControllerPilotInteraction"));
              to.add(new OutputEntity(expectedInt,TaskOperations.CreateMS));
 	      
 	      */	  
@@ -173,7 +173,7 @@ public class ControllerJADEAgent
  			    java.lang.reflect.Method m;
 				try {
 					m = expectedOutputRuntimeConversation.getClass().getMethod("setInteraction", new Class[]{Interaction.class});
-					m.invoke(expectedOutputRuntimeConversation, new Interaction("ControllerPilotInteracion")) ;	  
+					m.invoke(expectedOutputRuntimeConversation, new Interaction("ControllerPilotInteraction")) ;	  
 				} catch (SecurityException e) {
 					
 					e.printStackTrace();
@@ -539,7 +539,7 @@ public class ControllerJADEAgent
 
 		    
 		validConversationType=validConversationType||
-				conversation.getInteraction().getId().equalsIgnoreCase("ControllerPilotInteracion");
+				conversation.getInteraction().getId().equalsIgnoreCase("ControllerPilotInteraction");
 	 	
 				
 		if (validConversationType){
@@ -635,7 +635,7 @@ public class ControllerJADEAgent
          
          typesOfConversation=new Vector<String>();
 	     
-	     typesOfConversation.add("ControllerPilotInteracion");
+	     typesOfConversation.add("ControllerPilotInteraction");
 		 
          
          if (goalname.equals("Collision_Avoided")){
@@ -800,7 +800,7 @@ public class ControllerJADEAgent
 
    // Interactions started by this agent		
    
-   getCM().addKnownProtocol("ControllerPilotInteracion");
+   getCM().addKnownProtocol("ControllerPilotInteraction");
    
    boolean continueInit=false;
    // Interactions where this agent acts as collaborator
@@ -950,10 +950,10 @@ public class ControllerJADEAgent
    // a message "DOES NOT START ANY INTERACTION" will appear
    java.awt.event.ActionListener ifPressed=null;
    
-     final JADEAgent _jaControllerInitiatorControllerPilotInteracion=this;
+     final JADEAgent _jaControllerInitiatorControllerPilotInteraction=this;
      ifPressed=new java.awt.event.ActionListener() {
        public void actionPerformed(ActionEvent e) {
-         _jaControllerInitiatorControllerPilotInteracion.addBehaviour(
+         _jaControllerInitiatorControllerPilotInteraction.addBehaviour(
              new jade.core.behaviours.OneShotBehaviour() {
            public void action() {
 			 // If mental conditions are meet then the protocol is started
@@ -962,14 +962,14 @@ public class ControllerJADEAgent
 			 
 			 if (allexist){
 			  try {
-			  getCM().launchProtocolAsInitiator("ControllerPilotInteracion",getAM().getYellowPages());
+			  getCM().launchProtocolAsInitiator("ControllerPilotInteraction",getAM().getYellowPages());
               } catch (NoAgentsFound naf){
               } catch (WrongInteraction wi){
               	wi.printStackTrace();
               }
              } else {
               if (getGraphics()!=null)
-                getGraphics().runtimeWarning(" Mental conditions required for starting ControllerInitiatorControllerPilotInteracion "+
+                getGraphics().runtimeWarning(" Mental conditions required for starting ControllerInitiatorControllerPilotInteraction "+
         				 " are not satisfied yet ");
              }
 
@@ -977,8 +977,8 @@ public class ControllerJADEAgent
          });
        } };
      if (getGraphics()!=null)
-      getGraphics().addInteraction(this.getName(), "Role: ControllerInitiator - Int: ControllerPilotInteracion", ifPressed);
-     getCM().addInitiatorRoles("ControllerPilotInteracion","ControllerInitiator");
+      getGraphics().addInteraction(this.getName(), "Role: ControllerInitiator - Int: ControllerPilotInteraction", ifPressed);
+     getCM().addInitiatorRoles("ControllerPilotInteraction","ControllerInitiator");
         
 
     

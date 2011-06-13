@@ -80,6 +80,7 @@ public class IsANewConflictDetectedTask extends Task{
         	outputsdefault.remove(outputsdefaultCanStartSendOrder);
         }
         else{
+        	global.GlobalVarsAndMethods.putPlanesInRisk(eiPlanesInConflict.getPlanesInConflict(), 9);
         	outputsdefaultCanStartSendOrder.setPlanesInConflict(eiPlanesInConflict.getPlanesInConflict());
         	
         }

@@ -43,6 +43,8 @@ public class FlightsMonitorThread  implements Runnable{
 					for (int j = i+1; j < oVector.size(); j++) {
 						Plane_Position_ServiceAppImp oSecondService = oVector.get(j);
 						double dDistance = Double.MAX_VALUE;
+						double dDistanceWithHigh = Double.MAX_VALUE;
+						double dDistanceHigh = Double.MAX_VALUE;
 						gov.nasa.worldwind.geom.Position oPositionSecondService = null;
 						gov.nasa.worldwind.geom.Angle oHeadSecondService = null;
 						double dSpeedSecondService = 0;
@@ -53,6 +55,11 @@ public class FlightsMonitorThread  implements Runnable{
 							dSpeedSecondService = oSecondService.getCurrentSpeed();
 							dDistance = BasicFlightDynamics.BFD.getDistance(
 									oPositionFirstService, oPositionSecondService);
+							
+							dDistanceWithHigh = BasicFlightDynamics.BFD.getDistanceWithHigh(
+									oPositionFirstService , oPositionSecondService);
+							dDistanceHigh = Math.abs(oPositionFirstService.getAltitude() 
+									- oPositionSecondService.getAltitude())/1000;
 						}
 						catch(Exception ex){
 
@@ -64,6 +71,13 @@ public class FlightsMonitorThread  implements Runnable{
 						
 						if(dDistance < global.GlobalVarsAndMethods.dAwarenessDistance * Simulation.SimulationVars.x){//6 miles
 							listPlanesInConflict.add(oSecondService.getOwner().getAID());
+						}
+						
+						if(dDistanceWithHigh < (global.GlobalVarsAndMethods.dAwarenessDistance * Simulation.SimulationVars.x)/10){//6 miles
+							if(dDistanceHigh < 0.5)
+							{
+								int a = 0;
+							}
 						}
 
 					}

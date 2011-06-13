@@ -82,8 +82,8 @@
 			
 			        public void addInteractionLocks(String interaction, LocksWriter lw, String role){
                                     
-                   if (interaction.equals("ControllerPilotInteracion") && role.equals("PilotColaborator") ){
-                            PilotColaboratorControllerPilotInteracionDefaultCommControl.addDefaultLocks(lw);
+                   if (interaction.equals("ControllerPilotInteraction") && role.equals("PilotColaborator") ){
+                            PilotColaboratorControllerPilotInteractionDefaultCommControl.addDefaultLocks(lw);
                    }
                                     
                    if (interaction.equals("FlightPlannerPilotInteraction") && role.equals("PilotColaborator") ){

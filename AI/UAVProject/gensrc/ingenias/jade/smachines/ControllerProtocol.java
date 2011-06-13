@@ -95,10 +95,10 @@ public ControllerProtocol(){};
            
 		           // Interactions in which this agent appears as initiator                  
                   
-		   if (conv.getInteraction().getId().equals("ControllerPilotInteracion") && conv.getPlayedRole().equals("ControllerInitiator")){
-		   DefaultCommControl dcc=new ControllerInitiatorControllerPilotInteracionDefaultCommControl(
+		   if (conv.getInteraction().getId().equals("ControllerPilotInteraction") && conv.getPlayedRole().equals("ControllerInitiator")){
+		   DefaultCommControl dcc=new ControllerInitiatorControllerPilotInteractionDefaultCommControl(
                         		   conv.getConversationID(),msr,lr);
-			sb = new ControllerInitiatorControllerPilotInteracionStateBehavior(
+			sb = new ControllerInitiatorControllerPilotInteractionStateBehavior(
 			agentName,
 				msr,msu,
 					conv,                           		
@@ -122,7 +122,7 @@ public ControllerProtocol(){};
 	        public AgentExternalDescription[] getInteractionActors(String interaction, YellowPages yp) throws ingenias.jade.exception.NoAgentsFound{
               AgentExternalDescription[] result=null;
              
-               if (interaction.equals("ControllerPilotInteracion")){
+               if (interaction.equals("ControllerPilotInteraction")){
                 Vector<AgentExternalDescription> cols=new Vector<AgentExternalDescription>();
                  
                  try {
@@ -154,7 +154,7 @@ public ControllerProtocol(){};
 	        DFAgentDescription dfd=null;
                 dfd = new DFAgentDescription();
                 
-                if (protocol.equals("ControllerPilotInteracion")){
+                if (protocol.equals("ControllerPilotInteraction")){
 		dfd.setName(agentID);
 		 ServiceDescription sd = new ServiceDescription();
 		 sd.setName(agentID.getLocalName()  + "-sub-df");
@@ -176,7 +176,7 @@ public ControllerProtocol(){};
           
         
         
-        if (protocol.equals("ControllerPilotInteracion")){
+        if (protocol.equals("ControllerPilotInteraction")){
             Vector<String> toVerify=new Vector<String>();
             HashSet<String> rolesFound=new HashSet<String>();
             

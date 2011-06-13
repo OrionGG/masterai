@@ -48,18 +48,34 @@ public class LegCheckerThread implements Runnable{
 
 			jade.core.AID oPlaneAID = eiFlight_Leg.getPlaneID().id;
 			Plane_Position_ServiceAppImp plane_Position_ServiceAppImp = global.GlobalVarsAndMethods.PlanesPositionApps.get(oPlaneAID);
-
 			gov.nasa.worldwind.geom.Position oPosition = plane_Position_ServiceAppImp.getCurrentPosition();
-			double dDistance = BasicFlightDynamics.BFD.getDistance(eiFlight_Leg.getEndPoint(), oPosition);
-			if(dDistance < 10){
-				bLegCompleted = true;
-				try {
-					oLeg_CheckerAppImp.getOwner().getMSM().addMentalEntity(new ingenias.jade.mental.LegCompleted());
-				} catch (InvalidEntity e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+			
+			if(eiFlight_Leg.getEndPoint()!= null){
+				double dDistance = BasicFlightDynamics.BFD.getDistance(eiFlight_Leg.getEndPoint(), oPosition);
+				if(dDistance < 10){
+					bLegCompleted = true;
+					try {
+						oLeg_CheckerAppImp.getOwner().getMSM().addMentalEntity(new ingenias.jade.mental.LegCompleted());
+					} catch (InvalidEntity e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
 			}
+			else{
+				double dDistanceAltitude = Math.abs(eiFlight_Leg.getAltitudeKM()*1000 - oPosition.getAltitude());
+				if(dDistanceAltitude < 100)
+				{
+					bLegCompleted = true;
+					try {
+						oLeg_CheckerAppImp.getOwner().getMSM().addMentalEntity(new ingenias.jade.mental.LegCompleted());
+					} catch (InvalidEntity e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}
+
 
 
 		}

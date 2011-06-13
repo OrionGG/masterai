@@ -122,7 +122,7 @@ public class CreateNewOrdersTask extends Task{
 		        	
 		        	gov.nasa.worldwind.geom.Position  oMidPosition = 
 		        		new gov.nasa.worldwind.geom.Position(oMidLatLon, dNewAltitude);
-		        	oFlightLeg.setEndPoint(oMidPosition);
+		        	//oFlightLeg.setEndPoint(oMidPosition);
 		        	
 		        	
 		        	oFlightLeg.setIsFromControllerOrder(true);

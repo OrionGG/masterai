@@ -84,8 +84,8 @@
                   
 		           // Interactions in which this agent appears as initiator                  
                   
-                  if (interaction.equals("ControllerPilotInteracion")&& role.equals("ControllerInitiator")){
-                    ControllerInitiatorControllerPilotInteracionDefaultCommControl.addDefaultLocks(lw);
+                  if (interaction.equals("ControllerPilotInteraction")&& role.equals("ControllerInitiator")){
+                    ControllerInitiatorControllerPilotInteractionDefaultCommControl.addDefaultLocks(lw);
                   }
 				  
         }

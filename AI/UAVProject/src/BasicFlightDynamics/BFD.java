@@ -103,6 +103,21 @@ public class BFD {
 
 	}
 	
+	public static double getDistanceWithHigh(Position oStartPosition, Position bEndPosition){
+		double alt1 = oStartPosition.getAltitude();
+		double alt2 = bEndPosition.getAltitude();
+		
+		double dLatLonDistance = BFD.getDistance(oStartPosition, bEndPosition);
+		
+		double dAltitudeDiference = Math.abs(alt1 - alt2)/1000;
+		
+		double d = Math.sqrt(Math.pow(dAltitudeDiference, 2) + Math.pow(dLatLonDistance, 2)); 
+		
+		return d;
+		
+	}
+		
+	
 
 
 	public static boolean moreThanDobleDistance(Flight_Plan oFlightPlan, int i,
