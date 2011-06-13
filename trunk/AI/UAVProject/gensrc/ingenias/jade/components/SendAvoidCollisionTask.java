@@ -63,9 +63,9 @@ public class SendAvoidCollisionTask extends Task{
   		TaskOutput	outputsdefault=findOutputAlternative("default",
   																			outputs);
   		
-		RuntimeConversation outputsdefaultControllerPilotInteracion=
+		RuntimeConversation outputsdefaultControllerPilotInteraction=
 			(RuntimeConversation)
-				outputsdefault.getEntityByType("ControllerPilotInteracion");
+				outputsdefault.getEntityByType("ControllerPilotInteraction");
 		
 		
 		Order outputsdefaultOrder=
@@ -76,7 +76,7 @@ public class SendAvoidCollisionTask extends Task{
 		
         YellowPages yp=null; // only available for initiators of interactions
 
-		// This task can produce an interaction of type ControllerPilotInteracion by working with its conversation object
+		// This task can produce an interaction of type ControllerPilotInteraction by working with its conversation object
         
         // To define manually who are the collaborator involved. Your selection will be verified
         // in runtime. Pay attention to log messages to detect errors. You can use the yello pages
@@ -85,7 +85,7 @@ public class SendAvoidCollisionTask extends Task{
 
         //  Uncomment the following and write down a proper local id of the agent
         // Find an agent playing the role "PilotColaborator"
-      	//eoControllerPilotInteracion.addCollaborators("Local ID of the collaborator");
+      	//eoControllerPilotInteraction.addCollaborators("Local ID of the collaborator");
        	
 
 
@@ -95,7 +95,7 @@ public class SendAvoidCollisionTask extends Task{
         	
     	    outputsdefaultOrder.setNewFlightLeg(eiStartAvoidCollision.getNewFlightLeg());
         	
-        	outputsdefaultControllerPilotInteracion.addCollaborators(oPilotAgentExternalDescription);
+    	    outputsdefaultControllerPilotInteraction.addCollaborators(oPilotAgentExternalDescription);
 //#end_node:INGENIASCodeComponent21 <--- DO NOT REMOVE THIS
 
  }

@@ -93,10 +93,10 @@ public PilotProtocol(){};
             StateBehavior   sb=null;
 		    // Interactions in which this agent appears as collaborator
                              
-		   if (conv.getInteraction().getId().equals("ControllerPilotInteracion") && conv.getPlayedRole().equals("PilotColaborator")){
-		   	DefaultCommControl dcc=new PilotColaboratorControllerPilotInteracionDefaultCommControl(
+		   if (conv.getInteraction().getId().equals("ControllerPilotInteraction") && conv.getPlayedRole().equals("PilotColaborator")){
+		   	DefaultCommControl dcc=new PilotColaboratorControllerPilotInteractionDefaultCommControl(
                         		   conv.getConversationID(),msr,lr);
-			sb = new PilotColaboratorControllerPilotInteracionStateBehavior(agentName,
+			sb = new PilotColaboratorControllerPilotInteractionStateBehavior(agentName,
 				msr, msu,
 				conv,                           		
 				conv.getPlayedRole(),
@@ -238,7 +238,7 @@ public PilotProtocol(){};
                 }
                 
                                            
-                if (protocol.equals("ControllerPilotInteracion")){
+                if (protocol.equals("ControllerPilotInteraction")){
 		dfd.setName(agentID);
 		 ServiceDescription sd = new ServiceDescription();
 		 sd.setName(agentID.getLocalName()  + "-sub-df");

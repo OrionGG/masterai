@@ -65,14 +65,14 @@ public class TakeOrderTask extends Task{
   		TaskOutput	outputsdefault=findOutputAlternative("default",
   																			outputs);
   		
+		OrderOldLeg outputsdefaultOrderOldLeg=
+			(OrderOldLeg)
+				outputsdefault.getEntityByType("OrderOldLeg");
+		
 		OrderNewLeg outputsdefaultOrderNewLeg=
 			(OrderNewLeg)
 				outputsdefault.getEntityByType("OrderNewLeg");
 		
-		
-		OrderOldLeg outputsdefaultOrderOldLeg=
-			(OrderOldLeg)
-				outputsdefault.getEntityByType("OrderOldLeg");
 		
 		
 		
@@ -82,6 +82,7 @@ public class TakeOrderTask extends Task{
 //#start_node:INGENIASCodeComponent22 <--- DO NOT REMOVE THIS	
         
         Flight_Leg oFlightLeg = eiOrder.getNewFlightLeg();
+        oFlightLeg.setEndPoint(eiFlight_Leg.getEndPoint());
         
         outputsdefaultOrderNewLeg.setNewFlightLeg(oFlightLeg);
 

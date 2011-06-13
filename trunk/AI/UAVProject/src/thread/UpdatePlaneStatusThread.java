@@ -49,6 +49,8 @@ public class UpdatePlaneStatusThread  implements Runnable{
 					eiPlane_Mind.getAltitudeKM()*1000);
 			
 			oPlaneView.setNewPosition(oPosition);
+			jade.core.AID oAid = oPlaneView.getoPlaneEntity().getAID();
+			oPlaneView.setRangeOfRisk(global.GlobalVarsAndMethods.getRangeOfRisk(oAid));
 
 			
 			double lat1 = eiPlane_Mind.getLatLonPosition().getLatitude().radians;

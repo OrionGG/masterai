@@ -29,8 +29,15 @@ public class CheckDistanceBetweenPlanes implements Runnable{
 		
 		while(!bFinish){
 			bFinish = true;
+			ArrayList<jade.core.AID> aPlanesStillInConflict = new ArrayList<AID>();
+			ArrayList<jade.core.AID> aPlanesFreeOfConflict = new ArrayList<AID>(); 
+			
 			for (int i = 0; i < aPlanesAIDs.size(); i++) {
 				jade.core.AID oPlaneAIDi = aPlanesAIDs.get(i);
+				if(aPlanesStillInConflict.contains(oPlaneAIDi)){
+					break;
+				}
+				
 				Plane_Position_ServiceAppImp plane_Position_ServiceAppImpi = 
 					global.GlobalVarsAndMethods.PlanesPositionApps.get(oPlaneAIDi);
 				Position oPositioni = plane_Position_ServiceAppImpi.getCurrentPosition();
@@ -42,15 +49,26 @@ public class CheckDistanceBetweenPlanes implements Runnable{
 					Position oPositionj = plane_Position_ServiceAppImpj.getCurrentPosition();
 					double dDistance = BasicFlightDynamics.BFD.getDistance(oPositioni, oPositionj);
 					if(dDistance < global.GlobalVarsAndMethods.dAwarenessDistance * Simulation.SimulationVars.x){//6 miles
+						aPlanesStillInConflict.add(oPlaneAIDi);
+						aPlanesStillInConflict.add(oPlaneAIDj);
 						bFinish = false;
 						break;
 					}
 				}
-				if(!bFinish){
-					break;
+				
+				if(bFinish){
+					aPlanesFreeOfConflict.add(oPlaneAIDi);
 				}
+				
 			}
+			
 
+			for (AID aid : aPlanesFreeOfConflict) {
+				aPlanesConflictFinished.remove(aid);
+			}
+			global.GlobalVarsAndMethods.putPlanesInRisk(aPlanesFreeOfConflict, 0);
+        	
+			
 			try {
 				Thread.sleep((long) (Math.random()*2000));
 			} catch (InterruptedException e) {
@@ -59,11 +77,8 @@ public class CheckDistanceBetweenPlanes implements Runnable{
 			}
 		}
 
-		for (AID aid : aPlanesAIDs) {
-			aPlanesConflictFinished.remove(aid);
-		}
-
 		aConflictsAttended.remove(iWhereIsConflictAttended);
+		
 
 
 	}

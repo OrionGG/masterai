@@ -40,10 +40,13 @@ public class GlobalVarsAndMethods {
 	
 	public static double dAwarenessDistance = 10.8;//6 miles
 	
-	public static int iMaxNumWaypoints = 0;
+	public static int iMaxNumWaypoints = 1;
 	
 	public static Hashtable<jade.core.AID, Plane_Position_ServiceAppImp> PlanesPositionApps =
 		new Hashtable<jade.core.AID, Plane_Position_ServiceAppImp>();
+		
+	private static Hashtable<String, Integer> PlanesInRisk =
+		new Hashtable<String, Integer>();
 	
 	//public static Hashtable<PlaneJADEAgent, Thread> hUpdatePlanesThreads = new Hashtable<PlaneJADEAgent, Thread>();
 	
@@ -193,7 +196,15 @@ public class GlobalVarsAndMethods {
 		oFlightPlan.setCruisingSpeedKMH(dCruiseSpeedKMH);
 		java.util.Date oDate = new java.util.Date();
 		
-		oDate.setMinutes(oDate.getMinutes()+1);
+		double num = Math.random()*3;
+	    long iPart;
+	    double fPart;
+
+	    iPart = (long) num;
+	    fPart = num - iPart;
+	    
+		oDate.setMinutes((int) (oDate.getMinutes()+ iPart));
+		oDate.setSeconds((int) (fPart * 60));
 		oFlightPlan.setDepartureTime(oDate);
 		return oFlightPlan;
 	}
@@ -378,4 +389,23 @@ public class GlobalVarsAndMethods {
 		}
 		return iWhereIsConflictAttended;
 	} 
+	
+	public static void putPlanesInRisk(ArrayList<jade.core.AID> value, int iRangeOfRisk){
+		for (jade.core.AID aid : value) {
+			PlanesInRisk.put(aid.getLocalName(), iRangeOfRisk);
+		}
+		
+	}
+	
+	public static int getRangeOfRisk(jade.core.AID oAid){
+		int iRangeOfRisk = 0;
+		try{
+			iRangeOfRisk = PlanesInRisk.get(oAid.getLocalName());
+		}
+		catch(Exception ex){
+			iRangeOfRisk = 0;
+		}
+		return iRangeOfRisk;
+		
+	}
 }
