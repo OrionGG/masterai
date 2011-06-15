@@ -88,6 +88,10 @@
                     ControllerInitiatorControllerPilotInteractionDefaultCommControl.addDefaultLocks(lw);
                   }
 				  
+                  if (interaction.equals("FreeConflictInteraction")&& role.equals("ControllerInitiator")){
+                    ControllerInitiatorFreeConflictInteractionDefaultCommControl.addDefaultLocks(lw);
+                  }
+				  
         }
 	}
 			

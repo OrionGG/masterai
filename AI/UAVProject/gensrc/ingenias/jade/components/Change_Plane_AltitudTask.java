@@ -45,9 +45,9 @@ public class Change_Plane_AltitudTask extends Task{
  public void execute() throws TaskException{
 
 
-        Decrease_Altitude  eiDecrease_Altitude=(Decrease_Altitude)this.getFirstInputOfType("Decrease_Altitude");             
-
         Increase_Altitude  eiIncrease_Altitude=(Increase_Altitude)this.getFirstInputOfType("Increase_Altitude");             
+
+        Decrease_Altitude  eiDecrease_Altitude=(Decrease_Altitude)this.getFirstInputOfType("Decrease_Altitude");             
 
         Plane_Mind  eiPlane_Mind=(Plane_Mind)this.getFirstInputOfType("Plane_Mind");             
 

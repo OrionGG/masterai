@@ -106,6 +106,19 @@ public PilotProtocol(){};
 			return aconv;
                    }
                                     
+		   if (conv.getInteraction().getId().equals("FreeConflictInteraction") && conv.getPlayedRole().equals("PilotColaborator")){
+		   	DefaultCommControl dcc=new PilotColaboratorFreeConflictInteractionDefaultCommControl(
+                        		   conv.getConversationID(),msr,lr);
+			sb = new PilotColaboratorFreeConflictInteractionStateBehavior(agentName,
+				msr, msu,
+				conv,                           		
+				conv.getPlayedRole(),
+			   	actors,
+				dcc,conv.getInteraction().getId());
+                        ActiveConversation aconv=new ActiveConversation(sb,dcc,conv);
+			return aconv;
+                   }
+                                    
 		   if (conv.getInteraction().getId().equals("FlightPlannerPilotInteraction") && conv.getPlayedRole().equals("PilotColaborator")){
 		   	DefaultCommControl dcc=new PilotColaboratorFlightPlannerPilotInteractionDefaultCommControl(
                         		   conv.getConversationID(),msr,lr);
@@ -239,6 +252,16 @@ public PilotProtocol(){};
                 
                                            
                 if (protocol.equals("ControllerPilotInteraction")){
+		dfd.setName(agentID);
+		 ServiceDescription sd = new ServiceDescription();
+		 sd.setName(agentID.getLocalName()  + "-sub-df");
+		 sd.setType("PilotColaborator");
+		 sd.setOwnership("JADE");
+		 dfd.addServices(sd);
+                 playedRoles.add(dfd);
+                }
+                                           
+                if (protocol.equals("FreeConflictInteraction")){
 		dfd.setName(agentID);
 		 ServiceDescription sd = new ServiceDescription();
 		 sd.setName(agentID.getLocalName()  + "-sub-df");

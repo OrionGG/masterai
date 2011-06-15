@@ -47,10 +47,14 @@ public class IsANewConflictDetectedTask extends Task{
 
         PlanesInConflict  eiPlanesInConflict=(PlanesInConflict)this.getFirstInputOfType("PlanesInConflict");             
 
+        ControllerMind  eiControllerMind=(ControllerMind)this.getFirstInputOfType("ControllerMind");             
 
 
 
 
+
+			
+        CheckDistanceBetweenPlanesInConflictApp eaCheckDistanceBetweenPlanesInConflict=(CheckDistanceBetweenPlanesInConflictApp)this.getApplication("CheckDistanceBetweenPlanesInConflict");
 
 
 
@@ -74,14 +78,33 @@ public class IsANewConflictDetectedTask extends Task{
 
 
 //#start_node:INGENIASCodeComponent30 <--- DO NOT REMOVE THIS	
-        boolean bAlreadyProcessed = global.GlobalVarsAndMethods.isAlreadyConflictProcessed(eiPlanesInConflict);
+        boolean bAlreadyProcessed = global.GlobalVarsAndMethods.isAlreadyConflictProcessed(eiPlanesInConflict, eiControllerMind);
 
         if(bAlreadyProcessed){
         	outputsdefault.remove(outputsdefaultCanStartSendOrder);
         }
         else{
+        	ArrayList<jade.core.AID> lPlanesInConflict = 
+        		eiPlanesInConflict.getPlanesInConflict();
+        		
+        	Hashtable<Integer, ArrayList<jade.core.AID>> aConflictsAttended =
+ 	    		eiControllerMind.getConflictsAttended();
+ 	        
+ 	        int iConflictNumber =  eiControllerMind.getTotalConflictNumber();
+ 	        
+ 	    	aConflictsAttended.put(iConflictNumber, lPlanesInConflict);
+ 	    	eiControllerMind.setConflictsAttended(aConflictsAttended);
+ 	    	
+ 	    	yp=(YellowPages)this.getApplication("YellowPages");
+ 	    	ingenias.jade.agents.ControllerJADEAgent oController = (ingenias.jade.agents.ControllerJADEAgent)yp.ja;
+
+ 	        eaCheckDistanceBetweenPlanesInConflict.start(eiControllerMind, iConflictNumber, oController);
+ 	    	
+	    	eiControllerMind.setTotalConflictNumber(iConflictNumber + 1);
+	    	
         	global.GlobalVarsAndMethods.putPlanesInRisk(eiPlanesInConflict.getPlanesInConflict(), 9);
-        	outputsdefaultCanStartSendOrder.setPlanesInConflict(eiPlanesInConflict.getPlanesInConflict());
+        	
+        	outputsdefaultCanStartSendOrder.setPlanesInConflict(lPlanesInConflict);
         	
         }
 //#end_node:INGENIASCodeComponent30 <--- DO NOT REMOVE THIS

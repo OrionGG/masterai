@@ -78,18 +78,7 @@ public class CreateNewOrdersTask extends Task{
 //#start_node:INGENIASCodeComponent28 <--- DO NOT REMOVE THIS	
         	outputsdefault.remove(outputsdefaultStartAvoidCollision);
         	ArrayList<jade.core.AID> lPlanesInConflict = eiCanStartSendOrder.getPlanesInConflict();
-	        
-	        Hashtable<Integer, ArrayList<jade.core.AID>> aConflictsAttended =
-	    		eiControllerMind.getConflictsAttended();
-	        
-	       
-	        
-	    	aConflictsAttended.put(eiControllerMind.getTotalConflictNumber(), 
-	    			lPlanesInConflict);
-	    	eiControllerMind.setConflictsAttended(aConflictsAttended);
-	    	
-	    	eiControllerMind.setTotalConflictNumber(eiControllerMind.getTotalConflictNumber() + 1);
-	    		
+	
 	        for (int i = 0; i < lPlanesInConflict.size(); i++) {
 	        	
 		        	jade.core.AID oPlaneAIDi = lPlanesInConflict.get(i);
@@ -136,6 +125,7 @@ public class CreateNewOrdersTask extends Task{
 		        	
 		        	outputsdefault.add(new OutputEntity(oStartAvoidCollision, TaskOperations.CreateWF));
 	        }
+	        
 //#end_node:INGENIASCodeComponent28 <--- DO NOT REMOVE THIS
 
  }

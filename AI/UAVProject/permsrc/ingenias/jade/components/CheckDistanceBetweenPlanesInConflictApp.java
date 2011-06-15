@@ -21,32 +21,31 @@
     along with INGENIAS Agent Framework; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-*/
+ */
 
 
 package ingenias.jade.components;
 
 import java.util.*;
 
+import ingenias.jade.agents.ControllerJADEAgent;
 import ingenias.jade.exception.*;
 import ingenias.jade.mental.ControllerMind;
 
 
 
 
+public abstract class CheckDistanceBetweenPlanesInConflictApp extends MultipleOwnersApplication{
 
 
-public abstract class ConflictAttendedCheckerApp extends Application{
 
 
- public ConflictAttendedCheckerApp(){
-  super();
- }
+	public CheckDistanceBetweenPlanesInConflictApp(){
+		super();
+	}
 
 
- public abstract boolean isConflictAttended(ArrayList<jade.core.AID>  aPlanesInConflict, ControllerMind oControllerMind);
+	public abstract void start(ControllerMind eiControllerMind, int iConflictNumber, ControllerJADEAgent oController);
 
- 
 }
 
- 

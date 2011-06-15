@@ -86,6 +86,10 @@
                             PilotColaboratorControllerPilotInteractionDefaultCommControl.addDefaultLocks(lw);
                    }
                                     
+                   if (interaction.equals("FreeConflictInteraction") && role.equals("PilotColaborator") ){
+                            PilotColaboratorFreeConflictInteractionDefaultCommControl.addDefaultLocks(lw);
+                   }
+                                    
                    if (interaction.equals("FlightPlannerPilotInteraction") && role.equals("PilotColaborator") ){
                             PilotColaboratorFlightPlannerPilotInteractionDefaultCommControl.addDefaultLocks(lw);
                    }

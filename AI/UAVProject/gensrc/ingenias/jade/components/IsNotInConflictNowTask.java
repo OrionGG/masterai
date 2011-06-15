@@ -34,10 +34,10 @@ import ingenias.editor.entities.*;
 
 
 
-public class TakeOrderTask extends Task{
+public class IsNotInConflictNowTask extends Task{
 
- public TakeOrderTask(String id){
-  super(id,"TakeOrder");
+ public IsNotInConflictNowTask(String id){
+  super(id,"IsNotInConflictNow");
  }
 
 
@@ -45,9 +45,7 @@ public class TakeOrderTask extends Task{
  public void execute() throws TaskException{
 
 
-        Order  eiOrder=(Order)this.getFirstInputOfType("Order");             
-
-        Flight_Leg  eiFlight_Leg=(Flight_Leg)this.getFirstInputOfType("Flight_Leg");             
+        ConflictFinished  eiConflictFinished=(ConflictFinished)this.getFirstInputOfType("ConflictFinished");             
 
 
 
@@ -65,13 +63,9 @@ public class TakeOrderTask extends Task{
   		TaskOutput	outputsdefault=findOutputAlternative("default",
   																			outputs);
   		
-		OrderOldLeg outputsdefaultOrderOldLeg=
-			(OrderOldLeg)
-				outputsdefault.getEntityByType("OrderOldLeg");
-		
-		OrderNewLeg outputsdefaultOrderNewLeg=
-			(OrderNewLeg)
-				outputsdefault.getEntityByType("OrderNewLeg");
+		OrderFinished outputsdefaultOrderFinished=
+			(OrderFinished)
+				outputsdefault.getEntityByType("OrderFinished");
 		
 		
 		
@@ -79,30 +73,9 @@ public class TakeOrderTask extends Task{
         YellowPages yp=null; // only available for initiators of interactions
 
 
-//#start_node:INGENIASCodeComponent22 <--- DO NOT REMOVE THIS	
-        
-        Flight_Leg oFlightLeg = eiOrder.getNewFlightLeg();
-        oFlightLeg.setEndPoint(eiFlight_Leg.getEndPoint());
-        
-        outputsdefaultOrderNewLeg.setNewFlightLeg(oFlightLeg);
-
-        yp=(YellowPages)this.getApplication("YellowPages");
-        ingenias.jade.agents.PilotJADEAgent owner = ((ingenias.jade.agents.PilotJADEAgent)yp.ja);
-        Vector<MentalEntity> oVector =  owner.getMSM().getMentalEntityByType("OrderOldLeg");
-        if(oVector.size()> 0){
-        	OrderFinished oOrderFinished = new OrderFinished();
-        	oOrderFinished.setIsBecauseOtherConflict(true);
-        	outputsdefault.add(new OutputEntity(oOrderFinished, TaskOperations.CreateWF));
-      
-        	Flight_Leg oldFlightLeg = ((OrderOldLeg) oVector.get(0)).getOldFlightLeg();
-        	outputsdefaultOrderOldLeg.setOldFlightLeg(oldFlightLeg);
-        }
-        else{
-            outputsdefaultOrderOldLeg.setOldFlightLeg(eiFlight_Leg);
-        }
-       
-        
-//#end_node:INGENIASCodeComponent22 <--- DO NOT REMOVE THIS
+//#start_node:INGENIASCodeComponent33 <--- DO NOT REMOVE THIS	
+        outputsdefaultOrderFinished.setIsBecauseOtherConflict(false);
+//#end_node:INGENIASCodeComponent33 <--- DO NOT REMOVE THIS
 
  }
  
