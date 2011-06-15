@@ -109,6 +109,20 @@ public ControllerProtocol(){};
 			   return aconv;
                    }
 		
+		   if (conv.getInteraction().getId().equals("FreeConflictInteraction") && conv.getPlayedRole().equals("ControllerInitiator")){
+		   DefaultCommControl dcc=new ControllerInitiatorFreeConflictInteractionDefaultCommControl(
+                        		   conv.getConversationID(),msr,lr);
+			sb = new ControllerInitiatorFreeConflictInteractionStateBehavior(
+			agentName,
+				msr,msu,
+					conv,                           		
+				   conv.getPlayedRole(),
+				   actors,
+				dcc,conv.getInteraction().getId());
+                           ActiveConversation aconv=new ActiveConversation(sb,dcc,conv);
+			   return aconv;
+                   }
+		
 
          throw new WrongInteraction("Agent "+agentName+" does not know any interaction protocol of type "+conv.getInteraction().getId()+" where the " +
 		   		" agent knows how to play the protocol "+conv.getPlayedRole());
@@ -123,6 +137,29 @@ public ControllerProtocol(){};
               AgentExternalDescription[] result=null;
              
                if (interaction.equals("ControllerPilotInteraction")){
+                Vector<AgentExternalDescription> cols=new Vector<AgentExternalDescription>();
+                 
+                 try {
+                 String cardinality="";
+		 DFAgentDescription[] agents=yp.getAgents("PilotColaborator");
+                   if (agents==null || agents.length<=0)
+                      throw new ingenias.jade.exception.NoAgentsFound("Could not find an agent playing the role PilotColaborator");
+                   if (cardinality.equals("1") || cardinality.equals(""))
+                    cols.add(new AgentExternalDescription(agents[0].getName(),"PilotColaborator"));
+                    else
+                	   if (cardinality.equals("1__*"))
+						   for (int k=0;k<agents.length;k++)
+                			  cols.add(new AgentExternalDescription(agents[k].getName(),"PilotColaborator"));
+                 } catch (FIPAException fe){
+                   fe.printStackTrace();
+                   throw new NoAgentsFound();
+                 }
+                 
+                result=new AgentExternalDescription[cols.size()];
+                cols.toArray(result);
+               }
+             
+               if (interaction.equals("FreeConflictInteraction")){
                 Vector<AgentExternalDescription> cols=new Vector<AgentExternalDescription>();
                  
                  try {
@@ -164,6 +201,16 @@ public ControllerProtocol(){};
                  playedRoles.add(dfd);
                 }
                 
+                if (protocol.equals("FreeConflictInteraction")){
+		dfd.setName(agentID);
+		 ServiceDescription sd = new ServiceDescription();
+		 sd.setName(agentID.getLocalName()  + "-sub-df");
+		 sd.setType("ControllerInitiator");
+		 sd.setOwnership("JADE");
+		 dfd.addServices(sd);
+                 playedRoles.add(dfd);
+                }
+                
                 
                 result=new  DFAgentDescription[playedRoles.size()];
                 playedRoles.toArray(result);
@@ -177,6 +224,23 @@ public ControllerProtocol(){};
         
         
         if (protocol.equals("ControllerPilotInteraction")){
+            Vector<String> toVerify=new Vector<String>();
+            HashSet<String> rolesFound=new HashSet<String>();
+            
+         	toVerify.add("PilotColaborator");
+         	
+        	if (actors.length<toVerify.size())
+        		return false;
+        	boolean found=false;
+        	for (int k=0;k<actors.length ;k++){
+        		if (toVerify.contains(actors[k].role)){
+    				rolesFound.add(actors[k].role);    			
+    			}
+        	}
+        	return toVerify.size()==rolesFound.size();
+        }
+        
+        if (protocol.equals("FreeConflictInteraction")){
             Vector<String> toVerify=new Vector<String>();
             HashSet<String> rolesFound=new HashSet<String>();
             

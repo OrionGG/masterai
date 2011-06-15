@@ -84,11 +84,12 @@ public class ObeyOrderCompletedTask extends Task{
         		aPlanesConflictFinished, aConflictsAttended);
         
         if(iWhereIsConflictAttended != -1){
-        	thread.CheckDistanceBetweenPlanes oCheckDistantceBetweenPlanes
+        	aConflictsAttended.remove(iWhereIsConflictAttended);
+        	/*thread.CheckDistanceBetweenPlanes oCheckDistantceBetweenPlanes
          		= new thread.CheckDistanceBetweenPlanes(aPlanesConflictFinished, aConflictsAttended, iWhereIsConflictAttended);
 
          	Thread oThread = new Thread(oCheckDistantceBetweenPlanes);
-         	oThread.start();	
+         	oThread.start();	*/
         }
         
 //#end_node:INGENIASCodeComponent24 <--- DO NOT REMOVE THIS

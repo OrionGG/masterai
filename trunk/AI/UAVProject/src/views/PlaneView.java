@@ -22,6 +22,7 @@ public class PlaneView extends PointPlacemark {
 	private PlaneJADEAgent oPlaneEntity;
 	ArrayList<Path> lPath;
 	RenderableLayer layer = null;
+	int iRangeOfRisk = 0;
 
 	public PlaneView(PlaneJADEAgent oPlaneEntityParam, String sPlaneName, Position oPosition) {
 		super(oPosition);
@@ -77,6 +78,32 @@ public class PlaneView extends PointPlacemark {
 	public void setNewPosition(Position oNewPos) {
 		super.setPosition(oNewPos);
 		if(lPath.size() != 0){
+
+			Material oEndPathMaterial = Material.WHITE;
+			double dNewPosAltitudeKM = oNewPos.getAltitude()/1000;
+			if(dNewPosAltitudeKM < global.GlobalVarsAndMethods.dCruiseAltitudeKM ){
+				oEndPathMaterial = Material.GREEN;
+			}
+			else if(dNewPosAltitudeKM == global.GlobalVarsAndMethods.dCruiseAltitudeKM){
+				oEndPathMaterial = Material.WHITE;				
+			}
+			else{
+				oEndPathMaterial = Material.RED;
+			}
+
+			Material oInitialPathMaterial = Material.WHITE;
+			if(lPath.size() != 0){
+				Path oPath = lPath.get(lPath.size() - 1);
+				oInitialPathMaterial = oPath.getAttributes().getOutlineMaterial();
+			}
+			
+			if(!oInitialPathMaterial.equals(oEndPathMaterial)){
+				Path oPath2 = createNewPath();
+				oPath2.getAttributes().setOutlineMaterial(oEndPathMaterial);
+				lPath.add(oPath2);
+				renderLastPath();
+			}
+			
 			Path oPath = lPath.get(lPath.size() - 1);
 			ArrayList<Position> pathPositions = (ArrayList<Position>) oPath.getPositions();
 			pathPositions.add(oNewPos);
@@ -96,57 +123,25 @@ public class PlaneView extends PointPlacemark {
 	}
 
 	public void setRangeOfRisk(int rangeOfRisk) {
-		Material oEndPlaneMaterial = Material.YELLOW;
+		if(iRangeOfRisk != rangeOfRisk){
+			Material oEndPlaneMaterial = Material.GREEN;
 
-		Material oEndPathMaterial = Material.WHITE;
+			switch (rangeOfRisk) {
+			case 0:
+				oEndPlaneMaterial = Material.GREEN;
+				break;
+			case 9:
 
-		Material oInitialPathMaterial = Material.WHITE;
-		if(lPath.size() != 0){
-			Path oPath = lPath.get(lPath.size() - 1);
-			oInitialPathMaterial = oPath.getAttributes().getOutlineMaterial();
-		}
+				oEndPlaneMaterial = Material.YELLOW;
+				break;
 
-
-		switch (rangeOfRisk) {
-		case 0:
-			oEndPlaneMaterial = Material.GREEN;
-
-			oEndPathMaterial = Material.WHITE;
-			break;
-		case 9:
-
-			oEndPlaneMaterial = Material.YELLOW;
-
-			oEndPathMaterial = new Material(WWUtil.makeRandomColor(null));
-			break;
-
-		default:
-			break;
-		}
-
-		Material oInitialPlaneMaterial = this.getAttributes().getLineMaterial();
-
-		if(!oInitialPlaneMaterial.equals(oEndPlaneMaterial)){
+			default:
+				break;
+			}
 			this.getAttributes().setLineMaterial(oEndPlaneMaterial);
+			iRangeOfRisk = rangeOfRisk;
 		}
 
-
-		if(oInitialPathMaterial.equals(Material.WHITE)){
-			if(!oInitialPathMaterial.equals(oEndPathMaterial)){
-				Path oPath2 = createNewPath();
-				oPath2.getAttributes().setOutlineMaterial(oEndPathMaterial);
-				lPath.add(oPath2);
-				renderLastPath();
-			}
-		}
-		else{
-			if(oEndPathMaterial.equals(Material.WHITE)){
-				Path oPath2 = createNewPath();
-				oPath2.getAttributes().setOutlineMaterial(oEndPathMaterial);
-				lPath.add(oPath2);
-				renderLastPath();
-			}
-		}
 
 	}
 

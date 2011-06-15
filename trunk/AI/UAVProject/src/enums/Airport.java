@@ -3,7 +3,7 @@ package enums;
 import gov.nasa.worldwind.geom.Position;
 
 public enum Airport {
-	ALICANTE(Position.fromDegrees(38.282, -0.558, 11e3), 9842,"ALICANTE", "Alicante"),
+	//ALICANTE(Position.fromDegrees(38.282, -0.558, 11e3), 9842,"ALICANTE", "Alicante"),
 	BARCELONA(Position.fromDegrees(41.297, 2.078, 11e3), 11654, "BARCELONA", "Barcelona"),
 	//GRANCANARIA(Position.fromDegrees(27.932, -15.387, 11e3), 11654, "GRAN CANARIA", "Las Palmas"),
 	BARAJAS(Position.fromDegrees(40.494, -3.567, 11e3), 11654, "BARAJAS", "Madrid")

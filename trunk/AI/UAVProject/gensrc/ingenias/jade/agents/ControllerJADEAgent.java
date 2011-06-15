@@ -95,6 +95,17 @@ public class ControllerJADEAgent
 			to=new TaskOutput("default");
   
 		
+		expectedInput=this.getMSM().getMentalEntityByType("ConflictFinished");
+		if (this.getLM().canBeDeleted(expectedInput)){             
+             if (expectedInput.size()==0){
+				nonExistingInputs.add("ConflictFinished");
+			 } else {
+			    addExpectedInputs(tobject, "ConflictFinished","1",expectedInput);
+             	addConsumedInput(to,"ConflictFinished",expectedInput);
+			 }
+             allEntitiesExist=allEntitiesExist || expectedInput.size()!=0;
+		} 
+	      
 		expectedInput=this.getMSM().getMentalEntityByType("Order");
 		if (this.getLM().canBeDeleted(expectedInput)){             
              if (expectedInput.size()==0){
@@ -221,6 +232,103 @@ public class ControllerJADEAgent
                   
          nonExistingInputs.clear();
   		 repeatedOutputs.clear();
+         if (tobject.getType().equals("PlaneNotInConflictMore") ){
+            Vector<MentalEntity> expectedInput=null;
+            RuntimeFact expectedOutput=null;
+            RuntimeEvent expectedOutputEvent=null;
+			RuntimeConversation expectedInt=null;
+            ingenias.jade.components.Resource expectedResource=null;
+			ingenias.jade.components.Application expectedApp=null;        
+			boolean allEntitiesExist=true;		
+			TaskOutput to=null;
+			to=new TaskOutput("default");
+		
+	      
+		
+		
+             expectedInput=this.getMSM().getMentalEntityByType("PlaneNoMoreInConflict");
+             if (expectedInput.size()==0 && !("1".equals("0..n"))){
+				nonExistingInputs.add("PlaneNoMoreInConflict");
+			 } else {
+			    addExpectedInputs(tobject, "PlaneNoMoreInConflict","1",expectedInput);
+             	addConsumedInput(to,"1",expectedInput);
+			 }
+             allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;
+
+	      
+	      
+	     
+	      
+	     // Default application for all tasks executed within a conversation
+	     expectedApp=(ingenias.jade.components.Application)getAM().getApplication("YellowPages");
+             tobject.addApplication("YellowPages",expectedApp);
+	 /*    
+	     
+			 expectedInt=new RuntimeConversation(MentalStateManager.generateMentalEntityID());
+			 expectedInt.setInteraction(new Interaction("FreeConflictInteraction"));
+             to.add(new OutputEntity(expectedInt,TaskOperations.CreateMS));
+	      
+	      */	  
+	      
+	      /**/	      
+	      
+ 
+	     
+ 			{
+ 			RuntimeConversation expectedOutputRuntimeConversation=
+ 				new RuntimeConversation(MentalStateManager.generateMentalEntityID());
+ 			if (RuntimeConversation.class.isAssignableFrom(expectedOutputRuntimeConversation.getClass())){
+ 			    java.lang.reflect.Method m;
+				try {
+					m = expectedOutputRuntimeConversation.getClass().getMethod("setInteraction", new Class[]{Interaction.class});
+					m.invoke(expectedOutputRuntimeConversation, new Interaction("FreeConflictInteraction")) ;	  
+				} catch (SecurityException e) {
+					
+					e.printStackTrace();
+				} catch (NoSuchMethodException e) {
+					
+					e.printStackTrace();
+				} catch (IllegalArgumentException e) {
+					
+					e.printStackTrace();
+				} catch (IllegalAccessException e) {
+					
+					e.printStackTrace();
+				} catch (InvocationTargetException e) {
+					
+					e.printStackTrace();
+				}
+ 			}	 			
+            to.add(new OutputEntity(expectedOutputRuntimeConversation,TaskOperations.CreateMS));
+            }
+	     
+	     
+		    {ConflictFinished expectedOutputConflictFinished=		    
+		     new ConflictFinished(MentalStateManager.generateMentalEntityID());			
+             to.add(new OutputEntity(expectedOutputConflictFinished,TaskOperations.CreateWF));
+            }
+	     
+     
+     		      
+	      tobject.addOutput(to);
+	      initialised= allEntitiesExist;
+
+		if (!allEntitiesExist){
+		   String[] nonexisting=new String[nonExistingInputs.size()];
+		   for (int j=0;j<nonExistingInputs.size();j++){
+				nonexisting[j]=nonExistingInputs.elementAt(j).toString();
+			}
+			EventManager.getInstance().conversationalInitializationOfTaskFailed(getLocalName(), 
+												"Controller", 
+												tobject, nonexisting);
+		}
+		return initialised;	       
+	      }
+                 
+                  
+                  
+         nonExistingInputs.clear();
+  		 repeatedOutputs.clear();
          if (tobject.getType().equals("IsANewConflictDetected") ){
             Vector<MentalEntity> expectedInput=null;
             RuntimeFact expectedOutput=null;
@@ -232,6 +340,15 @@ public class ControllerJADEAgent
 			TaskOutput to=null;
 			to=new TaskOutput("default");
 		
+             expectedInput=this.getMSM().getMentalEntityByType("ControllerMind");
+             if (expectedInput.size()==0 && !("1".equals("0..n"))){
+				nonExistingInputs.add("ControllerMind");
+			 } else {
+			  addExpectedInputs(tobject, "ControllerMind","1",expectedInput);
+			 }
+             allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;             
+             
+	      
 	      
 		
 		
@@ -247,6 +364,9 @@ public class ControllerJADEAgent
 	      
 	      
 	     
+	     expectedApp=(ingenias.jade.components.Application)getAM().getApplication("CheckDistanceBetweenPlanesInConflict");
+             tobject.addApplication("CheckDistanceBetweenPlanesInConflict",expectedApp);
+	      
 	      
 	     // Default application for all tasks executed within a conversation
 	     expectedApp=(ingenias.jade.components.Application)getAM().getApplication("YellowPages");
@@ -511,6 +631,17 @@ public class ControllerJADEAgent
 			tobject.setConversationContext(conversation);
   
 		
+		expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"ConflictFinished");
+		if (this.getLM().canBeDeleted(expectedInput)){                          
+             if (expectedInput.size()==0){
+				nonExistingInputs.add("ConflictFinished");
+			 } else {
+			    addExpectedInputs(tobject, "ConflictFinished","1",expectedInput);
+             	addConsumedInput(to,"ConflictFinished",expectedInput);
+			 }
+             allEntitiesExist=allEntitiesExist|| expectedInput.size()!=0;
+		} 
+	      
 		expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"Order");
 		if (this.getLM().canBeDeleted(expectedInput)){                          
              if (expectedInput.size()==0){
@@ -684,6 +815,23 @@ public class ControllerJADEAgent
           }
                   
          
+         if (goalname.equals("FinishedPlaneConflict")){
+         
+         {
+         boolean canbescheduled=false;
+		 Task tobject=null;		 
+				// If a conversational initialization fails, a conventional one is tried
+				 tobject=new PlaneNotInConflictMoreTask(ingenias.jade.MentalStateManager.generateMentalEntityID());
+				 canbescheduled=initialiseNonConversationalTask(tobject);
+			 	 if (canbescheduled){
+					//MainInteractionManager.log("Scheduled task "+tobject.getType()+" to achieve goal FinishedPlaneConflict",getLocalName()+"-"+tobject.getType());
+					tasks.add(tobject);
+				 } 			
+	     }
+         
+          }
+                  
+         
          if (goalname.equals("NewConflictDetected")){
          
          {
@@ -780,6 +928,10 @@ public class ControllerJADEAgent
                 
          
          
+         ttypes.add("PlaneNotInConflictMore");		         
+                
+         
+         
          ttypes.add("IsANewConflictDetected");		         
                 
          
@@ -802,6 +954,8 @@ public class ControllerJADEAgent
    
    getCM().addKnownProtocol("ControllerPilotInteraction");
    
+   getCM().addKnownProtocol("FreeConflictInteraction");
+   
    boolean continueInit=false;
    // Interactions where this agent acts as collaborator
    
@@ -815,6 +969,15 @@ public class ControllerJADEAgent
    ingenias.jade.components.Application app=null;	  
    
    sg= new ingenias.editor.entities.StateGoal("Collision_Avoided");
+   sg.setState("pending");
+      try {
+	   this.getMSM().addMentalEntity(sg);
+   } catch (InvalidEntity e1) {
+
+	   e1.printStackTrace();
+   }
+   
+   sg= new ingenias.editor.entities.StateGoal("FinishedPlaneConflict");
    sg.setState("pending");
       try {
 	   this.getMSM().addMentalEntity(sg);
@@ -916,6 +1079,31 @@ public class ControllerJADEAgent
 
      //Initial applications assigned to the agent	  
    
+     app=CheckDistanceBetweenPlanesInConflictInit.getInstance(this);
+     //app.registerOwner(this);
+	
+     	    
+     this.getAM().addApplication("CheckDistanceBetweenPlanesInConflict",app);        
+	 events=new Vector();
+	 actions=new Vector();
+		
+	 event= new PlaneNoMoreInConflict();
+	 /*
+	 slot=new Slot("441");
+	 slot.setName("PlaneID");
+	 slot.setType("ingenias.jade.AgentExternalDescription");
+	 slot.setValue("");
+	 event.addSlots(slot);
+	  
+	 */ 
+	 events.add(event);
+	 actions.add(generateActionListener(PlaneNoMoreInConflict.class));		
+
+	 if (getGraphics()!=null)
+	  getGraphics().addApplication("CheckDistanceBetweenPlanesInConflict", events,actions);    
+
+     //Initial applications assigned to the agent	  
+   
      
      app=FlightsMonitorInit.createInstance(this);
 	 //app.registerOwner(this);
@@ -979,6 +1167,36 @@ public class ControllerJADEAgent
      if (getGraphics()!=null)
       getGraphics().addInteraction(this.getName(), "Role: ControllerInitiator - Int: ControllerPilotInteraction", ifPressed);
      getCM().addInitiatorRoles("ControllerPilotInteraction","ControllerInitiator");
+     
+     final JADEAgent _jaControllerInitiatorFreeConflictInteraction=this;
+     ifPressed=new java.awt.event.ActionListener() {
+       public void actionPerformed(ActionEvent e) {
+         _jaControllerInitiatorFreeConflictInteraction.addBehaviour(
+             new jade.core.behaviours.OneShotBehaviour() {
+           public void action() {
+			 // If mental conditions are meet then the protocol is started
+			 Vector<MentalEntity> expectedInput=null;
+			 boolean allexist=true;
+			 
+			 if (allexist){
+			  try {
+			  getCM().launchProtocolAsInitiator("FreeConflictInteraction",getAM().getYellowPages());
+              } catch (NoAgentsFound naf){
+              } catch (WrongInteraction wi){
+              	wi.printStackTrace();
+              }
+             } else {
+              if (getGraphics()!=null)
+                getGraphics().runtimeWarning(" Mental conditions required for starting ControllerInitiatorFreeConflictInteraction "+
+        				 " are not satisfied yet ");
+             }
+
+           }
+         });
+       } };
+     if (getGraphics()!=null)
+      getGraphics().addInteraction(this.getName(), "Role: ControllerInitiator - Int: FreeConflictInteraction", ifPressed);
+     getCM().addInitiatorRoles("FreeConflictInteraction","ControllerInitiator");
         
 
     

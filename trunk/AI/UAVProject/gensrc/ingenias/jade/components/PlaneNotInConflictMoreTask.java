@@ -34,10 +34,10 @@ import ingenias.editor.entities.*;
 
 
 
-public class TakeOrderTask extends Task{
+public class PlaneNotInConflictMoreTask extends Task{
 
- public TakeOrderTask(String id){
-  super(id,"TakeOrder");
+ public PlaneNotInConflictMoreTask(String id){
+  super(id,"PlaneNotInConflictMore");
  }
 
 
@@ -45,9 +45,7 @@ public class TakeOrderTask extends Task{
  public void execute() throws TaskException{
 
 
-        Order  eiOrder=(Order)this.getFirstInputOfType("Order");             
-
-        Flight_Leg  eiFlight_Leg=(Flight_Leg)this.getFirstInputOfType("Flight_Leg");             
+        PlaneNoMoreInConflict  eiPlaneNoMoreInConflict=(PlaneNoMoreInConflict)this.getFirstInputOfType("PlaneNoMoreInConflict");             
 
 
 
@@ -65,44 +63,39 @@ public class TakeOrderTask extends Task{
   		TaskOutput	outputsdefault=findOutputAlternative("default",
   																			outputs);
   		
-		OrderOldLeg outputsdefaultOrderOldLeg=
-			(OrderOldLeg)
-				outputsdefault.getEntityByType("OrderOldLeg");
+		RuntimeConversation outputsdefaultFreeConflictInteraction=
+			(RuntimeConversation)
+				outputsdefault.getEntityByType("FreeConflictInteraction");
 		
-		OrderNewLeg outputsdefaultOrderNewLeg=
-			(OrderNewLeg)
-				outputsdefault.getEntityByType("OrderNewLeg");
 		
+		ConflictFinished outputsdefaultConflictFinished=
+			(ConflictFinished)
+				outputsdefault.getEntityByType("ConflictFinished");
 		
 		
 		
         YellowPages yp=null; // only available for initiators of interactions
 
-
-//#start_node:INGENIASCodeComponent22 <--- DO NOT REMOVE THIS	
+		// This task can produce an interaction of type FreeConflictInteraction by working with its conversation object
         
-        Flight_Leg oFlightLeg = eiOrder.getNewFlightLeg();
-        oFlightLeg.setEndPoint(eiFlight_Leg.getEndPoint());
-        
-        outputsdefaultOrderNewLeg.setNewFlightLeg(oFlightLeg);
-
+        // To define manually who are the collaborator involved. Your selection will be verified
+        // in runtime. Pay attention to log messages to detect errors. You can use the yello pages
+        // service to locate other agents
         yp=(YellowPages)this.getApplication("YellowPages");
-        ingenias.jade.agents.PilotJADEAgent owner = ((ingenias.jade.agents.PilotJADEAgent)yp.ja);
-        Vector<MentalEntity> oVector =  owner.getMSM().getMentalEntityByType("OrderOldLeg");
-        if(oVector.size()> 0){
-        	OrderFinished oOrderFinished = new OrderFinished();
-        	oOrderFinished.setIsBecauseOtherConflict(true);
-        	outputsdefault.add(new OutputEntity(oOrderFinished, TaskOperations.CreateWF));
-      
-        	Flight_Leg oldFlightLeg = ((OrderOldLeg) oVector.get(0)).getOldFlightLeg();
-        	outputsdefaultOrderOldLeg.setOldFlightLeg(oldFlightLeg);
-        }
-        else{
-            outputsdefaultOrderOldLeg.setOldFlightLeg(eiFlight_Leg);
-        }
-       
+
+        //  Uncomment the following and write down a proper local id of the agent
+        // Find an agent playing the role "PilotColaborator"
+      	//eoFreeConflictInteraction.addCollaborators("Local ID of the collaborator");
+       	
+
+
+//#start_node:INGENIASCodeComponent32 <--- DO NOT REMOVE THIS	
+        ingenias.jade.AgentExternalDescription oPilotAgentExternalDescription = 
+        	global.GlobalVarsAndMethods.PlaneIdToPilotId.get(eiPlaneNoMoreInConflict.getPlaneID().id);
         
-//#end_node:INGENIASCodeComponent22 <--- DO NOT REMOVE THIS
+        outputsdefaultFreeConflictInteraction.addCollaborators(oPilotAgentExternalDescription);
+        
+//#end_node:INGENIASCodeComponent32 <--- DO NOT REMOVE THIS
 
  }
  
