@@ -12,7 +12,6 @@ import ingenias.jade.mental.Plane_Mind;
 public class RunManoeuvre{
 	Manoeuvre eiManoeuvre;
 	Plane_Mind eiPlane_Mind;
-	UpdatePlaneStatusApp oUpdatePlaneStatusApp;
 	
 	
 	private RunManoeuvre(Manoeuvre eiManoeuvre,
@@ -20,17 +19,12 @@ public class RunManoeuvre{
 		super();
 		this.eiManoeuvre = eiManoeuvre;
 		this.eiPlane_Mind = eiPlane_Mind;
-		this.oUpdatePlaneStatusApp = oUpdatePlaneStatusApp;
 	}
 	
 	public static boolean runManoeuvre(Manoeuvre eiManoeuvre,
 			Plane_Mind eiPlane_Mind, PlaneJADEAgent oPlaneJADEAgent) {
 
 		
-		ingenias.jade.mental.Change_Plane_Status event=new ingenias.jade.mental.Change_Plane_Status();
-		event.setNewAltitudeKM(-1);
-		event.setNewHead(null);
-		event.setNewLatLonPosition(null);
 		
 		if(eiManoeuvre.getSpeedChange()!= -1){
 			double dFinalSpeedKMH = eiPlane_Mind.getSpeedKMH() + eiManoeuvre.getSpeedChange();

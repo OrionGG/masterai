@@ -38,6 +38,11 @@ public class EnvironmentThread implements Runnable{
 				// Update layer panel
 				this.getLayerPanel().update(this.getWwd());
 
+				thread.MoveMouseThread oMoveMouseThread =
+					new thread.MoveMouseThread(getWwd());
+			
+				Thread oThread = new Thread(oMoveMouseThread);
+				oThread.start();
 					
 			}
 			

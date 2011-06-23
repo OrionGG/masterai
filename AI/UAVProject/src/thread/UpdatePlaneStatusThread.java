@@ -70,8 +70,6 @@ public class UpdatePlaneStatusThread  implements Runnable{
 	        ingenias.jade.mental.Change_Plane_Status event=new ingenias.jade.mental.Change_Plane_Status();
 	        
 	        event.setNewLatLonPosition(oNewLatLonPosition);
-	        event.setNewHead(null);
-	        event.setNewAltitudeKM(-1);
 	        
 	        try {
 				Vector<MentalEntity> lChange_Plane_Status = oUpdatePlaneStatusAppImp.getOwner().getMSM().getMentalEntityByType("Change_Plane_Status");
@@ -82,8 +80,6 @@ public class UpdatePlaneStatusThread  implements Runnable{
 				else{
 					ingenias.jade.mental.Change_Plane_Status oChange_Plane_Status = (ingenias.jade.mental.Change_Plane_Status)lChange_Plane_Status.get(0);
 					oChange_Plane_Status.setNewLatLonPosition(event.getNewLatLonPosition());
-					oChange_Plane_Status.setNewHead(event.getNewHead());
-					oChange_Plane_Status.setNewAltitudeKM(event.getNewAltitudeKM());
 				}
 				
 			} catch (ingenias.exception.InvalidEntity e1) {

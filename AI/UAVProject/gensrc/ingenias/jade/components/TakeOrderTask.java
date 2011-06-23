@@ -45,9 +45,9 @@ public class TakeOrderTask extends Task{
  public void execute() throws TaskException{
 
 
-        Order  eiOrder=(Order)this.getFirstInputOfType("Order");             
-
         Flight_Leg  eiFlight_Leg=(Flight_Leg)this.getFirstInputOfType("Flight_Leg");             
+
+        Order  eiOrder=(Order)this.getFirstInputOfType("Order");             
 
 
 

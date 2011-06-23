@@ -430,9 +430,6 @@ public class PlaneJADEAgent
 	      allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;
 	      
 		
-             expectedApp=(ingenias.jade.components.Application)getAM().getApplication("UpdatePlaneStatus");
-             tobject.addApplication("UpdatePlaneStatus",expectedApp);
-	      
 	      expectedApp=(ingenias.jade.components.Application)getAM().getApplication("YellowPages");
              tobject.addApplication("YellowPages",expectedApp);
         /*     
@@ -829,18 +826,6 @@ public class PlaneJADEAgent
 	 slot=new Slot("406");
 	 slot.setName("NewLatLonPosition");
 	 slot.setType("gov.nasa.worldwind.geom.LatLon");
-	 slot.setValue("");
-	 event.addSlots(slot);
-	 
-	 slot=new Slot("420");
-	 slot.setName("NewHead");
-	 slot.setType("gov.nasa.worldwind.geom.Angle");
-	 slot.setValue("");
-	 event.addSlots(slot);
-	 
-	 slot=new Slot("475");
-	 slot.setName("NewAltitudeKM");
-	 slot.setType("double");
 	 slot.setValue("");
 	 event.addSlots(slot);
 	  

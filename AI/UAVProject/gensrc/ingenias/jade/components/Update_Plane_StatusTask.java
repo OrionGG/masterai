@@ -77,14 +77,7 @@ public class Update_Plane_StatusTask extends Task{
 		if(eiChange_Plane_Status.getNewLatLonPosition()!= null){
 			eiPlane_Mind.setLastUpdatePosition(new Date());
 			eiPlane_Mind.setLatLonPosition(eiChange_Plane_Status.getNewLatLonPosition());
-		}
-		if(eiChange_Plane_Status.getNewHead()!= null){
-			eiPlane_Mind.setHead(eiChange_Plane_Status.getNewHead());        	
-		}
-		if(eiChange_Plane_Status.getNewAltitudeKM()!= -1){
-			eiPlane_Mind.setAltitudeKM(eiChange_Plane_Status.getNewAltitudeKM());        	
-		}
-	
+		}	
 //#end_node:INGENIASCodeComponent12 <--- DO NOT REMOVE THIS
 
  }
