@@ -14,7 +14,6 @@ package ingenias.jade.components;
 
 import java.util.*;
 
-import thread.RunManoeuvreTurnHead;
 import ingenias.jade.exception.*;
 import ingenias.jade.mental.Plane_Mind;
 

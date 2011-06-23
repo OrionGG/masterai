@@ -47,6 +47,8 @@ public class IsNotInConflictNowTask extends Task{
 
         ConflictFinished  eiConflictFinished=(ConflictFinished)this.getFirstInputOfType("ConflictFinished");             
 
+        Flight_Leg  eiFlight_Leg=(Flight_Leg)this.getFirstInputOfType("Flight_Leg");             
+
 
 
 

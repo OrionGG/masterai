@@ -53,8 +53,6 @@ public class Change_in_PlaneTask extends Task{
 
 
 
-			
-        UpdatePlaneStatusApp eaUpdatePlaneStatus=(UpdatePlaneStatusApp)this.getApplication("UpdatePlaneStatus");
 
 
 

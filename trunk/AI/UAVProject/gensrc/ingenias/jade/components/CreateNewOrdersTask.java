@@ -47,8 +47,6 @@ public class CreateNewOrdersTask extends Task{
 
         CanStartSendOrder  eiCanStartSendOrder=(CanStartSendOrder)this.getFirstInputOfType("CanStartSendOrder");             
 
-        ControllerMind  eiControllerMind=(ControllerMind)this.getFirstInputOfType("ControllerMind");             
-
 
 
 
@@ -106,11 +104,11 @@ public class CreateNewOrdersTask extends Task{
 		        	oFlightLeg.setStartPoint(oStartPosition);
 		        	//oFlightLeg.setEndPoint(oEndPosition);
 
-		        	gov.nasa.worldwind.geom.LatLon oMidLatLon = 
+		        	/*gov.nasa.worldwind.geom.LatLon oMidLatLon = 
 		        		BasicFlightDynamics.BFD.getMidpoint(oStartPosition, oEndPosition);
 		        	
 		        	gov.nasa.worldwind.geom.Position  oMidPosition = 
-		        		new gov.nasa.worldwind.geom.Position(oMidLatLon, dNewAltitude);
+		        		new gov.nasa.worldwind.geom.Position(oMidLatLon, dNewAltitude);*/
 		        	//oFlightLeg.setEndPoint(oMidPosition);
 		        	
 		        	

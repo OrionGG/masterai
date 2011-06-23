@@ -417,15 +417,6 @@ public class ControllerJADEAgent
 			TaskOutput to=null;
 			to=new TaskOutput("default");
 		
-             expectedInput=this.getMSM().getMentalEntityByType("ControllerMind");
-             if (expectedInput.size()==0 && !("1".equals("0..n"))){
-				nonExistingInputs.add("ControllerMind");
-			 } else {
-			  addExpectedInputs(tobject, "ControllerMind","1",expectedInput);
-			 }
-             allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;             
-             
-	      
 	      
 		
 		

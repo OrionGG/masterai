@@ -47,8 +47,6 @@ public class CreateNewLegForOrderTask extends Task{
 
         OrderNewLeg  eiOrderNewLeg=(OrderNewLeg)this.getFirstInputOfType("OrderNewLeg");             
 
-        Pilot_Mind  eiPilot_Mind=(Pilot_Mind)this.getFirstInputOfType("Pilot_Mind");             
-
 
 
 

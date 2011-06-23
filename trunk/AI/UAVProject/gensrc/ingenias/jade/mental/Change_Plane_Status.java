@@ -34,10 +34,6 @@ import ingenias.editor.entities.ViewPreferences.ViewType;
 public class Change_Plane_Status extends ingenias.editor.entities.RuntimeEvent{
    
     gov.nasa.worldwind.geom.LatLon NewLatLonPosition;   
-   
-    gov.nasa.worldwind.geom.Angle NewHead;   
-   
-    double NewAltitudeKM;   
     
    
    public Change_Plane_Status (String id){
@@ -73,24 +69,6 @@ public class Change_Plane_Status extends ingenias.editor.entities.RuntimeEvent{
    
    public gov.nasa.worldwind.geom.LatLon getNewLatLonPosition(){
      return NewLatLonPosition;      
-   }
-   
-
-   public void setNewHead(gov.nasa.worldwind.geom.Angle value){
-     NewHead=value;   
-   };
-   
-   public gov.nasa.worldwind.geom.Angle getNewHead(){
-     return NewHead;      
-   }
-   
-
-   public void setNewAltitudeKM(double value){
-     NewAltitudeKM=value;   
-   };
-   
-   public double getNewAltitudeKM(){
-     return NewAltitudeKM;      
    }
     
   
