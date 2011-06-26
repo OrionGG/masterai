@@ -72,19 +72,32 @@ public class ObeyOrderCompletedTask extends Task{
 
 
 //#start_node:INGENIASCodeComponent24 <--- DO NOT REMOVE THIS	
-        ArrayList<jade.core.AID> aPlanesConflictFinished = 
-        	eiControllerMind.getPlanesConflictFinished();
-        
-        aPlanesConflictFinished.add(eiOrdenDone.getPlaneID().id);
-
-        Hashtable<Integer, ArrayList<jade.core.AID>> aConflictsAttended =
-        	eiControllerMind.getConflictsAttended();
-        
-        int iWhereIsConflictAttended = global.GlobalVarsAndMethods.whereIsConflictAttended(
-        		aPlanesConflictFinished, aConflictsAttended);
-        
-        if(iWhereIsConflictAttended != -1){
-        	aConflictsAttended.remove(iWhereIsConflictAttended);
+        if(eiOrdenDone.getPlaneID() != null){
+	        ArrayList<jade.core.AID> aPlanesConflictFinished = 
+	        	new ArrayList<jade.core.AID>();
+	        
+	        aPlanesConflictFinished.add(eiOrdenDone.getPlaneID().id);
+	
+	        Hashtable<Integer, ArrayList<jade.core.AID>> aConflictsAttended =
+	        	eiControllerMind.getConflictsAttended();
+	        
+	        int iWhereIsConflictAttended = global.GlobalVarsAndMethods.whereIsConflictAttended(
+	        		aPlanesConflictFinished, aConflictsAttended);
+	        
+	        if(iWhereIsConflictAttended != -1){
+	        	ArrayList<jade.core.AID>  lPlanesInConflict = 
+	        		aConflictsAttended.get(iWhereIsConflictAttended);
+	        	lPlanesInConflict.remove(eiOrdenDone.getPlaneID().id);
+	        	
+	        	
+	        	if(lPlanesInConflict.size() == 0){
+	        		aConflictsAttended.remove(iWhereIsConflictAttended);
+	        	}
+	        	else{
+	        		aConflictsAttended.put(iWhereIsConflictAttended, lPlanesInConflict);
+	        	}
+	        	
+	        }
         }
         
 //#end_node:INGENIASCodeComponent24 <--- DO NOT REMOVE THIS

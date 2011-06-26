@@ -25,24 +25,17 @@ public class EnvironmentThread implements Runnable{
 				RenderableLayer layer = new RenderableLayer();
 				layer.setName("Show Planes");
 				
-				Simulation.SimulationVars.layer = layer;
-				
-				controllers.EntitiesController oEntitiesController = new controllers.EntitiesController();
-				oEntitiesController.render(layer);
+				controllers.EntitiesController.getInstance().setRenderableLayer(layer);
+				controllers.EntitiesController.getInstance().setWwd(this.getWwd());
+				controllers.EntitiesController.getInstance().render();
 				
 				// Add the layer to the model.
 				getWwd().getModel().getLayers().add(layer);
 
-				removeLayer("ViewControlsLayer");
+				//removeLayer("ViewControlsLayer");
 
 				// Update layer panel
 				this.getLayerPanel().update(this.getWwd());
-
-				thread.MoveMouseThread oMoveMouseThread =
-					new thread.MoveMouseThread(getWwd());
-			
-				Thread oThread = new Thread(oMoveMouseThread);
-				oThread.start();
 					
 			}
 			

@@ -1,9 +1,14 @@
 package thread;
 
+import jade.core.AID;
+
 import java.util.Date;
 import java.util.Vector;
 
 import views.PlaneView;
+
+import controllers.EntitiesController;
+
 
 import Simulation.SimulationVars;
 
@@ -17,7 +22,6 @@ public class UpdatePlaneStatusThread  implements Runnable{
 
 	Plane_Mind eiPlane_Mind;
 	UpdatePlaneStatusAppImp oUpdatePlaneStatusAppImp;
-	PlaneView oPlaneView;
 	
 
 
@@ -29,9 +33,13 @@ public class UpdatePlaneStatusThread  implements Runnable{
 		gov.nasa.worldwind.geom.Position oPosition = new gov.nasa.worldwind.geom.Position(
 				eiPlane_Mind.getLatLonPosition(),
 				eiPlane_Mind.getAltitudeKM());
-		oPlaneView = new PlaneView((PlaneJADEAgent)oUpdatePlaneStatusAppImp.getOwner(), oUpdatePlaneStatusAppImp.getOwner().getLocalName(), oPosition);
-		Simulation.SimulationVars.lPlanesFlying.add(oPlaneView);
-		oPlaneView.render(Simulation.SimulationVars.layer);
+		
+		EntitiesController.getInstance().addPlaneView(
+				new PlaneView((PlaneJADEAgent)oUpdatePlaneStatusAppImp.getOwner(), oUpdatePlaneStatusAppImp.getOwner().getLocalName(), oPosition));
+
+
+		AID aid = oUpdatePlaneStatusAppImp.getOwner().getAID();
+		EntitiesController.getInstance().renderPlane(aid);
 	}
 
 	@Override
@@ -48,10 +56,10 @@ public class UpdatePlaneStatusThread  implements Runnable{
 					eiPlane_Mind.getLatLonPosition(),
 					eiPlane_Mind.getAltitudeKM()*1000);
 			
-			oPlaneView.setNewPosition(oPosition);
-			jade.core.AID oAid = oPlaneView.getoPlaneEntity().getAID();
-			oPlaneView.setRangeOfRisk(global.GlobalVarsAndMethods.getRangeOfRisk(oAid));
-
+			AID aid = oUpdatePlaneStatusAppImp.getOwner().getAID();
+			
+			EntitiesController.getInstance().updatePlane(aid, oPosition, global.GlobalVarsAndMethods.getRangeOfRisk(aid));
+			
 			
 			double lat1 = eiPlane_Mind.getLatLonPosition().getLatitude().radians;
 	    	double lon1 = eiPlane_Mind.getLatLonPosition().getLongitude().radians;
