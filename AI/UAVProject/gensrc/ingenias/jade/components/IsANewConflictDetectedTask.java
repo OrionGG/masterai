@@ -84,15 +84,30 @@ public class IsANewConflictDetectedTask extends Task{
         	outputsdefault.remove(outputsdefaultCanStartSendOrder);
         }
         else{
-        	ArrayList<jade.core.AID> lPlanesInConflict = 
-        		eiPlanesInConflict.getPlanesInConflict();
-        		
+
         	Hashtable<Integer, ArrayList<jade.core.AID>> aConflictsAttended =
  	    		eiControllerMind.getConflictsAttended();
+        	
+
+ 	        ArrayList<jade.core.AID> lPlanesInConflict = 
+       		eiPlanesInConflict.getPlanesInConflict();
+        	
+        	int iAnyPlaneInConflict = global.GlobalVarsAndMethods.isAnyPlaneInConflict(lPlanesInConflict, aConflictsAttended);
+        		
+ 	        	
+        	
+        	int iConflictNumber = -1;
+ 	        if(iAnyPlaneInConflict == -1){
+ 	        	iConflictNumber =  eiControllerMind.getTotalConflictNumber();
+ 	 	    	aConflictsAttended.put(iConflictNumber, lPlanesInConflict);
+ 	        }
+ 	        else{
+ 	        	iConflictNumber = iAnyPlaneInConflict;
+ 	        	global.GlobalVarsAndMethods.AddPlanesToConflictsAttended(iConflictNumber, lPlanesInConflict, aConflictsAttended);
+ 	        }
+ 	    
  	        
- 	        int iConflictNumber =  eiControllerMind.getTotalConflictNumber();
  	        
- 	    	aConflictsAttended.put(iConflictNumber, lPlanesInConflict);
  	    	eiControllerMind.setConflictsAttended(aConflictsAttended);
  	    	
  	    	yp=(YellowPages)this.getApplication("YellowPages");

@@ -23,11 +23,15 @@ public class CreateNewDecisionThread implements Runnable{
 	        Date oLastDecisionDate = eiPilot_Mind.getLastDecisionDate();
 	        Date oNow = new Date();
 	        long lDifferOfMiliseconds = oNow.getTime() - oLastDecisionDate.getTime();
-	        long iRangeTime =(long) (Simulation.SimulationVars.iSleepTime * global.GlobalVarsAndMethods.PlaneIdToPilotId.size() * 2);
-	        while(lDifferOfMiliseconds < iRangeTime){
+	        long iRangeTime = (long) (Simulation.SimulationVars.iSleepTime * global.GlobalVarsAndMethods.PlaneIdToPilotId.size() * 2);
+	        long iRangeTimeForWait = iRangeTime + getAnwserTime();
+			
+	        while(lDifferOfMiliseconds < iRangeTimeForWait){
+				
 	        	try {
-	        		Thread.sleep(iRangeTime - lDifferOfMiliseconds);
-					Thread.sleep((long) (Math.random()*1000));
+	        		if((iRangeTimeForWait - lDifferOfMiliseconds) > 0){
+	        			Thread.sleep(iRangeTimeForWait - lDifferOfMiliseconds);
+	        		}
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -35,6 +39,9 @@ public class CreateNewDecisionThread implements Runnable{
 
 		        oNow = new Date();
 				lDifferOfMiliseconds = oNow.getTime() - oLastDecisionDate.getTime();
+				
+				updatePilotMindValues();
+				iRangeTimeForWait = iRangeTime + getAnwserTime();
 	        }
 	        try {
 				pilotJADEAgent.getMSM().addMentalEntity(new CanCreateNewDecision());
@@ -43,6 +50,34 @@ public class CreateNewDecisionThread implements Runnable{
 				e.printStackTrace();
 			}
 		
+	}
+
+	private void updatePilotMindValues() {
+		double dExperience = eiPilot_Mind.getExperience();
+		dExperience = Math.pow(dExperience, 1/1.001);
+		eiPilot_Mind.setExperience((float) dExperience);
+		
+		double dFatigue = eiPilot_Mind.getFatigue();
+		dFatigue = Math.pow(dFatigue, 1/1.001);
+		eiPilot_Mind.setFatigue((float) dFatigue);
+		
+		
+		double dStress = eiPilot_Mind.getStress();
+		dStress = Math.pow(dStress, 1/1.001);
+		eiPilot_Mind.setStress((float) dStress);
+		
+		
+		
+		
+	}
+
+	public long getAnwserTime() {
+		double dExperience = eiPilot_Mind.getExperience();
+		double dFatigue = eiPilot_Mind.getFatigue();
+		double dStress = eiPilot_Mind.getStress();
+		
+		long lAnwserTime = (long) (((dFatigue + dStress)/2) * (1/dExperience) * Simulation.SimulationVars.iSleepTime);
+		return lAnwserTime;
 	}
 
 }

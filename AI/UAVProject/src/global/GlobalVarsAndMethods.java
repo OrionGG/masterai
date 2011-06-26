@@ -367,10 +367,10 @@ public class GlobalVarsAndMethods {
 				ArrayList<jade.core.AID> hashConflictsList = oConflict.getValue();
 
 				boolean bAreAllPlanesAttended = true;
-
-				for (jade.core.AID mindPlanesInConflict : hashConflictsList) {
+				
+				for (jade.core.AID newPlaneInConflict : aPlanesInConflict) {
 					boolean bIsPlaneInConflict = false;
-					for (jade.core.AID newPlaneInConflict : aPlanesInConflict) {
+					for (jade.core.AID mindPlanesInConflict : hashConflictsList) {
 
 						if(newPlaneInConflict.equals(mindPlanesInConflict))
 						{
@@ -481,5 +481,69 @@ public class GlobalVarsAndMethods {
 				}
 			}
 			return aPlanesFreeOfConflict;
+		}
+
+		public static int isAnyPlaneInConflict(
+				ArrayList<AID> lPlanesInConflict, Hashtable<Integer, ArrayList<AID>> aConflictsAttended ) {
+			int iResult = -1;
+			
+			for (Entry<Integer, ArrayList<jade.core.AID>> oConflict : aConflictsAttended.entrySet()) {
+				ArrayList<jade.core.AID> hashConflictsList = oConflict.getValue();
+
+				boolean bSomePlaneAttended = false;
+
+				for (jade.core.AID mindPlanesInConflict : hashConflictsList) {
+					boolean bIsPlaneInConflict = false;
+					for (jade.core.AID newPlaneInConflict : lPlanesInConflict) {
+
+						if(newPlaneInConflict.equals(mindPlanesInConflict))
+						{
+							bIsPlaneInConflict = true;
+							break;
+						}
+					}
+
+					if(bIsPlaneInConflict){
+						bSomePlaneAttended = true;
+						break;
+					}
+				}
+
+				if(bSomePlaneAttended){
+					iResult = oConflict.getKey();
+					break;
+				}
+			}
+			
+			
+			return iResult;
+		}
+
+		public static void AddPlanesToConflictsAttended(int iConflictNumber,
+				ArrayList<AID> lPlanesInConflict,
+				Hashtable<Integer, ArrayList<AID>> aConflictsAttended) {
+			ArrayList<AID> lFirstPlanesInConflict = aConflictsAttended.get(iConflictNumber);
+			ArrayList<AID> lLastPlanesInConflict = addNoDuplicates(lFirstPlanesInConflict, lPlanesInConflict);
+
+	 	    aConflictsAttended.put(iConflictNumber, lLastPlanesInConflict);
+			
+			
+		}
+
+		private static ArrayList<AID> addNoDuplicates(
+				ArrayList<AID> lFirstPlanesInConflict,
+				ArrayList<AID> lPlanesInConflict) {
+			
+			ArrayList<AID> lLastPlanesInConflict = new ArrayList<AID>();
+			lLastPlanesInConflict.addAll(lFirstPlanesInConflict);
+			
+			for (AID aid : lPlanesInConflict) {
+				if(!lLastPlanesInConflict.contains(aid)){
+					lLastPlanesInConflict.add(aid);
+				}
+				
+			}
+			
+			return lLastPlanesInConflict;
 		}
 }

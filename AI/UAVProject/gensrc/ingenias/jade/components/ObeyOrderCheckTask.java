@@ -93,10 +93,9 @@ public class ObeyOrderCheckTask extends Task{
         }
         else{
             global.GlobalVarsAndMethods.copyFlightLeg(oFlightLeg, outputsdefaultFlight_Leg);
-            
+            outputsdefaultOrdenDone.setPlaneID(oFlightLeg.getPlaneID());
         }        
         
-        outputsdefaultOrdenDone.setPlaneID(oFlightLeg.getPlaneID());
 //#end_node:INGENIASCodeComponent23 <--- DO NOT REMOVE THIS
 
  }
