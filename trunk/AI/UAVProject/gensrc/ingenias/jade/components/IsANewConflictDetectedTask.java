@@ -80,6 +80,9 @@ public class IsANewConflictDetectedTask extends Task{
 //#start_node:INGENIASCodeComponent30 <--- DO NOT REMOVE THIS	
         boolean bAlreadyProcessed = global.GlobalVarsAndMethods.isAlreadyConflictProcessed(eiPlanesInConflict, eiControllerMind);
 
+        global.GlobalVarsAndMethods.putPlanesInRisk(eiPlanesInConflict.getPlanesInConflict(), eiPlanesInConflict.getRiskValue());
+    	
+        
         if(bAlreadyProcessed){
         	outputsdefault.remove(outputsdefaultCanStartSendOrder);
         }
@@ -100,6 +103,7 @@ public class IsANewConflictDetectedTask extends Task{
  	        if(iAnyPlaneInConflict == -1){
  	        	iConflictNumber =  eiControllerMind.getTotalConflictNumber();
  	 	    	aConflictsAttended.put(iConflictNumber, lPlanesInConflict);
+ 		    	eiControllerMind.setTotalConflictNumber(iConflictNumber + 1);
  	        }
  	        else{
  	        	iConflictNumber = iAnyPlaneInConflict;
@@ -115,10 +119,6 @@ public class IsANewConflictDetectedTask extends Task{
 
  	        eaCheckDistanceBetweenPlanesInConflict.start(eiControllerMind, iConflictNumber, oController);
  	    	
-	    	eiControllerMind.setTotalConflictNumber(iConflictNumber + 1);
-	    	
-        	global.GlobalVarsAndMethods.putPlanesInRisk(eiPlanesInConflict.getPlanesInConflict(), 9);
-        	
         	outputsdefaultCanStartSendOrder.setPlanesInConflict(lPlanesInConflict);
         	
         }

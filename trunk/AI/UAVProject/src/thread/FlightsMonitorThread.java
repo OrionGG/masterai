@@ -38,6 +38,7 @@ public class FlightsMonitorThread  implements Runnable{
 					continue;
 				}
 
+				int iRiskValue = -1;
 				if(dSpeedFirstService > 0){
 
 					for (int j = i+1; j < oVector.size(); j++) {
@@ -71,14 +72,15 @@ public class FlightsMonitorThread  implements Runnable{
 						
 						if(dDistance < global.GlobalVarsAndMethods.dAwarenessDistance * Simulation.SimulationVars.x){//6 miles
 							listPlanesInConflict.add(oSecondService.getOwner().getAID());
+							iRiskValue = 9;
 						}
 						
-						/*if(dDistanceWithHigh < (global.GlobalVarsAndMethods.dAwarenessDistance * Simulation.SimulationVars.x)/10){//6 miles
+						if(dDistance < (global.GlobalVarsAndMethods.dAwarenessDistance * Simulation.SimulationVars.x)/2){//3 miles
 							if(dDistanceHigh < 0.5)
 							{
-								int a = 0;
+								iRiskValue = 10;
 							}
-						}*/
+						}
 
 					}
 
@@ -88,6 +90,7 @@ public class FlightsMonitorThread  implements Runnable{
 							new ingenias.jade.mental.PlanesInConflict();
 
 						oPlanesInConflict.setPlanesInConflict(listPlanesInConflict);
+						oPlanesInConflict.setRiskValue(iRiskValue);
 
 						try {
 							flightsMonitorAppImp.getOwner().getMSM().addMentalEntity(oPlanesInConflict);

@@ -13,6 +13,7 @@ import ingenias.jade.mental.Decision;
 import ingenias.jade.mental.Flight_Leg;
 import ingenias.jade.mental.Flight_Plan;
 import ingenias.jade.mental.Manoeuvre;
+import ingenias.jade.mental.Pilot_Mind;
 import ingenias.jade.mental.PlanAnswer;
 import ingenias.jade.mental.Plane_Mind;
 import ingenias.jade.mental.PlanesInConflict;
@@ -21,12 +22,18 @@ import ingenias.jade.mental.Throw_Instruction;
 import jade.core.AID;
 import jade.domain.FIPAAgentManagement.DFAgentDescription;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.Random;
 import java.util.Vector;
+import java.util.concurrent.locks.*;
+
+import javax.xml.parsers.*;
+
+import org.w3c.dom.*;
 
 public class GlobalVarsAndMethods {
 	public static int nDegressPerSecond = 3;
@@ -35,6 +42,9 @@ public class GlobalVarsAndMethods {
 
 	public static double dCruiseSpeedKMH = 930;
 	public static double dCruiseAltitudeKM = 11;
+	
+
+	private static Lock lock = new ReentrantLock();;
 
 	public static Hashtable<jade.core.AID, ingenias.jade.AgentExternalDescription> PlaneIdToPilotId =
 		new Hashtable<jade.core.AID, ingenias.jade.AgentExternalDescription>();
@@ -44,6 +54,8 @@ public class GlobalVarsAndMethods {
 	public static double dAwarenessDistance = 10.8;//6 miles
 
 	public static int iMaxNumWaypoints = 0;
+	
+	public static int iPilotMind = 0;
 
 	public static Hashtable<jade.core.AID, Plane_Position_ServiceAppImp> PlanesPositionApps =
 		new Hashtable<jade.core.AID, Plane_Position_ServiceAppImp>();
@@ -545,5 +557,201 @@ public class GlobalVarsAndMethods {
 			}
 			
 			return lLastPlanesInConflict;
+		}
+
+		public static Flight_Plan getNewPlan(int i) {
+
+			Flight_Plan oFlightPlan = new ingenias.jade.mental.Flight_Plan();
+			
+			try {
+
+				File fXmlFile = new File(".\\config\\flightplans.xml");
+				DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+				DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+				Document doc = dBuilder.parse(fXmlFile);
+				doc.getDocumentElement().normalize();
+
+				NodeList nList = doc.getElementsByTagName("Flight_Plan");
+
+				Node nNode = nList.item(i);	    
+				if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+					setDepartureAirport(oFlightPlan, nNode);
+					setDestinationAirport(oFlightPlan, nNode);
+
+					setWaypoints(oFlightPlan, nNode);
+					
+					setDepartureTime(oFlightPlan, nNode);
+					
+					//Standard for a Boeing 737
+					oFlightPlan.setCruisingAltitudeKM(dCruiseAltitudeKM);
+					oFlightPlan.setCruisingSpeedKMH(dCruiseSpeedKMH);
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			return oFlightPlan;
+		}
+
+		private static void setDepartureTime(Flight_Plan oFlightPlan, Node nNode) {
+			String sElementName = "DepartureTime";
+			String sDepartureTime =  getElementValue(nNode, sElementName);
+
+			double num = Double.parseDouble(sDepartureTime);
+
+			long iPart;
+			double fPart;
+
+			iPart = (long) num;
+			fPart = num - iPart;
+
+			java.util.Date oDate = new java.util.Date();
+			oDate.setMinutes((int) (oDate.getMinutes()+ iPart));
+			oDate.setSeconds((int) (fPart * 60));
+			oFlightPlan.setDepartureTime(oDate);
+			
+		}
+
+		public static void setWaypoints(Flight_Plan oFlightPlan,
+				Node nNode ) {
+			//Adding Waypoints
+			String sElementName = "Waypoints";
+			String sWaypoints =  getElementValue(nNode, sElementName);
+			int iWaypointsNumber = Integer.parseInt(sWaypoints);
+			List<gov.nasa.worldwind.geom.Position> oWayPoints = new ArrayList<gov.nasa.worldwind.geom.Position>(iWaypointsNumber);
+
+			enums.Waypoint[] oWaypointvalues = enums.Waypoint.values();
+			/*List<Integer> lIndexUsed = new ArrayList<Integer>();
+
+				lIndexUsed.add(randomWaypoint);
+				enums.Waypoint oWaypoint = oWaypointvalues[randomWaypoint];
+				oWayPoints.add(oWaypoint.getoPosition());*/
+			
+			oFlightPlan.setWaypoints(oWayPoints);
+
+			oFlightPlan.setLegsNumber(oFlightPlan.getWaypoints().size() + 1);
+		}
+
+		public static void setDepartureAirport(Flight_Plan oFlightPlan,
+				Node nNode) {
+			String sElementName = "DepartureAirport";
+			String sDepartureAirport =  getElementValue(nNode, sElementName);
+			//set departure point
+			int iIndexDeparture = Integer.parseInt(sDepartureAirport);
+
+			enums.Airport[] oAirportvalues = enums.Airport.values();
+			enums.Airport oDeparture = oAirportvalues[iIndexDeparture];
+			oFlightPlan.setDepartureAirport(oDeparture);
+		}
+		
+		public static void setDestinationAirport(Flight_Plan oFlightPlan,
+				Node nNode) {
+			String sElementName = "DestinationAirport";
+			String sDestinationAirport =  getElementValue(nNode, sElementName);
+			//set departure point
+			int iIndexDestination =Integer.parseInt(sDestinationAirport);
+
+			enums.Airport[] oAirportvalues = enums.Airport.values();
+			enums.Airport oDestination = oAirportvalues[iIndexDestination];
+			oFlightPlan.setDestinationAirport(oDestination);
+		}
+
+		public static String getElementValue(Node nNode, String sElementName) {
+			Element eElement = (Element) nNode;
+			
+			NodeList oList = eElement.getElementsByTagName(sElementName);
+			Element oElement = (Element)oList.item(0);
+
+			NodeList textList = oElement.getChildNodes();
+			String text = ((Node)textList.item(0)).getNodeValue().trim();
+			return text;
+		}
+
+		public static List<DFAgentDescription> clearDuplicated(
+				List<DFAgentDescription> lDFPilotsAgentDescription) {
+			List<DFAgentDescription> lResult = new ArrayList<DFAgentDescription>();
+			for (DFAgentDescription dfAgentDescription : lDFPilotsAgentDescription) {
+				if(!containsAID(lResult, dfAgentDescription.getName())){
+					lResult.add(dfAgentDescription);
+				}
+			}
+			return lResult;
+			
+		}
+
+		private static boolean containsAID(List<DFAgentDescription> lResult,
+				AID name) {
+			boolean bResult = false;
+			for (DFAgentDescription dfAgentDescription : lResult) {
+				if(dfAgentDescription.getName().getLocalName().equals(name.getLocalName())){
+					bResult = true;
+					break;
+				}
+			}
+			return bResult;
+		}
+		
+		public static void setStatusValues(Pilot_Mind outputsdefaultPilot_Mind) {			
+			try {
+				File fXmlFile = new File(".\\config\\pilotminds.xml");
+				DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+				DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+				Document doc = dBuilder.parse(fXmlFile);
+				doc.getDocumentElement().normalize();
+
+
+				int i = 0;
+				NodeList nList = doc.getElementsByTagName("PilotMind");
+				
+				lock.lock();
+				try {
+					i = iPilotMind;
+					iPilotMind ++;
+				} finally {
+					lock.unlock();
+				}
+				
+				Node nNode = nList.item(i);	    
+				if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+					setStress(outputsdefaultPilot_Mind, nNode);
+					setFatigue(outputsdefaultPilot_Mind, nNode);
+					setExperience(outputsdefaultPilot_Mind, nNode);
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			
+		}
+
+		private static void setExperience(Pilot_Mind outputsdefaultPilot_Mind,
+				Node nNode) {
+			String sElementName = "Experience";
+			String sExperience =  getElementValue(nNode, sElementName);
+			//set departure point
+			float fExperience =Float.parseFloat(sExperience);
+			outputsdefaultPilot_Mind.setExperience(fExperience);
+		}
+
+		private static void setFatigue(Pilot_Mind outputsdefaultPilot_Mind,
+				Node nNode) {
+			String sElementName = "Fatigue";
+			String sFatigue =  getElementValue(nNode, sElementName);
+			//set departure point
+			float fFatigue =Float.parseFloat(sFatigue);
+			outputsdefaultPilot_Mind.setFatigue(fFatigue);
+			
+		}
+
+		private static void setStress(Pilot_Mind outputsdefaultPilot_Mind,
+				Node nNode) {
+			String sElementName = "Stress";
+			String sStress =  getElementValue(nNode, sElementName);
+			//set departure point
+			float fStress =Float.parseFloat(sStress);
+			outputsdefaultPilot_Mind.setStress(fStress);
+			
 		}
 }

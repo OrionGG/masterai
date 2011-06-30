@@ -54,7 +54,7 @@ public class CreateNewDecisionThread implements Runnable{
 
 	private void updatePilotMindValues() {
 		double dExperience = eiPilot_Mind.getExperience();
-		dExperience = Math.pow(dExperience, 1/1.001);
+		dExperience = Math.pow(dExperience, 1/1.0001);
 		eiPilot_Mind.setExperience((float) dExperience);
 		
 		double dFatigue = eiPilot_Mind.getFatigue();

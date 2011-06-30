@@ -45,9 +45,9 @@ public class ObeyOrderCheckTask extends Task{
  public void execute() throws TaskException{
 
 
-        OrderFinished  eiOrderFinished=(OrderFinished)this.getFirstInputOfType("OrderFinished");             
-
         OrderOldLeg  eiOrderOldLeg=(OrderOldLeg)this.getFirstInputOfType("OrderOldLeg");             
+
+        OrderFinished  eiOrderFinished=(OrderFinished)this.getFirstInputOfType("OrderFinished");             
 
 
 
@@ -94,7 +94,14 @@ public class ObeyOrderCheckTask extends Task{
         else{
             global.GlobalVarsAndMethods.copyFlightLeg(oFlightLeg, outputsdefaultFlight_Leg);
             outputsdefaultOrdenDone.setPlaneID(oFlightLeg.getPlaneID());
-        }        
+        }      
+        
+        /*try {
+			Thread.sleep((long) (1000));
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
         
 //#end_node:INGENIASCodeComponent23 <--- DO NOT REMOVE THIS
 

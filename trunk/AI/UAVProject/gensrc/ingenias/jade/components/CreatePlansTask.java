@@ -90,13 +90,19 @@ public class CreatePlansTask extends Task{
 			e.printStackTrace();
 		}
 		
+		//It's not needed, it usually a problem with run more than one deployment 
+		//with the same jade
+		//lDFPilotsAgentDescription = global.GlobalVarsAndMethods.clearDuplicated(lDFPilotsAgentDescription);
+		//lDFPlanesAgentDescription = global.GlobalVarsAndMethods.clearDuplicated(lDFPlanesAgentDescription);
+		
 		for (int i = 0; i < lDFPilotsAgentDescription.size(); i++) {
 			jade.domain.FIPAAgentManagement.DFAgentDescription dfPilotAgentDescription = lDFPilotsAgentDescription.get(i); 
 			if(i >= lDFPlanesAgentDescription.size()){
 				break;
 			}
 			jade.domain.FIPAAgentManagement.DFAgentDescription dfPlaneAgentDescription = lDFPlanesAgentDescription.get(i); 
-			Flight_Plan oFlightPlan = global.GlobalVarsAndMethods.CreateNewPlan();
+			Flight_Plan oFlightPlan = global.GlobalVarsAndMethods.getNewPlan(i);
+				//global.GlobalVarsAndMethods.CreateNewPlan();
 			ingenias.jade.AgentExternalDescription oPilotAgentExternalDescription = new ingenias.jade.AgentExternalDescription(dfPilotAgentDescription.getName(), PilotRole);
 			oFlightPlan.setPilotID(oPilotAgentExternalDescription);
 			ingenias.jade.AgentExternalDescription oPlaneAgentExternalDescription = new ingenias.jade.AgentExternalDescription(dfPlaneAgentDescription.getName(), PlaneRole);
