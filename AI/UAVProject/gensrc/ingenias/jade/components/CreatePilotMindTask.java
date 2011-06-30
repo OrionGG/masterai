@@ -74,15 +74,7 @@ public class CreatePilotMindTask extends Task{
 
 
 //#start_node:INGENIASCodeComponent3 <--- DO NOT REMOVE THIS	
-		Random generator = new Random();
-		float fStress = generator.nextFloat();
-        outputsdefaultPilot_Mind.setStress(fStress);
-
-		float fExperience = generator.nextFloat();    
-        outputsdefaultPilot_Mind.setExperience(fExperience);
-        
-        float fFatigue = generator.nextFloat();
-        outputsdefaultPilot_Mind.setFatigue(fFatigue);
+		global.GlobalVarsAndMethods.setStatusValues(outputsdefaultPilot_Mind);
         
         outputsdefaultPilot_Mind.setInstructionRunning(new java.util.ArrayList<Throw_Instruction>());
         

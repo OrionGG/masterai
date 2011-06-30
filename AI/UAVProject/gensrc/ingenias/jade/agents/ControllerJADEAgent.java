@@ -1110,6 +1110,12 @@ public class ControllerJADEAgent
 	 slot.setType("ArrayList<jade.core.AID>");
 	 slot.setValue("");
 	 event.addSlots(slot);
+	 
+	 slot=new Slot("382");
+	 slot.setName("RiskValue");
+	 slot.setType("int");
+	 slot.setValue("");
+	 event.addSlots(slot);
 	  
 	 */ 
 	 events.add(event);

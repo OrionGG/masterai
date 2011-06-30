@@ -131,10 +131,11 @@ public class PlaneView extends PointPlacemark {
 				oEndPlaneMaterial = Material.GREEN;
 				break;
 			case 9:
-
 				oEndPlaneMaterial = Material.YELLOW;
 				break;
-
+			case 10:
+				oEndPlaneMaterial = Material.RED;
+				break;
 			default:
 				break;
 			}

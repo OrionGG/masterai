@@ -88,11 +88,9 @@ public class StartPlaneTask extends Task{
 		eiPlane_Mind.setLastUpdatePosition(new Date());
 
 		eiPlane_Mind.setAltitudeKM(global.GlobalVarsAndMethods.dCruiseAltitudeKM);
-		eiPlane_Mind.setSpeedKMH(1);
+		eiPlane_Mind.setSpeedKMH(300);
 		//set head in departure point
-        Random generator = new Random();
-		int iHeadDegrees = generator.nextInt(360);
-		eiPlane_Mind.setHead(gov.nasa.worldwind.geom.Angle.fromDegrees(iHeadDegrees));
+		eiPlane_Mind.setHead(gov.nasa.worldwind.geom.Angle.fromDegrees(0));
 //#end_node:INGENIASCodeComponent9 <--- DO NOT REMOVE THIS
 
  }

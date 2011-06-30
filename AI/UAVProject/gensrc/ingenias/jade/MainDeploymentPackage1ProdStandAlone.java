@@ -184,6 +184,22 @@ public class MainDeploymentPackage1ProdStandAlone {
         }.start();
 
         // Create a new agent
+        final jade.wrapper.AgentController agcPilot_5DeploymentUnitByType9 = ac.createNewAgent("Pilot_5DeploymentUnitByType9",
+            "ingenias.jade.agents.PilotJADEAgent", new Object[0]);	
+	
+	
+        new Thread(){
+          public void run(){
+            try {
+               System.out.println("Starting up Pilot_5DeploymentUnitByType9...");
+              agcPilot_5DeploymentUnitByType9.start();
+            } catch (Exception e){
+              e.printStackTrace();
+            }
+          }
+        }.start();
+
+        // Create a new agent
         final jade.wrapper.AgentController agcPlane_0DeploymentUnitByType8 = ac.createNewAgent("Plane_0DeploymentUnitByType8",
             "ingenias.jade.agents.PlaneJADEAgent", new Object[0]);	
 	
@@ -257,6 +273,22 @@ public class MainDeploymentPackage1ProdStandAlone {
             try {
                System.out.println("Starting up Plane_4DeploymentUnitByType8...");
               agcPlane_4DeploymentUnitByType8.start();
+            } catch (Exception e){
+              e.printStackTrace();
+            }
+          }
+        }.start();
+
+        // Create a new agent
+        final jade.wrapper.AgentController agcPlane_5DeploymentUnitByType8 = ac.createNewAgent("Plane_5DeploymentUnitByType8",
+            "ingenias.jade.agents.PlaneJADEAgent", new Object[0]);	
+	
+	
+        new Thread(){
+          public void run(){
+            try {
+               System.out.println("Starting up Plane_5DeploymentUnitByType8...");
+              agcPlane_5DeploymentUnitByType8.start();
             } catch (Exception e){
               e.printStackTrace();
             }

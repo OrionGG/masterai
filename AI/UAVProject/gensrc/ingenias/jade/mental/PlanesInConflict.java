@@ -34,6 +34,8 @@ import ingenias.editor.entities.ViewPreferences.ViewType;
 public class PlanesInConflict extends ingenias.editor.entities.RuntimeEvent{
    
     ArrayList<jade.core.AID> PlanesInConflict;   
+   
+    int RiskValue;   
     
    
    public PlanesInConflict (String id){
@@ -69,6 +71,15 @@ public class PlanesInConflict extends ingenias.editor.entities.RuntimeEvent{
    
    public ArrayList<jade.core.AID> getPlanesInConflict(){
      return PlanesInConflict;      
+   }
+   
+
+   public void setRiskValue(int value){
+     RiskValue=value;   
+   };
+   
+   public int getRiskValue(){
+     return RiskValue;      
    }
     
   
