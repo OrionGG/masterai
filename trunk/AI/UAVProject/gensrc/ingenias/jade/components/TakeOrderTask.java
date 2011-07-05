@@ -93,8 +93,9 @@ public class TakeOrderTask extends Task{
         	OrderFinished oOrderFinished = new OrderFinished();
         	oOrderFinished.setIsBecauseOtherConflict(true);
         	outputsdefault.add(new OutputEntity(oOrderFinished, TaskOperations.CreateWF));
-      
-        	Flight_Leg oldFlightLeg = ((OrderOldLeg) oVector.get(0)).getOldFlightLeg();
+        	
+        	Flight_Leg oldFlightLeg = new Flight_Leg();
+        	global.GlobalVarsAndMethods.copyFlightLeg(((OrderOldLeg) oVector.get(0)).getOldFlightLeg(), oldFlightLeg);
         	outputsdefaultOrderOldLeg.setOldFlightLeg(oldFlightLeg);
         }
         else{

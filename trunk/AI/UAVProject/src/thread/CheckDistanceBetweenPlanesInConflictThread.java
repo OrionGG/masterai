@@ -10,17 +10,30 @@ import ingenias.jade.mental.ControllerMind;
 import ingenias.jade.mental.PlaneNoMoreInConflict;
 
 public class CheckDistanceBetweenPlanesInConflictThread implements Runnable {
-	ControllerMind eiControllerMind;
-	int iConflictNumber;
+	
 	ControllerJADEAgent owner;
+	private ArrayList<AID> lPlanesInConflict;
+
+	boolean bFinish = false;
+
+
+	public void setbFinish(boolean bFinish) {
+		this.bFinish = bFinish;
+	}
 
 
 
 	public CheckDistanceBetweenPlanesInConflictThread(
 			ControllerMind eiControllerMind, int iConflictNumber, ControllerJADEAgent oController) {
+		
+	}
+
+
+
+	public CheckDistanceBetweenPlanesInConflictThread(
+			ArrayList<AID> lPlanesInConflict, ControllerJADEAgent oController) {
 		super();
-		this.eiControllerMind = eiControllerMind;
-		this.iConflictNumber = iConflictNumber;
+		this.lPlanesInConflict = lPlanesInConflict;
 		owner = oController;
 	}
 
@@ -28,11 +41,9 @@ public class CheckDistanceBetweenPlanesInConflictThread implements Runnable {
 
 	@Override
 	public void run() {
-		boolean bFinish = false;
 		ArrayList<jade.core.AID> aTotalPlanesFreeOfConflict = new ArrayList<AID>();
 		while(!bFinish){
-			java.util.ArrayList<jade.core.AID> aConflictsAttended = 
-				eiControllerMind.getConflictsAttended().get(iConflictNumber);
+			java.util.ArrayList<jade.core.AID> aConflictsAttended = lPlanesInConflict;
 			if(aConflictsAttended == null){
 				bFinish = true;
 			}

@@ -96,13 +96,6 @@ public class ObeyOrderCheckTask extends Task{
             outputsdefaultOrdenDone.setPlaneID(oFlightLeg.getPlaneID());
         }      
         
-        /*try {
-			Thread.sleep((long) (1000));
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
-        
 //#end_node:INGENIASCodeComponent23 <--- DO NOT REMOVE THIS
 
  }

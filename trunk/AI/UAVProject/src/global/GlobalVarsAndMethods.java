@@ -1,6 +1,7 @@
 package global;
 
 
+import enums.Waypoint;
 import gov.nasa.worldwind.geom.Angle;
 import gov.nasa.worldwind.geom.Position;
 import ingenias.jade.agents.PlaneJADEAgent;
@@ -52,8 +53,12 @@ public class GlobalVarsAndMethods {
 	public static double dSecondsFactor = ((double)(Simulation.SimulationVars.iSleepTime * Simulation.SimulationVars.x))/1000;
 
 	public static double dAwarenessDistance = 10.8;//6 miles
+	
+	public static List<Waypoint> oWayPointsToShow = new ArrayList<Waypoint>();
 
-	public static int iMaxNumWaypoints = 0;
+
+	//public static int iMaxNumWaypoints = 0; 
+	//It is configured in the confli xml file
 	
 	public static int iPilotMind = 0;
 
@@ -176,34 +181,32 @@ public class GlobalVarsAndMethods {
 
 			//Adding Waypoints
 			enums.Waypoint[] oWaypointvalues = enums.Waypoint.values();
-			int iWaypointsNumber = global.GlobalVarsAndMethods.iMaxNumWaypoints;
-			int randomIndex = generator.nextInt(iWaypointsNumber + 1);
-			List<gov.nasa.worldwind.geom.Position> oWayPoints = new ArrayList<gov.nasa.worldwind.geom.Position>(randomIndex);
+			/*int iWaypointsNumber = global.GlobalVarsAndMethods.iMaxNumWaypoints;
+			//int randomIndex = generator.nextInt(iWaypointsNumber + 1);
+			List<gov.nasa.worldwind.geom.Position> oWayPoints = new ArrayList<gov.nasa.worldwind.geom.Position>(iWaypointsNumber);
 
 			List<Integer> lIndexUsed = new ArrayList<Integer>();
 
-			for (int i = 0; i < randomIndex; i++) {
+			for (int i = 0; i < iWaypointsNumber; i++) {
 				int randomWaypoint = generator.nextInt(oWaypointvalues.length);
 
 				int j =0;
-				while((j<iWaypointsNumber) &&
-						BasicFlightDynamics.BFD.moreThanDobleDistance(oFlightPlan, i,  oWaypointvalues[randomWaypoint], oWayPoints)){
+				while(((j<oWaypointvalues.length) &&
+						BasicFlightDynamics.BFD.moreThanDobleDistance(oFlightPlan, i,  oWaypointvalues[randomWaypoint], oWayPoints)) ||
+						lIndexUsed.contains(randomWaypoint)){
 					randomWaypoint = generator.nextInt(oWaypointvalues.length);
 					j++;
 				}
 
-				if(j == iWaypointsNumber){
+				if(j == oWaypointvalues.length){
 					break;
 				}
-
-				while(lIndexUsed.contains(randomWaypoint)){
-					randomWaypoint = generator.nextInt(oWaypointvalues.length);
-				}
+				
 				lIndexUsed.add(randomWaypoint);
 				enums.Waypoint oWaypoint = oWaypointvalues[randomWaypoint];
 				oWayPoints.add(oWaypoint.getoPosition());
 			}
-			oFlightPlan.setWaypoints(oWayPoints);
+			oFlightPlan.setWaypoints(oWayPoints);*/
 
 			oFlightPlan.setLegsNumber(oFlightPlan.getWaypoints().size() + 1);
 			//Standard for a Boeing 737
@@ -578,7 +581,7 @@ public class GlobalVarsAndMethods {
 					setDepartureAirport(oFlightPlan, nNode);
 					setDestinationAirport(oFlightPlan, nNode);
 
-					setWaypoints(oFlightPlan, nNode);
+					setWaypoints(doc, oFlightPlan, nNode);
 					
 					setDepartureTime(oFlightPlan, nNode);
 					
@@ -613,23 +616,34 @@ public class GlobalVarsAndMethods {
 			
 		}
 
-		public static void setWaypoints(Flight_Plan oFlightPlan,
+		public static void setWaypoints(Document doc, Flight_Plan oFlightPlan,
 				Node nNode ) {
 			//Adding Waypoints
-			String sElementName = "Waypoints";
-			String sWaypoints =  getElementValue(nNode, sElementName);
-			int iWaypointsNumber = Integer.parseInt(sWaypoints);
-			List<gov.nasa.worldwind.geom.Position> oWayPoints = new ArrayList<gov.nasa.worldwind.geom.Position>(iWaypointsNumber);
+			Element eElement = (Element) nNode;
 
+			String sElementName = "Waypoint";
+			NodeList nList = eElement.getElementsByTagName(sElementName);
+			
 			enums.Waypoint[] oWaypointvalues = enums.Waypoint.values();
-			/*List<Integer> lIndexUsed = new ArrayList<Integer>();
+			List<gov.nasa.worldwind.geom.Position> oWayPoints = new ArrayList<gov.nasa.worldwind.geom.Position>();
 
-				lIndexUsed.add(randomWaypoint);
-				enums.Waypoint oWaypoint = oWaypointvalues[randomWaypoint];
-				oWayPoints.add(oWaypoint.getoPosition());*/
+			for (int i = 0; i < nList.getLength(); i++) {
+				Node nSubNode = nList.item(i);	    
+				if (nSubNode.getNodeType() == Node.ELEMENT_NODE) {
+					Element eSubElement = (Element) nSubNode;
+					NodeList textList = eSubElement.getChildNodes();
+					String sWaypoint = ((Node)textList.item(0)).getNodeValue().trim();
+					
+					//set waypoint point
+					int indexWaypoint =Integer.parseInt(sWaypoint);
+
+					enums.Waypoint oWaypoint = oWaypointvalues[indexWaypoint];
+					oWayPoints.add(oWaypoint.getoPosition());
+					oWayPointsToShow.add(oWaypoint);
+				}
+			}
 			
 			oFlightPlan.setWaypoints(oWayPoints);
-
 			oFlightPlan.setLegsNumber(oFlightPlan.getWaypoints().size() + 1);
 		}
 
@@ -694,7 +708,7 @@ public class GlobalVarsAndMethods {
 		
 		public static void setStatusValues(Pilot_Mind outputsdefaultPilot_Mind) {			
 			try {
-				File fXmlFile = new File(".\\config\\pilotminds.xml");
+				File fXmlFile = new File(".\\config\\pilotminds2.xml");
 				DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 				DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 				Document doc = dBuilder.parse(fXmlFile);
