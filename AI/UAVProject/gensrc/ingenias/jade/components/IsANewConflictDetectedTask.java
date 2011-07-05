@@ -116,8 +116,10 @@ public class IsANewConflictDetectedTask extends Task{
  	    	
  	    	yp=(YellowPages)this.getApplication("YellowPages");
  	    	ingenias.jade.agents.ControllerJADEAgent oController = (ingenias.jade.agents.ControllerJADEAgent)yp.ja;
-
- 	        eaCheckDistanceBetweenPlanesInConflict.start(eiControllerMind, iConflictNumber, oController);
+ 	    	
+ 	    	ArrayList<jade.core.AID> lPlanesInConflictCopy = new ArrayList<jade.core.AID>(lPlanesInConflict.size());
+ 	    	lPlanesInConflictCopy.addAll(lPlanesInConflict);
+ 	        eaCheckDistanceBetweenPlanesInConflict.start(lPlanesInConflictCopy, iConflictNumber, oController);
  	    	
         	outputsdefaultCanStartSendOrder.setPlanesInConflict(lPlanesInConflict);
         	

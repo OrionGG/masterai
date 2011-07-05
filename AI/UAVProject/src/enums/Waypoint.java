@@ -4,19 +4,6 @@ import gov.nasa.worldwind.geom.Position;
 
 
 public enum Waypoint {
-	//AA(Position.fromDegrees(40.4482, -3.5388, 11e3, 11e3), WaypointControl.LEMD, WaypointType.Terminal),
-	//ABRIX(Position.fromDegrees(43.6463, -1.9626, 11e3, 11e3), WaypointControl.LECM, WaypointType.RNAV),
-	//ACD(Position.fromDegrees(40.5857, -3.6765, 11e3, 11e3), WaypointControl.LEGT, WaypointType.Terminal),
-	//ADEDI(Position.fromDegrees(43.1761, -2.1791, 11e3, 11e3), WaypointControl.LECM, WaypointType.LowLevel),
-	//ADRAS(Position.fromDegrees(36.8322, -2.7275, 11e3, 11e3), WaypointControl.LECM, WaypointType.LowLevel),
-	//ADUBI(Position.fromDegrees(35.8333, -6.3239, 11e3, 11e3), WaypointControl.LECM, WaypointType.RNAV),
-	//ADUXO(Position.fromDegrees(40.5123, -2.0643, 11e3, 11e3), WaypointControl.LECM, WaypointType.HighAndLowLevel),
-	//ADX(Position.fromDegrees(39.5494, 2.3959, 11e3, 11e3), WaypointControl.LECB, WaypointType.HighAndLowLevel),
-	//AGADO(Position.fromDegrees(41.8728, -8.9267, 11e3, 11e3), WaypointControl.LECM, WaypointType.RNAV),
-	//AGENA(Position.fromDegrees(41.5448, 3.4886, 11e3, 11e3), WaypointControl.LECB, WaypointType.HighAndLowLevel),
-	//ALAMA(Position.fromDegrees(36.8934, -4.0098, 11e3, 11e3), WaypointControl.LEMG, WaypointType.Terminal),
-	//ALT(Position.fromDegrees(38.2683, -0.5701, 11e3, 11e3), WaypointControl.LECB, WaypointType.HighAndLowLevel),
-	//R2305(Position.fromDegrees(38.2845, -0.5750, 11e3, 11e3), WaypointControl.LEAL, WaypointType.Terminal),
 	ABRIX(Position.fromDegrees(43.6463,-1.9626, 11e3), WaypointControl.LECM, WaypointType.RNAV),
 	ADUBI(Position.fromDegrees(35.8333,-6.3239, 11e3), WaypointControl.LECM, WaypointType.RNAV),
 	AGADO(Position.fromDegrees(41.8728,-8.9267, 11e3), WaypointControl.LECM, WaypointType.RNAV),

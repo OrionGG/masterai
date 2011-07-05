@@ -40,7 +40,8 @@ public class EntitiesController {
 			
 		}
 		this.lWayPoints = new ArrayList<WayPointView>();
-		for (Waypoint oWaypoint : Waypoint.values()) {
+		//Waypoint.values();
+		for (Waypoint oWaypoint : global.GlobalVarsAndMethods.oWayPointsToShow) {
 			WayPointView oWayPointView = new WayPointView(oWaypoint);
 			this.lWayPoints.add(oWayPointView);
 		}
@@ -58,9 +59,9 @@ public class EntitiesController {
 			oAirportsView.render(layer);
 		}
 		
-		/*for (WayPointView oWayPointViewEntry : lWayPoints) {
+		for (WayPointView oWayPointViewEntry : lWayPoints) {
 			oWayPointViewEntry.render(layer);
-		}*/
+		}
 		
 	}
 

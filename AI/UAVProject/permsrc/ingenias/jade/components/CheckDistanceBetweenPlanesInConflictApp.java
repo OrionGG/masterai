@@ -45,7 +45,7 @@ public abstract class CheckDistanceBetweenPlanesInConflictApp extends MultipleOw
 	}
 
 
-	public abstract void start(ControllerMind eiControllerMind, int iConflictNumber, ControllerJADEAgent oController);
+	public abstract void start(ArrayList<jade.core.AID> lPlanesInConflict, int iConflictNumber, ControllerJADEAgent oController);
 
 }
 
