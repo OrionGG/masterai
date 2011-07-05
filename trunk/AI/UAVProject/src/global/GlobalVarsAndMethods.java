@@ -768,4 +768,32 @@ public class GlobalVarsAndMethods {
 			outputsdefaultPilot_Mind.setStress(fStress);
 			
 		}
+		
+
+
+		public static gov.nasa.worldwind.geom.Position getLegEndPoint(int iLegsCompleted,
+				Flight_Plan oFlightPlan) {
+			gov.nasa.worldwind.geom.Position oEndPoint;
+			if(oFlightPlan.getWaypoints().size() <= iLegsCompleted){
+				oEndPoint = oFlightPlan.getDestinationAirport().getPosition();
+			}
+			else{
+				oEndPoint = oFlightPlan.getWaypoints().get(iLegsCompleted);
+			}
+			return oEndPoint;
+		}
+
+
+
+		public static gov.nasa.worldwind.geom.Position getLegStartPoint(int iLegsCompleted,
+				Flight_Plan oFlightPlan) {
+			gov.nasa.worldwind.geom.Position oStartPoint;
+			if(iLegsCompleted == 0 ){
+				oStartPoint = oFlightPlan.getDepartureAirport().getPosition();
+			}
+			else{
+				oStartPoint = oFlightPlan.getWaypoints().get(iLegsCompleted-1);
+			}
+			return oStartPoint;
+		}
 }
