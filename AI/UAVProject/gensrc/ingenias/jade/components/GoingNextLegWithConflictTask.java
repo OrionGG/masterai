@@ -34,10 +34,10 @@ import ingenias.editor.entities.*;
 
 
 
-public class Flight_Plan_MonitoringTask extends Task{
+public class GoingNextLegWithConflictTask extends Task{
 
- public Flight_Plan_MonitoringTask(String id){
-  super(id,"Flight_Plan_Monitoring");
+ public GoingNextLegWithConflictTask(String id){
+  super(id,"GoingNextLegWithConflict");
  }
 
 
@@ -45,7 +45,9 @@ public class Flight_Plan_MonitoringTask extends Task{
  public void execute() throws TaskException{
 
 
-        GetNextLeg  eiGetNextLeg=(GetNextLeg)this.getFirstInputOfType("GetNextLeg");             
+        GoNextLegWithConflict  eiGoNextLegWithConflict=(GoNextLegWithConflict)this.getFirstInputOfType("GoNextLegWithConflict");             
+
+        OrderOldLeg  eiOrderOldLeg=(OrderOldLeg)this.getFirstInputOfType("OrderOldLeg");             
 
         Pilot_Mind  eiPilot_Mind=(Pilot_Mind)this.getFirstInputOfType("Pilot_Mind");             
 
@@ -79,7 +81,7 @@ public class Flight_Plan_MonitoringTask extends Task{
         YellowPages yp=null; // only available for initiators of interactions
 
 
-//#start_node:INGENIASCodeComponent5 <--- DO NOT REMOVE THIS	
+//#start_node:INGENIASCodeComponent34 <--- DO NOT REMOVE THIS	
         int iLegsCompleted = eiPilot_Mind.getLegsCompleted();
         Flight_Plan oFlightPlan = eiPilot_Mind.getPilotFlightPlan();
         gov.nasa.worldwind.geom.Position oStartPoint = 
@@ -88,18 +90,25 @@ public class Flight_Plan_MonitoringTask extends Task{
         gov.nasa.worldwind.geom.Position oEndPoint = 
         	global.GlobalVarsAndMethods.getLegEndPoint(iLegsCompleted, oFlightPlan);
        
-        
         outputsdefaultFlight_Leg.setStartPoint(oStartPoint);
         outputsdefaultFlight_Leg.setEndPoint(oEndPoint);
-        
-        outputsdefaultFlight_Leg.setAltitudeKM(oFlightPlan.getCruisingAltitudeKM());
-        outputsdefaultFlight_Leg.setSpeedKMH(oFlightPlan.getCruisingSpeedKMH());
+        outputsdefaultFlight_Leg.setAltitudeKM(eiGoNextLegWithConflict.getFlightLeg().getAltitudeKM());
+        outputsdefaultFlight_Leg.setSpeedKMH(eiGoNextLegWithConflict.getFlightLeg().getSpeedKMH());
         outputsdefaultFlight_Leg.setPlaneID(oFlightPlan.getPlaneID());
+        
+        Flight_Leg oOldFlight_Leg = new Flight_Leg();
+        oOldFlight_Leg.setStartPoint(oStartPoint);
+        oOldFlight_Leg.setEndPoint(oEndPoint);
+        oOldFlight_Leg.setAltitudeKM(oFlightPlan.getCruisingAltitudeKM());
+        oOldFlight_Leg.setSpeedKMH(oFlightPlan.getCruisingSpeedKMH());
+        oOldFlight_Leg.setPlaneID(oFlightPlan.getPlaneID());
+        
+        eiOrderOldLeg.setOldFlightLeg(oOldFlight_Leg);
+        
     	
-//#end_node:INGENIASCodeComponent5 <--- DO NOT REMOVE THIS
+//#end_node:INGENIASCodeComponent34 <--- DO NOT REMOVE THIS
 
  }
- 
 }
 
  

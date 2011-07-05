@@ -45,9 +45,9 @@ public class GoNextLegTask extends Task{
  public void execute() throws TaskException{
 
 
-        LegCompleted  eiLegCompleted=(LegCompleted)this.getFirstInputOfType("LegCompleted");             
-
         Flight_Leg  eiFlight_Leg=(Flight_Leg)this.getFirstInputOfType("Flight_Leg");             
+
+        LegCompleted  eiLegCompleted=(LegCompleted)this.getFirstInputOfType("LegCompleted");             
 
         Pilot_Mind  eiPilot_Mind=(Pilot_Mind)this.getFirstInputOfType("Pilot_Mind");             
 
@@ -68,13 +68,13 @@ public class GoNextLegTask extends Task{
   																			outputs);
   		
 		
-		OrderFinished outputsdefaultOrderFinished=
-			(OrderFinished)
-				outputsdefault.getEntityByType("OrderFinished");
-		
 		AllLegsCompleted outputsdefaultAllLegsCompleted=
 			(AllLegsCompleted)
 				outputsdefault.getEntityByType("AllLegsCompleted");
+		
+		GoNextLegWithConflict outputsdefaultGoNextLegWithConflict=
+			(GoNextLegWithConflict)
+				outputsdefault.getEntityByType("GoNextLegWithConflict");
 		
 		GetNextLeg outputsdefaultGetNextLeg=
 			(GetNextLeg)
@@ -86,21 +86,23 @@ public class GoNextLegTask extends Task{
 
 
 //#start_node:INGENIASCodeComponent4 <--- DO NOT REMOVE THIS	
-        if(eiFlight_Leg.getIsFromControllerOrder()){
-        	outputsdefault.removeEntity(outputsdefaultGetNextLeg);
-        	outputsdefault.removeEntity(outputsdefaultAllLegsCompleted);
-        }
-        else{
             int iLegsCompleted =eiPilot_Mind.getLegsCompleted();
             eiPilot_Mind.setLegsCompleted(iLegsCompleted+1);
-        	outputsdefault.remove(outputsdefaultOrderFinished);
 	        if(eiPilot_Mind.getPilotFlightPlan().getLegsNumber() == eiPilot_Mind.getLegsCompleted()){
+	        	outputsdefault.remove(outputsdefaultGoNextLegWithConflict);
 	        	outputsdefault.removeEntity(outputsdefaultGetNextLeg);
 	        }
 	        else{
-	        	outputsdefault.removeEntity(outputsdefaultAllLegsCompleted);
+	        	if(eiFlight_Leg.getIsFromControllerOrder()){
+	            	outputsdefault.removeEntity(outputsdefaultGetNextLeg);
+	            	outputsdefault.removeEntity(outputsdefaultAllLegsCompleted);
+	            	outputsdefaultGoNextLegWithConflict.setFlightLeg(eiFlight_Leg);
+	            }
+	            else{
+	            	outputsdefault.remove(outputsdefaultGoNextLegWithConflict);
+	            	outputsdefault.removeEntity(outputsdefaultAllLegsCompleted);
+	            }
 	        }
-        }
 //#end_node:INGENIASCodeComponent4 <--- DO NOT REMOVE THIS
 
  }
