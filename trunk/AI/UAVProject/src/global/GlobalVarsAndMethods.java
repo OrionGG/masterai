@@ -36,6 +36,8 @@ import javax.xml.parsers.*;
 
 import org.w3c.dom.*;
 
+import controllers.EntitiesController;
+
 public class GlobalVarsAndMethods {
 	public static int nDegressPerSecond = 3;
 	public static double dMaxAltitudeMps = 40;
@@ -54,12 +56,11 @@ public class GlobalVarsAndMethods {
 
 	public static double dAwarenessDistance = 10.8;//6 miles
 	
-	public static List<Waypoint> oWayPointsToShow = new ArrayList<Waypoint>();
-
 
 	//public static int iMaxNumWaypoints = 0; 
 	//It is configured in the confli xml file
-	
+	public static File  fXmlPlanConfigFile = new File(".\\config\\flightplans.xml");
+	public static File fXmlPilotConfigFile = new File(".\\config\\pilotminds.xml");
 	public static int iPilotMind = 0;
 
 	public static Hashtable<jade.core.AID, Plane_Position_ServiceAppImp> PlanesPositionApps =
@@ -568,10 +569,9 @@ public class GlobalVarsAndMethods {
 			
 			try {
 
-				File fXmlFile = new File(".\\config\\flightplans.xml");
 				DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 				DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-				Document doc = dBuilder.parse(fXmlFile);
+				Document doc = dBuilder.parse(fXmlPlanConfigFile);
 				doc.getDocumentElement().normalize();
 
 				NodeList nList = doc.getElementsByTagName("Flight_Plan");
@@ -639,7 +639,7 @@ public class GlobalVarsAndMethods {
 
 					enums.Waypoint oWaypoint = oWaypointvalues[indexWaypoint];
 					oWayPoints.add(oWaypoint.getoPosition());
-					oWayPointsToShow.add(oWaypoint);
+					EntitiesController.getInstance().addWaypointsView(oWaypoint);
 				}
 			}
 			
@@ -708,10 +708,9 @@ public class GlobalVarsAndMethods {
 		
 		public static void setStatusValues(Pilot_Mind outputsdefaultPilot_Mind) {			
 			try {
-				File fXmlFile = new File(".\\config\\pilotminds2.xml");
 				DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 				DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-				Document doc = dBuilder.parse(fXmlFile);
+				Document doc = dBuilder.parse(fXmlPilotConfigFile);
 				doc.getDocumentElement().normalize();
 
 

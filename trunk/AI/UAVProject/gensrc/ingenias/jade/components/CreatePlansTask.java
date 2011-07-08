@@ -74,45 +74,50 @@ public class CreatePlansTask extends Task{
 
 
 //#start_node:INGENIASCodeComponent16 <--- DO NOT REMOVE THIS	
-        //outputsdefault.remove(outputsdefaultFlight_Plan);
-        yp=(YellowPages)this.getApplication("YellowPages");
-        String PilotRole = "PilotColaborator";
-        String PlaneRole = "PlaneColaborator";
-        List<jade.domain.FIPAAgentManagement.DFAgentDescription> lDFPilotsAgentDescription = new java.util.ArrayList();
-        List<jade.domain.FIPAAgentManagement.DFAgentDescription> lDFPlanesAgentDescription = new java.util.ArrayList();
-		try {
-			jade.domain.FIPAAgentManagement.DFAgentDescription[] aDFPilotsAgentDescription  = yp.getAgents(PilotRole);
-			lDFPilotsAgentDescription = Arrays.asList(aDFPilotsAgentDescription);
-			jade.domain.FIPAAgentManagement.DFAgentDescription[] aDFPlanesAgentDescription = yp.getAgents(PlaneRole);
-			lDFPlanesAgentDescription = Arrays.asList(aDFPlanesAgentDescription);
-		} catch (jade.domain.FIPAException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		//It's not needed, it usually a problem with run more than one deployment 
-		//with the same jade
-		//lDFPilotsAgentDescription = global.GlobalVarsAndMethods.clearDuplicated(lDFPilotsAgentDescription);
-		//lDFPlanesAgentDescription = global.GlobalVarsAndMethods.clearDuplicated(lDFPlanesAgentDescription);
-		
-		for (int i = 0; i < lDFPilotsAgentDescription.size(); i++) {
-			jade.domain.FIPAAgentManagement.DFAgentDescription dfPilotAgentDescription = lDFPilotsAgentDescription.get(i); 
-			if(i >= lDFPlanesAgentDescription.size()){
-				break;
-			}
-			jade.domain.FIPAAgentManagement.DFAgentDescription dfPlaneAgentDescription = lDFPlanesAgentDescription.get(i); 
-			Flight_Plan oFlightPlan = global.GlobalVarsAndMethods.getNewPlan(i);
-				//global.GlobalVarsAndMethods.CreateNewPlan();
-			ingenias.jade.AgentExternalDescription oPilotAgentExternalDescription = new ingenias.jade.AgentExternalDescription(dfPilotAgentDescription.getName(), PilotRole);
-			oFlightPlan.setPilotID(oPilotAgentExternalDescription);
-			ingenias.jade.AgentExternalDescription oPlaneAgentExternalDescription = new ingenias.jade.AgentExternalDescription(dfPlaneAgentDescription.getName(), PlaneRole);
-			oFlightPlan.setPlaneID(oPlaneAgentExternalDescription);
-			global.GlobalVarsAndMethods.PlaneIdToPilotId.put(dfPlaneAgentDescription.getName(), oPilotAgentExternalDescription);
+        if(Simulation.SimulationVars.bStartButtonSimulation){
 
-			outputsdefault.add( new OutputEntity(oFlightPlan, TaskOperations.CreateWF));
-			
-		}
-		outputsdefault.remove(outputsdefaultFlight_Plan);
+        	yp=(YellowPages)this.getApplication("YellowPages");
+        	String PilotRole = "PilotColaborator";
+        	String PlaneRole = "PlaneColaborator";
+        	List<jade.domain.FIPAAgentManagement.DFAgentDescription> lDFPilotsAgentDescription = new java.util.ArrayList();
+        	List<jade.domain.FIPAAgentManagement.DFAgentDescription> lDFPlanesAgentDescription = new java.util.ArrayList();
+        	try {
+        		jade.domain.FIPAAgentManagement.DFAgentDescription[] aDFPilotsAgentDescription  = yp.getAgents(PilotRole);
+        		lDFPilotsAgentDescription = Arrays.asList(aDFPilotsAgentDescription);
+        		jade.domain.FIPAAgentManagement.DFAgentDescription[] aDFPlanesAgentDescription = yp.getAgents(PlaneRole);
+        		lDFPlanesAgentDescription = Arrays.asList(aDFPlanesAgentDescription);
+        	} catch (jade.domain.FIPAException e) {
+        		// TODO Auto-generated catch block
+        		e.printStackTrace();
+        	}
+
+        	//It's not needed, it usually a problem with run more than one deployment 
+        	//with the same jade
+        	//lDFPilotsAgentDescription = global.GlobalVarsAndMethods.clearDuplicated(lDFPilotsAgentDescription);
+        	//lDFPlanesAgentDescription = global.GlobalVarsAndMethods.clearDuplicated(lDFPlanesAgentDescription);
+
+        	for (int i = 0; i < lDFPilotsAgentDescription.size(); i++) {
+        		jade.domain.FIPAAgentManagement.DFAgentDescription dfPilotAgentDescription = lDFPilotsAgentDescription.get(i); 
+        		if(i >= lDFPlanesAgentDescription.size()){
+        			break;
+        		}
+        		jade.domain.FIPAAgentManagement.DFAgentDescription dfPlaneAgentDescription = lDFPlanesAgentDescription.get(i); 
+        		Flight_Plan oFlightPlan = global.GlobalVarsAndMethods.getNewPlan(i);
+        		//global.GlobalVarsAndMethods.CreateNewPlan();
+        		ingenias.jade.AgentExternalDescription oPilotAgentExternalDescription = new ingenias.jade.AgentExternalDescription(dfPilotAgentDescription.getName(), PilotRole);
+        		oFlightPlan.setPilotID(oPilotAgentExternalDescription);
+        		ingenias.jade.AgentExternalDescription oPlaneAgentExternalDescription = new ingenias.jade.AgentExternalDescription(dfPlaneAgentDescription.getName(), PlaneRole);
+        		oFlightPlan.setPlaneID(oPlaneAgentExternalDescription);
+        		global.GlobalVarsAndMethods.PlaneIdToPilotId.put(dfPlaneAgentDescription.getName(), oPilotAgentExternalDescription);
+
+        		outputsdefault.add( new OutputEntity(oFlightPlan, TaskOperations.CreateWF));
+
+        	}
+        }
+        else{
+    		outputsdefault.add( new OutputEntity(eiCreatingPlans, TaskOperations.CreateWF));
+        }
+    	outputsdefault.remove(outputsdefaultFlight_Plan);
 //#end_node:INGENIASCodeComponent16 <--- DO NOT REMOVE THIS
 
  }

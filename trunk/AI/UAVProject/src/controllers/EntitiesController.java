@@ -39,12 +39,8 @@ public class EntitiesController {
 			this.lAirports.add(oAirportsView);
 			
 		}
+
 		this.lWayPoints = new ArrayList<WayPointView>();
-		//Waypoint.values();
-		for (Waypoint oWaypoint : global.GlobalVarsAndMethods.oWayPointsToShow) {
-			WayPointView oWayPointView = new WayPointView(oWaypoint);
-			this.lWayPoints.add(oWayPointView);
-		}
 		
 		hPlaneView = new Hashtable<AID, PlaneView>();
 	}
@@ -77,6 +73,12 @@ public class EntitiesController {
 		AID aid = oPlaneView.getoPlaneEntity().getAID();
 		hPlaneView.put(aid, oPlaneView);
 		
+	}
+	
+	public void addWaypointsView(Waypoint oWaypoint){
+		WayPointView oWayPointView = new WayPointView(oWaypoint);
+		lWayPoints.add(oWayPointView);
+		oWayPointView.render(layer);
 	}
 
 

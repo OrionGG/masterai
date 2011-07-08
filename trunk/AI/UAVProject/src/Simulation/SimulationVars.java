@@ -12,4 +12,5 @@ public class SimulationVars {
 	public static long iSleepTime = 1000;
 	public static boolean bSimulation = true;
 	public static ArrayList<PlaneView> lPlanesFlying = new ArrayList<PlaneView>();
+	public static boolean bStartButtonSimulation = false;
 }
