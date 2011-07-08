@@ -130,13 +130,17 @@ public class EnvironmentThread implements Runnable{
 	                }
 	            });
 				
-	            //this.plansLabel.setPreferredSize(new Dimension(200, 40));
-				this.plansLabel.setEditable(false);
-	            this.plansLabel.setLineWrap(true);
 
 				plansConfigPanel.add(plansConfigJButton);
-				plansConfigPanel.add(plansLabel);
 		        configPanel.add(plansConfigPanel);
+				
+				JPanel plansLabelPanel = new JPanel(new GridLayout(0, 1, 0, 0));
+				plansLabelPanel.setBorder(BorderFactory.createEmptyBorder(4, 4, 4, 4));
+				this.plansLabel.setEditable(false);
+	            this.plansLabel.setLineWrap(true);
+				
+	            plansLabelPanel.add(plansLabel);
+		        configPanel.add(plansLabelPanel);
 		        
 				  JPanel pilotConfigPanel = new JPanel(new GridLayout(0, 1, 0, 0));
 				  pilotConfigPanel.setBorder(BorderFactory.createEmptyBorder(4, 4, 4, 4));
