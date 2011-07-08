@@ -59,8 +59,8 @@ public class GlobalVarsAndMethods {
 
 	//public static int iMaxNumWaypoints = 0; 
 	//It is configured in the confli xml file
-	public static File  fXmlPlanConfigFile = new File(".\\config\\flightplans.xml");
-	public static File fXmlPilotConfigFile = new File(".\\config\\pilotminds.xml");
+	public static File  fXmlPlanConfigFile = new File(".\\config\\flightplans\\flightplans.xml");
+	public static File fXmlPilotConfigFile = new File(".\\config\\pilotminds\\pilotminds.xml");
 	public static int iPilotMind = 0;
 
 	public static Hashtable<jade.core.AID, Plane_Position_ServiceAppImp> PlanesPositionApps =
