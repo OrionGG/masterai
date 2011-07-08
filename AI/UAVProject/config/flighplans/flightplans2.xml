@@ -1,0 +1,38 @@
+ <Flight_Plans>
+<Flight_Plan>
+  <DepartureAirport>0</DepartureAirport>
+  <DestinationAirport>3</DestinationAirport>
+  <Waypoints></Waypoints>
+  <DepartureTime>0.5</DepartureTime>
+</Flight_Plan>
+<Flight_Plan>
+  <DepartureAirport>0</DepartureAirport>
+  <DestinationAirport>1</DestinationAirport>
+  <Waypoints></Waypoints>
+  <DepartureTime>1</DepartureTime>
+</Flight_Plan>
+<Flight_Plan>
+  <DepartureAirport>0</DepartureAirport>
+  <DestinationAirport>2</DestinationAirport>
+  <Waypoints></Waypoints>
+  <DepartureTime>1.5</DepartureTime>
+</Flight_Plan>
+<Flight_Plan>
+  <DepartureAirport>2</DepartureAirport>
+  <DestinationAirport>1</DestinationAirport>
+  <Waypoints></Waypoints>
+  <DepartureTime>1</DepartureTime>
+</Flight_Plan>
+<Flight_Plan>
+  <DepartureAirport>1</DepartureAirport>
+  <DestinationAirport>2</DestinationAirport>
+  <Waypoints></Waypoints>
+  <DepartureTime>1.5</DepartureTime>
+</Flight_Plan>
+<Flight_Plan>
+  <DepartureAirport>1</DepartureAirport>
+  <DestinationAirport>2</DestinationAirport>
+  <Waypoints></Waypoints>
+  <DepartureTime>1.5</DepartureTime>
+</Flight_Plan>
+</Flight_Plans>
