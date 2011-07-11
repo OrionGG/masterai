@@ -738,6 +738,62 @@ public class GlobalVarsAndMethods {
 			
 			
 		}
+		
+		public static void setStatusValues(Pilot_Mind outputsdefaultPilot_Mind, String sAgentID) {			
+			try {
+				DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+				DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+				Document doc = dBuilder.parse(fXmlPilotConfigFile);
+				doc.getDocumentElement().normalize();
+
+				int i = findNextValidInteger(sAgentID);
+				
+				NodeList nList = doc.getElementsByTagName("PilotMind");
+				
+				Node nNode = nList.item(i);	    
+				if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+					setStress(outputsdefaultPilot_Mind, nNode);
+					setFatigue(outputsdefaultPilot_Mind, nNode);
+					setExperience(outputsdefaultPilot_Mind, nNode);
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			
+		}
+		
+		public static int findNextValidInteger(String s) throws Exception {
+
+			// detect 1st digit after start of string
+			int beginIndex=0;
+			int endIndex=1;
+			int length=s.length();
+			while(!s.substring(beginIndex,endIndex).matches("\\d")) {
+				beginIndex++;
+				endIndex++;
+				if(endIndex>length) {
+					throw new Exception("No digit found.");
+				}
+			}
+			int i_startNumber= beginIndex;
+
+			// detect 1st non digit after start previously detected 1st digit   
+			beginIndex=i_startNumber;
+			endIndex=i_startNumber+1;
+			while(s.substring(beginIndex,endIndex).matches("\\d")) {
+				beginIndex++;
+				endIndex++;
+				if(endIndex>length) {
+					break;
+				}
+			}
+			int i_endNumber= beginIndex;
+
+			// return absolute value of integer
+			return Integer.valueOf(s.substring(i_startNumber, i_endNumber));
+		}
 
 		private static void setExperience(Pilot_Mind outputsdefaultPilot_Mind,
 				Node nNode) {
