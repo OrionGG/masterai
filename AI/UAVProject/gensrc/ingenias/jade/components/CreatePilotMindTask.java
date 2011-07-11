@@ -74,7 +74,7 @@ public class CreatePilotMindTask extends Task{
 
 
 //#start_node:INGENIASCodeComponent3 <--- DO NOT REMOVE THIS	
-		global.GlobalVarsAndMethods.setStatusValues(outputsdefaultPilot_Mind);
+		global.GlobalVarsAndMethods.setStatusValues(outputsdefaultPilot_Mind, this.getAgentID());
         
         outputsdefaultPilot_Mind.setInstructionRunning(new java.util.ArrayList<Throw_Instruction>());
         

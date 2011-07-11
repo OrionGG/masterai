@@ -41,6 +41,11 @@ public class EntitiesController {
 		}
 
 		this.lWayPoints = new ArrayList<WayPointView>();
+		/*for (Waypoint oWayPoint : Waypoint.values()) {
+			WayPointView oWayPointView = new WayPointView(oWayPoint);
+			this.lWayPoints.add(oWayPointView);
+			
+		}*/		
 		
 		hPlaneView = new Hashtable<AID, PlaneView>();
 	}

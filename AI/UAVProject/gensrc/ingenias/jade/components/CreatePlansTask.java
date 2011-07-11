@@ -95,9 +95,17 @@ public class CreatePlansTask extends Task{
         	//with the same jade
         	//lDFPilotsAgentDescription = global.GlobalVarsAndMethods.clearDuplicated(lDFPilotsAgentDescription);
         	//lDFPlanesAgentDescription = global.GlobalVarsAndMethods.clearDuplicated(lDFPlanesAgentDescription);
+        	//Collections.sort(lDFPilotsAgentDescription);
 
-        	for (int i = 0; i < lDFPilotsAgentDescription.size(); i++) {
-        		jade.domain.FIPAAgentManagement.DFAgentDescription dfPilotAgentDescription = lDFPilotsAgentDescription.get(i); 
+        	for (jade.domain.FIPAAgentManagement.DFAgentDescription dfPilotAgentDescription : lDFPilotsAgentDescription) {
+        		//jade.domain.FIPAAgentManagement.DFAgentDescription dfPilotAgentDescription = lDFPilotsAgentDescription.get(i); 
+        		int i =0;
+				try {
+					i = global.GlobalVarsAndMethods.findNextValidInteger(dfPilotAgentDescription.getName().getLocalName());
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					i++;
+				}
         		if(i >= lDFPlanesAgentDescription.size()){
         			break;
         		}

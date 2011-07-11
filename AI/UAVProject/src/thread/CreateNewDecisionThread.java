@@ -23,7 +23,7 @@ public class CreateNewDecisionThread implements Runnable{
 	        Date oLastDecisionDate = eiPilot_Mind.getLastDecisionDate();
 	        Date oNow = new Date();
 	        long lDifferOfMiliseconds = oNow.getTime() - oLastDecisionDate.getTime();
-	        long iRangeTime = (long) (Simulation.SimulationVars.iSleepTime * global.GlobalVarsAndMethods.PlaneIdToPilotId.size() * 2);
+	        long iRangeTime = (long) (Simulation.SimulationVars.iSleepTime * global.GlobalVarsAndMethods.PlaneIdToPilotId.size());// * 2);
 	        long iRangeTimeForWait = iRangeTime + getAnwserTime();
 			
 	        while(lDifferOfMiliseconds < iRangeTimeForWait){
