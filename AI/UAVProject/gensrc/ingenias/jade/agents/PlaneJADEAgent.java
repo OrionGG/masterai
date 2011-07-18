@@ -95,17 +95,6 @@ public class PlaneJADEAgent
 			to=new TaskOutput("default");
   
 		
-		expectedInput=this.getMSM().getMentalEntityByType("Fuel_Consumption");
-		if (this.getLM().canBeDeleted(expectedInput)){             
-             if (expectedInput.size()==0){
-				nonExistingInputs.add("Fuel_Consumption");
-			 } else {
-			    addExpectedInputs(tobject, "Fuel_Consumption","1",expectedInput);
-             	addConsumedInput(to,"Fuel_Consumption",expectedInput);
-			 }
-             allEntitiesExist=allEntitiesExist || expectedInput.size()!=0;
-		} 
-	      
 		expectedInput=this.getMSM().getMentalEntityByType("PlaneOn");
 		if (this.getLM().canBeDeleted(expectedInput)){             
              if (expectedInput.size()==0){
@@ -113,17 +102,6 @@ public class PlaneJADEAgent
 			 } else {
 			    addExpectedInputs(tobject, "PlaneOn","1",expectedInput);
              	addConsumedInput(to,"PlaneOn",expectedInput);
-			 }
-             allEntitiesExist=allEntitiesExist || expectedInput.size()!=0;
-		} 
-	      
-		expectedInput=this.getMSM().getMentalEntityByType("Time_elapsed");
-		if (this.getLM().canBeDeleted(expectedInput)){             
-             if (expectedInput.size()==0){
-				nonExistingInputs.add("Time_elapsed");
-			 } else {
-			    addExpectedInputs(tobject, "Time_elapsed","1",expectedInput);
-             	addConsumedInput(to,"Time_elapsed",expectedInput);
 			 }
              allEntitiesExist=allEntitiesExist || expectedInput.size()!=0;
 		} 
@@ -320,17 +298,6 @@ public class PlaneJADEAgent
 			tobject.setConversationContext(conversation);
   
 		
-		expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"Fuel_Consumption");
-		if (this.getLM().canBeDeleted(expectedInput)){                          
-             if (expectedInput.size()==0){
-				nonExistingInputs.add("Fuel_Consumption");
-			 } else {
-			    addExpectedInputs(tobject, "Fuel_Consumption","1",expectedInput);
-             	addConsumedInput(to,"Fuel_Consumption",expectedInput);
-			 }
-             allEntitiesExist=allEntitiesExist|| expectedInput.size()!=0;
-		} 
-	      
 		expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"PlaneOn");
 		if (this.getLM().canBeDeleted(expectedInput)){                          
              if (expectedInput.size()==0){
@@ -338,17 +305,6 @@ public class PlaneJADEAgent
 			 } else {
 			    addExpectedInputs(tobject, "PlaneOn","1",expectedInput);
              	addConsumedInput(to,"PlaneOn",expectedInput);
-			 }
-             allEntitiesExist=allEntitiesExist|| expectedInput.size()!=0;
-		} 
-	      
-		expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"Time_elapsed");
-		if (this.getLM().canBeDeleted(expectedInput)){                          
-             if (expectedInput.size()==0){
-				nonExistingInputs.add("Time_elapsed");
-			 } else {
-			    addExpectedInputs(tobject, "Time_elapsed","1",expectedInput);
-             	addConsumedInput(to,"Time_elapsed",expectedInput);
 			 }
              allEntitiesExist=allEntitiesExist|| expectedInput.size()!=0;
 		} 
