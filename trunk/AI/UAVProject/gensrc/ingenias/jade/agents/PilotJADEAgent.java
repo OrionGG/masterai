@@ -95,17 +95,6 @@ public class PilotJADEAgent
 			to=new TaskOutput("default");
   
 		
-		expectedInput=this.getMSM().getMentalEntityByType("PlanReceived");
-		if (this.getLM().canBeDeleted(expectedInput)){             
-             if (expectedInput.size()==0){
-				nonExistingInputs.add("PlanReceived");
-			 } else {
-			    addExpectedInputs(tobject, "PlanReceived","1",expectedInput);
-             	addConsumedInput(to,"PlanReceived",expectedInput);
-			 }
-             allEntitiesExist=allEntitiesExist || expectedInput.size()!=0;
-		} 
-	      
 		expectedInput=this.getMSM().getMentalEntityByType("ObjectDetected");
 		if (this.getLM().canBeDeleted(expectedInput)){             
              if (expectedInput.size()==0){
@@ -113,6 +102,17 @@ public class PilotJADEAgent
 			 } else {
 			    addExpectedInputs(tobject, "ObjectDetected","1",expectedInput);
              	addConsumedInput(to,"ObjectDetected",expectedInput);
+			 }
+             allEntitiesExist=allEntitiesExist || expectedInput.size()!=0;
+		} 
+	      
+		expectedInput=this.getMSM().getMentalEntityByType("PlanReceived");
+		if (this.getLM().canBeDeleted(expectedInput)){             
+             if (expectedInput.size()==0){
+				nonExistingInputs.add("PlanReceived");
+			 } else {
+			    addExpectedInputs(tobject, "PlanReceived","1",expectedInput);
+             	addConsumedInput(to,"PlanReceived",expectedInput);
 			 }
              allEntitiesExist=allEntitiesExist || expectedInput.size()!=0;
 		} 
@@ -128,57 +128,13 @@ public class PilotJADEAgent
              allEntitiesExist=allEntitiesExist || expectedInput.size()!=0;
 		} 
 	      
-		expectedInput=this.getMSM().getMentalEntityByType("Increase_Speed");
+		expectedInput=this.getMSM().getMentalEntityByType("OrdenDone");
 		if (this.getLM().canBeDeleted(expectedInput)){             
              if (expectedInput.size()==0){
-				nonExistingInputs.add("Increase_Speed");
+				nonExistingInputs.add("OrdenDone");
 			 } else {
-			    addExpectedInputs(tobject, "Increase_Speed","1",expectedInput);
-             	addConsumedInput(to,"Increase_Speed",expectedInput);
-			 }
-             allEntitiesExist=allEntitiesExist || expectedInput.size()!=0;
-		} 
-	      
-		expectedInput=this.getMSM().getMentalEntityByType("Increase_Altitude");
-		if (this.getLM().canBeDeleted(expectedInput)){             
-             if (expectedInput.size()==0){
-				nonExistingInputs.add("Increase_Altitude");
-			 } else {
-			    addExpectedInputs(tobject, "Increase_Altitude","1",expectedInput);
-             	addConsumedInput(to,"Increase_Altitude",expectedInput);
-			 }
-             allEntitiesExist=allEntitiesExist || expectedInput.size()!=0;
-		} 
-	      
-		expectedInput=this.getMSM().getMentalEntityByType("Decrease_Speed");
-		if (this.getLM().canBeDeleted(expectedInput)){             
-             if (expectedInput.size()==0){
-				nonExistingInputs.add("Decrease_Speed");
-			 } else {
-			    addExpectedInputs(tobject, "Decrease_Speed","1",expectedInput);
-             	addConsumedInput(to,"Decrease_Speed",expectedInput);
-			 }
-             allEntitiesExist=allEntitiesExist || expectedInput.size()!=0;
-		} 
-	      
-		expectedInput=this.getMSM().getMentalEntityByType("Decrease_Altitude");
-		if (this.getLM().canBeDeleted(expectedInput)){             
-             if (expectedInput.size()==0){
-				nonExistingInputs.add("Decrease_Altitude");
-			 } else {
-			    addExpectedInputs(tobject, "Decrease_Altitude","1",expectedInput);
-             	addConsumedInput(to,"Decrease_Altitude",expectedInput);
-			 }
-             allEntitiesExist=allEntitiesExist || expectedInput.size()!=0;
-		} 
-	      
-		expectedInput=this.getMSM().getMentalEntityByType("Decrease_degrees");
-		if (this.getLM().canBeDeleted(expectedInput)){             
-             if (expectedInput.size()==0){
-				nonExistingInputs.add("Decrease_degrees");
-			 } else {
-			    addExpectedInputs(tobject, "Decrease_degrees","1",expectedInput);
-             	addConsumedInput(to,"Decrease_degrees",expectedInput);
+			    addExpectedInputs(tobject, "OrdenDone","1",expectedInput);
+             	addConsumedInput(to,"OrdenDone",expectedInput);
 			 }
              allEntitiesExist=allEntitiesExist || expectedInput.size()!=0;
 		} 
@@ -190,28 +146,6 @@ public class PilotJADEAgent
 			 } else {
 			    addExpectedInputs(tobject, "TurningOnPlane","1",expectedInput);
              	addConsumedInput(to,"TurningOnPlane",expectedInput);
-			 }
-             allEntitiesExist=allEntitiesExist || expectedInput.size()!=0;
-		} 
-	      
-		expectedInput=this.getMSM().getMentalEntityByType("Increase_degrees");
-		if (this.getLM().canBeDeleted(expectedInput)){             
-             if (expectedInput.size()==0){
-				nonExistingInputs.add("Increase_degrees");
-			 } else {
-			    addExpectedInputs(tobject, "Increase_degrees","1",expectedInput);
-             	addConsumedInput(to,"Increase_degrees",expectedInput);
-			 }
-             allEntitiesExist=allEntitiesExist || expectedInput.size()!=0;
-		} 
-	      
-		expectedInput=this.getMSM().getMentalEntityByType("OrdenDone");
-		if (this.getLM().canBeDeleted(expectedInput)){             
-             if (expectedInput.size()==0){
-				nonExistingInputs.add("OrdenDone");
-			 } else {
-			    addExpectedInputs(tobject, "OrdenDone","1",expectedInput);
-             	addConsumedInput(to,"OrdenDone",expectedInput);
 			 }
              allEntitiesExist=allEntitiesExist || expectedInput.size()!=0;
 		} 
@@ -772,20 +706,20 @@ public class PilotJADEAgent
 			TaskOutput to=null;
 			to=new TaskOutput("default");
 		
-             expectedInput=this.getMSM().getMentalEntityByType("Pilot_Mind");
-             if (expectedInput.size()==0 && !("1".equals("0..n"))){
-				nonExistingInputs.add("Pilot_Mind");
-			 } else {
-			  addExpectedInputs(tobject, "Pilot_Mind","1",expectedInput);
-			 }
-             allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;             
-             
-	      
              expectedInput=this.getMSM().getMentalEntityByType("Flight_Leg");
              if (expectedInput.size()==0 && !("1".equals("0..n"))){
 				nonExistingInputs.add("Flight_Leg");
 			 } else {
 			  addExpectedInputs(tobject, "Flight_Leg","1",expectedInput);
+			 }
+             allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;             
+             
+	      
+             expectedInput=this.getMSM().getMentalEntityByType("Pilot_Mind");
+             if (expectedInput.size()==0 && !("1".equals("0..n"))){
+				nonExistingInputs.add("Pilot_Mind");
+			 } else {
+			  addExpectedInputs(tobject, "Pilot_Mind","1",expectedInput);
 			 }
              allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;             
              
@@ -1316,17 +1250,6 @@ public class PilotJADEAgent
 			tobject.setConversationContext(conversation);
   
 		
-		expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"PlanReceived");
-		if (this.getLM().canBeDeleted(expectedInput)){                          
-             if (expectedInput.size()==0){
-				nonExistingInputs.add("PlanReceived");
-			 } else {
-			    addExpectedInputs(tobject, "PlanReceived","1",expectedInput);
-             	addConsumedInput(to,"PlanReceived",expectedInput);
-			 }
-             allEntitiesExist=allEntitiesExist|| expectedInput.size()!=0;
-		} 
-	      
 		expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"ObjectDetected");
 		if (this.getLM().canBeDeleted(expectedInput)){                          
              if (expectedInput.size()==0){
@@ -1334,6 +1257,17 @@ public class PilotJADEAgent
 			 } else {
 			    addExpectedInputs(tobject, "ObjectDetected","1",expectedInput);
              	addConsumedInput(to,"ObjectDetected",expectedInput);
+			 }
+             allEntitiesExist=allEntitiesExist|| expectedInput.size()!=0;
+		} 
+	      
+		expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"PlanReceived");
+		if (this.getLM().canBeDeleted(expectedInput)){                          
+             if (expectedInput.size()==0){
+				nonExistingInputs.add("PlanReceived");
+			 } else {
+			    addExpectedInputs(tobject, "PlanReceived","1",expectedInput);
+             	addConsumedInput(to,"PlanReceived",expectedInput);
 			 }
              allEntitiesExist=allEntitiesExist|| expectedInput.size()!=0;
 		} 
@@ -1349,57 +1283,13 @@ public class PilotJADEAgent
              allEntitiesExist=allEntitiesExist|| expectedInput.size()!=0;
 		} 
 	      
-		expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"Increase_Speed");
+		expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"OrdenDone");
 		if (this.getLM().canBeDeleted(expectedInput)){                          
              if (expectedInput.size()==0){
-				nonExistingInputs.add("Increase_Speed");
+				nonExistingInputs.add("OrdenDone");
 			 } else {
-			    addExpectedInputs(tobject, "Increase_Speed","1",expectedInput);
-             	addConsumedInput(to,"Increase_Speed",expectedInput);
-			 }
-             allEntitiesExist=allEntitiesExist|| expectedInput.size()!=0;
-		} 
-	      
-		expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"Increase_Altitude");
-		if (this.getLM().canBeDeleted(expectedInput)){                          
-             if (expectedInput.size()==0){
-				nonExistingInputs.add("Increase_Altitude");
-			 } else {
-			    addExpectedInputs(tobject, "Increase_Altitude","1",expectedInput);
-             	addConsumedInput(to,"Increase_Altitude",expectedInput);
-			 }
-             allEntitiesExist=allEntitiesExist|| expectedInput.size()!=0;
-		} 
-	      
-		expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"Decrease_Speed");
-		if (this.getLM().canBeDeleted(expectedInput)){                          
-             if (expectedInput.size()==0){
-				nonExistingInputs.add("Decrease_Speed");
-			 } else {
-			    addExpectedInputs(tobject, "Decrease_Speed","1",expectedInput);
-             	addConsumedInput(to,"Decrease_Speed",expectedInput);
-			 }
-             allEntitiesExist=allEntitiesExist|| expectedInput.size()!=0;
-		} 
-	      
-		expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"Decrease_Altitude");
-		if (this.getLM().canBeDeleted(expectedInput)){                          
-             if (expectedInput.size()==0){
-				nonExistingInputs.add("Decrease_Altitude");
-			 } else {
-			    addExpectedInputs(tobject, "Decrease_Altitude","1",expectedInput);
-             	addConsumedInput(to,"Decrease_Altitude",expectedInput);
-			 }
-             allEntitiesExist=allEntitiesExist|| expectedInput.size()!=0;
-		} 
-	      
-		expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"Decrease_degrees");
-		if (this.getLM().canBeDeleted(expectedInput)){                          
-             if (expectedInput.size()==0){
-				nonExistingInputs.add("Decrease_degrees");
-			 } else {
-			    addExpectedInputs(tobject, "Decrease_degrees","1",expectedInput);
-             	addConsumedInput(to,"Decrease_degrees",expectedInput);
+			    addExpectedInputs(tobject, "OrdenDone","1",expectedInput);
+             	addConsumedInput(to,"OrdenDone",expectedInput);
 			 }
              allEntitiesExist=allEntitiesExist|| expectedInput.size()!=0;
 		} 
@@ -1411,28 +1301,6 @@ public class PilotJADEAgent
 			 } else {
 			    addExpectedInputs(tobject, "TurningOnPlane","1",expectedInput);
              	addConsumedInput(to,"TurningOnPlane",expectedInput);
-			 }
-             allEntitiesExist=allEntitiesExist|| expectedInput.size()!=0;
-		} 
-	      
-		expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"Increase_degrees");
-		if (this.getLM().canBeDeleted(expectedInput)){                          
-             if (expectedInput.size()==0){
-				nonExistingInputs.add("Increase_degrees");
-			 } else {
-			    addExpectedInputs(tobject, "Increase_degrees","1",expectedInput);
-             	addConsumedInput(to,"Increase_degrees",expectedInput);
-			 }
-             allEntitiesExist=allEntitiesExist|| expectedInput.size()!=0;
-		} 
-	      
-		expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"OrdenDone");
-		if (this.getLM().canBeDeleted(expectedInput)){                          
-             if (expectedInput.size()==0){
-				nonExistingInputs.add("OrdenDone");
-			 } else {
-			    addExpectedInputs(tobject, "OrdenDone","1",expectedInput);
-             	addConsumedInput(to,"OrdenDone",expectedInput);
 			 }
              allEntitiesExist=allEntitiesExist|| expectedInput.size()!=0;
 		} 
@@ -2754,7 +2622,7 @@ public class PilotJADEAgent
    ObjectSlot oslot=null;
    ingenias.jade.components.Application app=null;	  
    
-   sg= new ingenias.editor.entities.StateGoal("Flight_Plan_Completed");
+   sg= new ingenias.editor.entities.StateGoal("Arrived_To_Destination");
    sg.setState("pending");
       try {
 	   this.getMSM().addMentalEntity(sg);
@@ -2763,7 +2631,7 @@ public class PilotJADEAgent
 	   e1.printStackTrace();
    }
    
-   sg= new ingenias.editor.entities.StateGoal("Arrived_To_Destination");
+   sg= new ingenias.editor.entities.StateGoal("Flight_Plan_Completed");
    sg.setState("pending");
       try {
 	   this.getMSM().addMentalEntity(sg);
@@ -2898,7 +2766,7 @@ public class PilotJADEAgent
 	   e1.printStackTrace();
    }
    
-   sg= new ingenias.editor.entities.StateGoal("Arrive_Safe_And_Sound");
+   sg= new ingenias.editor.entities.StateGoal("PlaneStarted");
    sg.setState("pending");
       try {
 	   this.getMSM().addMentalEntity(sg);
@@ -2907,7 +2775,7 @@ public class PilotJADEAgent
 	   e1.printStackTrace();
    }
    
-   sg= new ingenias.editor.entities.StateGoal("PlaneStarted");
+   sg= new ingenias.editor.entities.StateGoal("Arrive_Safe_And_Sound");
    sg.setState("pending");
       try {
 	   this.getMSM().addMentalEntity(sg);
