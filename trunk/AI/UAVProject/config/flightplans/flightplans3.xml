@@ -19,9 +19,9 @@
 </Flight_Plan>
 <Flight_Plan>
   <DepartureAirport>0</DepartureAirport>
-  <DestinationAirport>1</DestinationAirport>
+  <DestinationAirport>2</DestinationAirport>
   <Waypoints>
-  	<Waypoint>97</Waypoint>
+  	<Waypoint>74</Waypoint>
   	</Waypoints>
   <DepartureTime>2</DepartureTime>
 </Flight_Plan>
@@ -43,9 +43,9 @@
 </Flight_Plan>
 <Flight_Plan>
   <DepartureAirport>0</DepartureAirport>
-  <DestinationAirport>2</DestinationAirport>
+  <DestinationAirport>1</DestinationAirport>
   <Waypoints>
-  	<Waypoint>74</Waypoint>
+  	<Waypoint>97</Waypoint>
   	</Waypoints>
   <DepartureTime>3.5</DepartureTime>
 </Flight_Plan>
