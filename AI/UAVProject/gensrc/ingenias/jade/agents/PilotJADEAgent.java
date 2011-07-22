@@ -95,17 +95,6 @@ public class PilotJADEAgent
 			to=new TaskOutput("default");
   
 		
-		expectedInput=this.getMSM().getMentalEntityByType("ObjectDetected");
-		if (this.getLM().canBeDeleted(expectedInput)){             
-             if (expectedInput.size()==0){
-				nonExistingInputs.add("ObjectDetected");
-			 } else {
-			    addExpectedInputs(tobject, "ObjectDetected","1",expectedInput);
-             	addConsumedInput(to,"ObjectDetected",expectedInput);
-			 }
-             allEntitiesExist=allEntitiesExist || expectedInput.size()!=0;
-		} 
-	      
 		expectedInput=this.getMSM().getMentalEntityByType("PlanReceived");
 		if (this.getLM().canBeDeleted(expectedInput)){             
              if (expectedInput.size()==0){
@@ -332,20 +321,20 @@ public class PilotJADEAgent
 			TaskOutput to=null;
 			to=new TaskOutput("default");
 		
-             expectedInput=this.getMSM().getMentalEntityByType("Pilot_Mind");
-             if (expectedInput.size()==0 && !("1".equals("0..n"))){
-				nonExistingInputs.add("Pilot_Mind");
-			 } else {
-			  addExpectedInputs(tobject, "Pilot_Mind","1",expectedInput);
-			 }
-             allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;             
-             
-	      
              expectedInput=this.getMSM().getMentalEntityByType("OrderOldLeg");
              if (expectedInput.size()==0 && !("1".equals("0..n"))){
 				nonExistingInputs.add("OrderOldLeg");
 			 } else {
 			  addExpectedInputs(tobject, "OrderOldLeg","1",expectedInput);
+			 }
+             allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;             
+             
+	      
+             expectedInput=this.getMSM().getMentalEntityByType("Pilot_Mind");
+             if (expectedInput.size()==0 && !("1".equals("0..n"))){
+				nonExistingInputs.add("Pilot_Mind");
+			 } else {
+			  addExpectedInputs(tobject, "Pilot_Mind","1",expectedInput);
 			 }
              allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;             
              
@@ -801,22 +790,22 @@ public class PilotJADEAgent
 	      
 		
 		
-             expectedInput=this.getMSM().getMentalEntityByType("LegCompleted");
+             expectedInput=this.getMSM().getMentalEntityByType("Flight_Leg");
              if (expectedInput.size()==0 && !("1".equals("0..n"))){
-				nonExistingInputs.add("LegCompleted");
+				nonExistingInputs.add("Flight_Leg");
 			 } else {
-			    addExpectedInputs(tobject, "LegCompleted","1",expectedInput);
+			    addExpectedInputs(tobject, "Flight_Leg","1",expectedInput);
              	addConsumedInput(to,"1",expectedInput);
 			 }
              allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;
 
 	      
 		
-             expectedInput=this.getMSM().getMentalEntityByType("Flight_Leg");
+             expectedInput=this.getMSM().getMentalEntityByType("LegCompleted");
              if (expectedInput.size()==0 && !("1".equals("0..n"))){
-				nonExistingInputs.add("Flight_Leg");
+				nonExistingInputs.add("LegCompleted");
 			 } else {
-			    addExpectedInputs(tobject, "Flight_Leg","1",expectedInput);
+			    addExpectedInputs(tobject, "LegCompleted","1",expectedInput);
              	addConsumedInput(to,"1",expectedInput);
 			 }
              allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;
@@ -1250,17 +1239,6 @@ public class PilotJADEAgent
 			tobject.setConversationContext(conversation);
   
 		
-		expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"ObjectDetected");
-		if (this.getLM().canBeDeleted(expectedInput)){                          
-             if (expectedInput.size()==0){
-				nonExistingInputs.add("ObjectDetected");
-			 } else {
-			    addExpectedInputs(tobject, "ObjectDetected","1",expectedInput);
-             	addConsumedInput(to,"ObjectDetected",expectedInput);
-			 }
-             allEntitiesExist=allEntitiesExist|| expectedInput.size()!=0;
-		} 
-	      
 		expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"PlanReceived");
 		if (this.getLM().canBeDeleted(expectedInput)){                          
              if (expectedInput.size()==0){
@@ -1499,20 +1477,20 @@ public class PilotJADEAgent
 	     
             
 		
-            expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"Flight_Leg");
-			if (expectedInput.size()==0 && !("1".equals("0..n")))
-				nonExistingInputs.add("Flight_Leg");
-			else {
-			    addExpectedInputs(tobject, "Flight_Leg","1",expectedInput);
-			    addConsumedInput(to, "1", expectedInput);
-			}
-	      allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;
-	      
             expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"Order");
 			if (expectedInput.size()==0 && !("1".equals("0..n")))
 				nonExistingInputs.add("Order");
 			else {
 			    addExpectedInputs(tobject, "Order","1",expectedInput);
+			    addConsumedInput(to, "1", expectedInput);
+			}
+	      allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;
+	      
+            expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"Flight_Leg");
+			if (expectedInput.size()==0 && !("1".equals("0..n")))
+				nonExistingInputs.add("Flight_Leg");
+			else {
+			    addExpectedInputs(tobject, "Flight_Leg","1",expectedInput);
 			    addConsumedInput(to, "1", expectedInput);
 			}
 	      allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;
@@ -2814,25 +2792,6 @@ public class PilotJADEAgent
 
 	 if (getGraphics()!=null)
 	  getGraphics().addApplication("WhenStartPlane", events,actions);    
-
-     //Initial applications assigned to the agent	  
-   
-     
-     app=RadarInit.createInstance(this);
-	 //app.registerOwner(this);
-	 	    
-     this.getAM().addApplication("Radar",app);        
-	 events=new Vector();
-	 actions=new Vector();
-		
-	 event= new ObstacleDetected();
-	 /* 
-	 */ 
-	 events.add(event);
-	 actions.add(generateActionListener(ObstacleDetected.class));		
-
-	 if (getGraphics()!=null)
-	  getGraphics().addApplication("Radar", events,actions);    
 
      //Initial applications assigned to the agent	  
    

@@ -42,7 +42,6 @@ public abstract class EnvironmentApp extends Application{
  }
 
 
- public abstract ArrayList<ingenias.jade.mental.ObjectDetected> getCloseObjects();
 
  public abstract void start();
 
