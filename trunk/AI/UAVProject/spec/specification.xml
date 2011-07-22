@@ -7,7 +7,7 @@
 <projectproperty id="jadeproject" module="Ingenias Agent Framework generator"  name="JADE main project folder" value="UAVProject"  tooltip="The folder that will contain the project for this development" />
 <projectproperty id="jadeperm" module="Ingenias Agent Framework generator"  name="JADE generate only once folder" value="permsrc"  tooltip="The folder that will hold generated elements that should not be regenerated" />
 <projectproperty id="htmldoc" module="HTML Document generator"  name="HTML document folder" value="UAVProject\html"  tooltip="The document folder that will contain HTML version of this specification" />
- <openeddiagram>Decisions Code</openeddiagram> <openeddiagram>Change Altitude</openeddiagram> <openeddiagram>Decision to Plane</openeddiagram></projectproperties>
+ <openeddiagram>Decisions Code</openeddiagram> <openeddiagram>Decision to Plane</openeddiagram> <openeddiagram>Obstacle Detected</openeddiagram> <openeddiagram>Obstacle Observed</openeddiagram> <openeddiagram>Avoid Obstacle Detected</openeddiagram> <openeddiagram>Avoid Obstacle</openeddiagram> <openeddiagram>Avoid Obstacle Observed In Environment</openeddiagram></projectproperties>
 <leafpackages>
    <path>
     <package id="Project"/>
