@@ -39,12 +39,6 @@ public  class EnvironmentAppImp extends EnvironmentApp{
 		super();
 	}
 
-
-	public ArrayList<ingenias.jade.mental.ObjectDetected> getCloseObjects(){
-		//TODO: INSERT HERE YOUR CODE
-		return null;
-	} 
-	
 	
 	
 	public void start(){

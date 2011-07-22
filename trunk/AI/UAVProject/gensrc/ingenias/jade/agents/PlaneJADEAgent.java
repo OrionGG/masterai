@@ -106,13 +106,13 @@ public class PlaneJADEAgent
              allEntitiesExist=allEntitiesExist || expectedInput.size()!=0;
 		} 
 	      
-		expectedInput=this.getMSM().getMentalEntityByType("Conflict");
+		expectedInput=this.getMSM().getMentalEntityByType("Plane_Change");
 		if (this.getLM().canBeDeleted(expectedInput)){             
              if (expectedInput.size()==0){
-				nonExistingInputs.add("Conflict");
+				nonExistingInputs.add("Plane_Change");
 			 } else {
-			    addExpectedInputs(tobject, "Conflict","1",expectedInput);
-             	addConsumedInput(to,"Conflict",expectedInput);
+			    addExpectedInputs(tobject, "Plane_Change","1",expectedInput);
+             	addConsumedInput(to,"Plane_Change",expectedInput);
 			 }
              allEntitiesExist=allEntitiesExist || expectedInput.size()!=0;
 		} 
@@ -309,13 +309,13 @@ public class PlaneJADEAgent
              allEntitiesExist=allEntitiesExist|| expectedInput.size()!=0;
 		} 
 	      
-		expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"Conflict");
+		expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"Plane_Change");
 		if (this.getLM().canBeDeleted(expectedInput)){                          
              if (expectedInput.size()==0){
-				nonExistingInputs.add("Conflict");
+				nonExistingInputs.add("Plane_Change");
 			 } else {
-			    addExpectedInputs(tobject, "Conflict","1",expectedInput);
-             	addConsumedInput(to,"Conflict",expectedInput);
+			    addExpectedInputs(tobject, "Plane_Change","1",expectedInput);
+             	addConsumedInput(to,"Plane_Change",expectedInput);
 			 }
              allEntitiesExist=allEntitiesExist|| expectedInput.size()!=0;
 		} 
@@ -804,25 +804,6 @@ public class PlaneJADEAgent
 
 	 if (getGraphics()!=null)
 	  getGraphics().addApplication("Plane_Position_Service", events,actions);    
-
-     //Initial applications assigned to the agent	  
-   
-     
-     app=RadarInit.createInstance(this);
-	 //app.registerOwner(this);
-	 	    
-     this.getAM().addApplication("Radar",app);        
-	 events=new Vector();
-	 actions=new Vector();
-		
-	 event= new ObstacleDetected();
-	 /* 
-	 */ 
-	 events.add(event);
-	 actions.add(generateActionListener(ObstacleDetected.class));		
-
-	 if (getGraphics()!=null)
-	  getGraphics().addApplication("Radar", events,actions);    
 
 
    
