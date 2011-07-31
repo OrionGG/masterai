@@ -34,10 +34,10 @@ import ingenias.editor.entities.*;
 
 
 
-public class StartMonitorizeFlightsTask extends Task{
+public class StartMonitoringFlightsTask extends Task{
 
- public StartMonitorizeFlightsTask(String id){
-  super(id,"StartMonitorizeFlights");
+ public StartMonitoringFlightsTask(String id){
+  super(id,"StartMonitoringFlights");
  }
 
 

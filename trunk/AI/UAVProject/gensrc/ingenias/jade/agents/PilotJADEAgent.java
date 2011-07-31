@@ -1477,20 +1477,20 @@ public class PilotJADEAgent
 	     
             
 		
-            expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"Order");
-			if (expectedInput.size()==0 && !("1".equals("0..n")))
-				nonExistingInputs.add("Order");
-			else {
-			    addExpectedInputs(tobject, "Order","1",expectedInput);
-			    addConsumedInput(to, "1", expectedInput);
-			}
-	      allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;
-	      
             expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"Flight_Leg");
 			if (expectedInput.size()==0 && !("1".equals("0..n")))
 				nonExistingInputs.add("Flight_Leg");
 			else {
 			    addExpectedInputs(tobject, "Flight_Leg","1",expectedInput);
+			    addConsumedInput(to, "1", expectedInput);
+			}
+	      allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;
+	      
+            expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"Order");
+			if (expectedInput.size()==0 && !("1".equals("0..n")))
+				nonExistingInputs.add("Order");
+			else {
+			    addExpectedInputs(tobject, "Order","1",expectedInput);
 			    addConsumedInput(to, "1", expectedInput);
 			}
 	      allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;
@@ -1755,20 +1755,20 @@ public class PilotJADEAgent
 	     
             
 		
-            expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"ConflictFinished");
-			if (expectedInput.size()==0 && !("1".equals("0..n")))
-				nonExistingInputs.add("ConflictFinished");
-			else {
-			    addExpectedInputs(tobject, "ConflictFinished","1",expectedInput);
-			    addConsumedInput(to, "1", expectedInput);
-			}
-	      allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;
-	      
             expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"Flight_Leg");
 			if (expectedInput.size()==0 && !("1".equals("0..n")))
 				nonExistingInputs.add("Flight_Leg");
 			else {
 			    addExpectedInputs(tobject, "Flight_Leg","1",expectedInput);
+			    addConsumedInput(to, "1", expectedInput);
+			}
+	      allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;
+	      
+            expectedInput=this.getMSM().obtainConversationalMentalEntityByType(conversation,"ConflictFinished");
+			if (expectedInput.size()==0 && !("1".equals("0..n")))
+				nonExistingInputs.add("ConflictFinished");
+			else {
+			    addExpectedInputs(tobject, "ConflictFinished","1",expectedInput);
 			    addConsumedInput(to, "1", expectedInput);
 			}
 	      allEntitiesExist=allEntitiesExist&& expectedInput.size()!=0;
