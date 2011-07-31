@@ -540,7 +540,7 @@ public class ControllerJADEAgent
                   
          nonExistingInputs.clear();
   		 repeatedOutputs.clear();
-         if (tobject.getType().equals("StartMonitorizeFlights") ){
+         if (tobject.getType().equals("StartMonitoringFlights") ){
             Vector<MentalEntity> expectedInput=null;
             RuntimeFact expectedOutput=null;
             RuntimeEvent expectedOutputEvent=null;
@@ -880,7 +880,7 @@ public class ControllerJADEAgent
          boolean canbescheduled=false;
 		 Task tobject=null;		 
 				// If a conversational initialization fails, a conventional one is tried
-				 tobject=new StartMonitorizeFlightsTask(ingenias.jade.MentalStateManager.generateMentalEntityID());
+				 tobject=new StartMonitoringFlightsTask(ingenias.jade.MentalStateManager.generateMentalEntityID());
 				 canbescheduled=initialiseNonConversationalTask(tobject);
 			 	 if (canbescheduled){
 					//MainInteractionManager.log("Scheduled task "+tobject.getType()+" to achieve goal FlightsMonitorized",getLocalName()+"-"+tobject.getType());
@@ -935,7 +935,7 @@ public class ControllerJADEAgent
                 
          
          
-         ttypes.add("StartMonitorizeFlights");		         
+         ttypes.add("StartMonitoringFlights");		         
                 
          
          if (IAFProperties.getGraphicsOn())

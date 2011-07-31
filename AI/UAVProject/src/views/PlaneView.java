@@ -1,8 +1,13 @@
 package views;
+import ingenias.editor.entities.MentalEntity;
 import ingenias.jade.agents.PlaneJADEAgent;
+import ingenias.jade.mental.OrderFinished;
+import ingenias.jade.mental.OrderOldLeg;
+import ingenias.jade.mental.Plane_Mind;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Vector;
 
 
 import gov.nasa.worldwind.WorldWind;
@@ -20,6 +25,8 @@ import gov.nasa.worldwind.util.WWUtil;
 
 public class PlaneView extends PointPlacemark {
 	private PlaneJADEAgent oPlaneEntity;
+	Plane_Mind oPlane_Mind;
+	String sPlaneName = "";
 	ArrayList<Path> lPath;
 	RenderableLayer layer = null;
 	int iRangeOfRisk = 0;
@@ -27,7 +34,13 @@ public class PlaneView extends PointPlacemark {
 	public PlaneView(PlaneJADEAgent oPlaneEntityParam, String sPlaneName, Position oPosition) {
 		super(oPosition);
 		oPlaneEntity = oPlaneEntityParam;
-
+		
+		Vector<MentalEntity> oVector = oPlaneEntity.getMSM().getMentalEntityByType("Plane_Mind");
+	    if(oVector.size()> 0){
+	    	oPlane_Mind = ((Plane_Mind) oVector.get(0));
+	    }
+		
+		this.sPlaneName = sPlaneName;
 		PointPlacemarkAttributes attrs2 = new PointPlacemarkAttributes();
 
 		attrs2.setUsePointAsDefaultImage(true);
@@ -40,7 +53,7 @@ public class PlaneView extends PointPlacemark {
 		attrs2.setScale(10d);
 		this.setAttributes(attrs2);
 
-		this.setValue(AVKey.DISPLAY_NAME, sPlaneName);
+		this.setValue(AVKey.DISPLAY_NAME, this.sPlaneName);
 		this.setAltitudeMode(WorldWind.RELATIVE_TO_GROUND);
 
 		this.setLineEnabled(false);
@@ -77,6 +90,18 @@ public class PlaneView extends PointPlacemark {
 
 	public void setNewPosition(Position oNewPos) {
 		super.setPosition(oNewPos);
+		
+		String sSpeed = "";
+	    if(oPlane_Mind != null){
+	    	sSpeed =  Double.toString(oPlane_Mind.getSpeedKMH());
+	    }
+		String sNameToDisplay = this.sPlaneName  + "\n" 
+								+ "Pos = " + oNewPos.toString() + "\n" 
+								+ "Speed = " + sSpeed+ " Km/h" ;
+								
+		this.setValue(AVKey.DISPLAY_NAME, sNameToDisplay);
+		
+		
 		if(lPath.size() != 0){
 
 			Material oEndPathMaterial = Material.WHITE;
